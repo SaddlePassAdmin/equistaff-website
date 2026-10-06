@@ -313,12 +313,14 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 
 /* ---------- The horses — secondary mark, three blues ---------- */
 .ftr { position: relative; overflow: hidden; }
+/* Deliberately bleeds off the right edge — the head runs out of frame.
+   Carrington asked for it stronger and for that crop to stay. */
 .ftr__horses {
-  position: absolute; right: -30px; bottom: -70px; width: 380px;
-  opacity: .3; pointer-events: none; user-select: none;
+  position: absolute; right: -110px; bottom: -80px; width: 600px;
+  opacity: .62; pointer-events: none; user-select: none;
 }
 .ftr > .wrap { position: relative; z-index: 1; }
-@media (max-width: 900px) { .ftr__horses { width: 240px; opacity: .22; right: -50px; bottom: -50px; } }
+@media (max-width: 900px) { .ftr__horses { width: 330px; opacity: .45; right: -70px; bottom: -30px; } }
 
 /* ---------- Header at phone widths ----------
    Both header actions were wrapping onto two lines at 390. */
@@ -350,3 +352,13 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 
 /* trailing accent in a dark band */
 .bandHorse { position: absolute; right: 4%; bottom: -10px; width: 230px; opacity: .14; color: #fff; pointer-events: none; }
+
+/* Quotes band — horse bleeding off the left, head out of frame, same crop
+   idea as the footer but mirrored so the two do not read as a repeat. */
+.quotes { position: relative; overflow: hidden; }
+.quotes > .wrap { position: relative; z-index: 1; }
+.quotesHorse {
+  position: absolute; left: -120px; top: 50%; transform: translateY(-50%) scaleX(-1);
+  width: 520px; opacity: .13; color: var(--baby-200); pointer-events: none;
+}
+@media (max-width: 900px) { .quotesHorse { width: 340px; left: -110px; opacity: .1; } }
