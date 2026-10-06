@@ -22,3 +22,14 @@ facilities — not glossy horse portraits.
 | `founder` | `img/founder.jpg` | Barbara Olsen | [7883352](https://www.pexels.com/photo/7883352/) | A smiling woman in riding gear leading a saddled horse |
 | `team` | `img/team.jpg` | TheOther Kev | [3149048](https://www.pexels.com/photo/3149048/) | Silhouetted figures with horses in a barn at sunset |
 | `proof` | `img/proof.jpg` | Brandon Randolph | [2042161](https://www.pexels.com/photo/2042161/) | Sunrise over a Kentucky horse farm |
+
+## Video (placeholder)
+
+| File | Pexels ID | Creator | Description |
+|---|---|---|---|
+| `media/hero.mp4` | [7881673](https://www.pexels.com/video/7881673/) | Barbara Olsen | A woman grooming a chestnut horse in a barn aisle |
+| `media/hero-alt.mp4` | [8625259](https://www.pexels.com/video/8625259/) | RDNE Stock project | Slow tracking shot down a barn aisle |
+
+Same licence and the same caveat as the stills: placeholder only. The brief
+calls for real people and real barns, and EquiStaff's own footage replaces
+these before launch. See `media/README.md` for the shoot spec.

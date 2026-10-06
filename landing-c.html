@@ -27,17 +27,17 @@
 /* ---- Video hero. Drop an mp4 into the <source> and it plays;
         until then the poster image carries it. ---- */
 .vHero { position:relative; min-height:88vh; display:flex; align-items:center; overflow:hidden; background:var(--navy-900); }
-.vHero__media { position:absolute; inset:0; }
+.vHero__media { position:absolute; inset:0; z-index:0; }
 .vHero__media video, .vHero__media img { width:100%; height:100%; object-fit:cover; }
 .vHero__media img { animation:kb 24s var(--ease) infinite alternate; }
 @keyframes kb { from{transform:scale(1.05)} to{transform:scale(1.15)} }
 /* layered gradient scrim — directional, so the type side stays dark */
-.vHero__grad { position:absolute; inset:0;
+.vHero__grad { position:absolute; inset:0; z-index:1;
   background:
     linear-gradient(104deg, rgba(11,37,69,.96) 0%, rgba(11,37,69,.86) 38%, rgba(22,57,92,.45) 68%, rgba(44,101,145,.25) 100%),
     linear-gradient(to bottom, rgba(11,37,69,.35) 0%, transparent 28%, rgba(11,37,69,.55) 100%);
 }
-.vHero__in { position:relative; padding:var(--s-9) 0; width:100%; }
+.vHero__in { position:relative; z-index:2; padding:var(--s-9) 0; width:100%; }
 .vHero h1 { color:#fff; font-size:clamp(3rem,6vw,5rem); max-width:16ch; letter-spacing:-.01em; }
 .vHero .lede { color:var(--baby-200); max-width:44ch; font-size:1.25rem; }
 .vHero__kicker { color:var(--warm); font:900 var(--t-label)/1 var(--font-body); letter-spacing:.16em; text-transform:uppercase; margin:0 0 var(--s-5); }
@@ -45,11 +45,6 @@
 .vHero__meta { color:var(--baby-300); font-size:var(--t-small); margin-top:var(--s-6); display:flex; gap:var(--s-5); flex-wrap:wrap; }
 .vHero__meta span { display:flex; gap:var(--s-2); align-items:center; }
 .vHero__dot { width:6px; height:6px; border-radius:50%; background:var(--warm); }
-/* video affordance */
-.vBadge { position:absolute; right:var(--s-7); bottom:var(--s-7); z-index:2;
-  display:flex; gap:var(--s-3); align-items:center; color:#fff; font-size:var(--t-label);
-  background:rgba(11,37,69,.55); border:1px solid rgba(255,255,255,.28);
-  padding:8px 14px; border-radius:var(--r-pill); backdrop-filter:blur(8px); }
 
 /* ---- gradient bands: each one descends the ramp ---- */
 .g-surface { background:linear-gradient(to bottom, #FFFFFF 0%, #F4FAFE 60%, #E3F1FB 100%); }
@@ -92,7 +87,7 @@
 .statRow .stat__n { background:linear-gradient(135deg,#0B2545,#007AB8); -webkit-background-clip:text; background-clip:text; color:transparent; }
 
 @media (max-width:1040px){ .doorGrid{grid-template-columns:1fr} .statRow{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:680px){ .overlap{margin-top:var(--s-6)} .statRow{grid-template-columns:1fr} .vBadge{display:none} }
+@media (max-width:680px){ .overlap{margin-top:var(--s-6)} .statRow{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -112,10 +107,10 @@
     <div class="vHero__media">
       <!-- Drop the barn footage in here; poster carries it until then.
            Keep it muted + playsinline so it autoplays on mobile. -->
-      <video autoplay muted loop playsinline poster="img/hero.jpg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="img/hero.jpg" aria-label="A woman grooming a horse in the stable aisle">
         <source src="media/hero.mp4" type="video/mp4">
       </video>
-      <img src="img/hero.jpg" alt="A barn manager preparing a horse in the stable aisle">
     </div>
     <div class="vHero__grad"></div>
     <div class="wrap vHero__in">
@@ -133,7 +128,6 @@
         <span><i class="vHero__dot"></i>Replacement guarantee</span>
       </p>
     </div>
-    <div class="vBadge"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg> Video slot — barn footage to come</div>
   </section>
 
   <!-- ============ SURFACE — overlapping doors ============ -->

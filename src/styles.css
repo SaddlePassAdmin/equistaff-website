@@ -68,9 +68,11 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   width: 100%; height: 100%; object-fit: cover;
   animation: kenburns 22s var(--ease) infinite alternate;
 }
-.hero__media video { position: relative; z-index: 1; }
-/* poster image sits behind the video and shows through until the file exists */
-.hero__media img { position: absolute; inset: 0; }
+/* Media is the bottom layer; scrim then content stack above it.
+   Without this the video paints over the scrim and the headline. */
+.hero__media { z-index: 0; }
+.hero__scrim { z-index: 1; }
+.hero__in    { z-index: 2; }
 @keyframes kenburns { from { transform: scale(1.06) translate3d(0,0,0); } to { transform: scale(1.16) translate3d(-1.5%,-1.5%,0); } }
 .hero__scrim {
   position: absolute; inset: 0;

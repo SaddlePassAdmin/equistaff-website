@@ -42,11 +42,12 @@
   <!-- HERO — movement stands in for the video header until footage exists -->
   <section class="hero">
     <div class="hero__media">
-      <!-- Video slot: drop media/hero.mp4 in and it plays. Poster carries it until then. -->
-      <video autoplay muted loop playsinline poster="img/hero.jpg" aria-hidden="true">
+      <!-- poster="" is the fallback: it shows until playback starts, and stays
+           if the video fails to load. No separate <img> needed. -->
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="img/hero.jpg" aria-label="A woman grooming a horse in the stable aisle">
         <source src="media/hero.mp4" type="video/mp4">
       </video>
-      <img src="img/hero.jpg" alt="A barn manager preparing a horse in the stable aisle">
     </div>
     <div class="hero__scrim"></div>
     <div class="wrap hero__in">
