@@ -319,3 +319,34 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 }
 .ftr > .wrap { position: relative; z-index: 1; }
 @media (max-width: 900px) { .ftr__horses { width: 240px; opacity: .22; right: -50px; bottom: -50px; } }
+
+/* ---------- Header at phone widths ----------
+   Both header actions were wrapping onto two lines at 390. */
+@media (max-width: 680px) {
+  .hdr__in { gap: var(--s-3); height: 64px; }
+  .hdr__logo img { height: 30px; }
+  .hdr__cta { margin-left: auto; gap: var(--s-3); }
+  .hdr__cta > a:not(.btn) { display: none; }      /* "Sign in" lives in the page, not the bar */
+  .hdr__cta .btn { padding: 0 var(--s-4); font-size: .9375rem; white-space: nowrap; }
+  .pHdr__in { gap: var(--s-3); height: 64px; }
+  .pHdr__logo img { height: 28px; }
+}
+
+/* ---------- The running horse — small decorative accents ----------
+   Single horse from the secondary mark, set in currentColor so it
+   tints to whatever it sits on. Used sparingly: a flourish, not wallpaper. */
+.horse { display: block; color: var(--blue-600); }
+.horse--sm { width: 54px; }
+.horse--md { width: 110px; }
+.horse--lg { width: 190px; }
+.horse--muted { color: var(--border-subtle); }
+.horse--warm  { color: #E4D7C3; }
+.horse--baby  { color: var(--baby-300); }
+
+/* centred divider: hairline, horse, hairline */
+.horseRule { display: flex; align-items: center; gap: var(--s-5); margin: var(--s-8) 0; }
+.horseRule::before, .horseRule::after { content: ""; flex: 1; height: 1px; background: var(--border-subtle); }
+.horseRule .horse { flex: 0 0 auto; width: 104px; color: var(--baby-300); }
+
+/* trailing accent in a dark band */
+.bandHorse { position: absolute; right: 4%; bottom: -10px; width: 230px; opacity: .14; color: #fff; pointer-events: none; }

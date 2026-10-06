@@ -46,6 +46,27 @@
   .row__pay { font-family:var(--font-mono); font-size:.9375rem; margin:0 0 var(--s-3); }
   .row__right { text-align:right; display:flex; flex-direction:column; gap:var(--s-3); align-items:flex-end; }
   .row__age { font-family:var(--font-mono); font-size:var(--t-label); color:var(--text-muted); }
+
+  /* ---- Responsive. The fixed 260px sidebar and the 4-up search bar both
+         overflowed at phone widths — the exact failure the audit flagged
+         on the current site. ---- */
+  @media (max-width: 1040px) {
+    .jbLayout { grid-template-columns: 1fr; }
+    .filters { position: static; }
+    .filters__grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0 var(--s-6); }
+    .jbSearch { grid-template-columns: 1fr 1fr; }
+    .jbSearch button { grid-column: 1 / -1; }
+  }
+  @media (max-width: 680px) {
+    .jbSearch { grid-template-columns: 1fr; }
+    .filters__grid { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; gap: var(--s-4); }
+    .row__right { flex-direction: row; justify-content: space-between;
+                  align-items: center; width: 100%; text-align: left; }
+    .row__right .btn { flex: 0 0 auto; }
+    .jbHero h1 { font-size: 2rem; }
+    .jbCount { align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
@@ -86,25 +107,24 @@
     <div class="wrap jbLayout">
 
       <aside class="filters">
-        <h4>Recruiter-managed</h4>
+        <div class="filters__grid">
+        <div><h4>Recruiter-managed</h4>
         <label><input type="checkbox" checked> Managed by EquiStaff</label>
-        <label><input type="checkbox"> Direct from employer</label>
-        <hr>
-        <h4>Housing</h4>
+        <label><input type="checkbox"> Direct from employer</label></div>
+        <div><h4>Housing</h4>
         <label><input type="checkbox"> Housing included</label>
-        <label><input type="checkbox"> Housing allowance</label>
-        <hr>
-        <h4>Commitment</h4>
+        <label><input type="checkbox"> Housing allowance</label></div>
+        <div><h4>Commitment</h4>
         <label><input type="checkbox"> Full time</label>
         <label><input type="checkbox"> Part time / seasonal</label>
-        <label><input type="checkbox"> Working student</label>
-        <hr>
-        <h4>Discipline</h4>
+        <label><input type="checkbox"> Working student</label></div>
+        <div><h4>Discipline</h4>
         <label><input type="checkbox"> Hunter / Jumper</label>
         <label><input type="checkbox"> Dressage</label>
         <label><input type="checkbox"> Eventing</label>
         <label><input type="checkbox"> Racing / Thoroughbred</label>
-        <label><input type="checkbox"> Western</label>
+        <label><input type="checkbox"> Western</label></div>
+        </div>
       </aside>
 
       <div>
