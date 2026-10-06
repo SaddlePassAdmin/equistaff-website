@@ -64,10 +64,13 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 /* ---------- Hero: movement without video ---------- */
 .hero { position: relative; overflow: hidden; background: var(--navy-900); }
 .hero__media { position: absolute; inset: 0; }
-.hero__media img {
+.hero__media video, .hero__media img {
   width: 100%; height: 100%; object-fit: cover;
   animation: kenburns 22s var(--ease) infinite alternate;
 }
+.hero__media video { position: relative; z-index: 1; }
+/* poster image sits behind the video and shows through until the file exists */
+.hero__media img { position: absolute; inset: 0; }
 @keyframes kenburns { from { transform: scale(1.06) translate3d(0,0,0); } to { transform: scale(1.16) translate3d(-1.5%,-1.5%,0); } }
 .hero__scrim {
   position: absolute; inset: 0;
@@ -260,3 +263,42 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   .door { min-height: 0; padding: var(--s-6); }
   .cut-top, .cut-both { clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%); margin-top: -5vw; }
 }
+
+/* ---------- Conversion: DIY listing vs paid recruiter-managed search ---------- */
+.compare { background: var(--depth-01); padding: var(--s-9) 0; }
+.compare__grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--s-6); margin-top: var(--s-7); align-items: start; }
+.cmp { background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--r-lg); padding: var(--s-7); }
+.cmp--hero { background: linear-gradient(160deg, var(--depth-07), var(--depth-06)); color: #fff; border-color: var(--baby-300); box-shadow: var(--e-3); position: relative; }
+.cmp--hero h3 { color: #fff; }
+.cmp h3 { font-size: 1.625rem; margin-bottom: var(--s-2); }
+.cmp__for { font-size: var(--t-small); color: var(--text-muted); margin-bottom: var(--s-5); }
+.cmp--hero .cmp__for { color: var(--baby-200); }
+.cmp__flag { position: absolute; top: calc(var(--s-5) * -1); left: var(--s-7);
+  background: var(--warm); color: var(--warm-ink); font: 900 var(--t-label)/1 var(--font-body);
+  letter-spacing: .1em; text-transform: uppercase; padding: 9px 14px; border-radius: var(--r-pill); }
+.cmp__list { list-style: none; margin: 0 0 var(--s-6); padding: 0; }
+.cmp__list li { display: flex; gap: var(--s-3); align-items: flex-start; margin-bottom: var(--s-3); font-size: 1rem; }
+.cmp--hero .cmp__list li { color: #fff; }
+.cmp__y, .cmp__n { width: 20px; height: 20px; border-radius: 50%; flex: 0 0 auto; margin-top: 2px; position: relative; }
+.cmp__y { background: var(--ok-bg); }
+.cmp--hero .cmp__y { background: var(--baby-200); }
+.cmp__y::after { content: ""; position: absolute; inset: 0; background: center/11px no-repeat
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B2545' stroke-width='3.5'><path d='M20 6L9 17l-5-5'/></svg>"); }
+.cmp__n { background: var(--depth-02); }
+.cmp__n::after { content: ""; position: absolute; inset: 0; background: center/10px no-repeat
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A6580' stroke-width='3.5'><path d='M6 6l12 12M18 6L6 18'/></svg>"); }
+.cmp__fee { font-size: var(--t-small); color: var(--baby-200); margin: var(--s-4) 0 0; text-align: center; }
+.compare__note { margin-top: var(--s-6); font-size: var(--t-small); color: var(--text-muted); }
+
+/* ---------- SEO content block ---------- */
+.seoBlock { background: var(--surface-page); padding: var(--s-9) 0; border-top: 1px solid var(--border-subtle); }
+.seoBlock h2 { font-size: 1.75rem; }
+.seoBlock > .wrap > p { max-width: 80ch; color: var(--text-muted); }
+.seoBlock__cols { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s-7); margin-top: var(--s-7); }
+.seoBlock__cols h3 { font-size: 1.125rem; margin-bottom: var(--s-4); }
+.seoBlock__cols ul { list-style: none; margin: 0; padding: 0; }
+.seoBlock__cols li { margin-bottom: var(--s-3); }
+.seoBlock__cols a { font-size: var(--t-small); text-decoration: none; }
+.seoBlock__cols a:hover { text-decoration: underline; }
+@media (max-width: 1040px){ .compare__grid { grid-template-columns: 1fr; } .seoBlock__cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px){ .seoBlock__cols { grid-template-columns: 1fr; } }

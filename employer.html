@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your searches | EquiStaff for employers</title>
+<meta name="description" content="Track your recruiter-managed searches, review shortlists and manage job posts.">
+
+<link rel="canonical" href="https://www.equistaff.com/employer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* Employer portal — Deep mode. This is the revenue side, so the
+   recruiter relationship is the spine of the screen, not a sidebar. */
+.shortlist { display:grid; gap:var(--s-4); }
+.cand { background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-md);
+  padding:var(--s-5) var(--s-6); display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-5); align-items:center; }
+.cand__av { width:48px; height:48px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; font:700 1rem/1 var(--font-body); }
+.cand h4 { margin:0 0 3px; font-family:var(--font-display); font-size:1.1875rem; color:#fff; }
+.cand p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
+.cand__acts { display:flex; gap:var(--s-3); align-items:center; }
+.searchCard { background:linear-gradient(145deg,var(--depth-06),var(--depth-07)); border:1px solid var(--navy-500);
+  border-radius:var(--r-lg); padding:var(--s-6); margin-bottom:var(--s-5); }
+.searchCard__top { display:flex; justify-content:space-between; gap:var(--s-5); align-items:flex-start; flex-wrap:wrap; }
+.searchCard h3 { margin:0 0 4px; color:#fff; }
+.searchCard__meta { font-size:var(--t-small); color:var(--text-muted); margin:0; }
+.track { display:flex; gap:0; margin-top:var(--s-6); }
+.track__s { flex:1; text-align:center; position:relative; padding-top:var(--s-5); }
+.track__s::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--navy-500); }
+.track__s--done::before { background:var(--baby-200); }
+.track__s--now::before { background:var(--warm); }
+.track__l { font-size:var(--t-label); color:var(--text-muted); font-weight:700; letter-spacing:.04em; }
+.track__s--now .track__l { color:var(--warm); }
+.track__s--done .track__l { color:var(--baby-200); }
+.recBar { display:flex; gap:var(--s-4); align-items:center; background:rgba(189,227,255,.10);
+  border:1px solid var(--baby-300); border-radius:var(--r-md); padding:var(--s-4) var(--s-5); margin-top:var(--s-6); }
+.recBar img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
+.recBar p { margin:0; font-size:var(--t-small); color:var(--baby-200); }
+.recBar b { color:#fff; }
+@media (max-width:760px){ .cand{grid-template-columns:1fr} .track{flex-wrap:wrap;gap:var(--s-4)} .track__s{flex:1 1 40%} }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><b>EQUI</b><span>staff</span></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="#" aria-current="page">Your searches</a><a href="#">Shortlists</a><a href="#">Job posts</a><a href="#">Invoices</a><a href="#">Messages</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <div class="pSection__head" style="margin-bottom:var(--s-6)">
+      <div>
+        <p class="eyebrow" style="color:var(--warm)">Golden Ocala Equestrian</p>
+        <h1 style="color:#fff;margin:0;font-size:2rem">Your searches</h1>
+      </div>
+      <a class="btn btn--primary" href="index.html#request">Request talent</a>
+    </div>
+
+    <!-- ACTIVE SEARCH — recruiter-managed, with the process made visible -->
+    <div class="searchCard">
+      <div class="searchCard__top">
+        <div>
+          <h3>Barn Manager</h3>
+          <p class="searchCard__meta">Recruiter-managed · opened 18 September · REF 10480</p>
+        </div>
+        <span class="pill pill--review">Shortlist ready</span>
+      </div>
+
+      <div class="track">
+        <div class="track__s track__s--done"><div class="track__l">LISTENED</div></div>
+        <div class="track__s track__s--done"><div class="track__l">SEARCHED</div></div>
+        <div class="track__s track__s--now"><div class="track__l">SHORTLIST OF 4</div></div>
+        <div class="track__s"><div class="track__l">REFERENCES</div></div>
+        <div class="track__s"><div class="track__l">PLACED</div></div>
+      </div>
+
+      <div class="recBar">
+        <img src="img/founder.jpg" alt="">
+        <p><b>Kaitlin has four people for you.</b> All four phone-referenced. She's free Thursday morning to walk you through them.</p>
+        <a class="btn btn--primary" href="#" style="margin-left:auto;white-space:nowrap">Book the call</a>
+      </div>
+    </div>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Your shortlist</h2><a href="#">Download as PDF →</a></div>
+      <div class="shortlist">
+        <div class="cand">
+          <div class="cand__av">DW</div>
+          <div><h4>Dana Whitfield</h4><p>9 years · 24-horse hunter/jumper barn, Ocala · available in 30 days</p></div>
+          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        </div>
+        <div class="cand">
+          <div class="cand__av">MR</div>
+          <div><h4>Marcus Reyes</h4><p>12 years · facility director, Wellington · available now</p></div>
+          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        </div>
+        <div class="cand">
+          <div class="cand__av">SO</div>
+          <div><h4>Sarah O'Dell</h4><p>6 years · barn manager, Lexington · relocating to Ocala</p></div>
+          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        </div>
+        <div class="cand">
+          <div class="cand__av">TB</div>
+          <div><h4>Tom Brennan</h4><p>15 years · estate &amp; barn management, Aiken · available in 60 days</p></div>
+          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Your job posts</h2><a href="#">Post a role →</a></div>
+      <div class="appRow">
+        <div><h4>Working Student — seasonal</h4><p>Posted 14 days ago · 112 views · 9 applicants</p></div>
+        <span class="pill pill--sent">Live on the board</span>
+      </div>
+      <div class="appRow">
+        <div><h4>Part-time Groom</h4><p>Posted 41 days ago · 203 views · 2 applicants</p></div>
+        <span class="pill pill--review">Not performing</span>
+      </div>
+      <!-- the lead moment from Kaitlin's wish list: adverts running >30 days -->
+      <div class="recBar" style="margin-top:var(--s-5)">
+        <img src="img/founder.jpg" alt="">
+        <p><b>That groom role has been live 41 days with two applicants.</b> Want us to take it over as a managed search, or rewrite the advert first?</p>
+        <a class="btn btn--primary" href="index.html#request" style="margin-left:auto;white-space:nowrap">Talk to Kaitlin</a>
+      </div>
+    </section>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Past placements</h2><a href="#">View all →</a></div>
+      <div class="appRow">
+        <div><h4>Assistant Trainer — Imogen Clarke</h4><p>Placed 4 March 2026 · still with you · guarantee period complete</p></div>
+        <span class="pill pill--shortlist">Placed</span>
+      </div>
+      <div class="appRow">
+        <div><h4>Head Groom — Luis Ferrer</h4><p>Placed 19 November 2025 · still with you</p></div>
+        <span class="pill pill--shortlist">Placed</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>© 2026 EquiStaff · Equine staffing since 1982</span><span>Privacy · Terms · Accessibility</span>
+  </div></div>
+</footer>
+</body>
+</html>

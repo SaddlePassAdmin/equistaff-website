@@ -35,10 +35,21 @@ No build step, no dependencies.
 
 | Page | Mode | What it is |
 |---|---|---|
-| `index.html` | Light | Landing — two doors, process, role categories, proof, Request Talent |
+| `index.html` | Light | **Landing option A — Editorial.** Video-ready hero, two doors, process, roles, conversion comparison, SEO block |
+| `landing-b.html` | Light | **Landing option B — Split decision.** The two doors *are* the hero; employer side weighted |
+| `landing-c.html` | Light | **Landing option C — The gradient dive.** Video hero, gradient bands descending the depth ramp |
 | `jobs.html` | Light | Job board — filters, scannable listings, recruiter-managed treatment |
+| `job-detail.html` | Light | Single role, with JobPosting schema and apply |
+| `signin.html` | Both | The threshold — light on one side, deep on the other |
 | `onboarding.html` | Light | Apply-triggered sign-up (3 steps) + the gated employer path |
-| `profile.html` | **Deep** | Job-seeker profile and portal — proves the two-mode system |
+| `profile.html` | **Deep** | Job-seeker profile and portal |
+| `employer.html` | **Deep** | Employer portal — searches, shortlist, job posts |
+
+### Video
+
+`index.html` and `landing-c.html` both reference `media/hero.mp4`. Drop the
+file in and it plays; until then the poster image carries it. See
+[`media/README.md`](media/README.md) for shoot guidance.
 
 `profile.html` is the reference implementation for Deep mode: it sets
 `data-mode="deep"` on `<html>` and reuses the same components as the public
