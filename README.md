@@ -19,7 +19,7 @@ It is deliberately framework-free right now so the stack decision stays open.
 | Launch target | 2 November 2026 (outside date 6 November) |
 | Package | B — full rebuild: agency site + job board + application experience |
 | Design file | Figma — EquiStaff |
-| Engineering | Jake Hemmerle |
+| Engineering | TBC |
 | Design | Carrington Smurl, Saddle Pass |
 
 ---
