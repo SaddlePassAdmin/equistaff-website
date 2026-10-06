@@ -18,10 +18,10 @@
 <style>
 /* THE THRESHOLD — depth 05. This is the crossing from public to portal,
    and the gradient is the transition made literal. */
-.thr { min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr; }
+.thr { min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr; align-items:stretch; }
 .thr__left {
   background:linear-gradient(170deg,#FFFFFF 0%,#E3F1FB 34%,#BDE3FF 62%,#5E9DC8 100%);
-  padding:var(--s-9) var(--s-8); display:flex; flex-direction:column; justify-content:center;
+  padding:var(--s-8) var(--s-8); display:flex; flex-direction:column; justify-content:center;
 }
 .thr__right {
   background:linear-gradient(170deg,#2C6591 0%,#16395C 48%,#0B2545 100%);
@@ -48,6 +48,10 @@
 .btnSso:hover { background:rgba(255,255,255,.12); }
 .thrFoot { color:var(--baby-300); font-size:var(--t-small); margin-top:var(--s-7); }
 .thrFoot a { color:var(--baby-200); }
+/* The three-blue horses — secondary mark. Full strength here, because the
+   light side of the threshold is the one place all three tones read. */
+.thrHorses { width:min(300px,62%); margin-top:var(--s-7); opacity:.9; }
+@media (max-width:900px){ .thrHorses{ width:min(220px,55%); margin-top:var(--s-6); } }
 @media (max-width:900px){ .thr{grid-template-columns:1fr} .thr__left{padding:var(--s-8) var(--s-5)} .thr__right{padding:var(--s-8) var(--s-5)} }
 </style>
 </head>
@@ -58,7 +62,7 @@
   <!-- Light side: what you get. Stays above the crossover, so navy ink. -->
   <section class="thr__left">
     <div class="thr__in">
-      <a class="thrLogo" href="index.html"><b>EQUI</b><span>staff</span></a>
+      <a class="thrLogo" href="index.html"><img src="assets/logo-lockup.svg" alt="EquiStaff"></a>
       <h1>You don't need an account to look around.</h1>
       <p style="font-size:1.125rem">Browsing is open to everyone — always has been. An account just saves you typing.</p>
       <ul class="thrList">
@@ -70,13 +74,14 @@
       <div style="margin-top:var(--s-7);display:flex;gap:var(--s-3);flex-wrap:wrap">
         <a class="btn btn--secondary btn--lg" href="jobs.html">Keep browsing instead</a>
       </div>
+      <img class="thrHorses" src="assets/horses-blue.svg" alt="" aria-hidden="true">
     </div>
   </section>
 
   <!-- Deep side: the form. Below the crossover, so white ink. -->
   <section class="thr__right">
     <div class="thr__in">
-      <a class="thrLogo" href="index.html"><b>EQUI</b><span>staff</span></a>
+      <a class="thrLogo" href="index.html"><img src="assets/logo-lockup-reversed.svg" alt="EquiStaff"></a>
       <h2 style="font-size:1.875rem;margin-bottom:var(--s-2)">Welcome back.</h2>
       <p style="color:var(--baby-200);margin-bottom:var(--s-6)">Sign in to pick up where you left off.</p>
 

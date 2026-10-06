@@ -304,3 +304,18 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .seoBlock__cols a:hover { text-decoration: underline; }
 @media (max-width: 1040px){ .compare__grid { grid-template-columns: 1fr; } .seoBlock__cols { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 680px){ .seoBlock__cols { grid-template-columns: 1fr; } }
+
+/* ---------- Logo (Brittany's hidden-magnifier mark) ---------- */
+.hdr__logo img  { height: 38px; width: auto; display: block; }
+.pHdr__logo img { height: 36px; width: auto; display: block; }
+.thrLogo img    { height: 42px; width: auto; display: block; }
+.ftr__logo      { height: 40px; width: auto; display: block; margin-bottom: var(--s-4); }
+
+/* ---------- The horses — secondary mark, three blues ---------- */
+.ftr { position: relative; overflow: hidden; }
+.ftr__horses {
+  position: absolute; right: -30px; bottom: -70px; width: 380px;
+  opacity: .3; pointer-events: none; user-select: none;
+}
+.ftr > .wrap { position: relative; z-index: 1; }
+@media (max-width: 900px) { .ftr__horses { width: 240px; opacity: .22; right: -50px; bottom: -50px; } }
