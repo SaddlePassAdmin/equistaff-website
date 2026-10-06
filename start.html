@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EquiStaff — all screens</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700&family=Lato:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css">
+<style>
+  body{background:var(--depth-01)}
+  .top{background:linear-gradient(160deg,var(--depth-07),var(--depth-06));color:#fff;padding:var(--s-8) 0}
+  .top h1{color:#fff;margin-bottom:var(--s-3)}
+  .top p{color:var(--baby-200);max-width:62ch}
+  .grp{margin-top:var(--s-8)}
+  .grp h2{font-size:1.25rem;margin-bottom:var(--s-2)}
+  .grp>p{color:var(--text-muted);font-size:var(--t-small);margin-bottom:var(--s-5)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5)}
+  .card{display:block;background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-md);
+    padding:var(--s-6);text-decoration:none;color:inherit;box-shadow:var(--e-1);
+    transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--e-3);border-color:var(--blue-600)}
+  .card h3{font-size:1.25rem;margin:0 0 6px}
+  .card p{font-size:var(--t-small);color:var(--text-muted);margin:0}
+  .card .k{font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--blue-700);display:block;margin-bottom:var(--s-3)}
+  .card--deep{background:linear-gradient(150deg,var(--depth-07),var(--depth-06));border-color:var(--navy-500)}
+  .card--deep h3{color:#fff} .card--deep p{color:var(--baby-200)} .card--deep .k{color:var(--warm)}
+  .tipbar{background:var(--warm);border-radius:var(--r-md);padding:var(--s-5) var(--s-6);margin-top:var(--s-8)}
+  .tipbar p{margin:0;font-size:var(--t-small);color:#3B2E1B}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--warm)">EquiStaff · V1 · 6 October 2026</p>
+    <h1>All screens</h1>
+    <p>Everything built so far. These are real working pages — click into them, scroll them, fill the forms in. Three landing options come first; pick one and the rest follow it.</p>
+  </div>
+</header>
+
+<main class="wrap" style="padding-bottom:var(--s-9)">
+
+  <section class="grp">
+    <h2>Landing page — three options</h2>
+    <p>Same content, three ways of arranging it. This is the decision.</p>
+    <div class="grid">
+      <a class="card" href="index.html"><span class="k">Option A</span><h3>Editorial</h3><p>Video hero, then two doors below it. The calmest of the three, and the closest to a classic agency site.</p></a>
+      <a class="card" href="landing-b.html"><span class="k">Option B</span><h3>Split decision</h3><p>The two doors <em>are</em> the hero, side by side, employer side larger. Shortest page by far — worth noting on a phone.</p></a>
+      <a class="card" href="landing-c.html"><span class="k">Option C</span><h3>The gradient dive</h3><p>Video hero, then the page gets progressively deeper in colour as you scroll. The boldest.</p></a>
+    </div>
+  </section>
+
+  <section class="grp">
+    <h2>The job board</h2>
+    <p>What a candidate sees. Pay is on every listing, and nothing is behind a login.</p>
+    <div class="grid">
+      <a class="card" href="jobs.html"><span class="k">Browse</span><h3>Job board</h3><p>Filters down the side, every row showing pay, housing and commitment before you click.</p></a>
+      <a class="card" href="job-detail.html"><span class="k">One role</span><h3>Job detail</h3><p>A single listing in full. Public and indexable, so it can turn up in Google.</p></a>
+      <a class="card" href="onboarding.html"><span class="k">Apply</span><h3>Onboarding</h3><p>Three short steps. Built for someone with no resume. The sign-up happens here, not before browsing.</p></a>
+    </div>
+  </section>
+
+  <section class="grp">
+    <h2>Signed in</h2>
+    <p>The dark theme. Same components as the public site — only the colours change.</p>
+    <div class="grid">
+      <a class="card" href="signin.html"><span class="k">The crossing</span><h3>Sign in</h3><p>Light on one side, dark on the other — the moment you move from public into the portal.</p></a>
+      <a class="card card--deep" href="profile.html"><span class="k">Job seeker</span><h3>Profile &amp; applications</h3><p>Where a candidate tracks what they've applied to and finishes their profile.</p></a>
+      <a class="card card--deep" href="employer.html"><span class="k">Employer</span><h3>Searches &amp; shortlist</h3><p>The revenue side. Shows the search progress, the shortlist of four, and nudges on adverts that aren't working.</p></a>
+    </div>
+  </section>
+
+  <div class="tipbar">
+    <p><b>To see the mobile version:</b> make this browser window narrow by dragging its right edge toward the middle. The pages rearrange themselves as it gets smaller.</p>
+  </div>
+</main>
+</body>
+</html>
