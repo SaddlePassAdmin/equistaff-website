@@ -1,0 +1,50 @@
+{
+ "hero": {
+  "query": "woman working with horse stable",
+  "photos": []
+ },
+ "barn-manager": {
+  "query": "woman leading horse barn",
+  "photos": []
+ },
+ "trainer": {
+  "query": "horse riding instructor arena",
+  "photos": []
+ },
+ "groom": {
+  "query": "person grooming brushing horse",
+  "photos": []
+ },
+ "estate": {
+  "query": "luxury horse farm property",
+  "photos": []
+ },
+ "tack": {
+  "query": "saddle bridle tack room",
+  "photos": []
+ },
+ "aisle": {
+  "query": "stable aisle barn interior",
+  "photos": []
+ },
+ "farrier": {
+  "query": "farrier shoeing horse hoof",
+  "photos": []
+ },
+ "vet": {
+  "query": "veterinarian examining horse",
+  "photos": []
+ },
+ "founder": {
+  "query": "professional woman portrait outdoors farm",
+  "photos": []
+ },
+ "team": {
+  "query": "two people talking stable barn",
+  "photos": []
+ },
+ "proof": {
+  "query": "horse farm sunrise pasture fence",
+  "photos": []
+ }
+}

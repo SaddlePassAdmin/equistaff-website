@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open roles — EquiStaff</title>
+<meta name="description" content="Every open equine role: barn managers, trainers, grooms and estate staff. Pay and housing shown on every listing. No account needed to browse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css">
+<link rel="stylesheet" href="src/styles.css">
+<style>
+  .jbHero { background: var(--navy-900); color:#fff; padding: var(--s-8) 0 calc(var(--s-8) + 3vw); }
+  .jbHero h1 { color:#fff; max-width: 18ch; }
+  .jbHero p { color: var(--baby-200); }
+  .jbSearch { display:grid; grid-template-columns: 2fr 1.4fr 1.2fr auto; gap: var(--s-3); margin-top: var(--s-6); }
+  .jbSearch input, .jbSearch select { min-height:52px; padding:0 14px; border-radius:var(--r-sm); border:1px solid transparent; font:inherit; font-size:1rem; }
+  .jbBody { background: var(--depth-03); padding: var(--s-8) 0 var(--s-9); }
+  .jbLayout { display:grid; grid-template-columns: 260px 1fr; gap: var(--s-7); align-items:start; }
+  .filters { background:#fff; border-radius:var(--r-md); padding:var(--s-5); box-shadow:var(--e-1); position:sticky; top:88px; }
+  .filters h4 { margin:0 0 var(--s-3); font-size:var(--t-small); letter-spacing:.04em; }
+  .filters label { display:flex; gap:var(--s-3); align-items:center; font-size:var(--t-small); margin-bottom:var(--s-3); cursor:pointer; }
+  .filters input { width:18px; height:18px; accent-color: var(--blue-600); }
+  .filters hr { border:0; border-top:1px solid var(--border-subtle); margin:var(--s-5) 0; }
+  .jbCount { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--s-5); flex-wrap:wrap; gap:var(--s-3); }
+  .jbCount b { font-family:var(--font-display); font-size:1.5rem; }
+  .jbList { display:flex; flex-direction:column; gap:var(--s-4); }
+  .row {
+    background:#fff; border-radius:var(--r-md); padding:var(--s-5) var(--s-6);
+    display:grid; grid-template-columns: 1fr auto; gap:var(--s-5); align-items:center;
+    border-left:4px solid var(--border-subtle); box-shadow:var(--e-1);
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .row:hover { transform:translateX(3px); box-shadow:var(--e-3); }
+  .row--managed { border-left-color: var(--navy-900); }
+  .row h3 { margin:0 0 4px; font-size:1.3125rem; }
+  .row__org { font-size:var(--t-small); color:var(--text-muted); margin:0 0 var(--s-3); }
+  .row__pay { font-family:var(--font-mono); font-size:.9375rem; margin:0 0 var(--s-3); }
+  .row__right { text-align:right; display:flex; flex-direction:column; gap:var(--s-3); align-items:flex-end; }
+  .row__age { font-family:var(--font-mono); font-size:var(--t-label); color:var(--text-muted); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="index.html"><b>EQUI</b><span>staff</span></a>
+    <nav class="hdr__nav" aria-label="Main">
+      <a href="jobs.html" style="color:var(--blue-700)">Find work</a>
+      <a href="index.html#request">Hire staff</a>
+      <a href="index.html#process">How we work</a>
+      <a href="index.html#founder">About</a>
+    </nav>
+    <div class="hdr__cta">
+      <a href="#" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a>
+      <a class="btn btn--primary" href="index.html#request">Request talent</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="jbHero">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--warm)">214 roles open · updated today</p>
+      <h1>Every open role, with the pay on it.</h1>
+      <p class="lede">No account needed to browse. Apply in one short form, and a person reads it.</p>
+      <div class="jbSearch">
+        <input placeholder="Barn manager, groom, trainer…" aria-label="Search roles">
+        <input placeholder="Ocala, FL" aria-label="Location">
+        <select aria-label="Role type"><option>All role types</option><option>Barn &amp; facility</option><option>Trainers</option><option>Grooms &amp; barn staff</option><option>Estate &amp; property</option><option>Executive</option></select>
+        <button class="btn btn--onDark">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="jbBody cut-top">
+    <div class="wrap jbLayout">
+
+      <aside class="filters">
+        <h4>Recruiter-managed</h4>
+        <label><input type="checkbox" checked> Managed by EquiStaff</label>
+        <label><input type="checkbox"> Direct from employer</label>
+        <hr>
+        <h4>Housing</h4>
+        <label><input type="checkbox"> Housing included</label>
+        <label><input type="checkbox"> Housing allowance</label>
+        <hr>
+        <h4>Commitment</h4>
+        <label><input type="checkbox"> Full time</label>
+        <label><input type="checkbox"> Part time / seasonal</label>
+        <label><input type="checkbox"> Working student</label>
+        <hr>
+        <h4>Discipline</h4>
+        <label><input type="checkbox"> Hunter / Jumper</label>
+        <label><input type="checkbox"> Dressage</label>
+        <label><input type="checkbox"> Eventing</label>
+        <label><input type="checkbox"> Racing / Thoroughbred</label>
+        <label><input type="checkbox"> Western</label>
+      </aside>
+
+      <div>
+        <div class="jbCount">
+          <b>214 roles</b>
+          <select style="min-height:44px;padding:0 12px;border-radius:var(--r-sm);border:1px solid var(--border-subtle);font:inherit">
+            <option>Newest first</option><option>Highest paid</option><option>Closest to me</option>
+          </select>
+        </div>
+
+        <div class="jbList">
+
+          <article class="row row--managed">
+            <div>
+              <h3>Barn Manager</h3>
+              <p class="row__org">Golden Ocala Equestrian · Ocala, FL</p>
+              <p class="row__pay">$55,000 – $68,000 · housing included</p>
+              <div class="job__tags">
+                <span class="tag tag--managed">Recruiter-managed</span>
+                <span class="tag tag--housing">Housing</span>
+                <span class="tag tag--neutral">Full time</span>
+                <span class="tag tag--neutral">24 horses</span>
+              </div>
+            </div>
+            <div class="row__right"><span class="row__age">3 days ago</span><a class="btn btn--primary" href="#">View role</a></div>
+          </article>
+
+          <article class="row row--managed">
+            <div>
+              <h3>Estate Manager</h3>
+              <p class="row__org">Private estate · Aiken, SC</p>
+              <p class="row__pay">$95,000 – $120,000 · housing included</p>
+              <div class="job__tags">
+                <span class="tag tag--managed">Recruiter-managed</span>
+                <span class="tag tag--housing">Housing</span>
+                <span class="tag tag--neutral">Full time</span>
+                <span class="tag tag--neutral">Confidential</span>
+              </div>
+            </div>
+            <div class="row__right"><span class="row__age">1 day ago</span><a class="btn btn--primary" href="#">View role</a></div>
+          </article>
+
+          <article class="row">
+            <div>
+              <h3>Assistant Trainer</h3>
+              <p class="row__org">Bridlewood Farm · Wellington, FL</p>
+              <p class="row__pay">$42,000 – $52,000</p>
+              <div class="job__tags">
+                <span class="tag tag--neutral">Hunter / Jumper</span>
+                <span class="tag tag--neutral">Full time</span>
+                <span class="tag tag--neutral">18 horses</span>
+              </div>
+            </div>
+            <div class="row__right"><span class="row__age">5 days ago</span><a class="btn btn--secondary" href="#">View role</a></div>
+          </article>
+
+          <article class="row">
+            <div>
+              <h3>Head Groom</h3>
+              <p class="row__org">Clearwater Sport Horses · Lexington, KY</p>
+              <p class="row__pay">$38,000 – $46,000 · housing available</p>
+              <div class="job__tags">
+                <span class="tag tag--housing">Housing</span>
+                <span class="tag tag--neutral">Full time</span>
+                <span class="tag tag--neutral">Dressage</span>
+              </div>
+            </div>
+            <div class="row__right"><span class="row__age">6 days ago</span><a class="btn btn--secondary" href="#">View role</a></div>
+          </article>
+
+          <article class="row row--managed">
+            <div>
+              <h3>Facility Director</h3>
+              <p class="row__org">Piedmont Equestrian Center · Middleburg, VA</p>
+              <p class="row__pay">$78,000 – $92,000</p>
+              <div class="job__tags">
+                <span class="tag tag--managed">Recruiter-managed</span>
+                <span class="tag tag--neutral">Full time</span>
+                <span class="tag tag--neutral">60+ horses</span>
+              </div>
+            </div>
+            <div class="row__right"><span class="row__age">1 week ago</span><a class="btn btn--primary" href="#">View role</a></div>
+          </article>
+
+          <article class="row">
+            <div>
+              <h3>Working Student</h3>
+              <p class="row__org">Live Oak Stables · Ocala, FL</p>
+              <p class="row__pay">Stipend · housing and board included</p>
+              <div class="job__tags">
+                <span class="tag tag--housing">Housing</span>
+                <span class="tag tag--neutral">Seasonal</span>
+                <span class="tag tag--neutral">Eventing</span>
+              </div>
+            </div>
+            <div class="row__right"><span class="row__age">1 week ago</span><a class="btn btn--secondary" href="#">View role</a></div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div>
+        <div class="ftr__brand"><b>EQUI</b><span>staff</span></div>
+        <p class="ftr__meta">Equine staffing since 1982 · online since 2000<br>Ocala, Florida</p>
+        <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p>
+      </div>
+      <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="#">Create a profile</a><a href="#">Job alerts</a><a href="#">Advice</a></div>
+      <div><h4>For employers</h4><a href="index.html#request">Request talent</a><a href="#">Post a job</a><a href="index.html#process">How recruiting works</a><a href="#">Guarantee</a></div>
+      <div><h4>Company</h4><a href="index.html#founder">About</a><a href="#">Contact</a><a href="#">Blog</a><a href="#">Affiliates</a></div>
+    </div>
+    <div class="ftr__bar">
+      <span>© 2026 EquiStaff. All rights reserved.</span>
+      <span>Privacy · Terms · Accessibility</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
