@@ -125,10 +125,23 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .trust__item svg { flex: 0 0 auto; }
 
 /* ---------- Stats ---------- */
-.stats { background: var(--depth-02); padding: var(--s-9) 0; }
-.stats__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-6); }
-.stat__n { font-family: var(--font-display); font-size: clamp(2.25rem,3.6vw,3.25rem); font-weight: 700; line-height: 1; color: var(--navy-900); }
-.stat__l { font-size: var(--t-small); color: var(--text-muted); margin-top: var(--s-2); }
+/* ---------- Proof strip ----------
+   Was a 290px block of four huge numbers. Now a single slim banner:
+   figure and label sit on one line, separated by hairline rules. */
+.stats { background: var(--depth-02); padding: var(--s-5) 0; }
+.stats__grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4) var(--s-6); }
+.stats__grid > div { display: flex; align-items: baseline; gap: var(--s-3); position: relative; }
+.stats__grid > div + div::before {
+  content: ""; position: absolute; left: calc(var(--s-6) / -2 - 1px);
+  top: 2px; bottom: 2px; width: 1px; background: var(--border-tint, #BDE3FF);
+}
+.stat__n { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; line-height: 1.1; color: var(--navy-900); white-space: nowrap; }
+.stat__l { font-size: var(--t-small); color: var(--text-muted); margin: 0; }
+@media (max-width: 900px) {
+  .stats__grid { justify-content: flex-start; gap: var(--s-3) var(--s-5); }
+  .stats__grid > div + div::before { display: none; }
+  .stat__n { font-size: 1.25rem; }
+}
 
 /* ---------- Process ---------- */
 .process { padding: var(--s-9) 0; }
@@ -254,13 +267,13 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 /* ---------- Responsive ---------- */
 @media (max-width: 1040px) {
   .doors__grid, .founder__grid, .request__grid { grid-template-columns: 1fr; }
-  .stats__grid, .process__grid { grid-template-columns: repeat(2,1fr); }
+  .process__grid { grid-template-columns: repeat(2,1fr); }
   .roles__grid, .board__grid, .quotes__grid { grid-template-columns: repeat(2,1fr); }
   .ftr__grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
   .hdr__nav { display: none; }
-  .stats__grid, .process__grid, .roles__grid, .board__grid, .quotes__grid, .ftr__grid, .form__row { grid-template-columns: 1fr; }
+  .process__grid, .roles__grid, .board__grid, .quotes__grid, .ftr__grid, .form__row { grid-template-columns: 1fr; }
   .hero__in { padding: var(--s-8) 0 calc(var(--s-8) + 30px); }
   .door { min-height: 0; padding: var(--s-6); }
   .cut-top, .cut-both { clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%); margin-top: -5vw; }
