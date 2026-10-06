@@ -33,10 +33,16 @@ python3 -m http.server 4321
 
 No build step, no dependencies.
 
-| Page | What it is |
-|---|---|
-| `index.html` | Landing page — two doors, process, role categories, proof, Request Talent |
-| `jobs.html` | Job board — filters, scannable listings, recruiter-managed treatment |
+| Page | Mode | What it is |
+|---|---|---|
+| `index.html` | Light | Landing — two doors, process, role categories, proof, Request Talent |
+| `jobs.html` | Light | Job board — filters, scannable listings, recruiter-managed treatment |
+| `onboarding.html` | Light | Apply-triggered sign-up (3 steps) + the gated employer path |
+| `profile.html` | **Deep** | Job-seeker profile and portal — proves the two-mode system |
+
+`profile.html` is the reference implementation for Deep mode: it sets
+`data-mode="deep"` on `<html>` and reuses the same components as the public
+site with no component-level overrides.
 
 ---
 

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apply — Barn Manager, Golden Ocala Equestrian | EquiStaff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css">
+<link rel="stylesheet" href="src/styles.css">
+<link rel="stylesheet" href="src/screens.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="index.html"><b>EQUI</b><span>staff</span></a>
+    <nav class="hdr__nav" aria-label="Main">
+      <a href="jobs.html">Find work</a><a href="index.html#request">Hire staff</a>
+      <a href="index.html#process">How we work</a><a href="index.html#founder">About</a>
+    </nav>
+    <div class="hdr__cta"><a href="#" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a></div>
+  </div>
+</header>
+
+<main id="main" class="shell shell--tint">
+  <div class="wrap">
+
+    <!-- The gate sits HERE — at apply — not in front of browsing.
+         Audit finding #1: "Available Jobs" currently redirects to /auth/login. -->
+    <p class="eyebrow" id="ob-eyebrow">Applying · step 1 of 3</p>
+    <h1 style="max-width:20ch">Let's get your application in.</h1>
+    <p class="lede" style="max-width:56ch">No account needed to browse — but we need a few details to send this to the barn. It takes about a minute.</p>
+
+    <div class="steps" id="ob-steps" style="margin-top:var(--s-7)">
+      <div class="stepdot stepdot--on" data-step="1"><span class="stepdot__n">1</span><span class="stepdot__l">About you</span></div>
+      <span class="stepbar"></span>
+      <div class="stepdot" data-step="2"><span class="stepdot__n">2</span><span class="stepdot__l">Your experience</span></div>
+      <span class="stepbar"></span>
+      <div class="stepdot" data-step="3"><span class="stepdot__n">3</span><span class="stepdot__l">Send it</span></div>
+    </div>
+
+    <div class="ob">
+      <div class="ob__card">
+        <form onsubmit="event.preventDefault();goTo(2)">
+          <div id="s1">
+            <h2 style="font-size:1.5rem">About you</h2>
+            <div class="form__row">
+              <div class="field"><label for="fn">First name</label><input id="fn" required></div>
+              <div class="field"><label for="ln">Last name</label><input id="ln" required></div>
+            </div>
+            <div class="field"><label for="em">Email</label><input id="em" type="email" required><small>This is how the barn replies to you.</small></div>
+            <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" placeholder="(352) 555-0147"><small>Optional. Some barns prefer to call.</small></div>
+            <div class="field"><label for="lo">Where are you now?</label><input id="lo" placeholder="Ocala, FL"><small>So we know if relocation is part of the conversation.</small></div>
+            <div class="ob__actions">
+              <button class="btn btn--primary btn--lg" type="submit">Continue</button>
+              <span class="ob__skip">Takes about a minute</span>
+            </div>
+          </div>
+        </form>
+
+        <!-- STEP 2 — designed for the candidate with no resume.
+             Kaitlin's wish list: build a basic resume from their last 2–3 roles. -->
+        <div id="s2" hidden>
+          <h2 style="font-size:1.5rem">Your experience</h2>
+          <p style="color:var(--text-muted);font-size:var(--t-small)">Most people applying for barn work don't have a resume ready. That's completely fine — answer what you can.</p>
+          <form onsubmit="event.preventDefault();goTo(3)">
+            <div class="field" style="margin-top:var(--s-5)">
+              <label>Do you have a resume?</label>
+              <div class="pick">
+                <label><input type="radio" name="cv" checked><span><b>No — help me put one together</b><span>We'll ask about your last two or three jobs and build a simple one for you.</span></span></label>
+                <label><input type="radio" name="cv"><span><b>Yes — I'll upload it</b><span>PDF or Word, up to 10MB.</span></span></label>
+              </div>
+            </div>
+            <div class="field"><label for="r1">Most recent job</label><input id="r1" placeholder="Groom · Live Oak Stables · 2024–now"><small>Role, barn, roughly when. Rough is fine.</small></div>
+            <div class="field"><label for="r2">The one before that</label><input id="r2" placeholder="Working student · Bridlewood Farm · 2022–2024"></div>
+            <div class="field">
+              <label for="dis">Disciplines you've worked in</label>
+              <select id="dis"><option>Hunter / Jumper</option><option>Dressage</option><option>Eventing</option><option>Racing / Thoroughbred</option><option>Western</option><option>Mixed / general barn work</option></select>
+            </div>
+            <div class="field"><label for="note">Anything the barn should know?</label><textarea id="note" rows="3" placeholder="Availability, housing needs, whether you drive…"></textarea><small>Optional.</small></div>
+            <div class="ob__actions">
+              <button class="btn btn--primary btn--lg" type="submit">Review and send</button>
+              <a class="ob__skip" href="#" onclick="event.preventDefault();goTo(1)">Back</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="s3" hidden>
+          <div class="done">
+            <div class="done__tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <p class="eyebrow" style="justify-self:center">Application sent</p>
+            <h2 style="font-size:1.75rem">That's with the barn.</h2>
+            <p style="margin:0 auto;color:var(--text-muted)">We've sent your application to Golden Ocala Equestrian, and created your EquiStaff profile so you don't have to type this again.</p>
+            <div class="whatnext">
+              <div class="whatnext__row"><span class="whatnext__n">NOW</span><span class="whatnext__t"><b>A person reads it</b>Not a filter. Usually the same day.</span></div>
+              <div class="whatnext__row"><span class="whatnext__n">2–3 DAYS</span><span class="whatnext__t"><b>You'll hear back either way</b>We tell you if it's a no. You won't be left wondering.</span></div>
+              <div class="whatnext__row"><span class="whatnext__n">NEXT</span><span class="whatnext__t"><b>Finish your profile</b>Three fields left. Complete profiles get seen first by the recruiting team.</span></div>
+            </div>
+            <div class="ob__actions" style="justify-content:center;margin-top:var(--s-7)">
+              <a class="btn btn--primary btn--lg" href="profile.html">Finish my profile</a>
+              <a class="btn btn--secondary btn--lg" href="jobs.html">Keep browsing roles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="ob__aside">
+        <div class="ob__role">
+          <p style="font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;color:var(--warm);margin:0 0 var(--s-3)">YOU'RE APPLYING TO</p>
+          <h3>Barn Manager</h3>
+          <p>Golden Ocala Equestrian · Ocala, FL</p>
+          <p class="job__pay">$55,000 – $68,000 · housing</p>
+          <div class="job__tags" style="margin-top:var(--s-4)"><span class="tag tag--managed">Recruiter-managed</span></div>
+        </div>
+        <div class="reassure">
+          <h4>WHAT HAPPENS TO THIS</h4>
+          <ul>
+            <li>Your application goes to Kaitlin's team first — we check it before the barn sees it.</li>
+            <li>We never share your details with anyone you haven't applied to.</li>
+            <li>It's free. It's always free for job seekers.</li>
+            <li>You can delete your profile any time, and we delete it properly.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <!-- EMPLOYER SIDE — the gate, documented -->
+    <section style="margin-top:var(--s-9);padding-top:var(--s-8);border-top:1px solid var(--border-subtle)">
+      <p class="eyebrow">The other door · employer onboarding</p>
+      <h2 style="max-width:24ch">Employers don't self-serve. They start a conversation.</h2>
+      <p class="lede" style="max-width:62ch">Companies submit an inquiry rather than getting instant access. Kaitlin reviews each one and routes it — full-service recruitment, or the job board. This is the flow the client confirmed on 2 October.</p>
+      <div class="process__grid" style="margin-top:var(--s-7)">
+        <div class="step"><div class="step__ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#007AB8" stroke-width="1.8"><path d="M4 4h16v12H5.2L4 17.5z"/></svg></div><div class="step__n">Step 01</div><h3>Request talent</h3><p>Five fields, three required. No account, no job spec needed yet.</p></div>
+        <div class="step"><div class="step__ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#007AB8" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div><div class="step__n">Step 02</div><h3>Kaitlin reviews it</h3><p>Every request, personally. This is the gate — and it's deliberate.</p></div>
+        <div class="step"><div class="step__ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#007AB8" stroke-width="1.8"><path d="M6 3v12M6 21v-2M18 3v2M18 9v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/></svg></div><div class="step__n">Step 03</div><h3>Routed</h3><p>Full-service recruitment, or posted to the board — whichever actually fits.</p></div>
+        <div class="step"><div class="step__ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#007AB8" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.1a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></div><div class="step__n">Step 04</div><h3>Discovery call</h3><p>Screening happens here, on the phone — not in a long form.</p></div>
+      </div>
+      <div style="margin-top:var(--s-7)"><a class="btn btn--primary btn--lg" href="index.html#request">See the Request Talent form</a></div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div>
+        <div class="ftr__brand"><b>EQUI</b><span>staff</span></div>
+        <p class="ftr__meta">Equine staffing since 1982 · online since 2000<br>Ocala, Florida</p>
+        <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p>
+      </div>
+      <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="#">Job alerts</a><a href="#">Advice</a></div>
+      <div><h4>For employers</h4><a href="index.html#request">Request talent</a><a href="#">Post a job</a><a href="index.html#process">How recruiting works</a><a href="#">Guarantee</a></div>
+      <div><h4>Company</h4><a href="index.html#founder">About</a><a href="#">Contact</a><a href="#">Blog</a><a href="#">Affiliates</a></div>
+    </div>
+    <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
+  </div>
+</footer>
+
+<script>
+function goTo(n){
+  ['s1','s2','s3'].forEach(function(id,i){
+    document.getElementById(id).hidden = (i+1 !== n);
+  });
+  document.querySelectorAll('#ob-steps .stepdot').forEach(function(d){
+    var s = +d.dataset.step;
+    d.classList.toggle('stepdot--on', s === n);
+    d.classList.toggle('stepdot--done', s < n);
+  });
+  document.getElementById('ob-eyebrow').textContent =
+    (n === 3) ? 'Applying · done' : 'Applying · step ' + n + ' of 3';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>

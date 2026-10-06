@@ -1,0 +1,133 @@
+/* EquiStaff — onboarding, profile and portal screens. Built on tokens.css. */
+
+/* ---------- Shared shell ---------- */
+.shell { padding: var(--s-8) 0 var(--s-9); }
+.shell--tint { background: var(--depth-01); }
+
+/* ---------- Step rail ---------- */
+.steps { display: flex; gap: var(--s-2); align-items: center; margin-bottom: var(--s-7); flex-wrap: wrap; }
+.stepdot { display: flex; align-items: center; gap: var(--s-3); }
+.stepdot__n {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  font: 700 .9375rem/1 var(--font-body); flex: 0 0 auto;
+  background: var(--depth-02); color: var(--text-muted); border: 2px solid transparent;
+}
+.stepdot--on .stepdot__n { background: var(--action-primary); color: var(--action-ink); }
+.stepdot--done .stepdot__n { background: var(--ok-bg); color: var(--ok-ink); border-color: var(--ok-ink); }
+.stepdot__l { font-size: var(--t-small); font-weight: 700; color: var(--text-muted); }
+.stepdot--on .stepdot__l { color: var(--text-primary); }
+.stepbar { flex: 1 1 28px; height: 2px; background: var(--depth-02); min-width: 20px; }
+
+/* ---------- Onboarding card ---------- */
+.ob { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s-8); align-items: start; }
+.ob__card { background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--r-lg); padding: var(--s-7); box-shadow: var(--e-2); }
+.ob__aside { position: sticky; top: 96px; }
+.ob__role {
+  background: var(--navy-900); color: #fff; border-radius: var(--r-md);
+  padding: var(--s-5) var(--s-6); margin-bottom: var(--s-5);
+}
+.ob__role h3 { color: #fff; margin: 0 0 4px; font-size: 1.25rem; }
+.ob__role p { color: var(--baby-200); margin: 0; font-size: var(--t-small); }
+.ob__role .job__pay { color: #fff; margin-top: var(--s-3); }
+.reassure { background: var(--warm); border-radius: var(--r-md); padding: var(--s-5) var(--s-6); }
+.reassure h4 { margin: 0 0 var(--s-3); font-size: var(--t-small); color: var(--warm-ink); letter-spacing: .04em; }
+.reassure li { font-size: var(--t-small); color: #3B2E1B; margin-bottom: var(--s-3); line-height: 1.5; }
+.reassure ul { margin: 0; padding-left: 18px; }
+
+/* radio cards — plain language, big targets */
+.pick { display: grid; gap: var(--s-3); }
+.pick label {
+  display: flex; gap: var(--s-4); align-items: flex-start; cursor: pointer;
+  border: 1.5px solid var(--border-subtle); border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-5); min-height: 56px; transition: border-color .15s var(--ease), background .15s var(--ease);
+}
+.pick label:hover { border-color: var(--action-primary); background: var(--depth-01); }
+.pick input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--blue-600); flex: 0 0 auto; }
+.pick b { display: block; font-size: 1rem; }
+.pick span { display: block; font-size: var(--t-small); color: var(--text-muted); margin-top: 2px; }
+
+.ob__actions { display: flex; gap: var(--s-3); align-items: center; margin-top: var(--s-6); flex-wrap: wrap; }
+.ob__skip { font-size: var(--t-small); color: var(--text-muted); }
+
+/* ---------- Success ---------- */
+.done { text-align: center; padding: var(--s-8) var(--s-6); }
+.done__tick {
+  width: 72px; height: 72px; border-radius: 50%; background: var(--ok-bg);
+  display: grid; place-items: center; margin: 0 auto var(--s-5);
+}
+.whatnext { text-align: left; max-width: 560px; margin: var(--s-7) auto 0; display: grid; gap: var(--s-4); }
+.whatnext__row { display: flex; gap: var(--s-4); align-items: flex-start; }
+.whatnext__n { font: 900 var(--t-label)/1.6 var(--font-body); color: var(--blue-700); letter-spacing: .1em; flex: 0 0 56px; }
+.whatnext__t { font-size: var(--t-small); }
+.whatnext__t b { display: block; font-size: 1rem; margin-bottom: 2px; }
+
+/* ============================================================
+   PORTAL — Deep mode. Everything below sits on [data-mode="deep"].
+   ============================================================ */
+.portal { background: var(--surface-page); color: var(--text-primary); min-height: 100vh; }
+.pHdr { background: var(--depth-07); border-bottom: 1px solid var(--navy-500); position: sticky; top: 0; z-index: 50; }
+.pHdr__in { display: flex; align-items: center; gap: var(--s-6); height: 72px; }
+.pHdr__logo { display: flex; align-items: baseline; font-family: var(--font-display); font-size: 1.5rem; text-decoration: none; }
+.pHdr__logo b { color: var(--baby-200); font-weight: 700; } .pHdr__logo span { color: #fff; font-style: italic; }
+.pHdr__nav { display: flex; gap: var(--s-6); margin-left: auto; }
+.pHdr__nav a { color: var(--baby-200); text-decoration: none; font-size: var(--t-small); font-weight: 600; }
+.pHdr__nav a[aria-current] { color: #fff; }
+.avatar {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--baby-200); color: var(--navy-900);
+  display: grid; place-items: center; font: 700 .875rem/1 var(--font-body);
+}
+.pLayout { display: grid; grid-template-columns: 300px 1fr; gap: var(--s-7); padding: var(--s-7) 0 var(--s-9); align-items: start; }
+.pCard { background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-md); padding: var(--s-6); }
+.pCard h3 { color: var(--text-primary); font-size: 1.25rem; margin-bottom: var(--s-4); }
+
+/* completion meter — from Kaitlin's chatbot wish list */
+.meter { height: 8px; border-radius: var(--r-pill); background: rgba(255,255,255,.14); overflow: hidden; margin: var(--s-3) 0 var(--s-2); }
+.meter__fill { height: 100%; background: var(--baby-200); border-radius: var(--r-pill); }
+.todo { display: grid; gap: var(--s-3); margin-top: var(--s-4); }
+.todo a { display: flex; gap: var(--s-3); align-items: center; color: var(--text-muted); text-decoration: none; font-size: var(--t-small); }
+.todo a:hover { color: #fff; }
+.todo__box { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid var(--navy-500); flex: 0 0 auto; display: grid; place-items: center; }
+.todo__box--done { background: var(--baby-200); border-color: var(--baby-200); }
+
+.pSection { margin-bottom: var(--s-7); }
+.pSection__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-4); gap: var(--s-4); }
+.pSection__head h2 { color: var(--text-primary); font-size: 1.5rem; margin: 0; }
+.pSection__head a { font-size: var(--t-small); font-weight: 700; }
+
+/* application rows in deep mode */
+.appRow {
+  background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-md);
+  padding: var(--s-5) var(--s-6); display: grid; grid-template-columns: 1fr auto; gap: var(--s-5);
+  align-items: center; margin-bottom: var(--s-4);
+}
+.appRow h4 { margin: 0 0 4px; font-family: var(--font-display); font-size: 1.1875rem; color: var(--text-primary); }
+.appRow p { margin: 0; font-size: var(--t-small); color: var(--text-muted); }
+.pill { font: 700 var(--t-label)/1 var(--font-body); padding: 7px 12px; border-radius: var(--r-pill); white-space: nowrap; }
+.pill--review { background: var(--baby-200); color: var(--navy-900); }
+.pill--sent { background: rgba(255,255,255,.12); color: var(--baby-200); }
+.pill--shortlist { background: var(--ok-bg); color: var(--ok-ink); }
+
+/* empty state */
+.empty { text-align: center; padding: var(--s-8) var(--s-6); border: 1px dashed var(--border-subtle); border-radius: var(--r-md); }
+.empty p { color: var(--text-muted); margin: 0 auto var(--s-5); }
+
+/* deep-mode form fields */
+[data-mode="deep"] .field input,
+[data-mode="deep"] .field select,
+[data-mode="deep"] .field textarea {
+  background: var(--depth-07); border-color: var(--navy-500); color: #fff;
+}
+[data-mode="deep"] .field input::placeholder { color: #7D9AB8; }
+[data-mode="deep"] .field label { color: var(--text-primary); }
+[data-mode="deep"] .field small { color: var(--text-muted); }
+
+@media (max-width: 1040px) {
+  .ob { grid-template-columns: 1fr; }
+  .ob__aside { position: static; }
+  .pLayout { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .pHdr__nav { display: none; }
+  .appRow { grid-template-columns: 1fr; }
+  .ob__card { padding: var(--s-6) var(--s-5); }
+}
