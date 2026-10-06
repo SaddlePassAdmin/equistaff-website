@@ -25,3 +25,21 @@ needs to move before launch. Either:
 
 The second is probably right, since `#007AB8` is what was approved and what the
 contrast ratios in `tokens.css` were measured against.
+
+## Wordmark weight — A / B
+
+Two lockups, same horse-and-magnifier mark, different wordmark:
+
+| File | Wordmark | Notes |
+|---|---|---|
+| `logo-lockup.svg` | Lighter serif — "Equistaff" | Brittany's original pairing. More editorial, but the thin strokes start to disappear at header size. |
+| `logo-lockup-thick.svg` | **Blocky "EQUI" + italic serif "staff"** | **Currently in use.** Holds up much better at 34px and below. Composed here: her mark plus the heavier wordmark from the same board. |
+
+Each has a `-reversed` variant for Deep mode.
+
+Compare them side by side at `/assets/compare.html`, including at real header
+size and reversed on navy.
+
+**To switch back:** find-and-replace `logo-lockup-thick` → `logo-lockup`
+across the HTML, and bump the header heights in `styles.css` back up ~4px
+(the thick lockup is 777×148, the lighter one 722×148).
