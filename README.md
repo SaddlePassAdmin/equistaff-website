@@ -26,12 +26,19 @@ It is deliberately framework-free right now so the stack decision stays open.
 
 ## Run it
 
+**Easiest:** double-click `serve.command`. It starts the server and opens the
+site in your browser. Close the Terminal window to stop it.
+
+**Or from a terminal:**
+
 ```bash
+cd equistaff-website
 python3 -m http.server 4321
-# http://127.0.0.1:4321
 ```
 
-No build step, no dependencies.
+Then open **http://127.0.0.1:4321**
+
+No build step, no dependencies, nothing to install.
 
 | Page | Mode | What it is |
 |---|---|---|
