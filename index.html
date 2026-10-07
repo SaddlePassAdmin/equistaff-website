@@ -25,14 +25,13 @@
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="/"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
     <nav class="hdr__nav" aria-label="Main">
-      <a href="jobs.html">Find work</a>
-      <a href="#request">Hire staff</a>
+      <a href="#find-work">Find work</a>
+      <a href="#hire">Hire staff</a>
       <a href="#process">How we work</a>
       <a href="#founder">About</a>
     </nav>
     <div class="hdr__cta">
-      <a href="#" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a>
-      <a class="btn btn--primary" href="#request">Request talent</a>
+      <a class="hdr__signin" href="signin.html">Sign in</a>
     </div>
   </div>
 </header>
@@ -54,50 +53,21 @@
       <p class="eyebrow eyebrow--on-dark" style="color:var(--warm)">Ocala, Florida · Since 1982</p>
       <h1>The people who run great barns.</h1>
       <hr class="hero__rule">
-      <p class="lede">Barn managers, trainers, grooms and estate staff — recruited, vetted and placed by horse people. Not a database. A person who knows the industry, and knows your barn.</p>
-      <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)">
-        <a class="btn btn--onDark btn--lg" href="#request">Request talent</a>
-        <a class="btn btn--ghostDark btn--lg" href="jobs.html">Browse open roles</a>
+      <p class="lede">Recruited, vetted and placed by horse people. In Ocala since 1982.</p>
+      <p class="hero__ask">Which are you?</p>
+      <div class="hero__choice">
+        <a class="btn btn--onDark btn--lg" href="#hire">I'm hiring</a>
+        <a class="btn btn--ghostDark btn--lg" href="#find-work">I'm looking for work</a>
       </div>
-      <p class="hero__meta">Free for job seekers · no account needed to browse · 214 roles open today</p>
+      <p class="hero__meta">Free for job seekers · no account needed to browse</p>
     </div>
   </section>
 
-  <!-- TWO DOORS — employer card gets the visual weight -->
-  <section class="doors cut-top">
-    <div class="wrap">
-      <div class="doors__grid">
-
-        <div class="door door--employer">
-          <div class="door__media"><img src="img/team.jpg" alt=""></div>
-          <span class="tagpill">Hiring</span>
-          <h3>I need to fill a role.</h3>
-          <p>Tell us the job, the barn and the hours. Kaitlin reads every request herself and comes back with a shortlist of four — never a stack of fifty.</p>
-          <div class="door__actions">
-            <a class="btn btn--onDark" href="#request">Request talent</a>
-            <a class="btn btn--ghostDark" href="#request">Post a job instead</a>
-          </div>
-          <p class="door__note">Most requests get a reply the same day.</p>
-        </div>
-
-        <div class="door door--seeker">
-          <div class="door__media"><img src="img/groom.jpg" alt=""></div>
-          <span class="tagpill">Looking for work</span>
-          <h3>I'm looking for a job.</h3>
-          <p>Browse every open role without making an account. Apply in one short form, and a person reads it — not a filter.</p>
-          <div class="door__actions">
-            <a class="btn btn--primary" href="jobs.html">Browse open roles</a>
-            <a class="btn btn--secondary" href="#">Create a profile</a>
-          </div>
-          <p class="door__note">Always free for job seekers.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
+  <!-- The hero now does the routing, so the duplicate two-door block is gone.
+       Its copy moved into the sections it actually belonged to. -->
 
   <!-- TRUST BAR — credibility, because the good listings get mistaken for fakes -->
-  <section class="trust">
+  <section class="trust cut-top">
     <div class="wrap trust__in">
       <div class="trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2.2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg><span><b>Every listing verified</b> <em>— we call the barn first</em></span></div>
       <div class="trust__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span><b>References checked by phone</b> <em>— not by email</em></span></div>
@@ -190,13 +160,13 @@
   </div>
 
   <!-- JOB BOARD — distinct block, scannable, real information -->
-  <section class="board cut-both" id="board">
+  <section class="board cut-both" id="find-work">
     <div class="wrap">
       <div class="board__head">
         <div class="sec-head">
           <p class="eyebrow" style="color:var(--navy-900)">Open now</p>
           <h2>Roles we are filling this week</h2>
-          <p style="color:#143A5C">Every listing shows the pay, the location and whether housing is included — before you click.</p>
+          <p style="color:#143A5C">Every listing shows the pay, the location and whether housing is included — before you click. Apply in one short form, and a person reads it, not a filter.</p>
         </div>
         <a class="btn btn--primary" href="jobs.html">See all 214 roles</a>
       </div>
@@ -234,7 +204,7 @@
       <div class="sec-head" style="max-width:68ch">
         <p class="eyebrow">Two ways to hire</p>
         <h2>You can post it yourself. Most people would rather we did it.</h2>
-        <p>Both work. The difference is who does the sorting, the chasing and the reference calls — and how confident you are on the first day.</p>
+        <p>Both work. The difference is who does the sorting, the chasing and the reference calls — and how confident you are on the first day. Kaitlin reads every request herself and comes back with a shortlist of four, never a stack of fifty.</p>
       </div>
 
       <div class="compare__grid">
