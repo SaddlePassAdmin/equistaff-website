@@ -119,10 +119,31 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .door--employer .tagpill { background: var(--baby-200); color: var(--navy-900); }
 
 /* ---------- Trust bar ---------- */
-.trust { background: var(--warm); padding: var(--s-6) 0; }
-.trust__in { display: flex; gap: var(--s-7); flex-wrap: wrap; align-items: center; justify-content: space-between; }
-.trust__item { display: flex; gap: var(--s-3); align-items: center; font-size: var(--t-small); color: #3B2E1B; }
+/* ---------- Trust bar ----------
+   Was 152px (288px on a phone) because space-between spaced three long
+   sentences unevenly and each wrapped. Now an even three-column grid with
+   one line per claim, and hairline separators doing the spacing. */
+.trust { background: var(--warm); padding: var(--s-4) 0; }
+.trust__in { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; gap: 0; }
+.trust__item {
+  display: flex; gap: var(--s-3); align-items: center; justify-content: center;
+  font-size: var(--t-small); line-height: 1.35; color: #3B2E1B;
+  padding: var(--s-2) var(--s-5); position: relative; text-align: left;
+}
+.trust__item + .trust__item::before {
+  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  height: 24px; width: 1px; background: #E0D3BE;
+}
 .trust__item svg { flex: 0 0 auto; }
+.trust__item b { font-weight: 700; }
+.trust__item span { display: block; }
+.trust__item em { font-style: normal; color: #6B5B45; }
+
+@media (max-width: 1040px) {
+  .trust__in { grid-template-columns: 1fr; gap: var(--s-2); }
+  .trust__item { justify-content: flex-start; padding: var(--s-2) 0; }
+  .trust__item + .trust__item::before { display: none; }
+}
 
 /* ---------- Stats ---------- */
 /* ---------- Proof strip ----------
