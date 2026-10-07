@@ -1,0 +1,3 @@
+# Unreleased preview of the EquiStaff rebuild. Not for indexing.
+User-agent: *
+Disallow: /

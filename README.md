@@ -7,6 +7,10 @@ Built by **Saddle Pass Inc.** for **EquiStaff** (Ocala, Florida).
 
 ## Status
 
+**Preview build — not the live site.** Every page carries `noindex` and
+`robots.txt` disallows crawling, so this can never compete with equistaff.com
+in search.
+
 Design-stage prototype. This repo currently holds the **design system** and a
 **working static prototype** of the public site, used to prove the layouts,
 motion and component behaviour before the application build starts.
@@ -161,11 +165,10 @@ Non-negotiable, and all of it traces to findings in the audit:
 
 ## Ownership
 
-Per the Scope of Work, all rights in the deliverables — including site code —
-assign to EquiStaff on receipt of final payment. This repo is kept separate
-from Saddle Pass work precisely so that transfer is clean.
-
-Until final payment, EquiStaff holds a licence to use everything delivered.
+All rights in the deliverables — brand assets, design files, site code and the
+content produced for the site — belong to EquiStaff under the project agreement.
+This repo is kept separate from other Saddle Pass work so that handover is a
+single clean transfer.
 
 ---
 

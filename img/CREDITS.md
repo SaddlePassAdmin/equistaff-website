@@ -33,9 +33,3 @@ facilities — not glossy horse portraits.
 Same licence and the same caveat as the stills: placeholder only. The brief
 calls for real people and real barns, and EquiStaff's own footage replaces
 these before launch. See `media/README.md` for the shoot spec.
-
-## Client-supplied
-
-| File | Source | Notes |
-|---|---|---|
-| `kaitlin.jpg` | equistaff.com team section | Kaitlin Snyder, Principal / Owner. Pulled from the live site and cropped to 4:5. **EquiStaff's own image** — not stock, and the only genuinely real photograph on the site so far. |
