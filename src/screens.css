@@ -131,3 +131,8 @@
   .appRow { grid-template-columns: 1fr; }
   .ob__card { padding: var(--s-6) var(--s-5); }
 }
+
+
+/* Why an employer name became visible. Appears only after contact is made. */
+.appRow__why { font-size:var(--t-label); color:var(--warm); margin:4px 0 0; font-style:italic; }
+

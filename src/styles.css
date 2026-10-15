@@ -416,3 +416,14 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 
 /* trust banner now sits directly under the hero and carries the diagonal */
 .trust.cut-top { padding-top: calc(var(--s-4) + 3.2vw); }
+
+/* Confidential employer pill. The 7 Oct business rule: on a recruiter-managed
+   search the barn is not named until contact is made. Lives here, not in
+   screens.css, because the landing pages and the board both need it. */
+.job__conf { display:inline-flex; gap:5px; align-items:center;
+  background:var(--warm); color:var(--warm-ink); border-radius:var(--r-pill);
+  padding:3px 9px; margin-right:6px;
+  font:900 11px/1.45 var(--font-body); letter-spacing:.06em; text-transform:uppercase; }
+/* In a narrow card the pill takes its own line; in a wide list row it sits inline. */
+.job__org .job__conf { display:flex; width:fit-content; margin:0 0 5px; }
+@media (max-width:620px){ .row__org .job__conf { display:flex; width:fit-content; margin:0 0 5px; } }
