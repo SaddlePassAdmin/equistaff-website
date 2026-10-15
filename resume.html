@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build your resume | EquiStaff</title>
+<meta name="description" content="No resume? Answer a few questions about the yards you've worked at and we'll build one for you.">
+
+<link rel="canonical" href="https://www.equistaff.com/resume.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* RESUME BUILDER — audit finding #21/#57: the live site demands a resume up front
+   and links out to Indeed to get one. Most grooms and riders have never written one.
+   So we ask plain questions about yards they've worked at and assemble the document
+   for them. The paper panel on the right is the actual output, updating as they type —
+   the point is that they can see a real resume appearing from answers they can give. */
+.rb { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-8); align-items:start; }
+.rb__form { background:var(--depth-06); border:1px solid var(--navy-500); border-radius:var(--r-lg); padding:var(--s-7); }
+.rb__form h2 { color:#fff; font-size:1.5rem; margin:0 0 var(--s-2); }
+.rb__lede { color:var(--baby-200); font-size:var(--t-small); margin:0 0 var(--s-6); max-width:48ch; }
+
+/* dark-mode form controls */
+.rb .field label { color:#fff; }
+.rb .field input, .rb .field textarea, .rb .field select {
+  background:rgba(255,255,255,.07); border:1.5px solid var(--navy-500); color:#fff; }
+.rb .field input::placeholder, .rb .field textarea::placeholder { color:#7FA3C4; }
+.rb .field input:focus, .rb .field textarea:focus { border-color:var(--baby-200); outline:2px solid rgba(189,227,255,.35); }
+
+/* one yard someone has worked at */
+.yard { border:1.5px solid var(--navy-500); border-radius:var(--r-md); padding:var(--s-5); margin-bottom:var(--s-4); background:rgba(255,255,255,.03); }
+.yard__head { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--s-4); }
+.yard__n { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; color:var(--warm); text-transform:uppercase; }
+.yard__del { background:none; border:0; color:var(--baby-300); font-size:var(--t-small); cursor:pointer; text-decoration:underline; padding:4px; }
+.yard__del:hover { color:#fff; }
+.rb__add { width:100%; background:none; border:1.5px dashed var(--navy-500); color:var(--baby-200);
+  border-radius:var(--r-md); padding:var(--s-4); font:700 1rem/1 var(--font-body); cursor:pointer; min-height:52px; }
+.rb__add:hover { border-color:var(--baby-200); color:#fff; }
+
+/* skills as big friendly targets, not a dropdown */
+.chips { display:flex; flex-wrap:wrap; gap:var(--s-3); }
+.chips label { display:inline-flex; gap:8px; align-items:center; cursor:pointer;
+  border:1.5px solid var(--navy-500); border-radius:var(--r-pill); padding:9px 15px;
+  color:var(--baby-200); font-size:var(--t-small); min-height:44px; transition:all .15s var(--ease); }
+.chips label:hover { border-color:var(--baby-200); color:#fff; }
+.chips input { width:17px; height:17px; accent-color:#BDE3FF; }
+.chips input:checked + span { color:#fff; font-weight:700; }
+.chips label:has(input:checked) { background:rgba(189,227,255,.14); border-color:var(--baby-200); }
+
+/* THE PAPER — the resume itself, light on the dark portal ground */
+.paper { background:#fff; border-radius:var(--r-lg); padding:var(--s-8); box-shadow:var(--e-3);
+  position:sticky; top:96px; max-height:calc(100vh - 140px); overflow:auto;
+  /* A light island inside a deep-mode page. Without this the inherited Deep
+     tokens apply --text-primary:#fff to body copy and the resume renders
+     white-on-white. Re-declare the Light values so the paper is really light. */
+  --text-primary: var(--navy-900);
+  --text-muted:   #4A6580;
+  --text-link:    var(--blue-700);
+  --border-subtle: #CFE4F3;
+  color: var(--navy-900); }
+.paper__name { font-family:var(--font-display); font-size:1.875rem; color:var(--navy-900); margin:0 0 4px; }
+.paper__role { color:var(--blue-700); font-weight:700; margin:0 0 var(--s-2); }
+.paper__meta { font-size:var(--t-small); color:var(--text-muted); margin:0; }
+.paper__rule { height:2px; background:var(--depth-03); margin:var(--s-5) 0; border:0; }
+.paper h4 { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.11em; text-transform:uppercase;
+  color:var(--blue-700); margin:var(--s-6) 0 var(--s-4); }
+.paper h4:first-of-type { margin-top:0; }
+.pJob { margin-bottom:var(--s-5); }
+.pJob__t { font-weight:900; color:var(--navy-900); margin:0; font-size:1.0625rem; }
+.pJob__w { font-size:var(--t-small); color:var(--text-muted); margin:2px 0 6px; font-family:var(--font-mono); }
+.pJob__d { font-size:var(--t-small); color:var(--text-primary); margin:0; line-height:1.6; }
+.paper__skills { display:flex; flex-wrap:wrap; gap:7px; }
+.paper__skills span { background:var(--depth-01); color:var(--navy-900); border-radius:var(--r-sm);
+  padding:5px 10px; font-size:var(--t-label); font-weight:700; }
+.paper__empty { color:#9BB3C7; font-style:italic; font-size:var(--t-small); }
+.paperBar { display:flex; gap:var(--s-3); align-items:center; margin-top:var(--s-5); flex-wrap:wrap; }
+.paperNote { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0; }
+
+@media (max-width:1040px){
+  .rb { grid-template-columns:1fr; }
+  .paper { position:static; max-height:none; }
+}
+@media (max-width:620px){ .rb__form, .paper { padding:var(--s-5); } }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Portal">
+      <a href="profile.html">Profile</a>
+      <a href="#" aria-current="page">Resume</a>
+      <a href="jobs.html">Find work</a>
+      <a href="#">Saved roles</a>
+      <a href="#">Messages</a>
+    </nav>
+    <div class="avatar" title="Dana Whitfield">DW</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+
+    <div style="margin-bottom:var(--s-6)">
+      <p class="eyebrow" style="color:var(--warm)">Resume builder</p>
+      <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">You don't need a resume to start.</h1>
+      <p style="color:var(--baby-200);max-width:60ch;margin:0">
+        Tell us about the yards you've worked at and we'll write it up for you. Most people finish in about five
+        minutes. You can download it, or just leave it on your profile for the recruiting team to read.
+      </p>
+    </div>
+
+    <div class="rb">
+
+      <!-- ============ THE QUESTIONS ============ -->
+      <section class="rb__form">
+
+        <div class="steps" style="margin-bottom:var(--s-6)">
+          <div class="stepdot stepdot--on" data-step="1"><span class="stepdot__n">1</span><span class="stepdot__l">Where you've worked</span></div>
+          <span class="stepbar"></span>
+          <div class="stepdot" data-step="2"><span class="stepdot__n">2</span><span class="stepdot__l">What you can do</span></div>
+          <span class="stepbar"></span>
+          <div class="stepdot" data-step="3"><span class="stepdot__n">3</span><span class="stepdot__l">Finish</span></div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div id="s1">
+          <h2>Where have you worked?</h2>
+          <p class="rb__lede">Start with the most recent. If you don't remember exact dates, roughly is fine &mdash; nobody is checking the months.</p>
+
+          <div class="field" style="margin-bottom:var(--s-5)">
+            <label for="who">Your name</label>
+            <input id="who" value="Dana Whitfield" oninput="draw()">
+          </div>
+
+          <div id="yards"></div>
+
+          <button type="button" class="rb__add" onclick="addYard()">+ Add another yard</button>
+
+          <div class="ob__actions">
+            <button class="btn btn--onDark btn--lg" type="button" onclick="go(2)">Next</button>
+            <a class="ob__skip" href="profile.html" style="color:var(--baby-200)">Save and come back later</a>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="s2" hidden>
+          <h2>What are you good at?</h2>
+          <p class="rb__lede">Tick anything you've genuinely done. This is what the recruiting team searches on, so it matters more than it looks.</p>
+
+          <div class="chips" id="skills"></div>
+
+          <div class="field" style="margin-top:var(--s-6)">
+            <label for="extra">Anything else worth knowing?</label>
+            <textarea id="extra" rows="3" oninput="draw()" placeholder="Qualifications, towing, foaling, clipping, rehab, languages&hellip;"></textarea>
+          </div>
+
+          <div class="ob__actions">
+            <button class="btn btn--onDark btn--lg" type="button" onclick="go(3)">Next</button>
+            <button class="btn btn--secondary" type="button" onclick="go(1)">Back</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="s3" hidden>
+          <h2>That's it.</h2>
+          <p class="rb__lede">Here's what we've made. Change anything you want &mdash; it updates as you type.</p>
+
+          <div class="field">
+            <label for="avail">When could you start?</label>
+            <select id="avail" onchange="draw()">
+              <option>Available now</option>
+              <option selected>Available in 30 days</option>
+              <option>Available in 60 days</option>
+              <option>Not looking right now, just browsing</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="where">Where would you work?</label>
+            <input id="where" value="Ocala FL, or will relocate for the right barn" oninput="draw()">
+          </div>
+
+          <div class="reassure" style="margin-top:var(--s-5)">
+            <h4>WHAT HAPPENS TO THIS</h4>
+            <ul>
+              <li>It sits on your profile so you never fill a form like this twice.</li>
+              <li>The recruiting team can read it when a role comes in that suits you.</li>
+              <li>Employers only see it once you apply, or once you say they can.</li>
+            </ul>
+          </div>
+
+          <div class="ob__actions">
+            <a class="btn btn--onDark btn--lg" href="profile.html">Save to my profile</a>
+            <button class="btn btn--secondary" type="button" onclick="go(2)">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ THE DOCUMENT ============ -->
+      <section>
+        <div class="paper" id="paper"></div>
+        <div class="paperBar">
+          <button class="btn btn--onDark" type="button" onclick="dl()">Download as PDF</button>
+          <button class="btn btn--secondary" type="button" onclick="dl()">Email it to me</button>
+        </div>
+        <p class="paperNote" id="dlnote">Updates as you type. Nothing is shared until you choose to apply.</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script>
+// Seeded with one real-looking entry so the page never opens empty — an empty
+// builder is the thing that makes people leave.
+var YARDS = [
+  { role:"Barn Manager", yard:"24-horse hunter/jumper barn, Ocala FL", years:"2021 — now",
+    did:"Ran the day-to-day for 24 head: turnout, feed, farrier and vet scheduling. Managed two grooms and a working student. Kept competition and health records." }
+];
+var SKILLS = ["Barn management","Staff rostering","Feed programmes","Medicating","Clipping","Plaiting",
+  "Foaling","Rehab / cold hosing","Lungeing","Backing youngstock","Towing","Show prep",
+  "Competition records","Ordering & budgets","Vet liaison","Farrier liaison"];
+var PICKED = ["Barn management","Staff rostering","Medicating","Show prep","Vet liaison"];
+
+function esc(s){ return (s||"").replace(/[&<>"]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+function yardsUI(){
+  var h = "";
+  YARDS.forEach(function(y,i){
+    h += '<div class="yard">'
+      +  '<div class="yard__head"><span class="yard__n">Yard '+(i+1)+'</span>'
+      +  (YARDS.length>1 ? '<button type="button" class="yard__del" onclick="delYard('+i+')">Remove</button>' : '')
+      +  '</div>'
+      +  '<div class="field"><label>What was your job?</label>'
+      +  '<input value="'+esc(y.role)+'" oninput="setY('+i+',\'role\',this.value)" placeholder="Groom, rider, barn manager&hellip;"></div>'
+      +  '<div class="field"><label>Which yard, and where?</label>'
+      +  '<input value="'+esc(y.yard)+'" oninput="setY('+i+',\'yard\',this.value)" placeholder="You can describe it instead of naming it"></div>'
+      +  '<div class="field"><label>Roughly when?</label>'
+      +  '<input value="'+esc(y.years)+'" oninput="setY('+i+',\'years\',this.value)" placeholder="2021 — now"></div>'
+      +  '<div class="field" style="margin-bottom:0"><label>What did you actually do there?</label>'
+      +  '<textarea rows="3" oninput="setY('+i+',\'did\',this.value)" placeholder="How many horses, who you looked after, what you were responsible for">'+esc(y.did)+'</textarea></div>'
+      +  '</div>';
+  });
+  document.getElementById("yards").innerHTML = h;
+}
+function skillsUI(){
+  document.getElementById("skills").innerHTML = SKILLS.map(function(s){
+    return '<label><input type="checkbox" '+(PICKED.indexOf(s)>-1?"checked":"")
+      +' onchange="toggle(\''+s+'\',this.checked)"><span>'+esc(s)+'</span></label>';
+  }).join("");
+}
+function setY(i,k,v){ YARDS[i][k]=v; draw(); }
+function addYard(){ YARDS.push({role:"",yard:"",years:"",did:""}); yardsUI(); draw(); }
+function delYard(i){ YARDS.splice(i,1); yardsUI(); draw(); }
+function toggle(s,on){ var i=PICKED.indexOf(s); if(on&&i<0)PICKED.push(s); if(!on&&i>-1)PICKED.splice(i,1); draw(); }
+
+function val(id){ var e=document.getElementById(id); return e?e.value:""; }
+
+function draw(){
+  var name = val("who").trim() || "Your name";
+  var top  = YARDS[0] || {};
+  var p = '<h2 class="paper__name">'+esc(name)+'</h2>'
+        + '<p class="paper__role">'+esc(top.role||"Equine professional")+'</p>'
+        + '<p class="paper__meta">'+esc(val("where")||"Ocala, FL")+' &middot; '+esc(val("avail")||"Available now")+'</p>'
+        + '<hr class="paper__rule">';
+
+  p += '<h4>Experience</h4>';
+  var any = false;
+  YARDS.forEach(function(y){
+    if(!y.role && !y.yard && !y.did) return;
+    any = true;
+    p += '<div class="pJob">'
+      +  '<p class="pJob__t">'+esc(y.role||"Role")+'</p>'
+      +  '<p class="pJob__w">'+esc(y.yard||"Yard")+(y.years?' &middot; '+esc(y.years):'')+'</p>'
+      +  (y.did ? '<p class="pJob__d">'+esc(y.did)+'</p>' : '')
+      +  '</div>';
+  });
+  if(!any) p += '<p class="paper__empty">Your yards will appear here as you add them.</p>';
+
+  if(PICKED.length){
+    p += '<h4>What I can do</h4><div class="paper__skills">'
+      + PICKED.map(function(s){ return '<span>'+esc(s)+'</span>'; }).join("")
+      + '</div>';
+  }
+  var ex = val("extra").trim();
+  if(ex) p += '<h4>Also worth knowing</h4><p class="pJob__d">'+esc(ex)+'</p>';
+
+  p += '<h4>References</h4><p class="pJob__d">Checked by phone by EquiStaff and available on request.</p>';
+  document.getElementById("paper").innerHTML = p;
+}
+
+function go(n){
+  [1,2,3].forEach(function(i){ document.getElementById("s"+i).hidden = (i!==n); });
+  document.querySelectorAll(".stepdot").forEach(function(d){
+    var s = +d.dataset.step;
+    d.classList.toggle("stepdot--on", s===n);
+    d.classList.toggle("stepdot--done", s<n);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+// Prototype: no PDF service wired up yet, so say so rather than fail silently.
+function dl(){ document.getElementById("dlnote").textContent =
+  "In the built site this downloads a PDF. Not wired up in the prototype."; }
+
+yardsUI(); skillsUI(); draw();
+</script>
+</body>
+</html>
