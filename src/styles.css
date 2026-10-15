@@ -302,7 +302,8 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 
 /* ---------- Conversion: DIY listing vs paid recruiter-managed search ---------- */
 .compare { background: var(--depth-01); padding: var(--s-9) 0; }
-.compare__grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--s-6); margin-top: var(--s-7); align-items: start; }
+.compare__grid { display: grid; grid-template-columns: 1fr 1.1fr 1.25fr; gap: var(--s-5); margin-top: var(--s-7); align-items: start; }
+@media (max-width: 1100px){ .compare__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
 .cmp { background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--r-lg); padding: var(--s-7); }
 .cmp--hero { background: linear-gradient(160deg, var(--depth-07), var(--depth-06)); color: #fff; border-color: var(--baby-300); box-shadow: var(--e-3); position: relative; }
 .cmp--hero h3 { color: #fff; }
@@ -427,3 +428,19 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 /* In a narrow card the pill takes its own line; in a wide list row it sits inline. */
 .job__org .job__conf { display:flex; width:fit-content; margin:0 0 5px; }
 @media (max-width:620px){ .row__org .job__conf { display:flex; width:fit-content; margin:0 0 5px; } }
+
+/* Three tiers, ascending weight: plain, lifted, premium. The middle one is
+   new and carries the anchor flag; the dark card stays with the full search. */
+.cmp--mid { position: relative; border: 2px solid var(--blue-600); box-shadow: var(--e-2); }
+.cmp__flag--mid { background: var(--blue-600); color: #fff; }
+.cmp__price { font-family: var(--font-mono); font-size: 1.375rem; color: var(--navy-900);
+  margin: 0 0 var(--s-4); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.cmp__price span { font-family: var(--font-body); font-size: var(--t-small); color: var(--text-muted); font-weight: 400; }
+.cmp__price--dark { color: #fff; font-size: 1.125rem; }
+.cmp__price--dark span:not(.tbc) { color: var(--baby-200); }
+/* Nothing here is signed off yet, and it must not read as if it is. */
+.tbc { font-family: var(--font-body); font-size: 11px; font-weight: 900; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--warm-ink); background: var(--warm);
+  border: 1px dashed #C9A227; border-radius: var(--r-pill); padding: 3px 9px; }
+.compare__note--draft { background: var(--warm); border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-5); color: #3B2E1B; margin-top: var(--s-6); }
