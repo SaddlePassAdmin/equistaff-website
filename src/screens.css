@@ -76,8 +76,8 @@
   width: 38px; height: 38px; border-radius: 50%; background: var(--baby-200); color: var(--navy-900);
   display: grid; place-items: center; font: 700 .875rem/1 var(--font-body);
 }
-.pLayout { display: grid; grid-template-columns: 300px 1fr; gap: var(--s-7); padding: var(--s-7) 0 var(--s-9); align-items: start; }
-.pCard { background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-md); padding: var(--s-6); }
+.pLayout { display: grid; grid-template-columns: 300px 1fr; gap: var(--s-8); padding: var(--s-7) 0 var(--s-9); align-items: start; }
+.pCard { background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-lg); padding: var(--s-6); }
 .pCard h3 { color: var(--text-primary); font-size: 1.25rem; margin-bottom: var(--s-4); }
 
 /* completion meter — from Kaitlin's chatbot wish list */
@@ -89,17 +89,38 @@
 .todo__box { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid var(--navy-500); flex: 0 0 auto; display: grid; place-items: center; }
 .todo__box--done { background: var(--baby-200); border-color: var(--baby-200); }
 
-.pSection { margin-bottom: var(--s-7); }
-.pSection__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-4); gap: var(--s-4); }
+/* Sections need to read as separate zones, not one long column of identical
+   rectangles. The 7 Oct note was that the portal is uniform and airless. */
+.pSection { margin-bottom: var(--s-9); }
+.pSection:last-child { margin-bottom: 0; }
+.pSection__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4);
+  margin-bottom: var(--s-5); padding-bottom: var(--s-4); border-bottom: 1px solid var(--border-subtle); }
 .pSection__head h2 { color: var(--text-primary); font-size: 1.5rem; margin: 0; }
 .pSection__head a { font-size: var(--t-small); font-weight: 700; }
 
 /* application rows in deep mode */
+/* An application that is going well and one that is still sitting in a queue
+   should not look identical. The left accent and the surface step carry the
+   status, so the row is readable before you reach the pill on the right. */
 .appRow {
-  background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-md);
-  padding: var(--s-5) var(--s-6); display: grid; grid-template-columns: 1fr auto; gap: var(--s-5);
-  align-items: center; margin-bottom: var(--s-4);
+  background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-lg);
+  padding: var(--s-6); display: grid; grid-template-columns: 1fr auto; gap: var(--s-5);
+  align-items: center; margin-bottom: var(--s-5);
+  transition: border-color .15s var(--ease);
 }
+.appRow:hover { border-color: var(--baby-300); }
+
+/* Best news on the page: lifted a step and accented. */
+.appRow--good {
+  background: linear-gradient(100deg, rgba(44,101,145,.5), var(--surface-raised) 58%);
+  border-color: var(--baby-300);
+  box-shadow: inset 3px 0 0 0 var(--warm);
+  padding-left: calc(var(--s-6) + 3px);
+}
+/* Still waiting: the default, no accent. */
+/* Already moved on: recedes. */
+.appRow--quiet { background: transparent; border-style: dashed; }
+.appRow--quiet h4 { color: var(--baby-200); }
 .appRow h4 { margin: 0 0 4px; font-family: var(--font-display); font-size: 1.1875rem; color: var(--text-primary); }
 .appRow p { margin: 0; font-size: var(--t-small); color: var(--text-muted); }
 .pill { font: 700 var(--t-label)/1 var(--font-body); padding: 7px 12px; border-radius: var(--r-pill); white-space: nowrap; }

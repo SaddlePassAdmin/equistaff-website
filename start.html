@@ -27,6 +27,9 @@
     color:var(--blue-700);display:block;margin-bottom:var(--s-3)}
   .card--deep{background:linear-gradient(150deg,var(--depth-07),var(--depth-06));border-color:var(--navy-500)}
   .card--deep h3{color:#fff} .card--deep p{color:var(--baby-200)} .card--deep .k{color:var(--warm)}
+  .card--retired{opacity:.62;background:var(--depth-01);border-style:dashed}
+  .card--retired:hover{opacity:1}
+  .card--retired .k{color:var(--text-muted)}
   .tipbar{background:var(--warm);border-radius:var(--r-md);padding:var(--s-5) var(--s-6);margin-top:var(--s-8)}
   .tipbar p{margin:0;font-size:var(--t-small);color:#3B2E1B}
   @media(max-width:900px){.grid{grid-template-columns:1fr}}
@@ -45,11 +48,11 @@
 
   <section class="grp">
     <h2>Landing page — three options</h2>
-    <p>Same content, three ways of arranging it. This is the decision.</p>
+    <p>Two live options, A and B. C is retired &mdash; kept visible so you can see what was set aside.</p>
     <div class="grid">
       <a class="card" href="index.html"><span class="k">Option A</span><h3>Editorial</h3><p>Video hero, then two doors below it. The calmest of the three, and the closest to a classic agency site.</p></a>
       <a class="card" href="landing-b.html"><span class="k">Option B</span><h3>Split decision</h3><p>The two doors <em>are</em> the hero, side by side, employer side larger. Shortest page by far — worth noting on a phone.</p></a>
-      <a class="card" href="landing-c.html"><span class="k">Option C</span><h3>The gradient dive</h3><p>Video hero, then the page gets progressively deeper in colour as you scroll. The boldest.</p></a>
+      <a class="card card--retired" href="landing-c.html"><span class="k">Retired</span><h3>💀 Option C &mdash; the gradient dive</h3><p>Not taken forward after the 7 October session. Kept here so the link still works, and so the idea is on the record.</p></a>
     </div>
   </section>
 
