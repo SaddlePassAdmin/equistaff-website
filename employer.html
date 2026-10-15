@@ -44,7 +44,27 @@
 .recBar img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
 .recBar p { margin:0; font-size:var(--t-small); color:var(--baby-200); }
 .recBar b { color:#fff; }
-@media (max-width:760px){ .cand{grid-template-columns:1fr} .track{flex-wrap:wrap;gap:var(--s-4)} .track__s{flex:1 1 40%} }
+
+/* CANDIDATE FEEDBACK — required before a candidate can be closed out.
+   Routes to the recruiter only; the job seeker never sees it. */
+.cand { display:block; padding:0; }
+.cand__row { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-5); align-items:center;
+  padding:var(--s-5) var(--s-6); }
+.fb { border-top:1px solid var(--navy-500); padding:var(--s-5) var(--s-6) var(--s-6); background:rgba(0,0,0,.16); }
+.fb__q { margin:0 0 var(--s-4); color:#fff; font-weight:700; font-size:1.0625rem; }
+.fb__stars { display:flex; gap:6px; }
+.star { background:none; border:0; cursor:pointer; font-size:2rem; line-height:1; padding:2px 4px;
+  color:var(--navy-500); transition:color .12s var(--ease); }
+.star:hover, .star.on { color:var(--warm); }
+.star:focus-visible { outline:2px solid var(--baby-200); border-radius:4px; }
+.fb__hint { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-3) 0 0; }
+.fb__hint.ok { color:var(--warm); }
+.fb__priv { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0;
+  border-left:2px solid var(--navy-500); padding-left:var(--s-4); }
+.fb__acts { display:flex; gap:var(--s-3); margin-top:var(--s-5); flex-wrap:wrap; }
+.btn[disabled] { opacity:.42; cursor:not-allowed; }
+@media (max-width:760px){ .cand__row{ grid-template-columns:1fr; } }
+@media (max-width:760px){ .track{flex-wrap:wrap;gap:var(--s-4)} .track__s{flex:1 1 40%} }
 </style>
 </head>
 <body class="portal">
@@ -97,25 +117,145 @@
     <section class="pSection">
       <div class="pSection__head"><h2>Your shortlist</h2><a href="#">Download as PDF →</a></div>
       <div class="shortlist">
-        <div class="cand">
-          <div class="cand__av">DW</div>
-          <div><h4>Dana Whitfield</h4><p>9 years · 24-horse hunter/jumper barn, Ocala · available in 30 days</p></div>
-          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        <div class="cand" id="c0">
+          <div class="cand__row">
+            <div class="cand__av">DW</div>
+            <div><h4>Dana Whitfield</h4><p>9 years · 24-horse hunter/jumper barn, Ocala · available in 30 days</p></div>
+            <div class="cand__acts">
+              <span class="pill pill--shortlist">References clear</span>
+              <a class="btn btn--primary" href="#">View</a>
+              <button class="btn btn--secondary" type="button" onclick="openFb(0)">Close out</button>
+            </div>
+          </div>
+
+          <!-- Required feedback. Kaitlin asked for a rating rather than
+               yes/no/maybe, because "no" on its own tells her nothing about
+               whether to keep sourcing the same kind of person. -->
+          <div class="fb" id="fb0" hidden>
+            <p class="fb__q">How close was Dana Whitfield to what you wanted?</p>
+            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five">
+              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(0,1)">&#9733;</button>
+              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(0,2)">&#9733;</button>
+              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(0,3)">&#9733;</button>
+              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(0,4)">&#9733;</button>
+              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(0,5)">&#9733;</button>
+            </div>
+            <p class="fb__hint" id="hint0">Pick a rating to continue.</p>
+            <div class="field" style="margin:var(--s-4) 0 0">
+              <label for="note0">Anything Kaitlin should know? (optional)</label>
+              <textarea id="note0" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
+            </div>
+            <p class="fb__priv">Goes to Kaitlin only. Dana never sees this, and it is not kept on their profile.</p>
+            <div class="fb__acts">
+              <button class="btn btn--primary" type="button" id="send0" disabled onclick="sendFb(0)">Send and close out</button>
+              <button class="btn btn--secondary" type="button" onclick="openFb(0)">Cancel</button>
+            </div>
+          </div>
         </div>
-        <div class="cand">
-          <div class="cand__av">MR</div>
-          <div><h4>Marcus Reyes</h4><p>12 years · facility director, Wellington · available now</p></div>
-          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        <div class="cand" id="c1">
+          <div class="cand__row">
+            <div class="cand__av">MR</div>
+            <div><h4>Marcus Reyes</h4><p>12 years · facility director, Wellington · available now</p></div>
+            <div class="cand__acts">
+              <span class="pill pill--shortlist">References clear</span>
+              <a class="btn btn--primary" href="#">View</a>
+              <button class="btn btn--secondary" type="button" onclick="openFb(1)">Close out</button>
+            </div>
+          </div>
+
+          <!-- Required feedback. Kaitlin asked for a rating rather than
+               yes/no/maybe, because "no" on its own tells her nothing about
+               whether to keep sourcing the same kind of person. -->
+          <div class="fb" id="fb1" hidden>
+            <p class="fb__q">How close was Marcus Reyes to what you wanted?</p>
+            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five">
+              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(1,1)">&#9733;</button>
+              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(1,2)">&#9733;</button>
+              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(1,3)">&#9733;</button>
+              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(1,4)">&#9733;</button>
+              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(1,5)">&#9733;</button>
+            </div>
+            <p class="fb__hint" id="hint1">Pick a rating to continue.</p>
+            <div class="field" style="margin:var(--s-4) 0 0">
+              <label for="note1">Anything Kaitlin should know? (optional)</label>
+              <textarea id="note1" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
+            </div>
+            <p class="fb__priv">Goes to Kaitlin only. Marcus never sees this, and it is not kept on their profile.</p>
+            <div class="fb__acts">
+              <button class="btn btn--primary" type="button" id="send1" disabled onclick="sendFb(1)">Send and close out</button>
+              <button class="btn btn--secondary" type="button" onclick="openFb(1)">Cancel</button>
+            </div>
+          </div>
         </div>
-        <div class="cand">
-          <div class="cand__av">SO</div>
-          <div><h4>Sarah O'Dell</h4><p>6 years · barn manager, Lexington · relocating to Ocala</p></div>
-          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        <div class="cand" id="c2">
+          <div class="cand__row">
+            <div class="cand__av">SO</div>
+            <div><h4>Sarah O'Dell</h4><p>6 years · barn manager, Lexington · relocating to Ocala</p></div>
+            <div class="cand__acts">
+              <span class="pill pill--shortlist">References clear</span>
+              <a class="btn btn--primary" href="#">View</a>
+              <button class="btn btn--secondary" type="button" onclick="openFb(2)">Close out</button>
+            </div>
+          </div>
+
+          <!-- Required feedback. Kaitlin asked for a rating rather than
+               yes/no/maybe, because "no" on its own tells her nothing about
+               whether to keep sourcing the same kind of person. -->
+          <div class="fb" id="fb2" hidden>
+            <p class="fb__q">How close was Sarah O'Dell to what you wanted?</p>
+            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five">
+              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(2,1)">&#9733;</button>
+              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(2,2)">&#9733;</button>
+              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(2,3)">&#9733;</button>
+              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(2,4)">&#9733;</button>
+              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(2,5)">&#9733;</button>
+            </div>
+            <p class="fb__hint" id="hint2">Pick a rating to continue.</p>
+            <div class="field" style="margin:var(--s-4) 0 0">
+              <label for="note2">Anything Kaitlin should know? (optional)</label>
+              <textarea id="note2" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
+            </div>
+            <p class="fb__priv">Goes to Kaitlin only. Sarah never sees this, and it is not kept on their profile.</p>
+            <div class="fb__acts">
+              <button class="btn btn--primary" type="button" id="send2" disabled onclick="sendFb(2)">Send and close out</button>
+              <button class="btn btn--secondary" type="button" onclick="openFb(2)">Cancel</button>
+            </div>
+          </div>
         </div>
-        <div class="cand">
-          <div class="cand__av">TB</div>
-          <div><h4>Tom Brennan</h4><p>15 years · estate &amp; barn management, Aiken · available in 60 days</p></div>
-          <div class="cand__acts"><span class="pill pill--shortlist">References clear</span><a class="btn btn--primary" href="#">View</a></div>
+        <div class="cand" id="c3">
+          <div class="cand__row">
+            <div class="cand__av">TB</div>
+            <div><h4>Tom Brennan</h4><p>15 years · estate & barn management, Aiken · available in 60 days</p></div>
+            <div class="cand__acts">
+              <span class="pill pill--shortlist">References clear</span>
+              <a class="btn btn--primary" href="#">View</a>
+              <button class="btn btn--secondary" type="button" onclick="openFb(3)">Close out</button>
+            </div>
+          </div>
+
+          <!-- Required feedback. Kaitlin asked for a rating rather than
+               yes/no/maybe, because "no" on its own tells her nothing about
+               whether to keep sourcing the same kind of person. -->
+          <div class="fb" id="fb3" hidden>
+            <p class="fb__q">How close was Tom Brennan to what you wanted?</p>
+            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five">
+              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(3,1)">&#9733;</button>
+              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(3,2)">&#9733;</button>
+              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(3,3)">&#9733;</button>
+              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(3,4)">&#9733;</button>
+              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(3,5)">&#9733;</button>
+            </div>
+            <p class="fb__hint" id="hint3">Pick a rating to continue.</p>
+            <div class="field" style="margin:var(--s-4) 0 0">
+              <label for="note3">Anything Kaitlin should know? (optional)</label>
+              <textarea id="note3" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
+            </div>
+            <p class="fb__priv">Goes to Kaitlin only. Tom never sees this, and it is not kept on their profile.</p>
+            <div class="fb__acts">
+              <button class="btn btn--primary" type="button" id="send3" disabled onclick="sendFb(3)">Send and close out</button>
+              <button class="btn btn--secondary" type="button" onclick="openFb(3)">Cancel</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -157,5 +297,27 @@
     <span>© 2026 EquiStaff · Equine staffing since 1982</span><span>Privacy · Terms · Accessibility</span>
   </div></div>
 </footer>
+
+<script>
+var RATING = {};
+function openFb(i){ var e=document.getElementById("fb"+i); e.hidden = !e.hidden; }
+function rate(i,n){
+  RATING[i]=n;
+  var stars=document.querySelectorAll("#fb"+i+" .star");
+  stars.forEach(function(s,k){ s.classList.toggle("on", k<n); });
+  var h=document.getElementById("hint"+i);
+  h.textContent = n>=4 ? "Strong match. Kaitlin will look for more like this."
+                : n<=2 ? "Noted. Kaitlin will adjust what she sends you."
+                : "Thanks. That helps shape the next shortlist.";
+  h.classList.add("ok");
+  document.getElementById("send"+i).disabled = false;   // the gate: no rating, no close-out
+}
+function sendFb(i){
+  var c=document.getElementById("c"+i);
+  c.querySelector(".cand__acts").innerHTML =
+    '<span class="pill pill--sent">Closed out &middot; '+RATING[i]+'/5 to Kaitlin</span>';
+  document.getElementById("fb"+i).hidden = true;
+}
+</script>
 </body>
 </html>
