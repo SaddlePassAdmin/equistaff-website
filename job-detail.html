@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
 <!-- Public + indexable. Audit finding: the live site hides every listing behind a login,
      so none of them can rank. JobPosting schema goes on every role. -->
 <script type="application/ld+json">
@@ -71,7 +71,7 @@
 @media (max-width:1040px){ .jdLayout{grid-template-columns:1fr} .jdApply{position:static} .jdMain{padding:var(--s-6)} }
 </style>
 </head>
-<body>
+<body class="has-chat">
 <a class="skip" href="#main">Skip to content</a>
 <header class="hdr">
   <div class="wrap hdr__in">
@@ -208,5 +208,11 @@
   </div>
   <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
 </div></footer>
+
+<!-- AI concierge launcher. The page reserves space for it (body.has-chat) so it
+     never sits on top of a control, which the audit found on the live site. -->
+<a class="chatLaunch" href="chatbot.html">
+  <span class="chatLaunch__dot"></span> Ask EquiStaff
+</a>
 </body>
 </html>

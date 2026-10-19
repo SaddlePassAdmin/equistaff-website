@@ -1,0 +1,130 @@
+/* ============================================================
+   AI CONCIERGE — EquiStaff
+   Built from Kaitlin's "Chat-Bot Key Wishes" document, as captured on the
+   Chatbot discovery page in Figma. Nine capabilities, not an FAQ widget:
+   it answers with live numbers, troubleshoots accounts, improves what
+   people write, captures leads, books time, and nudges toward the
+   recruiting service.
+
+   Three constraints are designed in rather than bolted on:
+   1. It never quotes a bespoke recruiting fee. Published prices yes,
+      "what would my search cost" goes to a person. (Open question 02 ·
+      MONEY — still unanswered by Kaitlin, so the safe side is the default.)
+   2. A human is one tap away from every state, always visible.
+   3. The launcher never covers a control — audit finding on the live site.
+   ============================================================ */
+
+/* ---------- Launcher ---------- */
+.chatLaunch {
+  position: fixed; right: 24px; bottom: 24px; z-index: 60;
+  display: inline-flex; gap: 10px; align-items: center;
+  background: var(--depth-07); color: #fff;
+  border: 1px solid var(--navy-500); border-radius: var(--r-pill);
+  padding: 14px 20px; min-height: 52px; cursor: pointer;
+  font: 700 var(--t-small)/1 var(--font-body);
+  box-shadow: var(--e-3);
+}
+.chatLaunch:hover { background: var(--depth-06); }
+.chatLaunch__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm); flex: 0 0 auto; }
+/* Never sit on top of a control: the page reserves room for it. */
+body.has-chat { padding-bottom: 96px; }
+@media (max-width: 620px) { .chatLaunch { right: 16px; bottom: 16px; } }
+
+/* ---------- Panel ---------- */
+.chat {
+  width: 400px; display: flex; flex-direction: column;
+  background: var(--portal-ground, #102F52);
+  border: 1px solid var(--navy-500); border-radius: var(--r-lg);
+  overflow: hidden; box-shadow: var(--e-3);
+}
+.chat__hdr { background: var(--depth-07); padding: var(--s-5); border-bottom: 1px solid var(--navy-500); }
+.chat__who { display: flex; gap: var(--s-4); align-items: center; }
+.chat__mark {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--baby-200);
+  display: grid; place-items: center; flex: 0 0 auto;
+}
+.chat__hdr b { color: #fff; display: block; font-size: 1rem; line-height: 1.3; }
+/* It says what it is. Open question 02 · IDENTITY — defaulting to disclosure. */
+.chat__hdr span { color: var(--baby-300); font-size: var(--t-label); }
+.chat__human {
+  display: flex; gap: 8px; align-items: center; margin-top: var(--s-4);
+  background: rgba(249,244,237,.12); border: 1px solid var(--warm);
+  border-radius: var(--r-sm); padding: 8px 12px;
+  color: var(--warm); font-size: var(--t-label); font-weight: 700;
+}
+
+.chat__body { padding: var(--s-5); display: grid; gap: var(--s-4); }
+
+/* ---------- Bubbles ---------- */
+.msg { max-width: 86%; padding: 12px 15px; border-radius: 14px; font-size: var(--t-small); line-height: 1.55; }
+.msg--bot { background: var(--portal-raised, #1B4A7D); color: #fff; border-bottom-left-radius: 4px; }
+.msg--me  { background: var(--baby-200); color: var(--navy-900); margin-left: auto; border-bottom-right-radius: 4px; font-weight: 600; }
+.msg b { color: #fff; }
+.msg--me b { color: var(--navy-900); }
+.msg p { margin: 0 0 8px; } .msg p:last-child { margin: 0; }
+
+/* Live figures pulled from the platform, not typed into the answer. */
+.liveFig {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  font-family: var(--font-mono); font-weight: 600; color: var(--warm);
+}
+.liveNote {
+  display: block; margin-top: 8px; padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,.18);
+  font-size: var(--t-label); color: var(--baby-300); font-style: italic;
+}
+
+/* Quick replies — the bot offers the next move rather than a blank box. */
+.chips2 { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips2 button, .chips2 span {
+  background: transparent; border: 1.5px solid var(--navy-500); color: var(--baby-200);
+  border-radius: var(--r-pill); padding: 9px 14px; font: 600 var(--t-label)/1 var(--font-body);
+  cursor: pointer; min-height: 38px;
+}
+.chips2 button:hover { border-color: var(--baby-200); color: #fff; }
+
+/* Lead capture — progressive, never one long form. */
+.leadCard {
+  background: rgba(255,255,255,.06); border: 1px solid var(--navy-500);
+  border-radius: var(--r-md); padding: var(--s-4); display: grid; gap: 10px;
+}
+.leadRow { display: flex; justify-content: space-between; gap: var(--s-4); font-size: var(--t-label); }
+.leadRow dt { color: var(--baby-300); margin: 0; }
+.leadRow dd { color: #fff; margin: 0; font-weight: 700; text-align: right; }
+.leadRow--todo dd { color: var(--baby-300); font-weight: 400; font-style: italic; }
+
+/* A handoff to a person, with the right calendar for who is asking. */
+.handoff {
+  background: rgba(189,227,255,.12); border: 1px solid var(--baby-300);
+  border-radius: var(--r-md); padding: var(--s-4); display: grid; gap: 10px;
+}
+.handoff img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.handoff__top { display: flex; gap: 12px; align-items: center; }
+.handoff__top b { color: #fff; font-size: var(--t-small); }
+.handoff__top span { color: var(--baby-200); font-size: var(--t-label); display: block; }
+
+.chat__foot { border-top: 1px solid var(--navy-500); padding: var(--s-4) var(--s-5); display: flex; gap: 10px; align-items: center; }
+.chat__foot input {
+  flex: 1; background: var(--depth-07); border: 1.5px solid var(--navy-500);
+  border-radius: var(--r-pill); color: #fff; padding: 11px 16px; font: inherit; font-size: var(--t-small); min-height: 44px;
+}
+.chat__foot input::placeholder { color: #7FA3C4; }
+.chat__send {
+  width: 44px; height: 44px; border-radius: 50%; border: 0; flex: 0 0 auto;
+  background: var(--baby-200); color: var(--navy-900); cursor: pointer; display: grid; place-items: center;
+}
+
+/* ---------- States board (handoff view only) ---------- */
+.board2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 440px)); gap: var(--s-8); justify-content: start; }
+.stateCard { display: grid; gap: var(--s-4); }
+.stateCard__n { font: 900 var(--t-label)/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--blue-700); margin: 0; }
+.stateCard h3 { margin: 0; font-size: 1.25rem; }
+.stateCard__why { font-size: var(--t-small); color: var(--text-muted); margin: 0; max-width: 42ch; }
+.stateCard__rule {
+  font-size: var(--t-label); color: #3B2E1B; background: var(--warm);
+  border-radius: var(--r-sm); padding: 10px 12px; margin: 0; max-width: 42ch;
+}
+@media (max-width: 620px) {
+  .chat { width: 100%; }
+  .board2 { grid-template-columns: 1fr; }
+}

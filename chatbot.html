@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI concierge — states for build | EquiStaff</title>
+<meta name="description" content="The EquiStaff AI concierge: every state, with the rule each one enforces.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css"><link rel="stylesheet" href="src/chat.css">
+<style>
+  body { background: var(--depth-01); }
+  .top2 { background: linear-gradient(160deg,var(--depth-07),var(--depth-06)); color:#fff; padding: var(--s-8) 0; }
+  .top2 h1 { color:#fff; margin-bottom: var(--s-3); }
+  .top2 p { color: var(--baby-200); max-width: 72ch; }
+  .wishes { background:#fff; border:1px solid var(--border-subtle); border-radius:var(--r-lg); padding:var(--s-6); margin-top:var(--s-8); }
+  .wishes h2 { font-size:1.25rem; margin:0 0 var(--s-4); }
+  .wishGrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:var(--s-5); }
+  .wish b { display:block; font-size:var(--t-small); margin-bottom:4px; }
+  .wish p { font-size:var(--t-label); color:var(--text-muted); margin:0; line-height:1.55; }
+  .open { background:var(--warm); border-radius:var(--r-md); padding:var(--s-5) var(--s-6); margin-top:var(--s-6); }
+  .open h2 { font-size:1.0625rem; margin:0 0 var(--s-3); color:#3B2E1B; }
+  .open li { font-size:var(--t-small); color:#3B2E1B; margin-bottom:6px; }
+  .open ul { margin:0; padding-left:20px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top2">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--warm)">EquiStaff · AI concierge · for build</p>
+    <h1>Every state, and the rule it enforces</h1>
+    <p>Built from Kaitlin&rsquo;s &ldquo;Chat-Bot Key Wishes&rdquo; document. This is not an FAQ widget &mdash; it answers with live
+    numbers, fixes what people write, captures leads, books time and nudges toward the recruiting service. Each state below
+    notes the constraint it is designed around, because several of those constraints are still open questions.</p>
+  </div>
+</header>
+
+<main id="main" class="wrap" style="padding-bottom:var(--s-9)">
+
+  <div class="wishes">
+    <h2>What she asked for &mdash; six capabilities</h2>
+    <div class="wishGrid">
+      <div class="wish"><b>Answer with live numbers</b><p>The company, the board, the recruiting process, what the published services cost &mdash; plus live stats like open roles and jobseekers in the last 30 days.</p></div>
+      <div class="wish"><b>Troubleshoot accounts</b><p>Password resets, subscribing, cancelling, search tips.</p></div>
+      <div class="wish"><b>Improve what people write</b><p>Prompt a jobseeker to finish their profile and fill the fields from their answers. Spot a thin job advert and offer to rewrite it.</p></div>
+      <div class="wish"><b>Capture leads</b><p>Push employers toward the recruiting service, especially those who never signed up or whose advert has run over 30 days. Collect the brief and save it.</p></div>
+      <div class="wish"><b>Book time and hand off</b><p>Share the booking calendar &mdash; a different link for a jobseeker than for an employer.</p></div>
+      <div class="wish"><b>Nudge and match, but not too well</b><p>Her words: it should work, &ldquo;but not work SO well that it makes the recruiting service obsolete.&rdquo;</p></div>
+    </div>
+  </div>
+
+  <div class="open">
+    <h2>Still unanswered &mdash; these change the build</h2>
+    <ul>
+      <li><b>Money.</b> Published prices yes. Can it ever discuss a bespoke recruiting fee? Designed below as a hard no.</li>
+      <li><b>Live data.</b> Stats, profile fields, resumes and lead storage are reads and writes against the platform. The chatbot is an integration, not a widget.</li>
+      <li><b>The throttle.</b> How good can matching get before it cannibalises the recruiting service? We need a rule, not a feeling.</li>
+      <li><b>Identity.</b> Does it say it is AI? Designed below as yes.</li>
+      <li><b>Spanish.</b> A meaningful share of barn staff are Spanish-speaking. Far cheaper to plan for now.</li>
+      <li><b>Resume accountability.</b> If it writes someone a resume, does a person review it before it attaches to an application?</li>
+    </ul>
+  </div>
+
+  <h2 style="margin:var(--s-9) 0 var(--s-6)">The states</h2>
+
+  <div class="board2">
+
+    <!-- 1 -->
+    <section class="stateCard">
+      <p class="stateCard__n">State 01</p>
+      <h3>Opening</h3>
+      <p class="stateCard__why">Asks the same single question the landing page asks, so the two doors stay consistent wherever someone arrives.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+          <div class="chat__human"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> A person is one tap away, any time</div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--bot"><p>Evening. I can help with most things here, and put you through to Kaitlin&rsquo;s team whenever you&rsquo;d rather talk to a person.</p><p>To point you the right way &mdash; are you hiring, or looking for work?</p></div>
+          <div class="chips2"><button type="button">I&rsquo;m hiring</button><button type="button">I&rsquo;m looking for work</button><button type="button">Something else</button></div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Rule:</b> it names itself as AI in the header, and the route to a human is visible before the first question &mdash; not buried after a failure.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="stateCard">
+      <p class="stateCard__n">State 02</p>
+      <h3>Answering with live numbers</h3>
+      <p class="stateCard__why">Her first requirement. The figures are read from the platform at answer time, never written into the response text.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--me">How many barn manager jobs are open right now?</div>
+          <div class="msg msg--bot">
+            <p><span class="liveFig">14</span> barn manager roles are open today, and <span class="liveFig">6</span> of them include housing.</p>
+            <p>Across the whole board there are <span class="liveFig">214</span> open roles, and <span class="liveFig">203</span> jobseekers signed in over the last 30 days.</p>
+            <span class="liveNote">Read live from the job board. If the number is stale or unavailable the assistant says so rather than guessing.</span>
+          </div>
+          <div class="chips2"><button type="button">Show me the 14</button><button type="button">Only ones with housing</button></div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Rule:</b> a number it cannot read is a number it will not invent. No figure is ever hard-coded into a reply.</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="stateCard">
+      <p class="stateCard__n">State 03</p>
+      <h3>The money boundary</h3>
+      <p class="stateCard__why">The wish list asks it to answer on costs. At kickoff the line was that it must never commit to a number. Both hold if published prices and bespoke fees are separated.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--me">What would it cost me to have you fill a head trainer role?</div>
+          <div class="msg msg--bot">
+            <p>I can give you the published prices: posting a job yourself is a monthly subscription, and having us write and run the advert is priced per role.</p>
+            <p>A full recruiting search is quoted per role, and I won&rsquo;t put a number on it &mdash; it depends on the seniority and how hard the brief is. <b>Kaitlin quotes those herself, before any work starts.</b></p>
+            <p>Want me to set that up? It takes about fifteen minutes.</p>
+          </div>
+          <div class="chips2"><button type="button">Book a call with Kaitlin</button><button type="button">Show published prices</button></div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Rule:</b> published prices yes, bespoke fees never. A refusal always arrives with the next step attached, so it reads as routing rather than stonewalling.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="stateCard">
+      <p class="stateCard__n">State 04</p>
+      <h3>Capturing the lead</h3>
+      <p class="stateCard__why">Asked one field at a time, never as a form. The card shows what has been captured so far so the person can see it is going somewhere.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--bot">Got it. Two more and I&rsquo;ll pass this to Kaitlin &mdash; what are the main duties?</div>
+          <div class="msg msg--me">Running a 30-horse eventing yard, managing three staff</div>
+          <div class="leadCard">
+            <dl style="margin:0;display:grid;gap:8px">
+              <div class="leadRow"><dt>Barn</dt><dd>Willow Creek Eventing</dd></div>
+              <div class="leadRow"><dt>Where</dt><dd>Aiken, SC</dd></div>
+              <div class="leadRow"><dt>Role</dt><dd>Yard Manager</dd></div>
+              <div class="leadRow"><dt>Duties</dt><dd>30 horses, 3 staff</dd></div>
+              <div class="leadRow leadRow--todo"><dt>Compensation</dt><dd>still to ask</dd></div>
+            </dl>
+          </div>
+          <div class="msg msg--bot">Last one &mdash; roughly what are you able to pay? A range is fine.</div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Rule:</b> the lead is written to the lead register with its source and a timestamp, and it lands even if the person leaves before the last answer.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="stateCard">
+      <p class="stateCard__n">State 05</p>
+      <h3>The thirty-day nudge</h3>
+      <p class="stateCard__why">Her named trigger: an advert that has run over 30 days, or an employer who never subscribed. The assistant opens the conversation rather than waiting to be asked.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--bot">
+            <p>Your part-time groom advert has been live <span class="liveFig">41</span> days and has <span class="liveFig">2</span> applicants.</p>
+            <p>That usually means the advert, not the market. I can rewrite it for you now &mdash; or Kaitlin can take it over as a managed search and bring you four people.</p>
+          </div>
+          <div class="chips2"><button type="button">Rewrite the advert</button><button type="button">Hand it to Kaitlin</button><button type="button">Leave it for now</button></div>
+          <div class="msg msg--bot" style="opacity:.85"><span class="liveNote" style="border:0;margin:0;padding:0">&ldquo;Leave it for now&rdquo; is a real option and is not asked again for 14 days.</span></div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Rule:</b> a nudge that can be declined, and that remembers it was declined. This is the one state most likely to feel pushy, so the opt-out is a first-class option.</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="stateCard">
+      <p class="stateCard__n">State 06</p>
+      <h3>Handing off to a person</h3>
+      <p class="stateCard__why">A different calendar depending on who is asking &mdash; her requirement. The assistant passes the conversation across rather than making them start again.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--me">I'd rather just talk to someone</div>
+          <div class="msg msg--bot">Of course. You&rsquo;re hiring, so this is Kaitlin&rsquo;s employer calendar &mdash; she keeps mornings free for new briefs.</div>
+          <div class="handoff">
+            <div class="handoff__top">
+              <img src="img/kaitlin.jpg" alt="">
+              <div><b>Kaitlin Veltkamp</b><span>Owner &middot; placing since 1982</span></div>
+            </div>
+            <a class="btn btn--onDark" href="#" style="width:100%">Book 15 minutes</a>
+            <span class="liveNote" style="border:0;margin:0;padding:0">She&rsquo;ll have everything you&rsquo;ve told me already &mdash; you won&rsquo;t need to repeat it.</span>
+          </div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Rule:</b> the transcript travels with the handoff. Asking a person to repeat themselves to a human after talking to a bot is the thing that makes people hate bots.</p>
+    </section>
+
+  </div>
+
+  <div class="wishes" style="margin-top:var(--s-9)">
+    <h2>The launcher</h2>
+    <p style="font-size:var(--t-small);color:var(--text-muted);max-width:60ch;margin:0 0 var(--s-5)">
+      Sits bottom-right on every public page. The audit found the current site&rsquo;s chat widget covering controls, so the page
+      reserves space for it rather than letting it float over the content. It is a button, reachable by keyboard, and it says what it is.
+    </p>
+    <button class="chatLaunch" style="position:static;box-shadow:none">
+      <span class="chatLaunch__dot"></span> Ask EquiStaff
+    </button>
+  </div>
+</main>
+</body>
+</html>
