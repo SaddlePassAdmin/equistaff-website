@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dana Whitfield — shortlisted for Barn Manager | EquiStaff</title>
+<meta name="description" content="Candidate profile, references checked by phone, with the recruiter's assessment.">
+
+<link rel="canonical" href="https://www.equistaff.com/candidate.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* CANDIDATE PROFILE — what the employer opens from the shortlist.
+   The employer's only real question is "should I meet this person?", so
+   Kaitlin's judgement leads and the evidence follows. A job board shows you
+   a resume; the thing EquiStaff sells is that a person already checked. */
+.cp { display:grid; grid-template-columns:1fr 340px; gap:var(--s-8); align-items:start; }
+
+.cpHead { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-6); align-items:center;
+  background:linear-gradient(145deg,var(--depth-06),var(--depth-07));
+  border:1px solid var(--navy-500); border-radius:var(--r-lg); padding:var(--s-7); margin-bottom:var(--s-6); }
+.cpAv { width:92px; height:92px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; font:900 2rem/1 var(--font-body); }
+.cpHead h1 { color:#fff; margin:0 0 4px; font-size:2rem; }
+.cpHead__role { color:var(--baby-200); margin:0 0 var(--s-3); font-size:1.0625rem; }
+.cpFacts { display:flex; gap:var(--s-5); flex-wrap:wrap; }
+.cpFacts span { color:var(--text-muted); font-size:var(--t-small); display:flex; gap:7px; align-items:center; }
+.cpHead__acts { display:flex; flex-direction:column; gap:var(--s-3); }
+
+/* Kaitlin's assessment — the reason this is not a job board. */
+.take { background:rgba(189,227,255,.10); border:1px solid var(--baby-300);
+  border-radius:var(--r-lg); padding:var(--s-6); margin-bottom:var(--s-6); }
+.take__who { display:flex; gap:var(--s-4); align-items:center; margin-bottom:var(--s-4); }
+.take__who img { width:44px; height:44px; border-radius:50%; object-fit:cover; }
+.take__who b { color:#fff; display:block; font-size:1rem; }
+.take__who span { color:var(--text-muted); font-size:var(--t-label); }
+.take p { color:#fff; margin:0 0 var(--s-3); font-size:1.0625rem; line-height:1.65; }
+.take p:last-child { margin-bottom:0; }
+
+/* Reference checks — the promise is "checked by phone", so show the evidence. */
+.ref { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-4); align-items:center;
+  padding:var(--s-4) 0; border-bottom:1px solid var(--navy-500); }
+.ref:last-child { border-bottom:0; }
+.ref__tick { width:24px; height:24px; border-radius:50%; background:var(--ok-bg); display:grid; place-items:center; }
+.ref b { color:#fff; display:block; font-size:1rem; }
+.ref span { color:var(--text-muted); font-size:var(--t-small); }
+.ref__when { color:var(--baby-300); font-size:var(--t-label); font-family:var(--font-mono); white-space:nowrap; }
+
+.cpJob { padding:var(--s-5) 0; border-bottom:1px solid var(--navy-500); }
+.cpJob:last-child { border-bottom:0; }
+.cpJob h4 { margin:0 0 3px; color:#fff; font-family:var(--font-display); font-size:1.1875rem; }
+.cpJob__w { color:var(--text-muted); font-size:var(--t-small); font-family:var(--font-mono); margin:0 0 var(--s-3); }
+.cpJob p { color:var(--baby-200); font-size:var(--t-small); margin:0; line-height:1.6; }
+
+.skills { display:flex; flex-wrap:wrap; gap:8px; }
+.skills span { background:rgba(255,255,255,.08); color:#fff; border:1px solid var(--navy-500);
+  border-radius:var(--r-pill); padding:6px 13px; font-size:var(--t-small); }
+
+/* Side rail */
+.rail { position:sticky; top:96px; display:grid; gap:var(--s-5); }
+.railCard { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-6); }
+.railCard h3 { color:#fff; font-size:1.0625rem; margin:0 0 var(--s-4); }
+.kv { display:flex; justify-content:space-between; gap:var(--s-4); padding:var(--s-3) 0;
+  border-bottom:1px solid var(--navy-500); font-size:var(--t-small); }
+.kv:last-child { border-bottom:0; }
+.kv dt { color:var(--text-muted); margin:0; }
+.kv dd { color:#fff; margin:0; font-weight:700; text-align:right; }
+
+/* The candidate is employed and looking quietly, so their yard is withheld
+   from the employer in the same way the barn is withheld from the candidate. */
+.quiet { display:inline-flex; gap:6px; align-items:center; background:var(--warm); color:var(--warm-ink);
+  border-radius:var(--r-pill); padding:3px 9px; font:900 11px/1.45 var(--font-body);
+  letter-spacing:.06em; text-transform:uppercase; }
+.quietNote { color:var(--baby-300); font-size:var(--t-label); margin:var(--s-3) 0 0;
+  border-left:2px solid var(--navy-500); padding-left:var(--s-4); }
+
+@media (max-width:1040px){ .cp { grid-template-columns:1fr; } .rail { position:static; } }
+@media (max-width:680px){
+  .cpHead { grid-template-columns:1fr; text-align:left; }
+  .cpHead__acts { flex-direction:row; flex-wrap:wrap; }
+}
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="employer.html">Your searches</a>
+      <a href="employer.html" aria-current="page">Shortlists</a>
+      <a href="#">Job posts</a><a href="#">Invoices</a><a href="#">Messages</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+
+    <p class="jdCrumb" style="color:var(--baby-300);font-size:var(--t-small);margin-bottom:var(--s-5)">
+      <a href="employer.html" style="color:var(--baby-200);text-decoration:none">&larr; Barn Manager shortlist</a>
+      &middot; 1 of 4
+    </p>
+
+    <div class="cpHead">
+      <div class="cpAv">DW</div>
+      <div>
+        <h1>Dana Whitfield</h1>
+        <p class="cpHead__role">Barn Manager &middot; 9 years &middot; Ocala, FL</p>
+        <div class="cpFacts">
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Available in 30 days</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg> Hunter/jumper, 24 head</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> All references clear</span>
+        </div>
+      </div>
+      <div class="cpHead__acts">
+        <a class="btn btn--primary" href="#">Message Dana</a>
+        <a class="btn btn--secondary" href="#">Book a call</a>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div>
+
+        <!-- The recruiter's judgement leads. This is the product. -->
+        <div class="take">
+          <div class="take__who">
+            <img src="img/kaitlin.jpg" alt="">
+            <div><b>Kaitlin's take</b><span>Spoke to Dana on 2 October &middot; 40 minutes</span></div>
+          </div>
+          <p>Dana has run a barn almost exactly the size of yours, in the same discipline, ten minutes down the road. She is the only one of the four who will not need the first month to learn how a competition yard runs.</p>
+          <p>She is leaving because her current owner is cutting back to four horses and there is nothing left to manage. That is a real reason, and I checked it.</p>
+          <p>One thing to know going in: she will ask you about days off in the first conversation. She has been doing six-day weeks for two years and is direct about not wanting to repeat that. I would treat it as a good sign rather than a problem.</p>
+        </div>
+
+        <section class="pSection">
+          <div class="pSection__head"><h2>Reference checks</h2><span class="pill pill--shortlist">3 of 3 clear</span></div>
+          <div class="ref">
+            <span class="ref__tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div><b>Current employer &mdash; owner</b><span>Confirmed dates, responsibilities and reason for leaving.</span></div>
+            <span class="ref__when">2 OCT</span>
+          </div>
+          <div class="ref">
+            <span class="ref__tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div><b>Previous yard &mdash; head trainer</b><span>"I would take her back tomorrow." Confirmed four years, no gaps.</span></div>
+            <span class="ref__when">3 OCT</span>
+          </div>
+          <div class="ref">
+            <span class="ref__tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div><b>Veterinarian &mdash; worked with her 6 years</b><span>Medication records and judgement on when to call. No concerns.</span></div>
+            <span class="ref__when">3 OCT</span>
+          </div>
+          <p class="quietNote">Every reference spoken to by phone, never by email. Notes are held by EquiStaff and available on request.</p>
+        </section>
+
+        <section class="pSection">
+          <div class="pSection__head"><h2>Experience</h2><a href="#">Download resume &rarr;</a></div>
+          <div class="cpJob">
+            <h4>Barn Manager</h4>
+            <p class="cpJob__w"><span class="quiet" style="display:flex;width:fit-content;margin:0 0 6px">Current employer withheld</span>24-horse hunter/jumper barn, Ocala FL &middot; 2021 &mdash; now</p>
+            <p>Runs the day-to-day for 24 head: turnout, feed, farrier and vet scheduling. Manages two grooms and a working student. Keeps competition and health records.</p>
+          </div>
+          <div class="cpJob">
+            <h4>Assistant Barn Manager</h4>
+            <p class="cpJob__w">Willow Bend Equestrian, Williston FL &middot; 2017 &mdash; 2021</p>
+            <p>Second to the manager on an 18-horse yard. Took over the barn outright for the winter season each year while the manager travelled with the show string.</p>
+          </div>
+          <div class="cpJob">
+            <h4>Groom</h4>
+            <p class="cpJob__w">Willow Bend Equestrian, Williston FL &middot; 2015 &mdash; 2017</p>
+            <p>Show grooming and daily care. Promoted internally.</p>
+          </div>
+          <p class="quietNote">Dana is employed and looking quietly, so her current yard is withheld until she agrees to an introduction &mdash; the same way your barn stays unnamed on the advert.</p>
+        </section>
+
+        <section class="pSection">
+          <div class="pSection__head"><h2>What she can do</h2></div>
+          <div class="skills">
+            <span>Barn management</span><span>Staff rostering</span><span>Feed programmes</span>
+            <span>Medicating</span><span>Clipping</span><span>Show prep</span>
+            <span>Competition records</span><span>Ordering &amp; budgets</span>
+            <span>Vet liaison</span><span>Farrier liaison</span><span>Towing</span>
+          </div>
+        </section>
+
+        <!-- Same gate as the shortlist: no rating, no close-out. -->
+        <section class="pSection">
+          <div class="pSection__head"><h2>Decide on Dana</h2></div>
+          <div class="fb" style="border:1px solid var(--navy-500);border-radius:var(--r-lg);background:rgba(0,0,0,.16)">
+            <p class="fb__q">How close was Dana to what you wanted?</p>
+            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five">
+              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(1)">&#9733;</button>
+              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(2)">&#9733;</button>
+              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(3)">&#9733;</button>
+              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(4)">&#9733;</button>
+              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(5)">&#9733;</button>
+            </div>
+            <p class="fb__hint" id="hint">Pick a rating to continue.</p>
+            <div class="field" style="margin:var(--s-4) 0 0">
+              <label for="note">Anything Kaitlin should know? (optional)</label>
+              <textarea id="note" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
+            </div>
+            <p class="fb__priv">Goes to Kaitlin only. Dana never sees this, and it is not kept on her profile.</p>
+            <div class="fb__acts">
+              <a class="btn btn--primary" href="#">Move to interview</a>
+              <button class="btn btn--secondary" type="button" id="send" disabled onclick="done()">Pass, and tell Kaitlin why</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RAIL -->
+      <aside class="rail">
+        <div class="railCard">
+          <h3>At a glance</h3>
+          <dl style="margin:0">
+            <div class="kv"><dt>Available</dt><dd>In 30 days</dd></div>
+            <div class="kv"><dt>Looking for</dt><dd>Full time</dd></div>
+            <div class="kv"><dt>Housing</dt><dd>Prefers on-site</dd></div>
+            <div class="kv"><dt>Relocate</dt><dd>Within Marion County</dd></div>
+            <div class="kv"><dt>Drives</dt><dd>Yes, tows</dd></div>
+            <div class="kv"><dt>Discipline</dt><dd>Hunter / jumper</dd></div>
+            <div class="kv"><dt>Managed</dt><dd>Up to 24 head</dd></div>
+          </dl>
+        </div>
+
+        <div class="railCard" style="background:var(--depth-06);border-color:var(--baby-300)">
+          <p style="font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;color:var(--warm);margin:0 0 var(--s-3)">WHERE SHE IS</p>
+          <div class="track track--rail" style="margin-top:0">
+            <div class="track__s track__s--done"><div class="track__l">SPOKEN TO</div></div>
+            <div class="track__s track__s--done"><div class="track__l">REFERENCED</div></div>
+            <div class="track__s track__s--now"><div class="track__l">WITH YOU</div></div>
+            <div class="track__s"><div class="track__l">INTERVIEW</div></div>
+          </div>
+          <p style="color:var(--baby-200);font-size:var(--t-small);margin:var(--s-5) 0 0">
+            Dana knows she has been put forward and is expecting to hear back this week.
+          </p>
+        </div>
+
+        <div class="railCard">
+          <h3>The other three</h3>
+          <p style="color:var(--text-muted);font-size:var(--t-small);margin:0 0 var(--s-4)">All phone-referenced, all available inside 60 days.</p>
+          <a class="btn btn--secondary" href="employer.html" style="width:100%">Back to shortlist</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script>
+var R = 0;
+function rate(n){
+  R = n;
+  document.querySelectorAll('.star').forEach(function(s,k){ s.classList.toggle('on', k<n); });
+  var h = document.getElementById('hint');
+  h.textContent = n>=4 ? "Strong match. Kaitlin will look for more like this."
+                : n<=2 ? "Noted. Kaitlin will adjust what she sends you."
+                : "Thanks. That helps shape the next shortlist.";
+  h.classList.add('ok');
+  document.getElementById('send').disabled = false;   // same gate as the shortlist
+}
+function done(){
+  document.querySelector('.fb__acts').innerHTML =
+    '<span class="pill pill--sent">Passed &middot; ' + R + '/5 sent to Kaitlin</span>';
+}
+</script>
+</body>
+</html>

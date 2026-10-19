@@ -157,3 +157,43 @@
 /* Why an employer name became visible. Appears only after contact is made. */
 .appRow__why { font-size:var(--t-label); color:var(--warm); margin:4px 0 0; font-style:italic; }
 
+
+/* Search progress tracker — employer portal and candidate profile. */
+.track { display:flex; gap:0; margin-top:var(--s-6); }
+.track__s { flex:1; text-align:center; position:relative; padding-top:var(--s-5); }
+.track__s::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--navy-500); }
+.track__s--done::before { background:var(--baby-200); }
+.track__s--now::before { background:var(--warm); }
+.track__l { font-size:var(--t-label); color:var(--text-muted); font-weight:700; letter-spacing:.04em; }
+.track__s--now .track__l { color:var(--warm); }
+.track__s--done .track__l { color:var(--baby-200); }
+
+/* CANDIDATE FEEDBACK — required before a candidate can be closed out.
+   Routes to the recruiter only; the job seeker never sees it. */
+.cand { display:block; padding:0; }
+.cand__row { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:var(--s-5); align-items:center;
+  padding:var(--s-5) var(--s-6); }
+.cand__row > * { min-width:0; }
+.cand h4, .cand p { overflow-wrap:anywhere; }
+.fb { border-top:1px solid var(--navy-500); padding:var(--s-5) var(--s-6) var(--s-6); background:rgba(0,0,0,.16); }
+.fb__q { margin:0 0 var(--s-4); color:#fff; font-weight:700; font-size:1.0625rem; }
+.fb__stars { display:flex; gap:6px; }
+.star { background:none; border:0; cursor:pointer; font-size:2rem; line-height:1; padding:2px 4px;
+  color:var(--navy-500); transition:color .12s var(--ease); }
+.star:hover, .star.on { color:var(--warm); }
+.star:focus-visible { outline:2px solid var(--baby-200); border-radius:4px; }
+.fb__hint { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-3) 0 0; }
+.fb__hint.ok { color:var(--warm); }
+.fb__priv { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0;
+  border-left:2px solid var(--navy-500); padding-left:var(--s-4); }
+.fb__acts { display:flex; gap:var(--s-3); margin-top:var(--s-5); flex-wrap:wrap; }
+.btn[disabled] { opacity:.42; cursor:not-allowed; }
+
+/* The horizontal tracker needs ~500px to breathe. In a 340px rail the labels
+   collide, so stack it instead of shrinking it. */
+.track--rail { flex-direction:column; gap:0; }
+.track--rail .track__s { text-align:left; padding:0 0 0 var(--s-5); min-height:38px; display:flex; align-items:center; }
+.track--rail .track__s::before { top:0; bottom:0; left:0; right:auto; width:3px; height:auto; }
+.track--rail .track__s:first-child::before { border-radius:2px 2px 0 0; }
+.track--rail .track__s:last-child::before { border-radius:0 0 2px 2px; }
+.track--rail .track__l { font-size:var(--t-label); }

@@ -31,40 +31,12 @@
 .searchCard__top { display:flex; justify-content:space-between; gap:var(--s-5); align-items:flex-start; flex-wrap:wrap; }
 .searchCard h3 { margin:0 0 4px; color:#fff; }
 .searchCard__meta { font-size:var(--t-small); color:var(--text-muted); margin:0; }
-.track { display:flex; gap:0; margin-top:var(--s-6); }
-.track__s { flex:1; text-align:center; position:relative; padding-top:var(--s-5); }
-.track__s::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--navy-500); }
-.track__s--done::before { background:var(--baby-200); }
-.track__s--now::before { background:var(--warm); }
-.track__l { font-size:var(--t-label); color:var(--text-muted); font-weight:700; letter-spacing:.04em; }
-.track__s--now .track__l { color:var(--warm); }
-.track__s--done .track__l { color:var(--baby-200); }
 .recBar { display:flex; gap:var(--s-4); align-items:center; background:rgba(189,227,255,.10);
   border:1px solid var(--baby-300); border-radius:var(--r-md); padding:var(--s-4) var(--s-5); margin-top:var(--s-6); }
 .recBar img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
 .recBar p { margin:0; font-size:var(--t-small); color:var(--baby-200); }
 .recBar b { color:#fff; }
 
-/* CANDIDATE FEEDBACK — required before a candidate can be closed out.
-   Routes to the recruiter only; the job seeker never sees it. */
-.cand { display:block; padding:0; }
-.cand__row { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:var(--s-5); align-items:center;
-  padding:var(--s-5) var(--s-6); }
-.cand__row > * { min-width:0; }
-.cand h4, .cand p { overflow-wrap:anywhere; }
-.fb { border-top:1px solid var(--navy-500); padding:var(--s-5) var(--s-6) var(--s-6); background:rgba(0,0,0,.16); }
-.fb__q { margin:0 0 var(--s-4); color:#fff; font-weight:700; font-size:1.0625rem; }
-.fb__stars { display:flex; gap:6px; }
-.star { background:none; border:0; cursor:pointer; font-size:2rem; line-height:1; padding:2px 4px;
-  color:var(--navy-500); transition:color .12s var(--ease); }
-.star:hover, .star.on { color:var(--warm); }
-.star:focus-visible { outline:2px solid var(--baby-200); border-radius:4px; }
-.fb__hint { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-3) 0 0; }
-.fb__hint.ok { color:var(--warm); }
-.fb__priv { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0;
-  border-left:2px solid var(--navy-500); padding-left:var(--s-4); }
-.fb__acts { display:flex; gap:var(--s-3); margin-top:var(--s-5); flex-wrap:wrap; }
-.btn[disabled] { opacity:.42; cursor:not-allowed; }
 @media (max-width:760px){
   .cand__row { grid-template-columns:1fr; }
   .cand__acts { width:100%; }
@@ -129,7 +101,7 @@
             <div><h4>Dana Whitfield</h4><p>9 years · 24-horse hunter/jumper barn, Ocala · available in 30 days</p></div>
             <div class="cand__acts">
               <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="#">View</a>
+              <a class="btn btn--primary" href="candidate.html">View</a>
               <button class="btn btn--secondary" type="button" onclick="openFb(0)">Close out</button>
             </div>
           </div>
@@ -164,7 +136,7 @@
             <div><h4>Marcus Reyes</h4><p>12 years · facility director, Wellington · available now</p></div>
             <div class="cand__acts">
               <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="#">View</a>
+              <a class="btn btn--primary" href="candidate.html">View</a>
               <button class="btn btn--secondary" type="button" onclick="openFb(1)">Close out</button>
             </div>
           </div>
@@ -199,7 +171,7 @@
             <div><h4>Sarah O'Dell</h4><p>6 years · barn manager, Lexington · relocating to Ocala</p></div>
             <div class="cand__acts">
               <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="#">View</a>
+              <a class="btn btn--primary" href="candidate.html">View</a>
               <button class="btn btn--secondary" type="button" onclick="openFb(2)">Close out</button>
             </div>
           </div>
@@ -234,7 +206,7 @@
             <div><h4>Tom Brennan</h4><p>15 years · estate & barn management, Aiken · available in 60 days</p></div>
             <div class="cand__acts">
               <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="#">View</a>
+              <a class="btn btn--primary" href="candidate.html">View</a>
               <button class="btn btn--secondary" type="button" onclick="openFb(3)">Close out</button>
             </div>
           </div>
