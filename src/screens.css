@@ -133,10 +133,12 @@
 .empty p { color: var(--text-muted); margin: 0 auto var(--s-5); }
 
 /* deep-mode form fields */
+/* Inputs sit at portal ground level inside a raised card, so they read as
+   recessed rather than as holes punched through it. */
 [data-mode="deep"] .field input,
 [data-mode="deep"] .field select,
 [data-mode="deep"] .field textarea {
-  background: var(--depth-07); border-color: var(--navy-500); color: #fff;
+  background: var(--portal-ground); border-color: var(--navy-500); color: #fff;
 }
 [data-mode="deep"] .field input::placeholder { color: #7D9AB8; }
 [data-mode="deep"] .field label { color: var(--text-primary); }
