@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your job posts | EquiStaff</title>
+<meta name="description" content="Manage your job posts, see how they are performing and hand a stale one to Kaitlin.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* YOUR JOB POSTS — a post is only worth looking at through its numbers, so
+   views and applicants sit on the row rather than behind a click. A post
+   running long with few applicants is called out, because that is the moment
+   Kaitlin can help and the moment the employer is most likely to give up. */
+.jpRow { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-6); margin-bottom:var(--s-5);
+  display:grid; grid-template-columns:1fr auto; gap:var(--s-5); align-items:center; }
+.jpRow--stale { box-shadow:inset 3px 0 0 0 var(--warm); padding-left:calc(var(--s-6) + 3px); }
+.jpRow--closed { background:transparent; border-style:dashed; }
+.jpRow h3 { margin:0 0 6px; font-family:var(--font-display); font-size:1.25rem; color:#fff; }
+.jpMeta { display:flex; gap:var(--s-5); flex-wrap:wrap; margin:0; }
+.jpMeta span { font-size:var(--t-small); color:var(--text-muted); }
+.jpMeta b { font-family:var(--font-mono); font-weight:600; color:#fff; }
+.jpActs { display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; }
+.jpNudge { grid-column:1/-1; background:rgba(249,244,237,.12); border:1px solid var(--warm);
+  border-radius:var(--r-md); padding:var(--s-4) var(--s-5); display:flex; gap:var(--s-4);
+  align-items:center; flex-wrap:wrap; }
+.jpNudge img { width:38px; height:38px; border-radius:50%; object-fit:cover; flex:0 0 auto; }
+.jpNudge p { margin:0; font-size:var(--t-small); color:var(--baby-200); flex:1 1 260px; }
+.jpNudge b { color:#fff; }
+.allowance { display:flex; gap:var(--s-5); align-items:center; flex-wrap:wrap;
+  background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-5) var(--s-6); margin-bottom:var(--s-6); }
+.allowance b { color:#fff; font-family:var(--font-mono); font-weight:600; }
+.allowance p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
+@media (max-width:760px){ .jpRow{grid-template-columns:1fr} }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="employer.html">Your searches</a><a href="#" aria-current="page">Job posts</a>
+      <a href="post-job.html">Post a job</a><a href="billing.html">Billing</a><a href="company.html">Company</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <div class="pSection__head" style="margin-bottom:var(--s-6)">
+      <div>
+        <p class="eyebrow" style="color:var(--warm)">Golden Ocala Equestrian</p>
+        <h1 style="color:#fff;margin:0;font-size:2rem">Your job posts</h1>
+      </div>
+      <a class="btn btn--primary" href="post-job.html">Post a job</a>
+    </div>
+
+    <div class="allowance">
+      <div><b id="left">—</b> <p style="display:inline">posts left this month</p></div>
+      <p style="margin-left:auto">On the <b>1 month</b> plan &mdash; 3 posts, unlimited candidate searches.
+        <a href="billing.html">Change plan</a></p>
+    </div>
+
+    <div id="list"></div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script>
+function esc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+function row(p){
+  var closed = p.state === 'Closed';
+  // A post running long with few applicants is the advert, not the market.
+  var stale = !closed && p.posted >= 30 && p.applicants <= 3;
+  var cls = 'jpRow' + (closed ? ' jpRow--closed' : stale ? ' jpRow--stale' : '');
+  var pill = closed ? '<span class="pill pill--sent">Closed</span>'
+           : stale  ? '<span class="pill pill--review">Not performing</span>'
+                    : '<span class="pill pill--shortlist">Live on the board</span>';
+
+  var h = '<div class="' + cls + '"><div>'
+        + '<h3>' + esc(p.title) + '</h3>'
+        + '<p class="jpMeta">'
+        + '<span><b>' + (p.posted === 0 ? 'Today' : p.posted + ' days') + '</b> live</span>'
+        + '<span><b>' + p.views + '</b> views</span>'
+        + '<span><b>' + p.applicants + '</b> applicant' + (p.applicants === 1 ? '' : 's') + '</span>'
+        + (p.pay ? '<span>' + esc(p.pay) + '</span>' : '')
+        + '</p></div>'
+        + '<div class="jpActs">' + pill
+        + (closed ? '' : '<a class="btn btn--primary" href="applicants.html">Applicants</a>'
+                       + '<a class="btn btn--secondary" href="post-job.html">Edit</a>'
+                       + '<button class="btn btn--secondary" type="button" onclick="close_(\'' + p.id + '\')">Close</button>')
+        + '</div>';
+
+  if (stale) {
+    h += '<div class="jpNudge"><img src="img/kaitlin.jpg" alt="">'
+       + '<p><b>Live ' + p.posted + ' days with ' + p.applicants + ' applicant'
+       + (p.applicants === 1 ? '' : 's') + '.</b> That is usually the advert, not the market. '
+       + 'Kaitlin can rewrite it, or take it over as a managed search.</p>'
+       + '<a class="btn btn--primary" href="request-talent.html" style="white-space:nowrap">Hand it to Kaitlin</a></div>';
+  }
+  return h + '</div>';
+}
+
+function paint(){
+  var posts = ES.posts();
+  document.getElementById('list').innerHTML = posts.length
+    ? posts.map(row).join('')
+    : '<div class="empty"><p>No job posts yet. Your first one takes about five minutes.</p>'
+      + '<a class="btn btn--primary" href="post-job.html">Post a job</a></div>';
+  var live = posts.filter(function(p){ return p.state !== 'Closed'; }).length;
+  document.getElementById('left').textContent = Math.max(0, 3 - live);
+}
+function close_(id){ ES.closePost(id); paint(); }
+paint();
+</script>
+</body>
+</html>

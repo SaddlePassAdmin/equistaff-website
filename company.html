@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your company profile | EquiStaff</title>
+<meta name="description" content="What candidates see about your barn — and what stays hidden on a managed search.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* COMPANY PROFILE — the employer's side of the confidentiality rule, made
+   visible. Everything here shows on a job they post themselves; on a
+   recruiter-managed search the identifying half is withheld until contact.
+   The preview shows both, because an employer who does not understand why
+   their barn is unnamed will ask Kaitlin to name it. */
+.co { display:grid; grid-template-columns:1fr 420px; gap:var(--s-8); align-items:start; }
+.coForm { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-7); }
+.coGroup { border-top:1px solid var(--navy-500); padding-top:var(--s-5); margin-top:var(--s-5); }
+.coGroup:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+.coGroup h3 { color:var(--warm); font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em;
+  text-transform:uppercase; margin:0 0 var(--s-4); }
+.coLogo { display:flex; gap:var(--s-5); align-items:center; flex-wrap:wrap; }
+.coLogo__box { width:84px; height:84px; border-radius:var(--r-md); background:var(--depth-07);
+  border:1.5px dashed var(--navy-500); display:grid; place-items:center;
+  color:var(--baby-300); font:600 var(--t-label)/1 var(--font-mono); flex:0 0 auto; text-align:center; padding:8px; }
+
+.coPrev { position:sticky; top:84px; display:grid; gap:var(--s-5); }
+.coCard { background:#fff; border-radius:var(--r-lg); padding:var(--s-6); box-shadow:var(--e-3);
+  --text-primary:var(--navy-900); --text-muted:#4A6580; color:var(--navy-900); }
+.coCard h4 { font-family:var(--font-display); font-size:1.25rem; margin:0 0 4px; color:var(--navy-900); }
+.coCard p { font-size:var(--t-small); color:var(--text-muted); margin:0 0 var(--s-3); }
+.coCard p:last-child { margin:0; }
+.coCard img { width:100%; height:120px; object-fit:cover; border-radius:var(--r-sm); margin-bottom:var(--s-4); }
+.coLabel { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em; text-transform:uppercase;
+  color:var(--baby-300); margin:0 0 var(--s-3); }
+.coHidden { background:var(--warm); color:var(--warm-ink); border-radius:var(--r-sm);
+  padding:3px 8px; font:900 10px/1.5 var(--font-body); letter-spacing:.06em; text-transform:uppercase; }
+@media (max-width:1040px){ .co{grid-template-columns:1fr} .coPrev{position:static} }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="employer.html">Your searches</a><a href="my-jobs.html">Job posts</a>
+      <a href="post-job.html">Post a job</a><a href="billing.html">Billing</a><a href="#" aria-current="page">Company</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <p class="eyebrow" style="color:var(--warm)">Company profile</p>
+    <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">What candidates see</h1>
+    <p style="color:var(--baby-200);max-width:62ch;margin:0 0 var(--s-6)">
+      This appears on every job you post yourself. On a managed search, the identifying half is held back until
+      you&rsquo;ve agreed to meet someone &mdash; the preview shows you both versions.
+    </p>
+
+    <div class="co">
+      <section class="coForm">
+        <div class="coGroup">
+          <h3>The basics</h3>
+          <div class="coLogo" style="margin-bottom:var(--s-5)">
+            <div class="coLogo__box">Add<br>logo</div>
+            <div>
+              <button class="btn btn--secondary" type="button">Upload a logo</button>
+              <p style="color:var(--text-muted);font-size:var(--t-label);margin:var(--s-3) 0 0">Square, at least 400px. Shows on your posts and in search.</p>
+            </div>
+          </div>
+          <div class="field"><label for="name">Barn or business name</label><input id="name" value="Golden Ocala Equestrian" oninput="draw()"></div>
+          <div class="form__row">
+            <div class="field"><label for="loc">Location</label><input id="loc" value="Ocala, FL" oninput="draw()"></div>
+            <div class="field"><label for="site">Website</label><input id="site" placeholder="goldenocala.com"></div>
+          </div>
+        </div>
+
+        <div class="coGroup">
+          <h3>The yard</h3>
+          <div class="form__row">
+            <div class="field"><label for="disc">Discipline</label><input id="disc" value="Hunter / jumper" oninput="draw()"></div>
+            <div class="field"><label for="horses">Horses</label><input id="horses" value="24" oninput="draw()"></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="staff">Staff</label><input id="staff" value="5" oninput="draw()"></div>
+            <div class="field"><label for="since">Established</label><input id="since" value="2004" oninput="draw()"></div>
+          </div>
+          <div class="field"><label for="about">About the yard</label>
+            <textarea id="about" rows="4" oninput="draw()">Twenty-four stalls, two arenas, a covered round pen and direct hack access, ten minutes from the World Equestrian Center. The same vet and farrier for eleven years.</textarea>
+            <small>Candidates read this more carefully than anything else on a post.</small>
+          </div>
+        </div>
+
+        <div class="coGroup">
+          <h3>Photos</h3>
+          <p style="color:var(--text-muted);font-size:var(--t-small);margin:0 0 var(--s-4)">
+            Up to six. The first is the one that appears on your job posts.
+          </p>
+          <div style="display:flex;gap:var(--s-3);flex-wrap:wrap">
+            <div class="coLogo__box" style="width:108px;height:76px;border-style:solid;padding:0;overflow:hidden">
+              <img src="img/aisle.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
+            </div>
+            <div class="coLogo__box" style="width:108px;height:76px">+ Add</div>
+          </div>
+        </div>
+
+        <div class="ob__actions">
+          <button class="btn btn--onDark btn--lg" type="button" onclick="save()">Save changes</button>
+          <span style="color:var(--text-muted);font-size:var(--t-small)" id="saved" hidden>Saved just now.</span>
+        </div>
+      </section>
+
+      <aside class="coPrev">
+        <div>
+          <p class="coLabel">On a job you post yourself</p>
+          <div class="coCard">
+            <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
+            <h4 id="pName">Golden Ocala Equestrian</h4>
+            <p id="pMeta">Hunter / jumper · 24 horses · Ocala, FL</p>
+            <p id="pAbout">Twenty-four stalls, two arenas…</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="coLabel">On a managed search, before contact</p>
+          <div class="coCard">
+            <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
+            <h4><span class="coHidden">Employer confidential</span></h4>
+            <p id="pMeta2" style="margin-top:var(--s-3)">Hunter / jumper · 24 horses · Ocala, FL</p>
+            <p id="pAbout2">Twenty-four stalls, two arenas…</p>
+            <p style="font-size:var(--t-label);font-style:italic;color:#4A6580;border-top:1px solid #CFE4F3;padding-top:var(--s-3);margin-top:var(--s-3)">
+              Your name, website and logo are held back. Everything that helps someone picture the job still shows.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script>
+function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
+function draw(){
+  var meta = [v('disc'), v('horses') ? v('horses') + ' horses' : '', v('loc')].filter(Boolean).join(' · ');
+  document.getElementById('pName').textContent  = v('name') || 'Your barn';
+  document.getElementById('pMeta').textContent  = meta;
+  document.getElementById('pMeta2').textContent = meta;
+  var a = v('about') || 'Tell candidates about the yard.';
+  document.getElementById('pAbout').textContent  = a;
+  document.getElementById('pAbout2').textContent = a;
+}
+function save(){
+  document.getElementById('saved').hidden = false;
+  ES.notify('Company profile saved');
+}
+draw();
+</script>
+</body>
+</html>

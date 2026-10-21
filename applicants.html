@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applicants | EquiStaff</title>
+<meta name="description" content="Review the people who applied to your job post.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* APPLICANTS — the self-serve equivalent of the managed shortlist. The
+   difference matters and is stated on the page: these people applied, nobody
+   has spoken to them, and no references have been checked. That is the gap
+   the recruiting service fills, so the screen says it rather than implying it.
+   Status is a real filter because an employer works a list in passes. */
+.apBar { display:flex; gap:var(--s-3); flex-wrap:wrap; align-items:center; margin-bottom:var(--s-6); }
+.apFilter { background:transparent; border:1.5px solid var(--navy-500); color:var(--baby-200);
+  border-radius:var(--r-pill); padding:9px 15px; font:600 var(--t-small)/1 var(--font-body);
+  cursor:pointer; min-height:42px; }
+.apFilter[aria-pressed="true"] { background:var(--baby-200); border-color:var(--baby-200); color:var(--navy-900); }
+.apRow { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-5) var(--s-6); margin-bottom:var(--s-4);
+  display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-5); align-items:center; }
+.apRow--new { box-shadow:inset 3px 0 0 0 var(--baby-200); padding-left:calc(var(--s-6) + 3px); }
+.apRow--out { background:transparent; border-style:dashed; opacity:.75; }
+.apAv { width:46px; height:46px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; font:900 1rem/1 var(--font-body); flex:0 0 auto; }
+.apRow h4 { margin:0 0 3px; font-family:var(--font-display); font-size:1.125rem; color:#fff; }
+.apRow p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
+.apActs { display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; }
+.unvetted { background:rgba(249,244,237,.12); border:1px solid var(--warm); border-radius:var(--r-md);
+  padding:var(--s-5); margin-bottom:var(--s-6); display:flex; gap:var(--s-4); align-items:center; flex-wrap:wrap; }
+.unvetted img { width:40px; height:40px; border-radius:50%; object-fit:cover; flex:0 0 auto; }
+.unvetted p { margin:0; font-size:var(--t-small); color:var(--baby-200); flex:1 1 300px; }
+.unvetted b { color:#fff; }
+@media (max-width:760px){ .apRow{grid-template-columns:1fr} }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="employer.html">Your searches</a><a href="my-jobs.html" aria-current="page">Job posts</a>
+      <a href="post-job.html">Post a job</a><a href="billing.html">Billing</a><a href="company.html">Company</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <p class="jdCrumb" style="color:var(--baby-300);font-size:var(--t-small);margin-bottom:var(--s-5)">
+      <a href="my-jobs.html" style="color:var(--baby-200);text-decoration:none">&larr; Your job posts</a>
+      &middot; Working Student &mdash; seasonal
+    </p>
+
+    <div class="pSection__head" style="margin-bottom:var(--s-5)">
+      <div>
+        <h1 style="color:#fff;margin:0;font-size:2rem">9 applicants</h1>
+        <p style="color:var(--baby-200);margin:6px 0 0;font-size:var(--t-small)">Working Student &mdash; seasonal &middot; live 14 days &middot; 112 views</p>
+      </div>
+      <a class="btn btn--secondary" href="post-job.html">Edit the post</a>
+    </div>
+
+    <!-- The honest difference between this list and a managed shortlist -->
+    <div class="unvetted">
+      <img src="img/kaitlin.jpg" alt="">
+      <p><b>These people applied. Nobody has spoken to them.</b> No references are checked and nothing is verified
+        &mdash; that is what a managed search adds. Happy to take this one over if the list isn&rsquo;t landing.</p>
+      <a class="btn btn--primary" href="request-talent.html" style="white-space:nowrap">Hand it to Kaitlin</a>
+    </div>
+
+    <div class="apBar" role="group" aria-label="Filter by status">
+      <button class="apFilter" aria-pressed="true"  onclick="filt('all',this)">All 9</button>
+      <button class="apFilter" aria-pressed="false" onclick="filt('New',this)">New 4</button>
+      <button class="apFilter" aria-pressed="false" onclick="filt('Shortlisted',this)">Shortlisted 2</button>
+      <button class="apFilter" aria-pressed="false" onclick="filt('Contacted',this)">Contacted 1</button>
+      <button class="apFilter" aria-pressed="false" onclick="filt('Not for this',this)">Not for this 2</button>
+    </div>
+
+    <div id="list"></div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script>
+var PEOPLE = [
+  { id:'ap1', n:'Imogen Clarke',  i:'IC', m:'2 years · working student, Wellington · available now',            s:'New' },
+  { id:'ap2', n:'Tomas Vieira',   i:'TV', m:'3 years · groom, Ocala · has own transport',                        s:'New' },
+  { id:'ap3', n:'Ruby Nakamura',  i:'RN', m:'1 year · pony club, Georgia · needs housing',                        s:'New' },
+  { id:'ap4', n:'Hallie Brandt',  i:'HB', m:'4 years · show groom, Aiken · available in 2 weeks',                 s:'New' },
+  { id:'ap5', n:'Pete Donnelly',  i:'PD', m:'6 years · barn staff, Lexington · relocating to Ocala',              s:'Shortlisted' },
+  { id:'ap6', n:'Sofia Marchetti',i:'SM', m:'2 years · eventing yard, Middleburg · drives',                       s:'Shortlisted' },
+  { id:'ap7', n:'Dale Whitcomb',  i:'DW', m:'5 years · hunter barn, Wellington · spoke Tuesday',                  s:'Contacted' },
+  { id:'ap8', n:'Mara Ellison',   i:'ME', m:'No barn experience · career changer',                                s:'Not for this' },
+  { id:'ap9', n:'Chris Udall',    i:'CU', m:'Applied to 3 of your posts · looking for full time, not seasonal',   s:'Not for this' }
+];
+var VIEW = 'all';
+
+function pill(s){
+  var c = s === 'Shortlisted' ? 'pill--shortlist' : s === 'Contacted' ? 'pill--sent'
+        : s === 'Not for this' ? 'pill--sent' : 'pill--review';
+  return '<span class="pill ' + c + '">' + s + '</span>';
+}
+function row(p){
+  var cls = 'apRow' + (p.s === 'New' ? ' apRow--new' : p.s === 'Not for this' ? ' apRow--out' : '');
+  return '<div class="' + cls + '">'
+    + '<div class="apAv">' + p.i + '</div>'
+    + '<div><h4>' + p.n + '</h4><p>' + p.m + '</p></div>'
+    + '<div class="apActs">' + pill(p.s)
+    + '<a class="btn btn--primary" href="candidate.html">View</a>'
+    + '<button class="btn btn--secondary" type="button" onclick="mark(\'' + p.id + '\')">'
+    + (p.s === 'Shortlisted' ? 'Unshortlist' : 'Shortlist') + '</button>'
+    + '</div></div>';
+}
+function paint(){
+  var rows = PEOPLE.filter(function(p){ return VIEW === 'all' || p.s === VIEW; });
+  document.getElementById('list').innerHTML = rows.length
+    ? rows.map(row).join('')
+    : '<div class="empty"><p>Nobody in this list yet.</p></div>';
+}
+function filt(v, btn){
+  VIEW = v;
+  document.querySelectorAll('.apFilter').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+  btn.setAttribute('aria-pressed','true');
+  paint();
+}
+function mark(id){
+  var p = PEOPLE.find(function(x){ return x.id === id; });
+  p.s = (p.s === 'Shortlisted') ? 'New' : 'Shortlisted';
+  paint();
+}
+paint();
+</script>
+</body>
+</html>

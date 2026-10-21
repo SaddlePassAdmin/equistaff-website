@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plans and billing | EquiStaff</title>
+<meta name="description" content="Your EquiStaff plan, invoices and payment method.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* PLANS AND BILLING — audit blocker #3: on the live site "Renew Subscription",
+   "Add New Job" and "Subscribe" all do nothing and no price appears anywhere,
+   so an employer who wants to pay cannot. Prices here are Kaitlin's approved
+   list. Cancelling runs the EM-4 save offers first and never cancels inside a
+   chat, which is hard rule R7. */
+.plans { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:var(--s-5); }
+.plan { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-6); display:flex; flex-direction:column; gap:var(--s-4); }
+.plan--on { border:2px solid var(--baby-200); box-shadow:var(--e-2); }
+.plan__tag { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em; text-transform:uppercase;
+  color:var(--warm); }
+.plan--on .plan__tag { color:var(--baby-200); }
+.plan h3 { margin:0; font-size:1.25rem; color:#fff; }
+.plan__price { font-family:var(--font-mono); font-weight:600; font-size:1.875rem; color:#fff; margin:0; }
+.plan__price span { font-family:var(--font-body); font-weight:400; font-size:var(--t-small); color:var(--text-muted); }
+.plan ul { margin:0; padding-left:18px; }
+.plan li { font-size:var(--t-small); color:var(--baby-200); margin-bottom:6px; }
+.plan .btn { margin-top:auto; }
+
+.card { display:flex; gap:var(--s-5); align-items:center; flex-wrap:wrap;
+  background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-6); }
+.cardMark { width:52px; height:36px; border-radius:6px; background:var(--depth-07);
+  border:1px solid var(--navy-500); display:grid; place-items:center;
+  font:600 11px/1 var(--font-mono); color:var(--baby-200); flex:0 0 auto; }
+.card b { color:#fff; display:block; font-size:var(--t-small); }
+.card span { color:var(--text-muted); font-size:var(--t-label); }
+
+.inv { display:grid; grid-template-columns:1fr auto auto auto; gap:var(--s-5);
+  align-items:center; padding:var(--s-4) 0; border-bottom:1px solid var(--navy-500); }
+.inv:last-child { border-bottom:0; }
+.inv b { color:#fff; font-size:var(--t-small); font-weight:700; }
+.inv span { color:var(--text-muted); font-size:var(--t-small); }
+.inv .amt { font-family:var(--font-mono); font-weight:600; color:#fff; font-variant-numeric:tabular-nums; }
+
+/* EM-4: the save offers come before the cancel, every time. */
+.save { background:rgba(249,244,237,.12); border:1px solid var(--warm); border-radius:var(--r-lg);
+  padding:var(--s-6); margin-top:var(--s-5); }
+.save h3 { color:var(--warm); font-size:1.0625rem; margin:0 0 var(--s-3); }
+.saveOpts { display:grid; gap:var(--s-4); margin:var(--s-5) 0; }
+.saveOpt { display:flex; gap:var(--s-4); align-items:center; background:rgba(255,255,255,.05);
+  border:1px solid var(--navy-500); border-radius:var(--r-md); padding:var(--s-4) var(--s-5); flex-wrap:wrap; }
+.saveOpt p { margin:0; font-size:var(--t-small); color:var(--baby-200); flex:1 1 240px; }
+.saveOpt b { color:#fff; }
+@media (max-width:700px){ .inv{grid-template-columns:1fr auto} }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="employer.html">Your searches</a><a href="my-jobs.html">Job posts</a>
+      <a href="post-job.html">Post a job</a><a href="#" aria-current="page">Billing</a><a href="company.html">Company</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <p class="eyebrow" style="color:var(--warm)">Golden Ocala Equestrian</p>
+    <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Plans and billing</h1>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Your plan</h2><span class="pill pill--shortlist">Renews 14 November</span></div>
+      <div class="plans">
+        <div class="plan plan--on">
+          <span class="plan__tag">Current plan</span>
+          <h3>1 month</h3>
+          <p class="plan__price">$50<span> / month</span></p>
+          <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Cancel any time</li></ul>
+          <button class="btn btn--secondary" type="button" disabled style="opacity:.5">This is your plan</button>
+        </div>
+        <div class="plan">
+          <span class="plan__tag">Save $10</span>
+          <h3>3 months</h3>
+          <p class="plan__price">$140<span> / quarter</span></p>
+          <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Works out at about $47 a month</li></ul>
+          <button class="btn btn--primary" type="button" onclick="switchTo('3 months','$140')">Switch to this</button>
+        </div>
+        <div class="plan">
+          <span class="plan__tag">Best value</span>
+          <h3>1 year</h3>
+          <p class="plan__price">$460<span> / year</span></p>
+          <ul><li><b style="color:#fff">5</b> job posts</li><li>Unlimited candidate searches</li><li>Under $39 a month</li></ul>
+          <button class="btn btn--primary" type="button" onclick="switchTo('1 year','$460')">Switch to this</button>
+        </div>
+      </div>
+      <p style="color:var(--text-muted);font-size:var(--t-small);margin-top:var(--s-5)">
+        Looking for a full search instead? That is quoted per role &mdash; $1,000 to start, with the balance due on
+        your hire&rsquo;s first day. <a href="request-talent.html">Talk to Kaitlin</a>.
+      </p>
+    </section>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Payment method</h2><a href="#" onclick="event.preventDefault()">Update card</a></div>
+      <div class="card">
+        <div class="cardMark">VISA</div>
+        <div><b>Visa ending 6411</b><span>Expires 09 / 2029 &middot; Elaine Harper</span></div>
+        <span class="pill pill--sent" style="margin-left:auto">Default</span>
+      </div>
+    </section>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Invoices</h2><a href="#" onclick="event.preventDefault()">Download all</a></div>
+      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+    </section>
+
+    <section class="pSection">
+      <div class="pSection__head"><h2>Cancelling</h2></div>
+      <p style="color:var(--text-muted);font-size:var(--t-small);max-width:64ch;margin:0 0 var(--s-4)">
+        You can cancel whenever you like and keep your posts running to the end of the month you have paid for.
+      </p>
+      <button class="btn btn--secondary" type="button" id="cancelBtn" onclick="offerSaves()">Cancel my plan</button>
+
+      <div class="save" id="saves" hidden>
+        <h3>Before you do &mdash; three things worth a look</h3>
+        <p style="color:var(--baby-200);font-size:var(--t-small);margin:0">
+          Most people cancelling tell us the board wasn&rsquo;t working for them, which is usually fixable.
+        </p>
+        <div class="saveOpts">
+          <div class="saveOpt"><p><b>50% off next month.</b> Give it one more cycle at $25.</p>
+            <button class="btn btn--primary" type="button" onclick="took('Discount applied — next month is $25')">Take the discount</button></div>
+          <div class="saveOpt"><p><b>Fifteen minutes with Kaitlin.</b> She&rsquo;ll look at your posts and tell you honestly what&rsquo;s wrong with them.</p>
+            <a class="btn btn--primary" href="request-talent.html">Book the call</a></div>
+          <div class="saveOpt"><p><b>Hand the role over entirely.</b> A managed search, four people, every reference checked.</p>
+            <a class="btn btn--primary" href="request-talent.html">How that works</a></div>
+        </div>
+        <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;align-items:center">
+          <button class="btn btn--secondary" type="button" onclick="reallyCancel()">No thanks, cancel my plan</button>
+          <button class="btn btn--secondary" type="button" onclick="keep()">Keep my plan</button>
+        </div>
+        <p id="outcome" style="color:var(--warm);font-size:var(--t-small);margin:var(--s-5) 0 0" hidden></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script>
+function switchTo(name, price){
+  ES.notify('Plan changed to ' + name + ' — ' + price);
+  location.reload();
+}
+function offerSaves(){
+  document.getElementById('saves').hidden = false;
+  document.getElementById('cancelBtn').hidden = true;
+  document.getElementById('saves').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+function say(t){
+  var o = document.getElementById('outcome');
+  o.textContent = t; o.hidden = false;
+}
+function took(t){ say(t + '. Nothing else to do.'); }
+function keep(){ say('Kept. Your plan renews on 14 November as normal.'); }
+function reallyCancel(){
+  say('Cancelled. Your posts stay live until 14 November, and you can come back any time without losing your company profile.');
+}
+</script>
+</body>
+</html>

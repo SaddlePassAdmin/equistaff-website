@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post a job | EquiStaff</title>
+<meta name="description" content="Write a job post that actually gets applications. Preview it as candidates will see it.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* POST A JOB — the complete-posting field list from the chatbot engineering
+   handoff, in the order an employer can actually answer it. The preview is
+   the real job card, updating as they type, because the audit found adverts
+   failing on missing pay and missing housing rather than on wording.
+   A completeness meter does the nagging so the form doesn't have to. */
+.pj { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-8); align-items:start; }
+.pjForm { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-7); }
+.pjForm h2 { color:#fff; font-size:1.375rem; margin:0 0 var(--s-2); }
+.pjLede { color:var(--baby-200); font-size:var(--t-small); margin:0 0 var(--s-6); max-width:46ch; }
+.pjGroup { border-top:1px solid var(--navy-500); padding-top:var(--s-5); margin-top:var(--s-5); }
+.pjGroup:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+.pjGroup h3 { color:var(--warm); font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em;
+  text-transform:uppercase; margin:0 0 var(--s-4); }
+
+/* Completeness — the nudge the audit said was missing */
+.pjMeter { position:sticky; top:84px; z-index:5; background:var(--depth-07);
+  border:1px solid var(--navy-500); border-radius:var(--r-md); padding:var(--s-4) var(--s-5);
+  margin-bottom:var(--s-6); }
+.pjMeter__top { display:flex; justify-content:space-between; align-items:baseline; gap:var(--s-4); }
+.pjMeter b { color:#fff; font-size:var(--t-small); }
+.pjMeter span { font-family:var(--font-mono); font-weight:600; color:var(--warm); font-size:var(--t-small); }
+.pjMeter__bar { height:6px; border-radius:var(--r-pill); background:rgba(255,255,255,.14);
+  overflow:hidden; margin:var(--s-3) 0 6px; }
+.pjMeter__fill { height:100%; background:var(--baby-200); width:0; transition:width .3s var(--ease); }
+.pjMeter p { margin:0; font-size:var(--t-label); color:var(--baby-300); }
+
+/* THE PREVIEW — a light island on a deep page, so the Light token values are
+   re-declared here. Without this the card renders white text on white. */
+.pjPrev { position:sticky; top:84px; }
+.pjCard { background:#fff; border-radius:var(--r-lg); padding:var(--s-7); box-shadow:var(--e-3);
+  --text-primary: var(--navy-900);
+  --text-muted:   #4A6580;
+  --border-subtle:#CFE4F3;
+  color: var(--navy-900); }
+.pjCard h3 { font-family:var(--font-display); font-size:1.5rem; color:var(--navy-900); margin:0 0 6px; }
+.pjCard__org { color:var(--text-muted); font-size:var(--t-small); margin:0 0 var(--s-3); }
+.pjCard__pay { font-family:var(--font-mono); font-weight:600; font-size:1.125rem; color:var(--navy-900); margin:0 0 var(--s-4); }
+.pjTags { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:var(--s-5); }
+.pjFacts { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s-4);
+  background:var(--depth-01); border-radius:var(--r-md); padding:var(--s-5); margin:var(--s-5) 0; }
+.pjFact b { display:block; font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em;
+  text-transform:uppercase; color:var(--blue-700); }
+.pjFact span { font-size:var(--t-small); font-weight:700; color:var(--navy-900); }
+.pjCard h4 { font-size:1.0625rem; margin:var(--s-5) 0 var(--s-3); color:var(--navy-900); }
+.pjCard p.body { font-size:var(--t-small); color:var(--navy-900); line-height:1.6; margin:0 0 var(--s-3); }
+.pjEmpty { color:#9BB3C7; font-style:italic; }
+.pjPrevBar { display:flex; gap:var(--s-3); align-items:center; margin-top:var(--s-5); flex-wrap:wrap; }
+.pjNote { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0; }
+
+/* Kaitlin's offer, per EM-2 in the handoff doc */
+.pjOffer { background:rgba(249,244,237,.12); border:1px solid var(--warm);
+  border-radius:var(--r-md); padding:var(--s-5); margin-top:var(--s-6); }
+.pjOffer img { width:42px; height:42px; border-radius:50%; object-fit:cover; }
+.pjOffer__top { display:flex; gap:var(--s-4); align-items:center; margin-bottom:var(--s-3); }
+.pjOffer b { color:#fff; font-size:var(--t-small); }
+.pjOffer p { color:var(--baby-200); font-size:var(--t-small); margin:0 0 var(--s-4); }
+
+@media (max-width:1040px){ .pj{grid-template-columns:1fr} .pjPrev,.pjMeter{position:static} }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Employer portal">
+      <a href="employer.html">Your searches</a><a href="my-jobs.html">Job posts</a>
+      <a href="#" aria-current="page">Post a job</a><a href="billing.html">Billing</a><a href="company.html">Company</a>
+    </nav>
+    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <p class="eyebrow" style="color:var(--warm)">Post a job</p>
+    <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">Write it once, properly.</h1>
+    <p style="color:var(--baby-200);max-width:62ch;margin:0 0 var(--s-6)">
+      The adverts that fail on this board are missing pay or housing, not good writing. Fill the facts in and the
+      preview on the right is exactly what a candidate sees.
+    </p>
+
+    <div class="pj">
+      <section class="pjForm">
+
+        <div class="pjMeter">
+          <div class="pjMeter__top"><b>Post completeness</b><span id="pcNum">0%</span></div>
+          <div class="pjMeter__bar"><div class="pjMeter__fill" id="pcFill"></div></div>
+          <p id="pcTip">Start with the title and the pay &mdash; those two do most of the work.</p>
+        </div>
+
+        <div class="pjGroup">
+          <h3>The basics</h3>
+          <div class="field"><label for="title">Job title</label>
+            <input id="title" list="roles" oninput="draw()" placeholder="Barn Manager">
+            <datalist id="roles"><option>Groom</option><option>Barn manager</option><option>Assistant trainer</option><option>Trainer</option><option>Exercise rider</option><option>Working student</option><option>Night watch</option><option>Foreman</option><option>Breeding manager</option><option>Vet technician</option><option>Farrier</option><option>Instructor</option></datalist>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="loc">Location</label><input id="loc" oninput="draw()" placeholder="Ocala, FL"></div>
+            <div class="field"><label for="type">Commitment</label>
+              <select id="type" onchange="draw()"><option>Full time</option><option>Part time</option><option>Seasonal</option><option>Working student</option><option>Freelance or event</option></select>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="payMin">Pay from</label><input id="payMin" oninput="draw()" placeholder="55,000"></div>
+            <div class="field"><label for="payMax">Pay to</label><input id="payMax" oninput="draw()" placeholder="68,000"></div>
+          </div>
+          <div class="field"><label for="payUnit">Per</label>
+            <select id="payUnit" onchange="draw()"><option>year</option><option>hour</option><option>week</option><option>month</option></select>
+            <small>A real range gets roughly three times the applications of &ldquo;competitive&rdquo;. It is the single biggest thing on this form.</small>
+          </div>
+        </div>
+
+        <div class="pjGroup">
+          <h3>The yard</h3>
+          <div class="form__row">
+            <div class="field"><label for="disc">Discipline</label>
+              <input id="disc" list="discs" oninput="draw()" placeholder="Hunter / jumper">
+              <datalist id="discs"><option>Hunter</option><option>Show Jumping</option><option>Dressage</option><option>3-Day Eventing</option><option>Equitation</option><option>Western Pleasure</option><option>Reining</option><option>Barrel Racing</option><option>Thoroughbred Industry</option><option>Breeding</option><option>Polo</option><option>General Horse Care</option></datalist>
+            </div>
+            <div class="field"><label for="horses">Horses</label><input id="horses" oninput="draw()" placeholder="24"></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="staff">Staff on the yard</label><input id="staff" oninput="draw()" placeholder="4"></div>
+            <div class="field"><label for="days">Days off</label><input id="days" oninput="draw()" placeholder="Two, rotating"></div>
+          </div>
+          <div class="field"><label for="housing">Housing</label>
+            <select id="housing" onchange="draw()">
+              <option>Not specified</option><option>On-site housing included</option>
+              <option>Housing allowance</option><option>No housing</option><option>Negotiable</option>
+            </select>
+            <small>Second only to pay. Candidates filter on it.</small>
+          </div>
+        </div>
+
+        <div class="pjGroup">
+          <h3>The role itself</h3>
+          <div class="field"><label for="duties">Main duties</label>
+            <textarea id="duties" rows="3" oninput="draw()" placeholder="Running the daily schedule, managing two grooms and a working student, keeping health and competition records"></textarea></div>
+          <div class="field"><label for="day">A day in the life</label>
+            <textarea id="day" rows="2" oninput="draw()" placeholder="Early starts, competing most weekends through the winter season"></textarea>
+            <small>Optional, and the thing candidates say they most want and least often get.</small></div>
+          <div class="field"><label for="qual">Qualities you want</label>
+            <textarea id="qual" rows="2" oninput="draw()" placeholder="Someone who communicates early rather than after the fact"></textarea></div>
+          <div class="form__row">
+            <div class="field"><label for="start">Start date</label><input id="start" oninput="draw()" placeholder="Flexible, ideally November"></div>
+            <div class="field"><label for="intl">Open to international applicants</label>
+              <select id="intl" onchange="draw()"><option>Not specified</option><option>Yes</option><option>No</option><option>Case by case</option></select>
+              <small>Lets the assistant answer visa questions for this role.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob__actions">
+          <button class="btn btn--onDark btn--lg" type="button" onclick="publish()">Publish to the board</button>
+          <a class="btn btn--secondary" href="my-jobs.html">Save as draft</a>
+        </div>
+
+        <div class="pjOffer">
+          <div class="pjOffer__top">
+            <img src="img/kaitlin.jpg" alt="">
+            <div><b>Want Kaitlin to write it for you?</b></div>
+          </div>
+          <p>She writes the advert, runs it, and refreshes it if it goes quiet. Priced per role.</p>
+          <a class="btn btn--secondary" href="request-talent.html">Ask Kaitlin to write it</a>
+        </div>
+      </section>
+
+      <section class="pjPrev">
+        <div class="pjCard" id="card"></div>
+        <div class="pjPrevBar">
+          <span class="pill pill--review" id="prevState">Draft &middot; not live</span>
+        </div>
+        <p class="pjNote">This is the card candidates see on the board, and it updates as you type.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script>
+function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
+function esc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+function payLine(){
+  var a=v('payMin'), b=v('payMax'), u=v('payUnit');
+  if(!a && !b) return '';
+  var p = a && b ? '$'+a+' – $'+b : '$'+(a||b);
+  return p + ' <span style="font-family:var(--font-body);font-weight:400;font-size:0.9375rem;color:#4A6580">per '+u+'</span>';
+}
+
+/* The facts that drive completeness are the ones the audit found missing. */
+var WEIGHTS = [['title',18],['loc',12],['payMin',18],['duties',14],['housing',10],
+               ['disc',8],['horses',6],['days',5],['start',5],['day',4]];
+function score(){
+  var t=0;
+  WEIGHTS.forEach(function(w){
+    var val=v(w[0]);
+    if(val && val!=='Not specified') t+=w[1];
+  });
+  return Math.min(100,t);
+}
+
+function draw(){
+  var s=score();
+  document.getElementById('pcNum').textContent = s+'%';
+  document.getElementById('pcFill').style.width = s+'%';
+  var tip=document.getElementById('pcTip');
+  if(!v('payMin')) tip.textContent='Add a pay range. It is worth more than everything else here combined.';
+  else if(v('housing')==='Not specified') tip.textContent='Say something about housing — candidates filter on it.';
+  else if(!v('duties')) tip.textContent='Add the main duties, so people can tell if the job is theirs.';
+  else if(s<80) tip.textContent='Good. The yard details are what turn a browse into an application.';
+  else tip.textContent='This is a complete post. Ready to publish.';
+
+  var tags='';
+  if(v('housing')==='On-site housing included'||v('housing')==='Housing allowance') tags+='<span class="tag tag--housing">Housing</span>';
+  if(v('type')) tags+='<span class="tag tag--neutral">'+esc(v('type'))+'</span>';
+  if(v('horses')) tags+='<span class="tag tag--neutral">'+esc(v('horses'))+' horses</span>';
+  if(v('disc')) tags+='<span class="tag tag--neutral">'+esc(v('disc'))+'</span>';
+
+  var facts='';
+  function fact(l,val){ return val ? '<div class="pjFact"><b>'+l+'</b><span>'+esc(val)+'</span></div>' : ''; }
+  facts += fact('Horses', v('horses') && (v('horses')+(v('disc')?' · '+v('disc'):'')));
+  facts += fact('Staff', v('staff'));
+  facts += fact('Days off', v('days'));
+  facts += fact('Housing', v('housing')!=='Not specified' ? v('housing') : '');
+  facts += fact('Start', v('start'));
+  facts += fact('International', v('intl')!=='Not specified' ? v('intl') : '');
+
+  var h = '<h3>'+(v('title') ? esc(v('title')) : '<span class="pjEmpty">Your job title</span>')+'</h3>'
+        + '<p class="pjCard__org">Golden Ocala Equestrian'+(v('loc') ? ' &middot; '+esc(v('loc')) : '')+'</p>'
+        + (payLine() ? '<p class="pjCard__pay">'+payLine()+'</p>'
+                     : '<p class="pjCard__pay pjEmpty" style="font-size:0.9375rem">No pay listed — this is the one candidates notice</p>')
+        + (tags ? '<div class="pjTags">'+tags+'</div>' : '')
+        + (facts ? '<div class="pjFacts">'+facts+'</div>' : '');
+
+  if(v('duties')) h += '<h4>What you&rsquo;d be doing</h4><p class="body">'+esc(v('duties'))+'</p>';
+  if(v('day'))    h += '<h4>A day in the life</h4><p class="body">'+esc(v('day'))+'</p>';
+  if(v('qual'))   h += '<h4>What they&rsquo;re looking for</h4><p class="body">'+esc(v('qual'))+'</p>';
+  if(!v('duties') && !v('day') && !v('qual'))
+    h += '<p class="body pjEmpty">The description appears here as you write it.</p>';
+
+  document.getElementById('card').innerHTML = h;
+}
+
+function publish(){
+  if(!v('title')){ document.getElementById('title').focus(); return; }
+  ES.addPost({ title: v('title'), where: v('loc'), pay: payLine().replace(/<[^>]+>/g,'').trim() });
+  location.href = 'my-jobs.html';
+}
+draw();
+</script>
+</body>
+</html>
