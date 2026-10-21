@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing | EquiStaff</title>
+<meta name="description" content="Job board from $50 a month. Full recruiting quoted per role, $1,000 to start. Always free for job seekers.">
+<link rel="canonical" href="https://www.equistaff.com/pricing.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* PRICING — audit finding #3: the live site has no price anywhere, and every
+   buy button is inert. Prices here are Kaitlin's approved list. The direct-hire
+   percentage is never stated, which is hard rule R3 in the chatbot handoff and
+   applies to the website for the same reason: it is quoted per role. */
+.prHero { background:linear-gradient(165deg,var(--depth-07) 0%,var(--depth-06) 100%); color:#fff;
+  padding:var(--s-8) 0 calc(var(--s-8) + 3vw); }
+.prHero h1 { color:#fff; max-width:18ch; margin:var(--s-3) 0 var(--s-4); }
+.prHero p { color:var(--baby-200); max-width:56ch; font-size:1.125rem; margin:0; }
+.prBody { background:var(--depth-01); padding:var(--s-8) 0 var(--s-9); }
+.prBoard { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:var(--s-5); }
+.prPlan { background:#fff; border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  padding:var(--s-6); display:flex; flex-direction:column; gap:var(--s-4); box-shadow:var(--e-1); }
+.prPlan--best { border:2px solid var(--blue-600); box-shadow:var(--e-2); position:relative; }
+.prFlag { position:absolute; top:calc(var(--s-4) * -1); left:var(--s-6); background:var(--blue-600);
+  color:#fff; font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em; text-transform:uppercase;
+  padding:7px 12px; border-radius:var(--r-pill); }
+.prPlan h3 { margin:0; font-size:1.25rem; }
+.prPrice { font-family:var(--font-mono); font-weight:600; font-size:2rem; margin:0; color:var(--navy-900); }
+.prPrice span { font-family:var(--font-body); font-weight:400; font-size:var(--t-small); color:var(--text-muted); }
+.prPlan ul { margin:0; padding-left:18px; }
+.prPlan li { font-size:var(--t-small); margin-bottom:6px; }
+.prPlan .btn { margin-top:auto; }
+.prSplit { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-6); margin-top:var(--s-8); }
+.prBig { background:linear-gradient(150deg,var(--depth-07),var(--depth-06)); color:#fff;
+  border-radius:var(--r-lg); padding:var(--s-7); }
+.prBig h3 { color:#fff; font-size:1.625rem; margin:0 0 var(--s-3); }
+.prBig p { color:var(--baby-200); font-size:var(--t-small); }
+.prBig .prPrice { color:#fff; }
+.prBig li { color:#fff; }
+.prFree { background:var(--warm); border-radius:var(--r-lg); padding:var(--s-7); }
+.prFree h3 { font-size:1.625rem; margin:0 0 var(--s-3); color:#3B2E1B; }
+.prFree p, .prFree li { color:#3B2E1B; font-size:var(--t-small); }
+.prQ { border-top:1px solid var(--border-subtle); padding:var(--s-5) 0; }
+.prQ h4 { margin:0 0 6px; font-size:1.0625rem; }
+.prQ p { margin:0; color:var(--text-muted); font-size:var(--t-small); max-width:68ch; }
+@media (max-width:860px){ .prSplit{grid-template-columns:1fr} }
+</style>
+</head>
+<body class="has-chat">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
+    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html">Find work</a><a href="request-talent.html">Hire staff</a><a href="pricing.html" style="color:var(--blue-700)">Pricing</a><a href="about.html">About</a></nav>
+    <div class="hdr__cta"><a href="signin.html" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a><a class="btn btn--primary" href="request-talent.html">Request talent</a></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="prHero">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--warm)">Pricing</p>
+      <h1>Post it yourself, or hand it over.</h1>
+      <p>Both work. The difference is who does the sorting, the chasing and the reference calls.</p>
+    </div>
+  </section>
+
+  <section class="prBody cut-top">
+    <div class="wrap">
+
+      <div class="sec-head" style="max-width:62ch">
+        <p class="eyebrow">The job board</p>
+        <h2>Post it yourself</h2>
+        <p>Live in minutes, seen by everyone browsing. Candidate searches are unlimited on every plan.</p>
+      </div>
+
+      <div class="prBoard">
+        <div class="prPlan">
+          <h3>1 month</h3>
+          <p class="prPrice">$50</p>
+          <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Cancel any time</li></ul>
+          <a class="btn btn--secondary" href="signup.html">Start posting</a>
+        </div>
+        <div class="prPlan prPlan--best">
+          <span class="prFlag">Most popular</span>
+          <h3>3 months</h3>
+          <p class="prPrice">$140</p>
+          <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>About $47 a month</li></ul>
+          <a class="btn btn--primary" href="signup.html">Start posting</a>
+        </div>
+        <div class="prPlan">
+          <h3>1 year</h3>
+          <p class="prPrice">$460</p>
+          <ul><li><b>5</b> job posts</li><li>Unlimited candidate searches</li><li>Under $39 a month</li></ul>
+          <a class="btn btn--secondary" href="signup.html">Start posting</a>
+        </div>
+      </div>
+
+      <div class="prSplit">
+        <div class="prBig">
+          <p class="eyebrow" style="color:var(--warm)">Full recruiting</p>
+          <h3>Hand it to Kaitlin</h3>
+          <p class="prPrice">$1,000 <span style="color:var(--baby-200)">to start the search</span></p>
+          <p>The balance is a percentage of first-year salary, due on your new hire's first day.
+             Kaitlin quotes the percentage per role, before any work starts &mdash; it depends on the
+             seniority and how hard the brief is.</p>
+          <ul style="margin:var(--s-5) 0;padding-left:18px">
+            <li>She writes the brief with you, on a call</li>
+            <li>She searches her own network, not just applicants</li>
+            <li>A shortlist of four, never fifty</li>
+            <li>Every reference checked by phone</li>
+            <li>Your barn stays unnamed on the advert</li>
+          </ul>
+          <a class="btn btn--onDark btn--lg" href="request-talent.html" style="width:100%">Request talent</a>
+        </div>
+
+        <div class="prFree">
+          <p class="eyebrow" style="color:var(--warm-ink)">Job seekers</p>
+          <h3>Always free.</h3>
+          <p>Browsing never needed an account and never will. Applying is free. Being represented by
+             the recruiting team is free &mdash; employers pay, candidates don't.</p>
+          <ul style="margin:var(--s-5) 0;padding-left:18px">
+            <li>Browse and apply without an account</li>
+            <li>Build a resume from a few questions</li>
+            <li>Be found for roles that never get posted</li>
+          </ul>
+          <a class="btn btn--primary btn--lg" href="jobs.html" style="width:100%">Browse 214 open roles</a>
+          <p style="font-size:var(--t-label);margin:var(--s-4) 0 0">
+            Featured Jobseeker is an optional paid upgrade. The price and what it includes are shown before any form.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:var(--s-9);max-width:72ch">
+        <h2 style="margin-bottom:var(--s-5)">Questions people ask</h2>
+        <div class="prQ"><h4>What's the recruiting percentage?</h4>
+          <p>It depends on the role, so Kaitlin quotes it per search rather than publishing a number that
+             would be wrong half the time. You see it in writing before any work starts, and the $1,000 is
+             the only thing due up front.</p></div>
+        <div class="prQ"><h4>Can I switch from the board to a full search?</h4>
+          <p>Yes, and people often do when an advert has run a month without the right person.
+             Send the role over and Kaitlin will tell you honestly whether a listing would have been enough.</p></div>
+        <div class="prQ"><h4>What happens if the hire doesn't work out?</h4>
+          <p>Managed placements carry a replacement guarantee, written into your agreement. The terms depend
+             on the role, so ask Kaitlin before you sign.</p></div>
+        <div class="prQ"><h4>Do unused job posts roll over?</h4>
+          <p>Your allowance resets with each billing period. Closing a post frees the slot straight away.</p></div>
+      </div>
+
+      <p class="compare__note" style="margin-top:var(--s-8)">Not sure which you need?
+        <a href="request-talent.html">Send the role over</a> and we'll tell you honestly &mdash; sometimes a
+        listing really is enough.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <img class="ftr__horses" src="assets/horses-blue-ondark.svg" alt="" aria-hidden="true">
+<div class="wrap">
+  <div class="ftr__grid">
+    <div><img class="ftr__logo" src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff">
+      <p class="ftr__meta">Equine staffing since 1982 · online since 2000<br>Ocala, Florida</p>
+      <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
+    <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="signup.html">Create a profile</a></div>
+    <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="pricing.html">Pricing</a></div>
+    <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></div>
+  </div>
+  <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Accessibility</span></div>
+</div></footer>
+
+<a class="chatLaunch" href="chatbot.html"><span class="chatLaunch__dot"></span> Ask EquiStaff</a>
+<script src="src/state.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings | EquiStaff</title>
+<meta name="description" content="Your account, notifications and privacy on EquiStaff.">
+<link rel="canonical" href="https://www.equistaff.com/settings.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+.stWrap{display:grid;grid-template-columns:230px 1fr;gap:var(--s-7);align-items:start}
+.stNav{position:sticky;top:96px;display:grid;gap:2px}
+.stNav a{padding:11px 14px;border-radius:var(--r-sm);text-decoration:none;color:var(--text-muted);font-size:var(--t-small);font-weight:700}
+.stNav a:hover{background:var(--surface-raised);color:#fff}
+.stNav a[aria-current="true"]{background:var(--surface-raised);color:#fff}
+.stCard{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);padding:var(--s-6);margin-bottom:var(--s-5)}
+.stCard h2{color:#fff;font-size:1.25rem;margin:0 0 var(--s-2)}
+.stCard > p{color:var(--text-muted);font-size:var(--t-small);margin:0 0 var(--s-5);max-width:58ch}
+.sw{display:flex;gap:var(--s-5);align-items:flex-start;padding:var(--s-4) 0;border-bottom:1px solid var(--navy-500)}
+.sw:last-of-type{border-bottom:0}
+.sw b{display:block;color:#fff;font-size:var(--t-small)}
+.sw span{display:block;color:var(--text-muted);font-size:var(--t-label);margin-top:3px;max-width:52ch}
+.sw input{margin-left:auto;width:22px;height:22px;accent-color:#BDE3FF;flex:0 0 auto;margin-top:2px}
+.danger{border-color:#8C2F22}
+.danger h2{color:#FBE9E6}
+@media(max-width:900px){.stWrap{grid-template-columns:1fr}.stNav{position:static;grid-auto-flow:column;overflow-x:auto}}
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Portal">
+      <a href="profile.html">Profile</a><a href="resume.html">Resume</a><a href="jobs.html">Find work</a>
+      <a href="messages.html">Messages</a><a href="settings.html" aria-current="page">Settings</a>
+    </nav>
+    <div class="avatar" title="Dana Whitfield">DW</div>
+  </div>
+</header>
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Settings</h1>
+    <div class="stWrap">
+      <nav class="stNav" aria-label="Settings sections">
+        <a href="#account" aria-current="true">Account</a>
+        <a href="#alerts">Job alerts</a>
+        <a href="#privacy">Who can see you</a>
+        <a href="#close">Closing your account</a>
+      </nav>
+
+      <div>
+        <div class="stCard" id="account">
+          <h2>Account</h2>
+          <p>The basics. Your name and location also appear on applications you send.</p>
+          <div class="form__row">
+            <div class="field"><label for="nm">Full name</label><input id="nm" value="Dana Whitfield"></div>
+            <div class="field"><label for="em">Email</label><input id="em" type="email" value="d.whitfield@example.com"></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" placeholder="Optional"></div>
+            <div class="field"><label for="lc">Location</label><input id="lc" value="Ocala, FL"></div>
+          </div>
+          <div class="field"><label for="pw">Password</label>
+            <input id="pw" type="password" value="····················" readonly>
+            <small><a href="forgot.html">Change your password</a></small></div>
+          <button class="btn btn--primary" type="button" onclick="saved(this)">Save changes</button>
+        </div>
+
+        <div class="stCard" id="alerts">
+          <h2>Job alerts</h2>
+          <p>We only send these if you ask. Nothing here is on by default.</p>
+          <label class="sw"><span><b>New roles that match me</b><span>Barn manager and assistant trainer roles within 50 miles of Ocala.</span></span><input type="checkbox" checked></label>
+          <label class="sw"><span><b>Weekly summary</b><span>One email on Monday with everything new, instead of one per role.</span></span><input type="checkbox" checked></label>
+          <label class="sw"><span><b>Application updates</b><span>When an employer views your application or the status changes.</span></span><input type="checkbox" checked></label>
+          <label class="sw"><span><b>News from EquiStaff</b><span>Occasional. Advice, hiring trends, nothing often.</span></span><input type="checkbox"></label>
+        </div>
+
+        <div class="stCard" id="privacy">
+          <h2>Who can see you</h2>
+          <p>Most people looking for work already have a job. These settings exist for that.</p>
+          <label class="sw"><span><b>Looking quietly</b><span>Hides your profile from your current employer and from anyone at their barn.</span></span><input type="checkbox" checked></label>
+          <label class="sw"><span><b>Let the recruiting team find me</b><span>Kaitlin can put you forward for roles that never get posted. This is how most placements start.</span></span><input type="checkbox" checked></label>
+          <label class="sw"><span><b>Show my profile to employers I apply to</b><span>Off means they see only your application. Employers you have not applied to never see your profile either way.</span></span><input type="checkbox" checked></label>
+          <p style="color:var(--baby-300);font-size:var(--t-label);margin:var(--s-5) 0 0;border-left:2px solid var(--navy-500);padding-left:var(--s-4)">
+            Feedback an employer gives about you goes to the recruiting team only. It is never shown to you and is not kept on your profile.</p>
+        </div>
+
+        <div class="stCard danger" id="close">
+          <h2>Closing your account</h2>
+          <p>Deactivating hides your profile and stops all email. Nothing is deleted, and you can come back and pick up where you left off.</p>
+          <div style="display:flex;gap:var(--s-3);flex-wrap:wrap">
+            <button class="btn btn--secondary" type="button" onclick="confirmIt('deact')">Deactivate my profile</button>
+            <button class="btn btn--secondary" type="button" onclick="confirmIt('del')">Delete my account</button>
+          </div>
+          <p id="confirmLine" style="color:var(--warm);font-size:var(--t-small);margin:var(--s-5) 0 0" hidden></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+function saved(b){ b.textContent='Saved'; setTimeout(function(){b.textContent='Save changes';},1800); ES.notify('Settings saved'); }
+function confirmIt(k){
+  var p=document.getElementById('confirmLine'); p.hidden=false;
+  p.textContent = k==='deact'
+    ? 'Are you sure? Your profile would be hidden immediately and all email would stop. Nothing is deleted — click again to confirm.'
+    : 'Deleting removes your profile, your applications and your resume for good. This cannot be undone — click again to confirm.';
+}
+</script>
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+<script src="src/state.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | EquiStaff</title>
+<meta name="description" content="Talk to the EquiStaff team in Ocala, Florida.">
+<link rel="canonical" href="https://www.equistaff.com/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+.ctHero{background:linear-gradient(165deg,var(--depth-07),var(--depth-06));color:#fff;padding:var(--s-8) 0 calc(var(--s-8) + 3vw)}
+.ctHero h1{color:#fff;margin:var(--s-3) 0 var(--s-4)}
+.ctHero p{color:var(--baby-200);max-width:54ch;font-size:1.125rem;margin:0}
+.ctBody{background:var(--depth-01);padding:var(--s-8) 0 var(--s-9)}
+.ctGrid{display:grid;grid-template-columns:1fr 360px;gap:var(--s-8);align-items:start}
+.ctForm{background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-lg);padding:var(--s-7);box-shadow:var(--e-2)}
+.ctRail{display:grid;gap:var(--s-5)}
+.ctCard{background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-lg);padding:var(--s-6)}
+.ctCard h3{font-size:1.0625rem;margin:0 0 var(--s-3)}
+.ctLine{display:flex;gap:var(--s-4);align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border-subtle);font-size:var(--t-small)}
+.ctLine:last-child{border-bottom:0}
+.ctLine svg{flex:0 0 auto;margin-top:2px}
+.ctLine b{display:block}
+.ctLine span{color:var(--text-muted)}
+.ctPick{display:grid;gap:var(--s-3);margin-bottom:var(--s-5)}
+.ctPick label{display:flex;gap:var(--s-4);align-items:flex-start;cursor:pointer;border:1.5px solid var(--border-subtle);border-radius:var(--r-md);padding:var(--s-4) var(--s-5);min-height:56px}
+.ctPick label:hover{border-color:var(--action-primary);background:var(--depth-01)}
+.ctPick input{width:20px;height:20px;margin-top:2px;accent-color:var(--blue-600);flex:0 0 auto}
+.ctPick b{display:block}.ctPick span{display:block;font-size:var(--t-small);color:var(--text-muted);margin-top:2px}
+@media(max-width:900px){.ctGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="has-chat">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
+    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html">Find work</a><a href="request-talent.html">Hire staff</a><a href="pricing.html">Pricing</a><a href="about.html">About</a></nav>
+    <div class="hdr__cta"><a href="signin.html" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a><a class="btn btn--primary" href="request-talent.html">Request talent</a></div>
+  </div>
+</header>
+<main id="main">
+  <section class="ctHero"><div class="wrap">
+    <p class="eyebrow" style="color:var(--warm)">Contact</p>
+    <h1>Talk to a person.</h1>
+    <p>There is no ticket queue here. Messages go to the team in Ocala and usually get answered the same day.</p>
+  </div></section>
+
+  <section class="ctBody cut-top"><div class="wrap"><div class="ctGrid">
+    <div class="ctForm" id="form">
+      <h2 style="font-size:1.5rem;margin-bottom:var(--s-2)">Send us a message</h2>
+      <p style="color:var(--text-muted);font-size:var(--t-small);margin-bottom:var(--s-5)">If you are hiring, <a href="request-talent.html">Request talent</a> gets you a faster answer.</p>
+
+      <div class="ctPick">
+        <label><input type="radio" name="who" checked><span><b>I'm looking for work</b><span>Questions about applying, your profile, or a role you've seen.</span></span></label>
+        <label><input type="radio" name="who"><span><b>I'm hiring</b><span>Questions about posting, plans, or a managed search.</span></span></label>
+        <label><input type="radio" name="who"><span><b>Something else</b><span>Press, partnerships, or anything that doesn't fit.</span></span></label>
+      </div>
+
+      <form onsubmit="event.preventDefault();sent()">
+        <div class="form__row">
+          <div class="field"><label for="n">Your name</label><input id="n" required autocomplete="name"></div>
+          <div class="field"><label for="e">Email</label><input id="e" type="email" required autocomplete="email"></div>
+        </div>
+        <div class="field"><label for="m">What can we help with?</label><textarea id="m" rows="5" required></textarea></div>
+        <button class="btn btn--primary btn--lg" type="submit" style="width:100%">Send message</button>
+      </form>
+    </div>
+
+    <div class="ctForm" id="done" hidden style="text-align:center">
+      <div style="width:62px;height:62px;border-radius:50%;background:var(--ok-bg);display:grid;place-items:center;margin:0 auto var(--s-5)">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2 style="font-size:1.5rem;margin-bottom:var(--s-3)">Message sent</h2>
+      <p style="color:var(--text-muted);margin:0 auto var(--s-5);max-width:40ch">We've got it. Someone will come back to you, usually the same day and always by the end of the next one.</p>
+      <a class="btn btn--primary" href="jobs.html">Browse open roles</a>
+    </div>
+
+    <aside class="ctRail">
+      <div class="ctCard">
+        <h3>Direct</h3>
+        <div class="ctLine"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span><b>352-293-2088</b><span>Mon to Fri, horse hours</span></span></div>
+        <div class="ctLine"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg><span><b>pro@equistaff.com</b><span>For anything that isn't urgent</span></span></div>
+        <div class="ctLine"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M12 21s-7-5.3-7-10a7 7 0 1 1 14 0c0 4.7-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg><span><b>Ocala, Florida</b><span>Ten minutes from WEC</span></span></div>
+      </div>
+      <div class="ctCard" style="background:var(--warm);border-color:#D8C8AE">
+        <h3 style="color:#3B2E1B">Hiring and in a hurry?</h3>
+        <p style="font-size:var(--t-small);color:#3B2E1B;margin:0 0 var(--s-4)">Requesting talent goes straight to Kaitlin with the brief attached, which skips a round of back-and-forth.</p>
+        <a class="btn btn--primary" href="request-talent.html" style="width:100%">Request talent</a>
+      </div>
+      <div class="ctCard">
+        <h3>Quicker answers</h3>
+        <p style="font-size:var(--t-small);color:var(--text-muted);margin:0 0 var(--s-4)">The assistant can answer most things about roles, applying and plans without waiting for anyone.</p>
+        <a class="btn btn--secondary" href="chatbot.html" style="width:100%">Ask EquiStaff</a>
+      </div>
+    </aside>
+  </div></div></section>
+</main>
+<script>
+function sent(){ document.getElementById('form').hidden = true; document.getElementById('done').hidden = false; window.scrollTo({top:0,behavior:'smooth'}); }
+</script>
+<footer class="ftr">
+  <img class="ftr__horses" src="assets/horses-blue-ondark.svg" alt="" aria-hidden="true">
+<div class="wrap">
+  <div class="ftr__grid">
+    <div><img class="ftr__logo" src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff">
+      <p class="ftr__meta">Equine staffing since 1982 &middot; online since 2000<br>Ocala, Florida</p>
+      <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
+    <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="signup.html">Create a profile</a></div>
+    <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="pricing.html">Pricing</a></div>
+    <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></div>
+  </div>
+  <div class="ftr__bar"><span>&copy; 2026 EquiStaff. All rights reserved.</span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span></div>
+</div></footer>
+
+<a class="chatLaunch" href="chatbot.html"><span class="chatLaunch__dot"></span> Ask EquiStaff</a>
+<script src="src/state.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Messages | EquiStaff</title>
+<meta name="description" content="Your conversations with the EquiStaff team and with employers.">
+<link rel="canonical" href="https://www.equistaff.com/messages.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* MESSAGES — the live site mixes employer messages and admin notices into one
+   inbox with a toggle, which the audit flagged. Two tabs instead, because a
+   note from the recruiting team and a note from a barn need different attention. */
+.msWrap{display:grid;grid-template-columns:340px 1fr;gap:var(--s-7);align-items:start}
+.msTabs{display:flex;gap:4px;background:rgba(255,255,255,.06);border:1px solid var(--navy-500);border-radius:var(--r-pill);padding:4px;margin-bottom:var(--s-5)}
+.msTabs button{flex:1;background:none;border:0;color:var(--baby-200);cursor:pointer;padding:10px;border-radius:var(--r-pill);font:700 var(--t-label)/1 var(--font-body);min-height:40px}
+.msTabs button[aria-pressed="true"]{background:var(--baby-200);color:var(--navy-900)}
+.msItem{display:grid;grid-template-columns:auto 1fr;gap:var(--s-4);padding:var(--s-4);border-radius:var(--r-md);cursor:pointer;border:1px solid transparent;margin-bottom:6px}
+.msItem:hover{background:var(--surface-raised)}
+.msItem[aria-current="true"]{background:var(--surface-raised);border-color:var(--baby-300)}
+.msAv{width:42px;height:42px;border-radius:50%;background:var(--baby-200);color:var(--navy-900);display:grid;place-items:center;font:900 .875rem/1 var(--font-body);flex:0 0 auto;overflow:hidden}
+.msAv img{width:100%;height:100%;object-fit:cover}
+.msItem b{display:block;color:#fff;font-size:var(--t-small)}
+.msItem p{margin:2px 0 0;font-size:var(--t-label);color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msUnread{width:8px;height:8px;border-radius:50%;background:var(--warm);align-self:center;flex:0 0 auto}
+.msPane{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);display:flex;flex-direction:column;min-height:60vh}
+.msHead{padding:var(--s-5) var(--s-6);border-bottom:1px solid var(--navy-500);display:flex;gap:var(--s-4);align-items:center}
+.msHead b{color:#fff}.msHead span{color:var(--text-muted);font-size:var(--t-label);display:block}
+.msBody{padding:var(--s-6);display:grid;gap:var(--s-4);flex:1}
+.bub{max-width:76%;padding:12px 16px;border-radius:14px;font-size:var(--t-small);line-height:1.55}
+.bub--them{background:var(--portal-ground,#102F52);color:#fff;border-bottom-left-radius:4px}
+.bub--me{background:var(--baby-200);color:var(--navy-900);margin-left:auto;border-bottom-right-radius:4px;font-weight:600}
+.bubTime{font-size:10px;font-family:var(--font-mono);color:var(--baby-300);margin-top:4px;display:block}
+.msFoot{border-top:1px solid var(--navy-500);padding:var(--s-4) var(--s-6);display:flex;gap:10px;align-items:center}
+.msFoot input{flex:1;background:var(--depth-07);border:1.5px solid var(--navy-500);border-radius:var(--r-pill);color:#fff;padding:12px 18px;font:inherit;font-size:var(--t-small);min-height:46px}
+.msFoot input::placeholder{color:#7FA3C4}
+@media(max-width:900px){.msWrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<header class="pHdr">
+  <div class="wrap pHdr__in">
+    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
+    <nav class="pHdr__nav" aria-label="Portal">
+      <a href="profile.html">Profile</a><a href="resume.html">Resume</a><a href="jobs.html">Find work</a>
+      <a href="messages.html" aria-current="page">Messages</a><a href="settings.html">Settings</a>
+    </nav>
+    <div class="avatar" title="Dana Whitfield">DW</div>
+  </div>
+</header>
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Messages</h1>
+    <div class="msWrap">
+      <div>
+        <div class="msTabs" role="group" aria-label="Filter messages">
+          <button aria-pressed="true" onclick="tab('all',this)">All</button>
+          <button aria-pressed="false" onclick="tab('team',this)">EquiStaff</button>
+          <button aria-pressed="false" onclick="tab('barn',this)">Employers</button>
+        </div>
+        <div id="list"></div>
+      </div>
+      <div class="msPane">
+        <div class="msHead" id="pHead"></div>
+        <div class="msBody" id="pBody"></div>
+        <div class="msFoot">
+          <input id="say" placeholder="Write a reply…" aria-label="Write a reply" onkeydown="if(event.key==='Enter')send()">
+          <button class="btn btn--primary" type="button" onclick="send()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+var T = [
+ { id:'t1', kind:'team', who:'Kaitlin Veltkamp', sub:'Owner, EquiStaff', img:'img/kaitlin.jpg', unread:true,
+   msgs:[['them','Dana — good news. Golden Ocala want to meet you about the barn manager role. Are you free Thursday morning?','Mon 9:12'],
+         ['them','I\u2019ve sent them your references already, so this is just a conversation, not an interview in the scary sense.','Mon 9:13']]},
+ { id:'t2', kind:'barn', who:'Clearwater Sport Horses', sub:'Head Groom · you applied 1 week ago', img:'', unread:false,
+   msgs:[['them','Thanks for applying. We\u2019re working through applications this week and will come back to you either way.','Thu 14:02'],
+         ['me','Understood — thank you for letting me know.','Thu 16:30']]},
+ { id:'t3', kind:'team', who:'EquiStaff', sub:'Automatic · job alert', img:'', unread:false,
+   msgs:[['them','Three new barn manager roles in Ocala this week, two with housing. Want me to send these weekly?','Tue 07:00']]}
+];
+var CUR = T[0].id, VIEW = 'all';
+function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function initials(n){return n.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();}
+function paintList(){
+  var rows = T.filter(function(t){ return VIEW==='all' || t.kind===VIEW; });
+  document.getElementById('list').innerHTML = rows.map(function(t){
+    var av = t.img ? '<span class="msAv"><img src="'+t.img+'" alt=""></span>' : '<span class="msAv">'+initials(t.who)+'</span>';
+    var last = t.msgs[t.msgs.length-1];
+    return '<div class="msItem" aria-current="'+(t.id===CUR)+'" onclick="open_(\''+t.id+'\')">'+av
+      + '<div style="min-width:0"><b>'+esc(t.who)+'</b><p>'+esc(last[1])+'</p></div>'
+      + (t.unread ? '<span class="msUnread"></span>' : '') + '</div>';
+  }).join('');
+}
+function paintPane(){
+  var t = T.find(function(x){return x.id===CUR;});
+  var av = t.img ? '<span class="msAv"><img src="'+t.img+'" alt=""></span>' : '<span class="msAv">'+initials(t.who)+'</span>';
+  document.getElementById('pHead').innerHTML = av + '<div><b>'+esc(t.who)+'</b><span>'+esc(t.sub)+'</span></div>';
+  document.getElementById('pBody').innerHTML = t.msgs.map(function(m){
+    return '<div class="bub bub--'+(m[0]==='me'?'me':'them')+'">'+esc(m[1])+'<span class="bubTime">'+m[2]+'</span></div>';
+  }).join('');
+}
+function open_(id){ CUR=id; var t=T.find(function(x){return x.id===id;}); t.unread=false; paintList(); paintPane(); }
+function tab(v,b){ VIEW=v; document.querySelectorAll('.msTabs button').forEach(function(x){x.setAttribute('aria-pressed','false');}); b.setAttribute('aria-pressed','true'); paintList(); }
+function send(){
+  var i=document.getElementById('say'), v=i.value.trim(); if(!v) return;
+  T.find(function(x){return x.id===CUR;}).msgs.push(['me',v,'Just now']);
+  i.value=''; paintList(); paintPane();
+  document.getElementById('pBody').scrollTop = 99999;
+}
+paintList(); paintPane();
+</script>
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+  </div></div>
+</footer>
+<script src="src/state.js"></script>
+</body>
+</html>
