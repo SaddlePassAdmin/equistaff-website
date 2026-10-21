@@ -32,9 +32,11 @@
   <div class="wrap">
     <p class="eyebrow" style="color:var(--warm)">EquiStaff · AI concierge · for build</p>
     <h1>Every state, and the rule it enforces</h1>
-    <p>Built from Kaitlin&rsquo;s &ldquo;Chat-Bot Key Wishes&rdquo; document. This is not an FAQ widget &mdash; it answers with live
-    numbers, fixes what people write, captures leads, books time and nudges toward the recruiting service. Each state below
-    notes the constraint it is designed around, because several of those constraints are still open questions.</p>
+    <p><b>V1 is a scripted assistant, not a self-learning AI.</b> Every path is written in advance, and anything it cannot answer
+    goes to &ldquo;book a call with Kaitlin.&rdquo; It answers with live numbers, helps people finish a profile or a job post,
+    collects employer inquiries and hands off &mdash; it never generates an answer that is not in the approved content.</p>
+    <p style="margin-top:var(--s-4)">Rule numbers below (R1&ndash;R12) are the hard rules from
+    <b>EquiStaff Chatbot: Engineering Handoff (V1)</b>, 19 October. That document is the specification; this page is what it looks like.</p>
   </div>
 </header>
 
@@ -53,7 +55,7 @@
   </div>
 
   <div class="open">
-    <h2>Still unanswered &mdash; these change the build</h2>
+    <h2>Still unanswered &mdash; the live list is in the handoff document</h2>
     <ul>
       <li><b>Money.</b> Published prices yes. Can it ever discuss a bespoke recruiting fee? Designed below as a hard no.</li>
       <li><b>Live data.</b> Stats, profile fields, resumes and lead storage are reads and writes against the platform. The chatbot is an integration, not a widget.</li>
@@ -90,7 +92,7 @@
           <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
-      <p class="stateCard__rule"><b>Rule:</b> it names itself as AI in the header, and the route to a human is visible before the first question &mdash; not buried after a failure.</p>
+      <p class="stateCard__rule"><b>R8 &middot; R11:</b> it names itself as AI in the header, and the route to a human is visible before the first question &mdash; not buried after a failure.</p>
     </section>
 
     <!-- 2 -->
@@ -119,7 +121,7 @@
           <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
-      <p class="stateCard__rule"><b>Rule:</b> a number it cannot read is a number it will not invent. No figure is ever hard-coded into a reply.</p>
+      <p class="stateCard__rule"><b>R5:</b> a number it cannot read is a number it will not invent. No figure is ever hard-coded into a reply.</p>
     </section>
 
     <!-- 3 -->
@@ -148,7 +150,7 @@
           <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
-      <p class="stateCard__rule"><b>Rule:</b> published prices yes, bespoke fees never. A refusal always arrives with the next step attached, so it reads as routing rather than stonewalling.</p>
+      <p class="stateCard__rule"><b>R3:</b> published prices yes, the direct-hire percentage never. A refusal always arrives with the next step attached, so it reads as routing rather than stonewalling.</p>
     </section>
 
     <!-- 4 -->
@@ -182,40 +184,13 @@
           <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
-      <p class="stateCard__rule"><b>Rule:</b> the lead is written to the lead register with its source and a timestamp, and it lands even if the person leaves before the last answer.</p>
+      <p class="stateCard__rule"><b>R9:</b> every employer request goes to Kaitlin, never a candidate list. The inquiry is written to the lead register with its source and a timestamp, and it lands even if the person leaves before the last answer.</p>
     </section>
 
-    <!-- 5 -->
-    <section class="stateCard">
-      <p class="stateCard__n">State 05</p>
-      <h3>The thirty-day nudge</h3>
-      <p class="stateCard__why">Her named trigger: an advert that has run over 30 days, or an employer who never subscribed. The assistant opens the conversation rather than waiting to be asked.</p>
-      <div class="chat">
-        <div class="chat__hdr">
-          <div class="chat__who">
-            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
-            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
-          </div>
-        </div>
-        <div class="chat__body">
-          <div class="msg msg--bot">
-            <p>Your part-time groom advert has been live <span class="liveFig">41</span> days and has <span class="liveFig">2</span> applicants.</p>
-            <p>That usually means the advert, not the market. I can rewrite it for you now &mdash; or Kaitlin can take it over as a managed search and bring you four people.</p>
-          </div>
-          <div class="chips2"><button type="button">Rewrite the advert</button><button type="button">Hand it to Kaitlin</button><button type="button">Leave it for now</button></div>
-          <div class="msg msg--bot" style="opacity:.85"><span class="liveNote" style="border:0;margin:0;padding:0">&ldquo;Leave it for now&rdquo; is a real option and is not asked again for 14 days.</span></div>
-        </div>
-        <div class="chat__foot">
-          <input placeholder="Type a message&hellip;" aria-label="Message">
-          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        </div>
-      </div>
-      <p class="stateCard__rule"><b>Rule:</b> a nudge that can be declined, and that remembers it was declined. This is the one state most likely to feel pushy, so the opt-out is a first-class option.</p>
-    </section>
 
     <!-- 6 -->
     <section class="stateCard">
-      <p class="stateCard__n">State 06</p>
+      <p class="stateCard__n">State 05</p>
       <h3>Handing off to a person</h3>
       <p class="stateCard__why">A different calendar depending on who is asking &mdash; her requirement. The assistant passes the conversation across rather than making them start again.</p>
       <div class="chat">
@@ -242,9 +217,43 @@
           <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
-      <p class="stateCard__rule"><b>Rule:</b> the transcript travels with the handoff. Asking a person to repeat themselves to a human after talking to a bot is the thing that makes people hate bots.</p>
+      <p class="stateCard__rule"><b>R2 &middot; R11:</b> the transcript travels with the handoff. Asking a person to repeat themselves to a human after talking to a bot is the thing that makes people hate bots.</p>
     </section>
 
+  </div>
+
+  <h2 style="margin:var(--s-9) 0 var(--s-3)">Phase 2 &mdash; designed, not built</h2>
+  <p style="color:var(--text-muted);font-size:var(--t-small);max-width:62ch;margin:0 0 var(--s-6)">
+    The bot never speaks first in V1. This is here so the event hooks get built now rather than retrofitted.
+  </p>
+  <div class="board2">
+    <!-- 5 -->
+    <section class="stateCard">
+      <p class="stateCard__n" style="color:var(--warm-ink)">Phase 2 &middot; not in V1</p>
+      <h3>The thirty-day nudge</h3>
+      <p class="stateCard__why">Her named trigger: an advert that has run over 30 days, or an employer who never subscribed. The assistant opens the conversation rather than waiting to be asked.</p>
+      <div class="chat">
+        <div class="chat__hdr">
+          <div class="chat__who">
+            <span class="chat__mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3-.5L3 21l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+            <div><b>EquiStaff Assistant</b><span>An AI assistant &middot; here around the clock</span></div>
+          </div>
+        </div>
+        <div class="chat__body">
+          <div class="msg msg--bot">
+            <p>Your part-time groom advert has been live <span class="liveFig">41</span> days and has <span class="liveFig">2</span> applicants.</p>
+            <p>That usually means the advert, not the market. I can rewrite it for you now &mdash; or Kaitlin can take it over as a managed search and bring you four people.</p>
+          </div>
+          <div class="chips2"><button type="button">Rewrite the advert</button><button type="button">Hand it to Kaitlin</button><button type="button">Leave it for now</button></div>
+          <div class="msg msg--bot" style="opacity:.85"><span class="liveNote" style="border:0;margin:0;padding:0">&ldquo;Leave it for now&rdquo; is a real option and is not asked again for 14 days.</span></div>
+        </div>
+        <div class="chat__foot">
+          <input placeholder="Type a message&hellip;" aria-label="Message">
+          <button class="chat__send" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <p class="stateCard__rule"><b>Not in V1.</b> The handoff document puts the bot speaking first &mdash; any proactive trigger &mdash; in Phase 2. Designed now because the event hooks should be built in V1 so this drops in later without rework. The opt-out is a first-class option: declined once, not asked again for 14 days.</p>
+    </section>
   </div>
 
   <div class="wishes" style="margin-top:var(--s-9)">

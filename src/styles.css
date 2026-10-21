@@ -444,3 +444,8 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   border: 1px dashed #C9A227; border-radius: var(--r-pill); padding: 3px 9px; }
 .compare__note--draft { background: var(--warm); border-radius: var(--r-md);
   padding: var(--s-4) var(--s-5); color: #3B2E1B; margin-top: var(--s-6); }
+
+/* Plan terms under a price. Kaitlin's approved price list carries real detail
+   (post counts, term lengths) that a single figure hides. */
+.cmp__terms { font-size: var(--t-label); color: var(--text-muted); margin: -8px 0 var(--s-4); line-height: 1.5; }
+.cmp__terms--dark { color: var(--baby-200); }
