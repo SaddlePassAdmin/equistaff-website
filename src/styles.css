@@ -449,3 +449,15 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
    (post counts, term lengths) that a single figure hides. */
 .cmp__terms { font-size: var(--t-label); color: var(--text-muted); margin: -8px 0 var(--s-4); line-height: 1.5; }
 .cmp__terms--dark { color: var(--baby-200); }
+
+/* Cross-screen confirmation. An action taken on one page is acknowledged on
+   the next, so the prototype behaves like software rather than like slides. */
+.esFlash { position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+  display:flex; gap:10px; align-items:center; z-index:80;
+  background:var(--depth-07); color:#fff; border:1px solid var(--baby-300);
+  border-radius:var(--r-pill); padding:13px 22px; box-shadow:var(--e-3);
+  font:700 var(--t-small)/1.3 var(--font-body); max-width:min(90vw,520px);
+  opacity:1; transition:opacity .5s var(--ease), transform .5s var(--ease); }
+.esFlash svg { color:var(--warm); flex:0 0 auto; }
+.esFlash--out { opacity:0; transform:translateX(-50%) translateY(8px); }
+@media (prefers-reduced-motion:reduce){ .esFlash{transition:none} }

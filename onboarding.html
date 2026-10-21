@@ -25,7 +25,7 @@
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
     <nav class="hdr__nav" aria-label="Main">
-      <a href="jobs.html">Find work</a><a href="index.html#request">Hire staff</a>
+      <a href="jobs.html">Find work</a><a href="request-talent.html">Hire staff</a>
       <a href="index.html#process">How we work</a><a href="index.html#founder">About</a>
     </nav>
     <div class="hdr__cta"><a href="#" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a></div>
@@ -73,7 +73,7 @@
         <div id="s2" hidden>
           <h2 style="font-size:1.5rem">Your experience</h2>
           <p style="color:var(--text-muted);font-size:var(--t-small)">Most people applying for barn work don't have a resume ready. That's completely fine — answer what you can.</p>
-          <form onsubmit="event.preventDefault();goTo(3)">
+          <form onsubmit="event.preventDefault();sendApplication()">
             <div class="field" style="margin-top:var(--s-5)">
               <label>Do you have a resume?</label>
               <div class="pick">
@@ -148,7 +148,7 @@
         <div class="step"><div class="step__ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#007AB8" stroke-width="1.8"><path d="M6 3v12M6 21v-2M18 3v2M18 9v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/></svg></div><div class="step__n">Step 03</div><h3>Routed</h3><p>Full-service recruitment, or posted to the board — whichever actually fits.</p></div>
         <div class="step"><div class="step__ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#007AB8" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.1a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></div><div class="step__n">Step 04</div><h3>Discovery call</h3><p>Screening happens here, on the phone — not in a long form.</p></div>
       </div>
-      <div style="margin-top:var(--s-7)"><a class="btn btn--primary btn--lg" href="index.html#request">See the Request Talent form</a></div>
+      <div style="margin-top:var(--s-7)"><a class="btn btn--primary btn--lg" href="request-talent.html">See the Request Talent form</a></div>
     </section>
 
   </div>
@@ -165,7 +165,7 @@
         <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p>
       </div>
       <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="#">Job alerts</a><a href="#">Advice</a></div>
-      <div><h4>For employers</h4><a href="index.html#request">Request talent</a><a href="#">Post a job</a><a href="index.html#process">How recruiting works</a><a href="#">Guarantee</a></div>
+      <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="#">Post a job</a><a href="index.html#process">How recruiting works</a><a href="#">Guarantee</a></div>
       <div><h4>Company</h4><a href="index.html#founder">About</a><a href="#">Contact</a><a href="#">Blog</a><a href="#">Affiliates</a></div>
     </div>
     <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
@@ -185,6 +185,14 @@ function goTo(n){
   document.getElementById('ob-eyebrow').textContent =
     (n === 3) ? 'Applying · done' : 'Applying · step ' + n + ' of 3';
   window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<script src="src/state.js"></script>
+<script>
+function sendApplication(){
+  // Managed search, so the barn is not named on the tracker until contact.
+  ES.apply({ title:'Barn Manager', org:'24-horse hunter/jumper barn', where:'Ocala, FL', managed:true });
+  goTo(3);
 }
 </script>
 </body>

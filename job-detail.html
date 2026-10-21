@@ -76,7 +76,7 @@
 <header class="hdr">
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
-    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html" style="color:var(--blue-700)">Find work</a><a href="index.html#request">Hire staff</a><a href="index.html#process">How we work</a><a href="index.html#founder">About</a></nav>
+    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html" style="color:var(--blue-700)">Find work</a><a href="request-talent.html">Hire staff</a><a href="index.html#process">How we work</a><a href="index.html#founder">About</a></nav>
     <div class="hdr__cta"><a href="signin.html" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a><a class="btn btn--primary" href="onboarding.html">Apply now</a></div>
   </div>
 </header>
@@ -156,7 +156,7 @@
           <h3 style="font-size:1.375rem;margin-bottom:var(--s-3)">One short form.</h3>
           <p style="font-size:var(--t-small);color:var(--text-muted)">No account needed to get started, and no resume required &mdash; <a href="resume.html" style="color:var(--text-link)">we can build you one</a>.</p>
           <a class="btn btn--primary btn--lg" href="onboarding.html" style="width:100%;margin-top:var(--s-4)">Apply for this role</a>
-          <a class="btn btn--secondary" href="#" style="width:100%;margin-top:var(--s-3)">Save for later</a>
+          <button class="btn btn--secondary" type="button" id="saveBtn" style="width:100%;margin-top:var(--s-3)" onclick="toggleSave()">Save for later</button>
 
           <div class="jdRec">
             <p style="font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;color:var(--warm);margin:0 0 var(--s-3)">RECRUITER-MANAGED</p>
@@ -203,7 +203,7 @@
       <p class="ftr__meta">Equine staffing since 1982 · online since 2000<br>Ocala, Florida</p>
       <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
     <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="#">Job alerts</a></div>
-    <div><h4>For employers</h4><a href="index.html#request">Request talent</a><a href="#">Post a job</a><a href="employer.html">Employer portal</a></div>
+    <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="#">Post a job</a><a href="employer.html">Employer portal</a></div>
     <div><h4>Company</h4><a href="#">About</a><a href="#">Contact</a><a href="#">Blog</a></div>
   </div>
   <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
@@ -214,5 +214,15 @@
 <a class="chatLaunch" href="chatbot.html">
   <span class="chatLaunch__dot"></span> Ask EquiStaff
 </a>
+<script src="src/state.js"></script>
+<script>
+var JOB = { title:'Barn Manager', org:'24-horse hunter/jumper barn', where:'Ocala, FL',
+            pay:'$55,000 – $68,000', managed:true };
+function paintSave(){
+  document.getElementById('saveBtn').textContent = ES.isSaved(JOB.title) ? 'Saved \u2713' : 'Save for later';
+}
+function toggleSave(){ ES.toggleSave(JOB); paintSave(); }
+paintSave();
+</script>
 </body>
 </html>

@@ -54,9 +54,9 @@
 
         <!-- Profile completion prompts — straight from Kaitlin's chatbot wish list -->
         <p style="margin:0;font-size:var(--t-small);display:flex;justify-content:space-between">
-          <span style="font-weight:700">Profile strength</span><span style="font-family:var(--font-mono)">70%</span>
+          <span style="font-weight:700">Profile strength</span><span style="font-family:var(--font-mono)" id="pcPct">70%</span>
         </p>
-        <div class="meter"><div class="meter__fill" style="width:70%"></div></div>
+        <div class="meter"><div class="meter__fill" id="pcBar" style="width:70%"></div></div>
         <p style="margin:0;font-size:var(--t-label);color:var(--text-muted)">Complete profiles are seen first by the recruiting team.</p>
 
         <div class="todo">
@@ -79,33 +79,10 @@
     <!-- RIGHT -->
     <div>
       <section class="pSection">
-        <div class="pSection__head"><h2>Your applications</h2><a href="#">View all 4 →</a></div>
+        <div class="pSection__head"><h2>Your applications</h2><a href="#" id="appCount">View all →</a></div>
 
-        <div class="appRow appRow--good">
-          <div>
-            <h4>Barn Manager</h4>
-            <p>Golden Ocala Equestrian · Ocala, FL · applied 2 days ago</p>
-            <p class="appRow__why">Named now that you&rsquo;re shortlisted.</p>
-          </div>
-          <span class="pill pill--shortlist">Shortlisted</span>
-        </div>
-
-        <div class="appRow">
-          <div>
-            <h4>Facility Director</h4>
-            <p><span class="job__conf">Employer confidential</span> Eventing yard · Middleburg, VA · applied 5 days ago</p>
-          </div>
-          <span class="pill pill--review">Being reviewed</span>
-        </div>
-
-        <div class="appRow appRow--quiet">
-          <div>
-            <h4>Head Groom</h4>
-            <p>Clearwater Sport Horses · Lexington, KY · applied 1 week ago</p>
-          </div>
-          <span class="pill pill--sent">Sent to barn</span>
-        </div>
-      </section>
+        <div id="apps"></div>
+        </section>
 
       <section class="pSection">
         <div class="pSection__head"><h2>Your details</h2><a href="#">Edit →</a></div>
@@ -130,11 +107,7 @@
 
       <section class="pSection">
         <div class="pSection__head"><h2>Saved roles</h2><a href="jobs.html">Browse more →</a></div>
-        <div class="empty">
-          <svg class="horse horse--md" viewBox="0 0 282 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"  style="margin:0 auto var(--s-5);color:var(--navy-500)"><path d="M36.0425 109.317C32.2486 109.407 28.6353 108.91 24.9768 107.554L17.7503 104.886C11.6077 102.626 5.0586 104.299 0 108.684C2.16797 98.6927 11.9238 94.0362 21.6345 95.3472L31.0742 96.6583C38.9783 97.7433 46.25 94.1266 50.8118 87.6164C55.0574 81.6035 56.7737 75.4098 63.1873 70.708C57.9029 72.2903 53.9734 75.7714 50.7215 79.8403C47.4695 83.9092 43.9917 87.4355 39.2945 89.7864C32.4744 93.2224 24.7058 93.6745 17.7954 90.555C14.4983 89.1083 11.6077 87.0739 9.62037 83.9092C24.7962 90.1029 37.8491 83.9996 48.2373 72.6068C50.6311 69.9846 52.8443 67.4076 55.5994 65.102C67.7039 54.8394 82.2474 55.834 96.294 61.9373C97.8296 62.6154 100.043 63.4292 101.669 62.4798C112.644 56.1504 122.039 56.4669 134.143 59.0439L150.493 62.4798C155.371 63.5196 160.339 63.5648 165.263 62.7963L170.637 61.2139C167.205 61.1235 163.908 60.7618 160.972 58.863C158.578 57.3259 156.094 56.4217 153.068 55.6079C155.236 54.4777 157.81 54.1612 160.339 54.3421C166.437 54.7489 171.902 52.8953 176.599 49.0525C179.309 46.792 182.29 45.3001 185.497 43.9438L178.27 45.4357C174.702 46.1591 171.134 46.0687 167.882 44.5315C165.172 43.2205 162.869 41.3217 162.056 38.2926C169.102 40.1462 175.606 38.6543 181.522 35.0375C186.265 32.1441 191.369 30.833 196.834 31.0138C198.685 31.1043 200.447 29.8836 200.763 27.9848C197.827 26.0408 194.259 25.5887 190.827 26.312C185.497 27.4423 182.064 31.0591 177.232 29.7932C180.393 28.5725 182.832 26.4929 184.955 23.8255C188.433 19.5306 193.356 17.1797 198.821 16.9084L205.325 17.1345C211.332 17.3605 217.474 19.395 223.753 14.5123C219.507 15.0096 215.623 15.0096 212.28 12.4327C217.203 12.6135 221.268 11.3024 225.153 8.77068C232.695 3.88803 239.516 4.74702 247.645 8.04733C248.278 8.31858 249.768 8.18295 250.446 8.09253C252.93 4.24971 257.537 1.08503 262.144 0L260.337 8.31858C259.976 9.90092 259.163 11.4833 258.485 12.93C259.208 14.9192 260.698 16.6372 262.234 18.2647L266.66 22.9665C267.518 23.8707 268.151 25.001 268.512 26.2216C269.822 30.4713 271.222 34.495 273.48 38.383L281.339 51.9007C281.836 52.7597 282.197 54.0256 281.881 54.975C280.978 57.6424 279.894 60.2645 277.861 62.1633C276.145 63.7457 273.48 63.5648 271.358 63.1579C269.144 62.7511 267.654 61.0783 267.518 58.8178C267.338 56.3765 266.299 54.0708 264.492 52.398C258.169 46.7016 252.162 48.1935 247.149 44.848C244.755 43.2657 243.084 40.5531 243.49 37.6597C244.348 31.6016 251.123 31.1043 254.872 26.1312C257.175 23.0569 256.995 18.6716 253.833 16.4111C247.645 11.9806 235.722 15.8686 228.721 19.4402C218.513 24.6393 210.835 33.41 207.041 44.2151C205.505 48.51 202.841 53.031 198.234 52.4432C191.323 51.5843 184.955 53.7543 179.942 58.863C180.664 58.863 181.296 58.863 181.974 58.9534C183.464 59.0891 184.277 60.807 183.374 62.0277C179.58 67.3624 173.573 70.3011 166.979 70.5723C162.146 70.7532 157.584 69.8038 152.977 68.357C142.002 64.8759 131.614 62.0729 121.451 69.2612C117.929 71.7478 114.225 73.3753 109.979 74.1891C104.334 75.2741 99.8169 78.7101 97.4231 83.9544C95.0293 89.1987 95.8875 94.3978 93.2227 98.6023C92.6807 99.4613 91.5064 100.23 90.6482 100.275C90.4676 100.275 90.2418 100.275 90.0159 100.23C88.7061 99.9586 87.7576 98.7832 87.5769 97.4269C85.0928 78.3032 97.4683 68.0406 97.4683 68.0406C89.8804 66.9103 82.428 69.849 77.4146 75.6358C70.459 83.6831 70.2784 92.0469 66.6199 99.5065C64.8584 103.123 62.555 106.469 58.7159 108.368C60.7935 104.344 62.1033 100.275 60.7483 95.935C57.2254 104.073 52.4378 111.125 44.3982 114.561C37.4878 117.545 29.8096 116.957 23.4412 112.617C23.2153 112.617 23.6218 112.21 23.7573 112.165C28.2739 112.753 32.655 112.301 36.2683 109.046L36.0425 109.317Z" fill="currentColor"/></svg>
-          <p>You haven't saved any roles yet. Tap the bookmark on any listing to keep it here.</p>
-          <a class="btn btn--primary" href="jobs.html">Browse 214 open roles</a>
-        </div>
+        <div id="savedWrap"></div>
       </section>
     </div>
   </div>
@@ -148,5 +121,53 @@
     </div>
   </div>
 </footer>
+<script src="src/state.js"></script>
+
+<script>
+(function(){
+  // The applications list is the clearest proof the prototype is stateful:
+  // apply for something on the job board and it is here when you get back.
+  function pill(a){
+    var cls = a.status === 'Shortlisted' ? 'pill--shortlist'
+            : a.status === 'Sent to barn' ? 'pill--sent' : 'pill--review';
+    return '<span class="pill ' + cls + '">' + a.status + '</span>';
+  }
+  function row(a){
+    var mod = a.status === 'Shortlisted' ? ' appRow--good'
+            : a.status === 'Sent to barn' ? ' appRow--quiet' : '';
+    // The confidentiality rule, applied to the candidate's own tracker:
+    // a managed employer is named only once contact has been made.
+    var org = (a.managed && !a.disclosed)
+      ? '<span class="job__conf">Employer confidential</span> ' + a.org
+      : a.org;
+    var why = (a.managed && a.disclosed)
+      ? '<p class="appRow__why">Named now that you\u2019re shortlisted.</p>' : '';
+    return '<div class="appRow' + mod + '"><div>'
+         + '<h4>' + a.title + '</h4>'
+         + '<p>' + org + ' \u00b7 ' + a.where + ' \u00b7 ' + a.when + '</p>'
+         + why + '</div>' + pill(a) + '</div>';
+  }
+  var list = ES.applications();
+  document.getElementById('apps').innerHTML = list.map(row).join('');
+  var c = document.getElementById('appCount');
+  if (c) c.textContent = 'View all ' + list.length + ' \u2192';
+
+  var pr = ES.profile();
+  document.getElementById('pcPct').textContent = pr.strength + '%';
+  document.getElementById('pcBar').style.width = pr.strength + '%';
+  document.querySelectorAll('.avatar').forEach(function(a){ a.textContent = pr.initials; });
+  var h = document.querySelector('.pCard h3'); if (h) h.textContent = pr.name;
+
+  var sv = ES.saved();
+  document.getElementById('savedWrap').innerHTML = sv.length
+    ? sv.map(function(r){
+        var org = (r.managed ? '<span class="job__conf">Employer confidential</span> ' : '') + r.org;
+        return '<div class="appRow"><div><h4>' + r.title + '</h4><p>' + org + ' \u00b7 ' + r.where
+             + (r.pay ? ' \u00b7 ' + r.pay : '') + '</p></div>'
+             + '<a class="btn btn--primary" href="job-detail.html">View</a></div>';
+      }).join('')
+    : '<div class="empty"><svg class="horse horse--sm" viewBox="0 0 282 120" aria-hidden="true" style="color:var(--navy-500);margin-bottom:var(--s-4)"><path d="M36 109c-4 0-7 0-11-2l-7-2c-6-2-13 0-18 4 2-10 12-14 22-13l9 1c8 1 15-2 20-9 4-6 6-12 12-17-5 2-9 5-12 9s-7 8-11 10c-7 3-15 4-22 1-3-1-6-3-8-6 15 6 28 0 39-11 2-3 4-5 7-8 12-10 27-9 41-3 2 1 4 2 5 1 11-6 20-6 32-3l16 3c5 1 10 1 15 0l5-1c-3 0-7-1-9-2-3-2-5-3-8-4 2-1 5-1 7-1 6 0 12-2 16-5 3-2 6-4 9-5l-7 1c-4 1-7 1-11 0-3-1-5-3-6-6 7 2 14 0 20-3 5-3 10-4 15-4 2 0 4-1 4-3-3-2-7-2-10-2-5 1-9 5-14 3 3-1 6-3 8-6 3-4 8-7 14-7h6c6 0 12 2 19-3-4 1-8 1-12-2 5 0 9-1 13-4 8-5 15-4 23-1 1 0 2 0 3 0 2-4 7-7 12-8l-2 8c0 2-1 3-2 5 1 2 2 4 4 5l4 5c1 1 2 2 2 3 1 4 3 8 5 12l8 14c0 1 1 2 0 3-1 3-2 5-4 7-2 2-4 2-6 1-2 0-4-2-4-4 0-2-1-5-3-6-6-6-12-4-17-8-2-1-4-4-3-7 1-6 7-6 11-11 2-3 2-7-1-10-6-4-18 0-25 4-10 5-18 14-22 25-1 4-4 9-9 8-7-1-13 1-18 6h2c1 0 2 2 1 3-4 5-10 8-16 8-5 0-10-1-14-2-11-3-21-6-32 1-3 3-7 4-11 5-6 1-10 5-12 10s-1 10-4 15c-1 1-2 2-3 2h-1c-1 0-2-1-2-3-3-19 9-29 9-29-7-1-15 2-20 8-7 8-7 16-11 24-2 3-4 7-8 9 2-4 3-8 2-13-4 8-9 15-17 19-7 3-14 2-21-2 0 0 0 0 0 0 5 1 9 0 13-3z" fill="currentColor"/></svg><p>You haven\u2019t saved any roles yet. Tap <b>Save for later</b> on any listing to keep it here.</p><a class="btn btn--primary" href="jobs.html">Browse 214 open roles</a></div>';
+})();
+</script>
 </body>
 </html>

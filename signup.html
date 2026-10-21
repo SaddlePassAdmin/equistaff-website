@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create an account | EquiStaff</title>
+<meta name="description" content="Create an EquiStaff account in under two minutes. Browsing is always free and never needs an account.">
+
+<link rel="canonical" href="https://www.equistaff.com/signup.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* SIGN UP — audit findings #21, #22, #23 and #57. The live site demands 35
+   mandatory fields, caps the password at 15 characters, asks for the address
+   twice and links out to Indeed for a resume. This asks for four things.
+   Everything else is collected later, in context, where it means something. */
+.su { min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr; }
+.su__left { background:linear-gradient(170deg,#FFFFFF 0%,#E3F1FB 40%,#BDE3FF 100%);
+  padding:var(--s-8); display:flex; flex-direction:column; justify-content:center; }
+.su__right { background:linear-gradient(170deg,#2C6591 0%,#16395C 48%,#0B2545 100%);
+  padding:var(--s-8); display:flex; flex-direction:column; justify-content:center;
+  position:relative; overflow:hidden; }
+.su__right::after { content:""; position:absolute; inset:0;
+  background:radial-gradient(900px 420px at 110% -10%, rgba(189,227,255,.18), transparent 60%); }
+.su__in { max-width:30rem; width:100%; margin:0 auto; position:relative; }
+.su__left h1 { color:var(--navy-900); font-size:clamp(2rem,3vw,2.75rem); max-width:16ch; }
+.su__left p { color:#2F5572; }
+.su__right h2 { color:#fff; }
+.suLogo { display:inline-block; margin-bottom:var(--s-7); }
+.suLogo img { height:38px; }
+.suList { margin:var(--s-6) 0 0; padding:0; list-style:none; }
+.suList li { display:flex; gap:var(--s-3); align-items:flex-start; margin-bottom:var(--s-4);
+  color:var(--navy-900); font-size:1.0625rem; }
+.suList svg { flex:0 0 auto; margin-top:3px; }
+.su__right .field label { color:#fff; }
+.su__right .field input, .su__right .field select {
+  background:rgba(255,255,255,.07); border-color:#32597F; color:#fff; }
+.su__right .field input::placeholder { color:#7FA3C4; }
+.su__right .field small { color:var(--baby-300); }
+.pwBar { height:5px; border-radius:var(--r-pill); background:rgba(255,255,255,.16);
+  overflow:hidden; margin-top:8px; }
+.pwBar i { display:block; height:100%; width:0; background:var(--warn-bg); transition:width .25s var(--ease), background .25s var(--ease); }
+.pwNote { font-size:var(--t-label); color:var(--baby-300); margin-top:6px; }
+.roleSwap { display:flex; gap:0; background:rgba(255,255,255,.08); border:1px solid var(--navy-500);
+  border-radius:var(--r-pill); padding:4px; margin-bottom:var(--s-6); }
+.roleSwap button { flex:1; background:none; border:0; color:var(--baby-200); cursor:pointer;
+  padding:11px 10px; border-radius:var(--r-pill); font:700 var(--t-small)/1 var(--font-body); min-height:44px; }
+.roleSwap button[aria-pressed="true"] { background:var(--baby-200); color:var(--navy-900); }
+.suHorses { width:min(300px,62%); margin-top:var(--s-7); opacity:.9; }
+.suFoot { color:var(--baby-300); font-size:var(--t-small); margin-top:var(--s-7); }
+.suFoot a { color:var(--baby-200); }
+@media (max-width:900px){ .su{grid-template-columns:1fr} .su__left,.su__right{padding:var(--s-8) var(--s-5)} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main" class="su">
+
+  <section class="su__left">
+    <div class="su__in">
+      <a class="suLogo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff"></a>
+      <h1 id="leftH">Four questions. Then you're in.</h1>
+      <p style="font-size:1.125rem" id="leftP">You never needed an account to look around, and you still don't. This is just so you don't type the same thing twice.</p>
+      <ul class="suList" id="leftList">
+        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Apply without filling the same form twice</span></li>
+        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Track where each application stands</span></li>
+        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>No resume? We'll build you one from a few questions</span></li>
+        <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Be found for roles that never get posted</span></li>
+      </ul>
+      <img class="suHorses" src="assets/horses-blue.svg" alt="" aria-hidden="true">
+    </div>
+  </section>
+
+  <section class="su__right">
+    <div class="su__in">
+
+      <!-- FORM -->
+      <div id="form">
+        <h2 style="font-size:1.875rem;margin-bottom:var(--s-2)">Create your account</h2>
+        <p style="color:var(--baby-200);margin-bottom:var(--s-5)">About a minute. Nothing else is required up front.</p>
+
+        <div class="roleSwap" role="group" aria-label="Account type">
+          <button type="button" id="rSeek" aria-pressed="true" onclick="role('seeker')">I'm looking for work</button>
+          <button type="button" id="rEmp" aria-pressed="false" onclick="role('employer')">I'm hiring</button>
+        </div>
+
+        <form onsubmit="event.preventDefault();submitForm()">
+          <div class="form__row">
+            <div class="field"><label for="fn">First name</label><input id="fn" required autocomplete="given-name"></div>
+            <div class="field"><label for="ln">Last name</label><input id="ln" required autocomplete="family-name"></div>
+          </div>
+
+          <div class="field" id="bizWrap" hidden>
+            <label for="biz">Barn or business name</label>
+            <input id="biz" autocomplete="organization">
+          </div>
+
+          <div class="field">
+            <label for="em">Email</label>
+            <input id="em" type="email" required autocomplete="email">
+            <small>Where your verification link goes.</small>
+          </div>
+
+          <div class="field">
+            <label for="pw">Password</label>
+            <input id="pw" type="password" required autocomplete="new-password" oninput="pwCheck(this.value)">
+            <div class="pwBar"><i id="pwFill"></i></div>
+            <p class="pwNote" id="pwNote">At least 8 characters. No upper limit, and a passphrase is fine.</p>
+          </div>
+
+          <div class="field">
+            <label for="zip">ZIP code</label>
+            <input id="zip" inputmode="numeric" placeholder="34474" oninput="zipFill(this.value)">
+            <small id="zipNote">We'll work out the city and state. Used to show you roles nearby.</small>
+          </div>
+
+          <button class="btn btn--onDark btn--lg" type="submit" style="width:100%;margin-top:var(--s-3)">Create account</button>
+          <p class="pwNote" style="margin-top:var(--s-4)">By continuing you agree to our <a href="terms.html" style="color:var(--baby-200)">Terms</a> and <a href="privacy.html" style="color:var(--baby-200)">Privacy Policy</a>.</p>
+        </form>
+
+        <div class="thrDivide" style="display:flex;align-items:center;gap:var(--s-4);margin:var(--s-6) 0;color:var(--baby-300);font-size:var(--t-small)">or</div>
+        <div class="thrSso" style="display:grid;gap:var(--s-3)">
+          <a class="btnSso" href="#" onclick="event.preventDefault();submitForm()" style="display:flex;align-items:center;justify-content:center;gap:var(--s-3);min-height:52px;border-radius:var(--r-sm);border:1.5px solid var(--navy-500);background:rgba(255,255,255,.06);color:#fff;font:700 1rem/1 var(--font-body);text-decoration:none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.2a7.2 7.2 0 01-6-3.2c0-2 4-3.1 6-3.1s6 1.1 6 3.1a7.2 7.2 0 01-6 3.2z"/></svg>
+            Continue with Google
+          </a>
+        </div>
+
+        <p class="suFoot">
+          Already have an account? <a href="signin.html">Sign in</a><br>
+          Just looking? <a href="jobs.html">Browse 214 open roles</a> — no account needed.
+        </p>
+      </div>
+
+      <!-- VERIFY SENT — audit blocker #2: the live site's verification link is
+           the email address in base64 with no token. This one is tokenised,
+           expiring and single-use. -->
+      <div id="sent" hidden>
+        <div style="width:62px;height:62px;border-radius:50%;background:var(--ok-bg);display:grid;place-items:center;margin-bottom:var(--s-5)">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.4"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>
+        </div>
+        <h2 style="font-size:1.75rem;margin-bottom:var(--s-3)">Check your email</h2>
+        <p style="color:var(--baby-200);margin-bottom:var(--s-5)">
+          We've sent a link to <b id="sentTo" style="color:#fff">your inbox</b>. It's good for 24 hours and works once.
+        </p>
+        <div class="reassure" style="background:rgba(249,244,237,.12);border:1px solid var(--warm)">
+          <h4 style="color:var(--warm);margin:0 0 var(--s-3);font-size:var(--t-small);letter-spacing:.04em">IF IT DOESN'T ARRIVE</h4>
+          <ul style="margin:0;padding-left:18px">
+            <li style="font-size:var(--t-small);color:var(--baby-200);margin-bottom:var(--s-3)">Check spam — we're working on that, and it's a known issue on the old site.</li>
+            <li style="font-size:var(--t-small);color:var(--baby-200)">Still nothing after five minutes? <a href="#" onclick="event.preventDefault();resend()" style="color:var(--warm)">Send it again</a>.</li>
+          </ul>
+        </div>
+        <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)">
+          <a class="btn btn--onDark btn--lg" href="verify.html">I've clicked the link</a>
+          <a class="btn btn--secondary btn--lg" href="jobs.html">Keep browsing</a>
+        </div>
+        <p class="suFoot" id="resentNote" hidden>Sent again just now.</p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script src="src/state.js"></script>
+<script>
+var ROLE = 'seeker';
+function role(r){
+  ROLE = r;
+  document.getElementById('rSeek').setAttribute('aria-pressed', r === 'seeker');
+  document.getElementById('rEmp').setAttribute('aria-pressed', r === 'employer');
+  document.getElementById('bizWrap').hidden = (r !== 'employer');
+  document.getElementById('biz').required = (r === 'employer');
+  var h = document.getElementById('leftH'), p = document.getElementById('leftP'), l = document.getElementById('leftList');
+  if (r === 'employer') {
+    h.textContent = 'Post a role, or hand it to Kaitlin.';
+    p.textContent = 'An account lets you post to the board, track applicants and see where a managed search has got to.';
+    l.innerHTML = item('Post a job and see who applies')
+                + item('Track a managed search, stage by stage')
+                + item('Every candidate phone-referenced before you see them')
+                + item('Your barn stays unnamed on the advert');
+  } else {
+    h.textContent = "Four questions. Then you're in.";
+    p.textContent = "You never needed an account to look around, and you still don't. This is just so you don't type the same thing twice.";
+    l.innerHTML = item('Apply without filling the same form twice')
+                + item('Track where each application stands')
+                + item("No resume? We'll build you one from a few questions")
+                + item('Be found for roles that never get posted');
+  }
+}
+function item(t){
+  return '<li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006499" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>' + t + '</span></li>';
+}
+// No 15-character cap, and length is what actually counts.
+function pwCheck(v){
+  var score = Math.min(100, Math.round((v.length / 16) * 100));
+  var fill = document.getElementById('pwFill'), note = document.getElementById('pwNote');
+  fill.style.width = score + '%';
+  if (v.length === 0){ fill.style.background = 'rgba(255,255,255,.16)'; note.textContent = 'At least 8 characters. No upper limit, and a passphrase is fine.'; }
+  else if (v.length < 8){ fill.style.background = '#FBE9E6'; note.textContent = 'A little longer — 8 characters minimum.'; }
+  else if (v.length < 14){ fill.style.background = '#FAF0DC'; note.textContent = 'That works. Three unrelated words would be stronger.'; }
+  else { fill.style.background = '#BDE3FF'; note.textContent = 'Strong. Nothing else to do.'; }
+}
+// ZIP fills city and state, so nobody is asked for their address twice.
+var ZIPS = { '34474':'Ocala, FL', '34482':'Ocala, FL', '33414':'Wellington, FL',
+             '40511':'Lexington, KY', '29801':'Aiken, SC', '20117':'Middleburg, VA' };
+function zipFill(v){
+  var n = document.getElementById('zipNote');
+  if (ZIPS[v]) { n.innerHTML = '<b style="color:#BDE3FF">' + ZIPS[v] + '</b> — looks right?'; }
+  else { n.textContent = "We'll work out the city and state. Used to show you roles nearby."; }
+}
+function submitForm(){
+  var em = document.getElementById('em').value.trim() || 'your inbox';
+  var fn = document.getElementById('fn').value.trim();
+  var ln = document.getElementById('ln').value.trim();
+  var zip = document.getElementById('zip').value.trim();
+  if (fn || ln) {
+    ES.setProfile({
+      name: (fn + ' ' + ln).trim(),
+      initials: ((fn[0] || 'D') + (ln[0] || 'W')).toUpperCase(),
+      email: em,
+      location: ZIPS[zip] || ES.profile().location
+    });
+  }
+  document.getElementById('sentTo').textContent = em;
+  document.getElementById('form').hidden = true;
+  document.getElementById('sent').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function resend(){ document.getElementById('resentNote').hidden = false; }
+</script>
+</body>
+</html>

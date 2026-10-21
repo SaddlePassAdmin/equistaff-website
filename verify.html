@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email verified | EquiStaff</title>
+<meta name="description" content="Your email is verified. Pick up where you left off.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* VERIFY — the landing page for the emailed link. Audit blocker #2: the live
+   site's link is the email address in base64 with no token and no confirmation
+   message, so nobody knows whether it worked. This says so plainly, and shows
+   the expired case because that is the one people actually hit. */
+.vf { min-height:100vh; display:grid; place-items:center;
+  background:linear-gradient(170deg,var(--depth-01) 0%,var(--depth-02) 60%,var(--depth-03) 100%);
+  padding:var(--s-7) var(--s-5); }
+.vfCard { background:#fff; border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  box-shadow:var(--e-3); padding:var(--s-8); max-width:34rem; width:100%; text-align:center; }
+.vfMark { width:76px; height:76px; border-radius:50%; display:grid; place-items:center; margin:0 auto var(--s-5); }
+.vfMark--ok { background:var(--ok-bg); }
+.vfMark--old { background:var(--warn-bg); }
+.vfCard h1 { font-size:1.875rem; margin-bottom:var(--s-3); }
+.vfCard p { color:var(--text-muted); margin:0 auto var(--s-5); max-width:44ch; }
+.vfActs { display:flex; gap:var(--s-3); justify-content:center; flex-wrap:wrap; }
+.vfNext { background:var(--depth-01); border-radius:var(--r-md); padding:var(--s-5); margin-top:var(--s-6); text-align:left; }
+.vfNext h2 { font-size:1.0625rem; margin:0 0 var(--s-3); }
+.vfNext a { display:flex; gap:var(--s-3); align-items:center; padding:10px 0; text-decoration:none;
+  color:var(--text-primary); font-size:var(--t-small); border-bottom:1px solid var(--border-subtle); }
+.vfNext a:last-child { border-bottom:0; }
+.vfNext a:hover { color:var(--blue-700); }
+.vfNext span.n { font-family:var(--font-mono); font-size:var(--t-label); color:var(--blue-700); font-weight:600; }
+.vfSwap { margin-top:var(--s-6); font-size:var(--t-label); color:var(--text-muted); }
+</style>
+</head>
+<body>
+<main class="vf">
+
+  <div class="vfCard" id="ok">
+    <div class="vfMark vfMark--ok">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <p class="eyebrow" style="justify-content:center;display:flex">Email verified</p>
+    <h1>You're all set.</h1>
+    <p>Your email is confirmed and your account is live. Nothing else to do here.</p>
+
+    <div class="vfActs">
+      <a class="btn btn--primary btn--lg" href="profile.html">Go to my profile</a>
+      <a class="btn btn--secondary btn--lg" href="jobs.html">Browse open roles</a>
+    </div>
+
+    <div class="vfNext">
+      <h2>Worth doing next</h2>
+      <a href="resume.html"><span class="n">01</span> <span>Build a resume from a few questions &mdash; about five minutes</span></a>
+      <a href="profile.html"><span class="n">02</span> <span>Add two references so the recruiting team can move faster</span></a>
+      <a href="jobs.html"><span class="n">03</span> <span>Set your availability, so you only hear about roles you can take</span></a>
+    </div>
+
+    <p class="vfSwap">Wrong account? <a href="signin.html">Sign in as someone else</a>.</p>
+  </div>
+
+  <!-- The case people actually hit. Shown via ?state=expired -->
+  <div class="vfCard" id="old" hidden>
+    <div class="vfMark vfMark--old">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    </div>
+    <p class="eyebrow" style="justify-content:center;display:flex;color:var(--warn-ink)">Link expired</p>
+    <h1>That link has run out.</h1>
+    <p>Verification links last 24 hours and work once, which keeps your account safe. Send yourself a fresh one and it'll arrive in a minute.</p>
+    <div class="vfActs">
+      <button class="btn btn--primary btn--lg" type="button" onclick="resend()">Send a new link</button>
+      <a class="btn btn--secondary btn--lg" href="signin.html">Back to sign in</a>
+    </div>
+    <p class="vfSwap" id="again" hidden>Sent. Check your inbox, and your spam folder.</p>
+  </div>
+
+</main>
+<script src="src/state.js"></script>
+<script>
+if (new URLSearchParams(location.search).get('state') === 'expired') {
+  document.getElementById('ok').hidden = true;
+  document.getElementById('old').hidden = false;
+}
+function resend(){ document.getElementById('again').hidden = false; }
+</script>
+</body>
+</html>

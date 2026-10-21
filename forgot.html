@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reset your password | EquiStaff</title>
+<meta name="description" content="Reset your EquiStaff password.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* FORGOT PASSWORD — three states in one page: ask, sent, set a new one.
+   The "sent" copy deliberately does not confirm whether the address exists,
+   because that turns the form into a way to test who has an account. */
+.fg { min-height:100vh; display:grid; place-items:center;
+  background:linear-gradient(170deg,var(--depth-01) 0%,var(--depth-02) 60%,var(--depth-03) 100%);
+  padding:var(--s-7) var(--s-5); }
+.fgCard { background:#fff; border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  box-shadow:var(--e-3); padding:var(--s-8); max-width:30rem; width:100%; }
+.fgLogo { display:block; margin-bottom:var(--s-6); }
+.fgLogo img { height:34px; }
+.fgCard h1 { font-size:1.625rem; margin-bottom:var(--s-3); }
+.fgCard > p { color:var(--text-muted); margin:0 0 var(--s-5); }
+.pwBar { height:5px; border-radius:var(--r-pill); background:var(--depth-02); overflow:hidden; margin-top:8px; }
+.pwBar i { display:block; height:100%; width:0; background:var(--warn-bg); transition:width .25s var(--ease), background .25s var(--ease); }
+.pwNote { font-size:var(--t-label); color:var(--text-muted); margin-top:6px; }
+.fgBack { font-size:var(--t-small); margin-top:var(--s-6); display:block; }
+.fgMark { width:64px; height:64px; border-radius:50%; background:var(--ok-bg);
+  display:grid; place-items:center; margin-bottom:var(--s-5); }
+</style>
+</head>
+<body>
+<main class="fg">
+
+  <!-- 1 · ASK -->
+  <div class="fgCard" id="ask">
+    <a class="fgLogo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff"></a>
+    <h1>Reset your password</h1>
+    <p>Give us the email on your account and we'll send you a link. It lasts an hour and works once.</p>
+    <form onsubmit="event.preventDefault();sent()">
+      <div class="field">
+        <label for="em">Email</label>
+        <input id="em" type="email" required autocomplete="email" autofocus>
+      </div>
+      <button class="btn btn--primary btn--lg" type="submit" style="width:100%">Send the link</button>
+    </form>
+    <a class="fgBack" href="signin.html">&larr; Back to sign in</a>
+  </div>
+
+  <!-- 2 · SENT -->
+  <div class="fgCard" id="sentCard" hidden>
+    <div class="fgMark"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.4"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div>
+    <h1>Check your email</h1>
+    <p>If there's an EquiStaff account on <b id="toWho" style="color:var(--text-primary)">that address</b>, a reset link is on its way. It's good for an hour.</p>
+    <p style="font-size:var(--t-small)">Nothing after a few minutes? Check spam, then <a href="#" onclick="event.preventDefault();again()">send it again</a>.</p>
+    <p class="pwNote" id="againNote" hidden>Sent again just now.</p>
+    <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-5)">
+      <button class="btn btn--primary" type="button" onclick="show('reset')">I've clicked the link</button>
+      <a class="btn btn--secondary" href="signin.html">Back to sign in</a>
+    </div>
+  </div>
+
+  <!-- 3 · SET A NEW ONE -->
+  <div class="fgCard" id="reset" hidden>
+    <a class="fgLogo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff"></a>
+    <h1>Choose a new password</h1>
+    <p>One field. Make it long rather than complicated &mdash; three unrelated words beats a symbol you'll forget.</p>
+    <form onsubmit="event.preventDefault();show('done')">
+      <div class="field">
+        <label for="pw">New password</label>
+        <input id="pw" type="password" required autocomplete="new-password" oninput="pwCheck(this.value)">
+        <div class="pwBar"><i id="pwFill"></i></div>
+        <p class="pwNote" id="pwNote">At least 8 characters. No upper limit.</p>
+      </div>
+      <button class="btn btn--primary btn--lg" type="submit" style="width:100%">Save and sign in</button>
+    </form>
+  </div>
+
+  <!-- 4 · DONE -->
+  <div class="fgCard" id="done" hidden>
+    <div class="fgMark"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h1>Password changed</h1>
+    <p>You're signed in. We've signed out any other devices, so anyone else holding the old one is out.</p>
+    <div style="display:flex;gap:var(--s-3);flex-wrap:wrap">
+      <a class="btn btn--primary btn--lg" href="profile.html">Go to my profile</a>
+      <a class="btn btn--secondary btn--lg" href="jobs.html">Browse roles</a>
+    </div>
+  </div>
+
+</main>
+<script src="src/state.js"></script>
+<script>
+function show(id){
+  ['ask','sentCard','reset','done'].forEach(function(k){ document.getElementById(k).hidden = true; });
+  document.getElementById(id).hidden = false;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function sent(){
+  var v = document.getElementById('em').value.trim();
+  if (v) document.getElementById('toWho').textContent = v;
+  show('sentCard');
+}
+function again(){ document.getElementById('againNote').hidden = false; }
+function pwCheck(v){
+  var score = Math.min(100, Math.round((v.length / 16) * 100));
+  var fill = document.getElementById('pwFill'), note = document.getElementById('pwNote');
+  fill.style.width = score + '%';
+  if (v.length === 0){ fill.style.background = 'var(--depth-02)'; note.textContent = 'At least 8 characters. No upper limit.'; }
+  else if (v.length < 8){ fill.style.background = '#FBE9E6'; note.textContent = 'A little longer — 8 characters minimum.'; }
+  else if (v.length < 14){ fill.style.background = '#FAF0DC'; note.textContent = 'That works. Three unrelated words would be stronger.'; }
+  else { fill.style.background = '#BDE3FF'; note.textContent = 'Strong. Nothing else to do.'; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request talent | EquiStaff</title>
+<meta name="description" content="Tell us the role and Kaitlin comes back with a shortlist of four, every reference checked by phone. Equine staffing since 1982.">
+
+<link rel="canonical" href="https://www.equistaff.com/request-talent.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* REQUEST TALENT — the front half of the recruiter-managed flow.
+   Field order follows EM-Q1 to EM-Q8 in the chatbot engineering handoff, so
+   this form and the assistant collect exactly the same things and both write
+   the same EmployerInquiry record. Contact comes at step 2, not last, because
+   the handoff doc says a part-finished inquiry still has to reach Kaitlin. */
+.rtHero { background:linear-gradient(165deg,var(--depth-07) 0%,var(--depth-06) 100%); color:#fff;
+  padding:var(--s-8) 0 calc(var(--s-8) + 3vw); }
+.rtHero h1 { color:#fff; max-width:20ch; margin:var(--s-3) 0 var(--s-4); }
+.rtHero p { color:var(--baby-200); max-width:58ch; font-size:1.125rem; margin:0; }
+.rtBody { background:var(--depth-01); padding:var(--s-8) 0 var(--s-9); }
+.rtOptional { background:var(--warm); border-radius:var(--r-md); padding:var(--s-4) var(--s-5);
+  margin-bottom:var(--s-5); font-size:var(--t-small); color:#3B2E1B; }
+.proof { display:grid; gap:var(--s-5); }
+.proofRow { display:flex; gap:var(--s-4); align-items:flex-start; }
+.proofRow svg { flex:0 0 auto; margin-top:2px; }
+.proofRow b { display:block; font-size:var(--t-small); }
+.proofRow span { font-size:var(--t-small); color:var(--text-muted); }
+</style>
+</head>
+<body class="has-chat">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
+    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html">Find work</a><a href="request-talent.html" style="color:var(--blue-700)">Hire staff</a><a href="index.html#process">How we work</a><a href="index.html#founder">About</a></nav>
+    <div class="hdr__cta"><a href="signin.html" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a><a class="btn btn--primary" href="post-job.html">Post a job</a></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="rtHero">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--warm)">Request talent</p>
+      <h1>Tell us the role. We'll bring you four people worth meeting.</h1>
+      <p>Kaitlin reads every request herself. Most are answered the same day.</p>
+    </div>
+  </section>
+
+  <section class="rtBody cut-top">
+    <div class="wrap ob">
+      <div class="ob__card">
+
+        <div class="steps" style="margin-bottom:var(--s-6)">
+          <div class="stepdot stepdot--on" data-step="1"><span class="stepdot__n">1</span><span class="stepdot__l">The role</span></div>
+          <span class="stepbar"></span>
+          <div class="stepdot" data-step="2"><span class="stepdot__n">2</span><span class="stepdot__l">How to reach you</span></div>
+          <span class="stepbar"></span>
+          <div class="stepdot" data-step="3"><span class="stepdot__n">3</span><span class="stepdot__l">Your program</span></div>
+        </div>
+
+        <!-- STEP 1 · EM-Q1 to EM-Q4 -->
+        <div id="s1">
+          <h2 style="font-size:1.5rem">What are you hiring for?</h2>
+          <p style="color:var(--text-muted);font-size:var(--t-small)">Four questions. You can be rough on the pay &mdash; a range is enough to start.</p>
+
+          <div class="field" style="margin-top:var(--s-5)">
+            <label for="barn">Barn or business name <span style="color:var(--err-ink)">*</span></label>
+            <input id="barn" required placeholder="Golden Ocala Equestrian">
+          </div>
+          <div class="field">
+            <label for="loc">Where are you? <span style="color:var(--err-ink)">*</span></label>
+            <input id="loc" required placeholder="Ocala, FL">
+          </div>
+          <div class="field">
+            <label for="role">What role are you filling? <span style="color:var(--err-ink)">*</span></label>
+            <input id="role" list="roles" required placeholder="Start typing — barn manager, groom, trainer…">
+            <datalist id="roles">
+              <option>Stall cleaner</option><option>Groom</option><option>Hotwalker</option><option>Barn manager</option>
+              <option>Flat rider</option><option>Exercise rider</option><option>Pony rider</option><option>Outrider</option>
+              <option>Assistant trainer</option><option>Trainer</option><option>Night watch</option><option>Foreman</option>
+              <option>General manager</option><option>Property manager</option><option>Maintenance manager</option>
+              <option>Bloodstock agent</option><option>Breeding manager</option><option>Loper</option><option>Assistant manager</option>
+              <option>Instructor</option><option>Equestrian director</option><option>Vet assistant</option><option>Vet technician</option>
+              <option>Veterinarian</option><option>Practice manager</option><option>Show secretary</option><option>Farrier</option>
+              <option>Rehab specialist</option><option>PATH instructor</option><option>Office manager</option>
+            </datalist>
+            <small>Kaitlin's full list. If it isn't here, type your own.</small>
+          </div>
+          <div class="field">
+            <label for="duties">What are the main duties? <span style="color:var(--err-ink)">*</span></label>
+            <textarea id="duties" rows="3" required placeholder="Running a 24-horse hunter/jumper barn, managing two grooms and a working student"></textarea>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label for="pay">Pay <span style="color:var(--err-ink)">*</span></label>
+              <input id="pay" required placeholder="$55,000 – $68,000">
+            </div>
+            <div class="field">
+              <label for="housing">Housing</label>
+              <select id="housing">
+                <option>On-site housing included</option>
+                <option>Housing allowance</option>
+                <option>No housing</option>
+                <option>Negotiable for the right person</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ob__actions">
+            <button class="btn btn--primary btn--lg" type="button" onclick="go(2)">Next</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 · EM-Q5 -->
+        <div id="s2" hidden>
+          <h2 style="font-size:1.5rem">How should Kaitlin reach you?</h2>
+          <p style="color:var(--text-muted);font-size:var(--t-small)">So she can come back to you even if you don't finish the last step.</p>
+
+          <div class="field" style="margin-top:var(--s-5)">
+            <label for="name">Your name <span style="color:var(--err-ink)">*</span></label>
+            <input id="name" required autocomplete="name">
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="email">Email <span style="color:var(--err-ink)">*</span></label><input id="email" type="email" required autocomplete="email"></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" autocomplete="tel"><small>She'll usually call.</small></div>
+          </div>
+          <div class="field">
+            <label for="urgency">How soon do you need someone?</label>
+            <select id="urgency">
+              <option>As soon as possible</option>
+              <option selected>Within a month</option>
+              <option>Within three months</option>
+              <option>Just planning ahead</option>
+            </select>
+          </div>
+
+          <div class="ob__actions">
+            <button class="btn btn--primary btn--lg" type="button" onclick="go(3)">Next</button>
+            <button class="btn btn--secondary" type="button" onclick="go(1)">Back</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 · EM-Q6 to EM-Q8 — all optional -->
+        <div id="s3" hidden>
+          <h2 style="font-size:1.5rem">Tell us about your program</h2>
+          <p class="rtOptional" style="margin-top:var(--s-4)">
+            <b>All optional.</b> These are the questions Kaitlin asks on a first call anyway &mdash; answering them now
+            usually means a better shortlist and a shorter call.
+          </p>
+
+          <div class="form__row">
+            <div class="field"><label for="disc">Discipline</label><input id="disc" list="discs" placeholder="Hunter / jumper">
+              <datalist id="discs"><option>Hunter</option><option>Show Jumping</option><option>Dressage</option><option>3-Day Eventing</option><option>Equitation</option><option>Western Pleasure</option><option>Reining</option><option>Cutting</option><option>Barrel Racing</option><option>Thoroughbred Industry</option><option>Standardbred Racing</option><option>Breeding</option><option>Polo</option><option>General Horse Care</option><option>Working Ranch / Stock Horse</option></datalist>
+            </div>
+            <div class="field"><label for="horses">How many horses?</label><input id="horses" placeholder="24"></div>
+          </div>
+          <div class="field"><label for="staff">How many staff?</label><input id="staff" placeholder="4 — two grooms, a working student, a part-time rider"></div>
+          <div class="field"><label for="day">What does a day in the life look like?</label><textarea id="day" rows="3" placeholder="Early starts, competing most weekends through the winter season"></textarea></div>
+          <div class="field"><label for="qualities">What qualities matter most in this person?</label><textarea id="qualities" rows="2" placeholder="Someone who communicates early rather than after the fact"></textarea></div>
+
+          <div class="ob__actions">
+            <button class="btn btn--primary btn--lg" type="button" onclick="send()">Send to Kaitlin</button>
+            <button class="btn btn--secondary" type="button" onclick="go(2)">Back</button>
+            <a class="ob__skip" href="#" onclick="event.preventDefault();send()">Skip this and send</a>
+          </div>
+        </div>
+
+        <!-- SENT -->
+        <div id="s4" hidden>
+          <div class="done">
+            <div class="done__tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <p class="eyebrow" style="justify-self:center">Request sent</p>
+            <h2 style="font-size:1.75rem">That's with Kaitlin.</h2>
+            <p style="margin:0 auto;color:var(--text-muted)" id="sentLine">Your request is in. She reads every one herself, and you'll hear from her directly.</p>
+            <div class="whatnext">
+              <div class="whatnext__row"><span class="whatnext__n">NOW</span><span class="whatnext__t"><b>Kaitlin reads it</b>Not a form queue. Usually the same day.</span></div>
+              <div class="whatnext__row"><span class="whatnext__n">NEXT</span><span class="whatnext__t"><b>She'll call to fill in the gaps</b>Fifteen minutes, so the brief is right before anyone starts searching.</span></div>
+              <div class="whatnext__row"><span class="whatnext__n">THEN</span><span class="whatnext__t"><b>A shortlist of four</b>Every reference checked by phone. Never a stack of fifty.</span></div>
+            </div>
+            <div class="ob__actions" style="justify-content:center;margin-top:var(--s-6)">
+              <a class="btn btn--primary btn--lg" href="employer.html">See it in your portal</a>
+              <a class="btn btn--secondary btn--lg" href="index.html">Back to the site</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="ob__aside">
+        <div class="ob__role">
+          <h3>What you get back</h3>
+          <p>A shortlist of four people, not a stack of fifty.</p>
+        </div>
+        <div class="reassure">
+          <h4>HOW A MANAGED SEARCH WORKS</h4>
+          <div class="proof">
+            <div class="proofRow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span><b>Kaitlin writes the brief with you</b><span>On a call, not from a form.</span></span></div>
+            <div class="proofRow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span><b>She searches her own network</b><span>Not just whoever happens to apply.</span></span></div>
+            <div class="proofRow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span><b>Every reference by phone</b><span>Never by email.</span></span></div>
+            <div class="proofRow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A5312" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span><b>Your name stays off the advert</b><span>So candidates can't go around her.</span></span></div>
+          </div>
+          <p style="font-size:var(--t-label);color:#3B2E1B;margin:var(--s-5) 0 0;border-top:1px solid #D8C8AE;padding-top:var(--s-4)">
+            <b>$1,000 to start the search.</b> The balance is a percentage of first-year salary, due on your new hire's
+            first day. Kaitlin quotes the percentage per role, before any work starts.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <img class="ftr__horses" src="assets/horses-blue-ondark.svg" alt="" aria-hidden="true">
+<div class="wrap">
+  <div class="ftr__grid">
+    <div><img class="ftr__logo" src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff">
+      <p class="ftr__meta">Equine staffing since 1982 · online since 2000<br>Ocala, Florida</p>
+      <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
+    <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="signup.html">Create a profile</a></div>
+    <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="employer.html">Employer portal</a></div>
+    <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="pricing.html">Pricing</a></div>
+  </div>
+  <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Accessibility</span></div>
+</div></footer>
+
+<a class="chatLaunch" href="chatbot.html"><span class="chatLaunch__dot"></span> Ask EquiStaff</a>
+
+<script src="src/state.js"></script>
+<script>
+function go(n){
+  [1,2,3,4].forEach(function(i){ document.getElementById('s'+i).hidden = (i!==n); });
+  document.querySelectorAll('.stepdot').forEach(function(d){
+    var s=+d.dataset.step;
+    d.classList.toggle('stepdot--on', s===n);
+    d.classList.toggle('stepdot--done', s<n);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
+function send(){
+  // Writes the EmployerInquiry the handoff document describes, so the portal
+  // and the assistant both read the same record.
+  ES.addInquiry({
+    business_name: v('barn') || 'Your barn',
+    location: v('loc'), role: v('role') || 'New role', duties: v('duties'),
+    pay: v('pay'), housing: v('housing'),
+    contact_name: v('name'), email: v('email'), phone: v('phone'),
+    urgency: v('urgency'),
+    program: { discipline: v('disc'), horse_count: v('horses'), staff_count: v('staff') },
+    day_in_life: v('day'), key_attributes: v('qualities'),
+    tags: ['request_talent'], status: 'new'
+  });
+  var r = v('role') || 'the role';
+  document.getElementById('sentLine').textContent =
+    'Your request for ' + r + ' is in. Kaitlin reads every one herself, and you’ll hear from her directly.';
+  go(4);
+}
+</script>
+</body>
+</html>
