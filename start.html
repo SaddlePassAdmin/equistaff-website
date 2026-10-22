@@ -3,181 +3,334 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EquiStaff — all screens</title>
-<meta name="robots" content="noindex">
+<title>EquiStaff — the prototype</title>
+<meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700&family=Lato:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css">
 <style>
-  body{background:var(--depth-01)}
-  .top{background:linear-gradient(160deg,var(--depth-07),var(--depth-06));color:#fff;padding:var(--s-8) 0}
-  .top h1{color:#fff;margin-bottom:var(--s-3)}
-  .top p{color:var(--baby-200);max-width:62ch}
-  .grp{margin-top:var(--s-8)}
-  .grp h2{font-size:1.25rem;margin-bottom:var(--s-2)}
-  .grp>p{color:var(--text-muted);font-size:var(--t-small);margin-bottom:var(--s-5)}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5)}
-  .card{display:block;background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-md);
-    padding:var(--s-6);text-decoration:none;color:inherit;box-shadow:var(--e-1);
-    transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
-  .card:hover{transform:translateY(-3px);box-shadow:var(--e-3);border-color:var(--blue-600)}
-  .card h3{font-size:1.25rem;margin:0 0 6px}
-  .card p{font-size:var(--t-small);color:var(--text-muted);margin:0}
-  .card .k{font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;
-    color:var(--blue-700);display:block;margin-bottom:var(--s-3)}
-  .card--deep{background:linear-gradient(150deg,var(--depth-07),var(--depth-06));border-color:var(--navy-500)}
-  .card--deep h3{color:#fff} .card--deep p{color:var(--baby-200)} .card--deep .k{color:var(--warm)}
-  .card--final{border-color:var(--blue-600);border-width:2px;box-shadow:var(--e-2)}
-  .card--final .k{color:var(--blue-600)}
-  .card--retired{opacity:.62;background:var(--depth-01);border-style:dashed}
-  .card--retired:hover{opacity:1}
-  .card--retired .k{color:var(--text-muted)}
-  .whatsnew{background:var(--warm);border-radius:var(--r-md);padding:var(--s-6);margin-top:var(--s-8)}
-  .whatsnew h2{font-size:1.25rem;margin:0 0 var(--s-4);color:#3B2E1B}
-  .whatsnew ul{margin:0;padding-left:20px}
-  .whatsnew li{color:#3B2E1B;font-size:var(--t-small);margin-bottom:var(--s-3);line-height:1.6}
-  .whatsnew a{color:var(--blue-700)}
-  .tipbar{background:var(--warm);border-radius:var(--r-md);padding:var(--s-5) var(--s-6);margin-top:var(--s-8)}
-  .tipbar p{margin:0;font-size:var(--t-small);color:#3B2E1B}
-  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+/* THE PROTOTYPE MENU — rebuilt 22 Oct around the three journeys rather than
+   around page types. The previous version listed screens in nine themed groups
+   and repeated the same screen in three of them, which made 33 screens feel
+   like sixty. Order here matches the Figma review section exactly, so a screen
+   is in the same place on the canvas as it is on this page. */
+body{background:var(--depth-01)}
+.top{background:linear-gradient(160deg,var(--depth-07),var(--depth-06));color:#fff;padding:var(--s-8) 0 var(--s-9)}
+.top h1{color:#fff;margin:var(--s-3) 0 var(--s-4);max-width:20ch}
+.top p{color:var(--baby-200);max-width:64ch;font-size:1.0625rem;margin:0}
+
+/* three doors */
+.tours{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5);margin-top:calc(var(--s-8) * -1);
+  position:relative;z-index:2}
+.tour{display:flex;flex-direction:column;gap:var(--s-3);background:#fff;border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg);padding:var(--s-6);text-decoration:none;color:inherit;box-shadow:var(--e-2);
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)}
+.tour:hover{transform:translateY(-3px);box-shadow:var(--e-3);border-color:var(--blue-600)}
+.tour .k{font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--blue-700)}
+.tour h3{font-size:1.3125rem;margin:0}
+.tour p{font-size:var(--t-small);color:var(--text-muted);margin:0;flex:1}
+.tour .go{font:700 var(--t-small)/1 var(--font-body);color:var(--blue-600);margin-top:var(--s-3)}
+.tour .n{font-family:var(--font-mono);font-weight:600;font-size:var(--t-label);color:var(--text-muted)}
+
+/* a journey */
+.jny{margin-top:var(--s-9);background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:var(--e-1)}
+.jny__head{background:var(--depth-07);color:#fff;padding:var(--s-6)}
+.jny__head .k{font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--warm);display:block;margin-bottom:var(--s-3)}
+.jny__head h2{color:#fff;font-size:1.5rem;margin:0 0 6px}
+.jny__head p{color:var(--baby-200);font-size:var(--t-small);margin:0;max-width:72ch}
+.jny--self .jny__head{background:var(--depth-06)}
+.jny--pub .jny__head{background:var(--depth-05)}
+
+.mstep{display:grid;grid-template-columns:54px 1fr auto;gap:var(--s-5);align-items:center;
+  padding:var(--s-5) var(--s-6);border-top:1px solid var(--border-subtle);text-decoration:none;color:inherit;
+  transition:background .14s var(--ease)}
+.mstep:hover{background:var(--depth-01)}
+.mstep:hover h4{color:var(--blue-700)}
+.mstep__n{font-family:var(--font-mono);font-weight:600;font-size:1.0625rem;color:var(--blue-700);
+  background:var(--depth-02);border-radius:var(--r-pill);width:44px;height:44px;display:grid;place-items:center}
+.mstep h4{margin:0 0 3px;font-size:1.0625rem;font-family:var(--font-display)}
+.mstep p{margin:0;font-size:var(--t-small);color:var(--text-muted)}
+.mstep__f{font-family:var(--font-mono);font-size:var(--t-label);color:var(--text-muted);white-space:nowrap}
+.mtag{display:inline-block;font:900 10px/1 var(--font-body);letter-spacing:.09em;text-transform:uppercase;
+  padding:5px 8px;border-radius:var(--r-pill);margin-left:8px;vertical-align:2px}
+.mtag--new{background:var(--blue-600);color:#fff}
+.mtag--fin{background:var(--warm);color:var(--warm-ink)}
+.mtag--alt{background:var(--depth-02);color:var(--depth-06)}
+
+/* reference + notes */
+.ref{margin-top:var(--s-9)}
+.ref h2{font-size:1.25rem;margin:0 0 var(--s-2)}
+.ref>p{color:var(--text-muted);font-size:var(--t-small);margin:0 0 var(--s-5);max-width:68ch}
+.refgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-4)}
+.rc{display:block;background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-md);
+  padding:var(--s-5);text-decoration:none;color:inherit}
+.rc:hover{border-color:var(--blue-600)}
+.rc h4{margin:0 0 4px;font-size:1rem}
+.rc p{margin:0;font-size:var(--t-label);color:var(--text-muted)}
+
+.note{border-radius:var(--r-lg);padding:var(--s-6);margin-top:var(--s-8)}
+.note h2{font-size:1.1875rem;margin:0 0 var(--s-4)}
+.note li{font-size:var(--t-small);margin-bottom:var(--s-3);line-height:1.6}
+.note--warm{background:var(--warm)} .note--warm h2,.note--warm li,.note--warm p{color:#3B2E1B}
+.note--warm a{color:var(--blue-700)}
+.note--out{background:#fff;border:2px dashed var(--amber,#C98B2E)}
+.note--out h2{color:var(--warm-ink)}
+.note--out li,.note--out p{color:var(--text-muted)}
+
+.bar{display:flex;gap:var(--s-4);flex-wrap:wrap;align-items:center;background:var(--depth-02);
+  border-radius:var(--r-lg);padding:var(--s-5) var(--s-6);margin-top:var(--s-8)}
+.bar p{margin:0;font-size:var(--t-small);flex:1 1 320px}
+@media(max-width:980px){.tours,.refgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.tours,.refgrid{grid-template-columns:1fr}
+  .mstep{grid-template-columns:44px 1fr;gap:var(--s-4)} .mstep__f{display:none}}
 </style>
 </head>
 <body>
+
 <header class="top">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--warm)">EquiStaff · V1 · 21 October 2026 · 35 screens</p>
-    <h1>All screens</h1>
-    <p>Everything built so far. These are real working pages &mdash; click into them, scroll them, fill the forms in. The landing decision comes first; pick one and the rest follow it.</p>
+    <p class="eyebrow" style="color:var(--warm)">EquiStaff &middot; working prototype &middot; 22 October 2026</p>
+    <h1>Thirty-three screens, three journeys.</h1>
+    <p>These are real working pages, not pictures of pages. Click into them, scroll them, fill the forms in &mdash;
+       the prototype remembers what you do. Start with a journey rather than a screen list; each one runs in order,
+       the way a real person would move through it.</p>
   </div>
 </header>
 
 <main class="wrap" style="padding-bottom:var(--s-9)">
 
-  <section class="whatsnew">
-    <h2>Where this stands</h2>
-    <ul>
-      <li><b>The employer name is now confidential on recruiter-managed roles.</b> The advert carries the barn&rsquo;s character, not its identity. Roles an employer posted themselves still show their name &mdash; that contrast is what makes the Recruiter-managed badge mean something. See <a href="job-detail.html">Job detail</a>, and the tracker on <a href="profile.html">Profile</a> where the name appears once you are shortlisted.</li>
-      <li><b>AI concierge</b> &mdash; five V1 states, each citing the hard rule it enforces, plus the Phase 2 nudge kept separate. V1 is a <i>scripted</i> assistant, not a self-learning one. Built against <b>EquiStaff Chatbot: Engineering Handoff (V1)</b>. See <a href="chatbot.html">AI concierge</a>.</li>
-      <li><b>Candidate profile</b> &mdash; the screen behind every <i>View</i> button on the shortlist. The recruiter&rsquo;s judgement first, then the phone-checked references that support it, then the decision. See <a href="candidate.html">Candidate profile</a>.</li>
-      <li><b>Resume builder</b> &mdash; plain questions on the left, the document assembling itself on the right. For the candidate who has never written one.</li>
-      <li><b>Pricing is now Kaitlin&rsquo;s real price list</b> &mdash; $50 a month, $140 a quarter, $460 a year, and direct hire at $1,000 up front with the balance on the hire&rsquo;s first day. The percentage is never stated. Only the middle tier is still unpriced.</li>
-      <li><b>Closing out a candidate now requires a star rating</b>, and it goes to the recruiter only. See <a href="employer.html">Searches &amp; shortlist</a>.</li>
-      <li><b>Option A is the final landing page.</b> Two calls to action above the fold instead of four. B is the documented alternate; C is retired.</li>
-      <li><b>Numbers are legible now</b> &mdash; IBM Plex Mono, larger and bolder, replacing Cutive Mono which had no bold weight.</li>
-      <li><b>The portal is brighter</b>, and contrast was measured rather than eyeballed &mdash; white sits at 13.5:1 and 9.0:1 on the two new grounds.</li>
-      <li><b>The portal is no longer one flat column</b> &mdash; applications differ by status, and sections have room to breathe.</li>
-    </ul>
-  </section>
-
-
-  <section class="grp">
-    <h2>Landing page &mdash; decided</h2>
-    <p><b>Option A is final</b>, confirmed 21 October. B stays documented as the alternate; C is retired. This is the page that goes to engineering.</p>
-    <div class="grid">
-      <a class="card card--final" href="index.html"><span class="k">Option A · FINAL</span><h3>Editorial</h3><p>Video hero, then two doors below it. One question above the fold, two answers. This is the landing page we build.</p></a>
-      <a class="card" href="landing-b.html"><span class="k">Alternate</span><h3>Split decision</h3><p>The two doors <em>are</em> the hero, side by side. Kept on record as the documented alternate — not being built.</p></a>
-      <a class="card card--retired" href="landing-c.html"><span class="k">Retired</span><h3>💀 Option C &mdash; the gradient dive</h3><p>Not taken forward after the 7 October session. Kept here so the link still works, and so the idea is on the record.</p></a>
-    </div>
-  </section>
-
-  <section class="grp">
-    <h2>The job board</h2>
-    <p>What a candidate sees. Pay is on every listing, and nothing is behind a login.</p>
-    <div class="grid">
-      <a class="card" href="jobs.html"><span class="k">Browse</span><h3>Job board</h3><p>Filters down the side, every row showing pay, housing and commitment before you click.</p></a>
-      <a class="card" href="job-detail.html"><span class="k">One role</span><h3>Job detail</h3><p>A single listing in full. Public and indexable, so it can turn up in Google.</p></a>
-      <a class="card" href="onboarding.html"><span class="k">Apply</span><h3>Onboarding</h3><p>Three short steps. Built for someone with no resume. The sign-up happens here, not before browsing.</p></a>
-    </div>
-  </section>
-
-  <section class="grp">
-    <h2>Signed in</h2>
-    <p>The dark theme. Same components as the public site — only the colours change.</p>
-    <div class="grid">
-      <a class="card" href="signin.html"><span class="k">The crossing</span><h3>Sign in</h3><p>Light on one side, dark on the other — the moment you move from public into the portal.</p></a>
-      <a class="card card--deep" href="profile.html"><span class="k">Job seeker</span><h3>Profile &amp; applications</h3><p>Where a candidate tracks what they've applied to and finishes their profile.</p></a>
-      <a class="card card--deep" href="employer.html"><span class="k">Employer</span><h3>Searches &amp; shortlist</h3><p>The revenue side. Shows the search progress, the shortlist of four, and nudges on adverts that aren't working.</p></a>
-      <a class="card" href="chatbot.html"><span class="k">New</span><h3>AI concierge &mdash; all states</h3><p>Six states with the rule each one enforces, built from Kaitlin&rsquo;s wish list. This is the handoff document for the chatbot.</p></a>
-      <a class="card card--deep" href="candidate.html"><span class="k">New</span><h3>Candidate profile</h3><p>What the employer opens from the shortlist. Kaitlin&rsquo;s assessment leads, then the reference checks that back it up.</p></a>
-      <a class="card card--deep" href="resume.html"><span class="k">New</span><h3>Resume builder</h3><p>For the candidate who has never written one. Plain questions on the left, a real document assembling itself on the right.</p></a>
-    </div>
-  </section>
-
-
-  <section class="grp">
-    <h2>Getting an account</h2>
-    <p>The audit's blocker #2 was the verification link. These replace it.</p>
-    <div class="grid">
-      <a class="card" href="signup.html"><span class="k">New</span><h3>Sign up</h3><p>Four fields, both roles. The live site asks thirty-five and caps the password at fifteen characters.</p></a>
-      <a class="card" href="verify.html"><span class="k">New</span><h3>Verify email</h3><p>Tokenised, expiring, single-use. Add <code>?state=expired</code> to see the case people actually hit.</p></a>
-      <a class="card" href="forgot.html"><span class="k">New</span><h3>Forgot password</h3><p>Four states in one page. The copy never confirms whether an address has an account.</p></a>
-    </div>
-  </section>
-
-  <section class="grp">
-    <h2>Hiring through Kaitlin</h2>
-    <p>The managed search, now complete from first contact to the decision.</p>
-    <div class="grid">
-      <a class="card" href="request-talent.html"><span class="k">New</span><h3>Request talent</h3><p>Fields follow EM-Q1 to EM-Q8 in the engineering handoff, so this and the assistant collect the same things.</p></a>
-      <a class="card card--deep" href="employer.html"><span class="k">Employer</span><h3>Searches &amp; shortlist</h3><p>Progress, the shortlist of four, and the nudge on an advert that isn't working.</p></a>
-      <a class="card card--deep" href="candidate.html"><span class="k">Employer</span><h3>Candidate profile</h3><p>Kaitlin's assessment first, then the phone-checked references, then the decision.</p></a>
-    </div>
-  </section>
-
-  <section class="grp">
-    <h2>Posting a job yourself</h2>
-    <p>The subscription side. Audit blocker #3 was that none of this existed and no price appeared anywhere.</p>
-    <div class="grid">
-      <a class="card card--deep" href="post-job.html"><span class="k">New</span><h3>Post a job</h3><p>Live preview of the real card, and a completeness meter that nags about pay and housing.</p></a>
-      <a class="card card--deep" href="my-jobs.html"><span class="k">New</span><h3>Your job posts</h3><p>Views and applicants on the row. A post running long with few applicants gets called out.</p></a>
-      <a class="card card--deep" href="applicants.html"><span class="k">New</span><h3>Applicants</h3><p>The self-serve list, and an honest note about how it differs from a vetted shortlist.</p></a>
-      <a class="card card--deep" href="billing.html"><span class="k">New</span><h3>Plans &amp; billing</h3><p>Kaitlin's real prices. Cancelling runs the save offers first, per EM-4.</p></a>
-      <a class="card card--deep" href="company.html"><span class="k">New</span><h3>Company profile</h3><p>Shows both versions: what a candidate sees on your own post, and what is withheld on a managed search.</p></a>
-    </div>
-  </section>
-
-
-  <section class="grp">
-    <h2>Your account, once you're in</h2>
-    <p>The job seeker side of the portal, completed.</p>
-    <div class="grid">
-      <a class="card card--deep" href="messages.html"><span class="k">New</span><h3>Messages</h3><p>Two tabs, not one inbox with a toggle. A note from the recruiting team and a note from a barn need different attention.</p></a>
-      <a class="card card--deep" href="settings.html"><span class="k">New</span><h3>Settings</h3><p>Job alerts off by default, &ldquo;looking quietly&rdquo;, and a plain note that employer feedback never reaches you.</p></a>
-      <a class="card card--deep" href="resume.html"><span class="k">Builder</span><h3>Resume builder</h3><p>Plain questions on the left, the document assembling itself on the right.</p></a>
-    </div>
-  </section>
-
-  <section class="grp">
-    <h2>The public site</h2>
-    <p>Everything Google needs to see, and the pages the audit found missing entirely.</p>
-    <div class="grid">
-      <a class="card" href="pricing.html"><span class="k">New</span><h3>Pricing</h3><p>Audit finding #3 was no price anywhere. Kaitlin&rsquo;s real list, and the recruiting percentage still never stated.</p></a>
-      <a class="card" href="about.html"><span class="k">New</span><h3>About</h3><p>Forty-two years, the phone-reference rule, and why a managed advert never names the barn.</p></a>
-      <a class="card" href="contact.html"><span class="k">New</span><h3>Contact</h3><p>A first-class page, routed by who you are, with the faster path flagged if you&rsquo;re hiring.</p></a>
-      <a class="card" href="privacy.html"><span class="k">Draft</span><h3>Privacy policy</h3><p>The live site has none at all. Plain English, marked clearly as needing a lawyer.</p></a>
-      <a class="card" href="terms.html"><span class="k">Draft</span><h3>Terms of use</h3><p>Short, and honest about the two rules that actually matter.</p></a>
-      <a class="card" href="404.html"><span class="k">New</span><h3>404</h3><p>Branded, with three ways back in. The audit found no 404 page.</p></a>
-    </div>
-  </section>
-
-
-  <section class="grp">
-    <h2>Everything else that now has a page</h2>
-    <p>Every button on the site leads somewhere. These are the destinations that were missing.</p>
-    <div class="grid">
-      <a class="card card--deep" href="applications.html"><span class="k">New</span><h3>Applications</h3><p>The full list behind the profile preview, filterable, with what each status actually means.</p></a>
-      <a class="card card--deep" href="saved.html"><span class="k">New</span><h3>Saved roles</h3><p>What you kept. Saving tells the employer nothing &mdash; the page says so.</p></a>
-      <a class="card" href="book.html"><span class="k">New</span><h3>Book a call</h3><p>Routed by whether you&rsquo;re hiring or looking, then a real time picker.</p></a>
-      <a class="card" href="blog.html"><span class="k">New</span><h3>Equine Prose</h3><p>The blog, filterable by audience. Six posts with real headlines.</p></a>
-      <a class="card" href="blog-post.html"><span class="k">New</span><h3>A blog post</h3><p>&ldquo;Why your advert has been up for forty days&rdquo; &mdash; the long-form template.</p></a>
-      <a class="card" href="404.html"><span class="k">New</span><h3>404</h3><p>Branded, with three ways back in.</p></a>
-    </div>
-  </section>
-
-  <div class="tipbar">
-    <p style="margin-bottom:var(--s-3)"><b>This prototype remembers what you do.</b> Apply for a role and it appears on your profile. Save a listing and it is in your saved roles. Publish a job post and it is on your job posts. Clear site data to start over.</p>
-    <p><b>To see the mobile version:</b> make this browser window narrow by dragging its right edge toward the middle. The pages rearrange themselves as it gets smaller.</p>
+  <div class="tours">
+    <a class="tour" href="jobs.html">
+      <span class="k">Journey one</span>
+      <h3>Looking for work</h3>
+      <p>Imogen, a working student. Browses without an account, finds a role that doesn&rsquo;t name the barn, applies in three steps, then waits for an answer.</p>
+      <span class="n">11 screens</span>
+      <span class="go">Start at the job board &rarr;</span>
+    </a>
+    <a class="tour" href="request-talent.html">
+      <span class="k">Journey two</span>
+      <h3>Hiring through Kaitlin</h3>
+      <p>Whitney, a 24-horse show barn. Doesn&rsquo;t want her name on a job board and doesn&rsquo;t want fifty applications. Hands the whole search over.</p>
+      <span class="n">4 screens</span>
+      <span class="go">Start at Request talent &rarr;</span>
+    </a>
+    <a class="tour" href="post-job.html">
+      <span class="k">Journey three</span>
+      <h3>Posting it yourself</h3>
+      <p>Marco, a 90-horse sales farm. Hires twelve times a year and doesn&rsquo;t need a recruiter for grooms. Subscribes and runs it himself.</p>
+      <span class="n">5 screens</span>
+      <span class="go">Start at Post a job &rarr;</span>
+    </a>
   </div>
+
+
+  <!-- ============ PUBLIC ============ -->
+  <section class="jny jny--pub">
+    <div class="jny__head">
+      <span class="k">Before any journey starts</span>
+      <h2>The public site</h2>
+      <p>What a stranger sees. The fold asks one question &mdash; are you hiring, or are you looking for work &mdash; and the two buttons answer it.</p>
+    </div>
+    <a class="mstep" href="index.html">
+      <span class="mstep__n">1</span>
+      <div><h4>Landing <span class="mtag mtag--fin">Final</span></h4><p>Option A, confirmed 21 October. Video hero, then two doors beneath it. This is the page that goes to engineering.</p></div>
+      <span class="mstep__f">index.html</span>
+    </a>
+    <a class="mstep" href="landing-b.html">
+      <span class="mstep__n">2</span>
+      <div><h4>Landing, the alternate <span class="mtag mtag--alt">On record</span></h4><p>The two doors <em>are</em> the hero, side by side. Documented, not being built. Option C was retired on 7 October.</p></div>
+      <span class="mstep__f">landing-b.html</span>
+    </a>
+    <a class="mstep" href="pricing.html">
+      <span class="mstep__n">3</span>
+      <div><h4>Pricing</h4><p>Your real price list &mdash; $50 a month, $140 a quarter, $460 a year, and $1,000 to start a managed search. The placement percentage is deliberately never stated.</p></div>
+      <span class="mstep__f">pricing.html</span>
+    </a>
+    <a class="mstep" href="about.html">
+      <span class="mstep__n">4</span>
+      <div><h4>About</h4><p>Forty-two years, the phone-reference rule, and why a managed advert never names the barn.</p></div>
+      <span class="mstep__f">about.html</span>
+    </a>
+    <a class="mstep" href="contact.html">
+      <span class="mstep__n">5</span>
+      <div><h4>Contact</h4><p>Routed by who you are, with the faster path flagged if you&rsquo;re hiring.</p></div>
+      <span class="mstep__f">contact.html</span>
+    </a>
+  </section>
+
+
+  <!-- ============ JOB SEEKER ============ -->
+  <section class="jny">
+    <div class="jny__head">
+      <span class="k">Journey one &middot; 11 screens</span>
+      <h2>Looking for work</h2>
+      <p>Steps 1 to 5 are the part that has to work on a phone between barn shifts. Steps 6 to 11 are her portal once she is in.</p>
+    </div>
+    <a class="mstep" href="jobs.html">
+      <span class="mstep__n">1</span>
+      <div><h4>Browses the board</h4><p>Pay on every row, so she doesn&rsquo;t have to open eleven listings to rule them out. No account needed.</p></div>
+      <span class="mstep__f">jobs.html</span>
+    </a>
+    <a class="mstep" href="job-detail.html">
+      <span class="mstep__n">2</span>
+      <div><h4>Opens a role</h4><p>Employer confidential, said out loud &mdash; with the discipline, horse count and housing that let her judge it anyway.</p></div>
+      <span class="mstep__f">job-detail.html</span>
+    </a>
+    <a class="mstep" href="signup.html">
+      <span class="mstep__n">3</span>
+      <div><h4>Makes an account <span class="mtag mtag--new">New</span></h4><p>Four fields, both roles. The live site asks thirty-five and caps the password at fifteen characters.</p></div>
+      <span class="mstep__f">signup.html</span>
+    </a>
+    <a class="mstep" href="verify.html">
+      <span class="mstep__n">4</span>
+      <div><h4>Confirms the email <span class="mtag mtag--new">New</span></h4><p>Audit blocker #2. Tokenised, expiring, single-use. Add <code>?state=expired</code> to see the case people actually hit.</p></div>
+      <span class="mstep__f">verify.html</span>
+    </a>
+    <a class="mstep" href="onboarding.html">
+      <span class="mstep__n">5</span>
+      <div><h4>Applies &mdash; three short steps</h4><p>Built for someone who has never written a resume. No upload anywhere in the flow.</p></div>
+      <span class="mstep__f">onboarding.html</span>
+    </a>
+    <a class="mstep" href="profile.html">
+      <span class="mstep__n">6</span>
+      <div><h4>Her profile and checklist</h4><p>Every item deep-links to the screen that completes it. Applying above puts a real row here.</p></div>
+      <span class="mstep__f">profile.html</span>
+    </a>
+    <a class="mstep" href="applications.html">
+      <span class="mstep__n">7</span>
+      <div><h4>Where each application stands <span class="mtag mtag--new">New</span></h4><p>One list, four statuses, and a panel spelling out what each status actually means. The live site gives her three tables and no status at all.</p></div>
+      <span class="mstep__f">applications.html</span>
+    </a>
+    <a class="mstep" href="resume.html">
+      <span class="mstep__n">8</span>
+      <div><h4>Builds a resume <span class="mtag mtag--new">New</span></h4><p>Plain questions on the left, a real document assembling itself on the right. Downloadable.</p></div>
+      <span class="mstep__f">resume.html</span>
+    </a>
+    <a class="mstep" href="saved.html">
+      <span class="mstep__n">9</span>
+      <div><h4>Roles she saved <span class="mtag mtag--new">New</span></h4><p>Saving tells the employer nothing &mdash; the page says so, because people assume otherwise.</p></div>
+      <span class="mstep__f">saved.html</span>
+    </a>
+    <a class="mstep" href="messages.html">
+      <span class="mstep__n">10</span>
+      <div><h4>Messages <span class="mtag mtag--new">New</span></h4><p>Two tabs, not one inbox. A note from your team and a note from a barn need different attention.</p></div>
+      <span class="mstep__f">messages.html</span>
+    </a>
+    <a class="mstep" href="settings.html">
+      <span class="mstep__n">11</span>
+      <div><h4>Settings <span class="mtag mtag--new">New</span></h4><p>Job alerts off by default, a &ldquo;looking quietly&rdquo; switch, and a plain note that employer feedback never reaches the candidate.</p></div>
+      <span class="mstep__f">settings.html</span>
+    </a>
+  </section>
+
+
+  <!-- ============ MANAGED EMPLOYER ============ -->
+  <section class="jny">
+    <div class="jny__head">
+      <span class="k">Journey two &middot; 4 screens</span>
+      <h2>Hiring through Kaitlin</h2>
+      <p>The managed search, complete from first contact to the decision. This is the revenue side.</p>
+    </div>
+    <a class="mstep" href="request-talent.html">
+      <span class="mstep__n">1</span>
+      <div><h4>Sends the role over <span class="mtag mtag--new">New</span></h4><p>Eight real questions &mdash; EM-Q1 to EM-Q8 in the engineering handoff &mdash; so this and the assistant collect exactly the same things.</p></div>
+      <span class="mstep__f">request-talent.html</span>
+    </a>
+    <a class="mstep" href="book.html">
+      <span class="mstep__n">2</span>
+      <div><h4>Books the briefing call <span class="mtag mtag--new">New</span></h4><p>Routed by whether you&rsquo;re hiring or looking, then a real time picker.</p></div>
+      <span class="mstep__f">book.html</span>
+    </a>
+    <a class="mstep" href="employer.html">
+      <span class="mstep__n">3</span>
+      <div><h4>Her searches and shortlist</h4><p>Progress on each search, a shortlist of four rather than fifty, and a nudge on an advert that isn&rsquo;t working.</p></div>
+      <span class="mstep__f">employer.html</span>
+    </a>
+    <a class="mstep" href="candidate.html">
+      <span class="mstep__n">4</span>
+      <div><h4>Reads a candidate, rates them <span class="mtag mtag--new">New</span></h4><p>Your assessment leads, then the phone-checked references that back it up. The star rating is required before anyone can be closed out, and it reaches you only &mdash; never the candidate.</p></div>
+      <span class="mstep__f">candidate.html</span>
+    </a>
+  </section>
+
+
+  <!-- ============ SELF-SERVE EMPLOYER ============ -->
+  <section class="jny jny--self">
+    <div class="jny__head">
+      <span class="k">Journey three &middot; 5 screens</span>
+      <h2>Posting it yourself</h2>
+      <p>The subscription side. Audit blocker #3 was that none of this existed, and that no price appeared anywhere on the site.</p>
+    </div>
+    <a class="mstep" href="post-job.html">
+      <span class="mstep__n">1</span>
+      <div><h4>Writes the post <span class="mtag mtag--new">New</span></h4><p>Live preview of the real card as he types, and a completeness meter that nags about pay and housing.</p></div>
+      <span class="mstep__f">post-job.html</span>
+    </a>
+    <a class="mstep" href="my-jobs.html">
+      <span class="mstep__n">2</span>
+      <div><h4>His job posts <span class="mtag mtag--new">New</span></h4><p>Views and applicants on the row. A post running long with few applicants gets called out.</p></div>
+      <span class="mstep__f">my-jobs.html</span>
+    </a>
+    <a class="mstep" href="applicants.html">
+      <span class="mstep__n">3</span>
+      <div><h4>Who applied <span class="mtag mtag--new">New</span></h4><p>Status filters built for working a list in passes. Says plainly that nobody has been spoken to &mdash; and offers to hand the role to you.</p></div>
+      <span class="mstep__f">applicants.html</span>
+    </a>
+    <a class="mstep" href="billing.html">
+      <span class="mstep__n">4</span>
+      <div><h4>Plan and billing <span class="mtag mtag--new">New</span></h4><p>Your real prices. Cancelling runs the save offers first, per EM-4.</p></div>
+      <span class="mstep__f">billing.html</span>
+    </a>
+    <a class="mstep" href="company.html">
+      <span class="mstep__n">5</span>
+      <div><h4>Company profile <span class="mtag mtag--new">New</span></h4><p>Shows both versions at once: what a candidate sees on his own post, and what is withheld on a managed search.</p></div>
+      <span class="mstep__f">company.html</span>
+    </a>
+  </section>
+
+
+  <!-- ============ REFERENCE ============ -->
+  <section class="ref">
+    <h2>The rest of the site</h2>
+    <p>Screens every journey can reach but none of them starts at. Nothing here is a dead end &mdash; every button on the site leads somewhere real.</p>
+    <div class="refgrid">
+      <a class="rc" href="chatbot.html"><h4>AI concierge</h4><p>Five V1 states, each citing the hard rule it enforces. V1 is scripted, not self-learning.</p></a>
+      <a class="rc" href="signin.html"><h4>Sign in</h4><p>Light on one side, dark on the other — the crossing into the portal.</p></a>
+      <a class="rc" href="forgot.html"><h4>Forgot password</h4><p>Four states in one page. Never confirms whether an address has an account.</p></a>
+      <a class="rc" href="blog.html"><h4>Equine Prose</h4><p>The blog, filterable by audience. Six posts with real headlines.</p></a>
+      <a class="rc" href="blog-post.html"><h4>A blog post</h4><p>&ldquo;Why your advert has been up for forty days&rdquo; — the long-form template.</p></a>
+      <a class="rc" href="privacy.html"><h4>Privacy policy</h4><p>The live site has none at all. Plain English, still needs a lawyer.</p></a>
+      <a class="rc" href="terms.html"><h4>Terms of use</h4><p>Short, and honest about the two rules that actually matter.</p></a>
+      <a class="rc" href="404.html"><h4>404</h4><p>Branded, with three ways back in. The audit found no 404 page.</p></a>
+    </div>
+  </section>
+
+
+  <div class="note note--out">
+    <h2>Deliberately not built yet</h2>
+    <ul>
+      <li><b>Kaitlin&rsquo;s own admin portal</b> &mdash; where she runs searches, holds candidates she already knows, writes the shortlist up and tracks invoices. Agreed out of scope on 7 October. The employer-side rating and progress patterns are the groundwork for it.</li>
+      <li><b>Anything that needs the live database</b> &mdash; blocked on Azure access and the SmartSearch API terms.</li>
+      <li><b>Logo, final typeface and iconography</b> &mdash; with Brittany.</li>
+    </ul>
+  </div>
+
+  <div class="bar">
+    <p><b>The prototype remembers what you do.</b> Apply for a role and it shows up on the profile. Save a listing and it&rsquo;s in saved roles. Publish a post and it&rsquo;s on the job posts screen.</p>
+    <button class="btn btn--secondary" type="button" onclick="if(window.ES){ES.reset();}location.reload()">Reset the demo</button>
+  </div>
+
+  <div class="note note--warm">
+    <h2>Two things worth doing while you&rsquo;re in here</h2>
+    <ul>
+      <li><b>Drag the window narrower</b> to see the phone version. Everything rearranges; the portal navigation scrolls sideways rather than disappearing.</li>
+      <li><b>Follow a journey in order</b> rather than jumping around. Steps 1 to 5 of journey one are the ones that carry the most change from the live site.</li>
+    </ul>
+  </div>
+
 </main>
+<script src="src/state.js"></script>
 </body>
 </html>
