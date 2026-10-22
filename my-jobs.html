@@ -41,16 +41,7 @@
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="pHdr">
-  <div class="wrap pHdr__in">
-    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
-    <nav class="pHdr__nav" aria-label="Employer portal">
-      <a href="employer.html">Your searches</a><a href="my-jobs.html" aria-current="page">Job posts</a>
-      <a href="post-job.html">Post a job</a><a href="billing.html">Billing</a><a href="company.html">Company</a>
-    </nav>
-    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
-  </div>
-</header>
+<div id="nav" data-nav="employer"></div>
 
 <main id="main">
   <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
@@ -79,6 +70,7 @@
 </footer>
 
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 <script>
 function esc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 

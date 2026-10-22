@@ -149,6 +149,21 @@
       commit(); return db.ratings[candidateId];
     },
 
+    /* Real file downloads. This is a static site, not a sandboxed frame, so a
+       Blob download genuinely works — better than a button that does nothing. */
+    download: function (filename, text, mime) {
+      try {
+        var blob = new Blob([text], { type: mime || 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        ES.notify('Downloaded ' + filename);
+        return true;
+      } catch (e) { return false; }
+    },
+
     /* ---------- small cross-screen notice ---------- */
     notify: function (text) { db.notices.push({ text: text, at: Date.now() }); commit(); },
     takeNotices: function () { var n = db.notices.slice(); db.notices = []; commit(); return n; },

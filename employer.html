@@ -47,15 +47,7 @@
 </head>
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
-<header class="pHdr">
-  <div class="wrap pHdr__in">
-    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
-    <nav class="pHdr__nav" aria-label="Employer portal">
-      <a href="employer.html" aria-current="page">Your searches</a><a href="employer.html">Shortlists</a><a href="my-jobs.html">Job posts</a><a href="billing.html">Invoices</a><a href="messages.html">Messages</a>
-    </nav>
-    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
-  </div>
-</header>
+<div id="nav" data-nav="employer"></div>
 
 <main id="main">
   <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
@@ -88,12 +80,12 @@
       <div class="recBar">
         <img src="img/kaitlin.jpg" alt="">
         <p><b>Kaitlin has four people for you.</b> All four phone-referenced. She's free Thursday morning to walk you through them.</p>
-        <a class="btn btn--primary" href="#" style="margin-left:auto;white-space:nowrap">Book the call</a>
+        <a class="btn btn--primary" href="book.html" style="margin-left:auto;white-space:nowrap">Book the call</a>
       </div>
     </div>
 
     <section class="pSection">
-      <div class="pSection__head"><h2>Your shortlist</h2><a href="#">Download as PDF →</a></div>
+      <div class="pSection__head"><h2>Your shortlist</h2><a href="#" onclick="event.preventDefault();dlShortlist()">Download the shortlist &rarr;</a></div>
       <div class="shortlist">
         <div class="cand" id="c0">
           <div class="cand__row">
@@ -257,7 +249,7 @@
     </section>
 
     <section class="pSection">
-      <div class="pSection__head"><h2>Past placements</h2><a href="#">View all →</a></div>
+      <div class="pSection__head"><h2>Past placements</h2><a href="my-jobs.html">View all &rarr;</a></div>
       <div class="appRow">
         <div><h4>Assistant Trainer — Imogen Clarke</h4><p>Placed 4 March 2026 · still with you · guarantee period complete</p></div>
         <span class="pill pill--shortlist">Placed</span>
@@ -298,5 +290,17 @@ function sendFb(i){
 }
 </script>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
+<script>
+function dlShortlist(){
+  var txt = ['EQUISTAFF — SHORTLIST','Barn Manager · REF 10480 · Golden Ocala Equestrian','',
+   'Dana Whitfield — 9 years — 24-horse hunter/jumper barn, Ocala — available in 30 days — references clear',
+   'Marcus Reyes — 12 years — facility director, Wellington — available now — references clear',
+   "Sarah O'Dell — 6 years — barn manager, Lexington — relocating to Ocala — references clear",
+   'Tom Brennan — 15 years — estate & barn management, Aiken — available in 60 days — references clear','',
+   'Every reference checked by phone. Notes held by EquiStaff and available on request.'].join('\n');
+  ES.download('Barn-Manager-shortlist.txt', txt);
+}
+</script>
 </body>
 </html>

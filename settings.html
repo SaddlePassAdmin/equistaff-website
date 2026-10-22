@@ -35,16 +35,7 @@
 </head>
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
-<header class="pHdr">
-  <div class="wrap pHdr__in">
-    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
-    <nav class="pHdr__nav" aria-label="Portal">
-      <a href="profile.html">Profile</a><a href="resume.html">Resume</a><a href="jobs.html">Find work</a>
-      <a href="messages.html">Messages</a><a href="settings.html" aria-current="page">Settings</a>
-    </nav>
-    <div class="avatar" title="Dana Whitfield">DW</div>
-  </div>
-</header>
+<div id="nav" data-nav="seeker"></div>
 <main id="main">
   <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
     <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Settings</h1>
@@ -121,5 +112,6 @@ function confirmIt(k){
   </div></div>
 </footer>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 </body>
 </html>

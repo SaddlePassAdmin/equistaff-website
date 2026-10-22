@@ -461,3 +461,23 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .esFlash svg { color:var(--warm); flex:0 0 auto; }
 .esFlash--out { opacity:0; transform:translateX(-50%) translateY(8px); }
 @media (prefers-reduced-motion:reduce){ .esFlash{transition:none} }
+
+/* The portal nav used to be display:none under 680px, which left a phone with
+   no navigation at all. It scrolls sideways instead — pHdr__nav scrolls. */
+@media (max-width: 760px) {
+  .pHdr__nav, .hdr__nav {
+    display: flex !important; gap: var(--s-4);
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; margin: 0 calc(var(--s-4) * -1); padding: 0 var(--s-4);
+    flex: 1 1 100%; order: 3; min-width: 0;
+  }
+  .pHdr__nav::-webkit-scrollbar, .hdr__nav::-webkit-scrollbar { display: none; }
+  .pHdr__nav a, .hdr__nav a { white-space: nowrap; padding: 10px 0; font-size: var(--t-small); }
+  .pHdr__in, .hdr__in { flex-wrap: wrap; row-gap: var(--s-3); }
+  .pHdr__cta, .hdr__cta { margin-left: auto; }
+}
+/* Current page, in both navs. */
+.pHdr__nav a[aria-current="page"] { color: #fff; font-weight: 900; }
+.hdr__nav a[aria-current="page"] { color: var(--blue-700); font-weight: 900; }
+.hdr__plain { font-size: var(--t-small); font-weight: 700; text-decoration: none; color: var(--text-primary); }
+.pHdr__cta { display: flex; gap: var(--s-3); align-items: center; }

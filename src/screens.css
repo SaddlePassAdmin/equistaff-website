@@ -199,3 +199,10 @@
 .track--rail .track__s:first-child::before { border-radius:2px 2px 0 0; }
 .track--rail .track__s:last-child::before { border-radius:0 0 2px 2px; }
 .track--rail .track__l { font-size:var(--t-label); }
+
+
+/* The field you were sent to from the completion checklist. */
+.field--target { position:relative; }
+.field--target > label { color:var(--warm) !important; }
+.field--target input, .field--target select, .field--target textarea {
+  border-color:var(--warm) !important; box-shadow:0 0 0 3px rgba(249,244,237,.18); }

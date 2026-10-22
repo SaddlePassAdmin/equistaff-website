@@ -21,20 +21,7 @@
 <body class="has-chat">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a class="hdr__logo" href="/"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
-    <nav class="hdr__nav" aria-label="Main">
-      <a href="#find-work">Find work</a>
-      <a href="#hire">Hire staff</a>
-      <a href="#process">How we work</a>
-      <a href="#founder">About</a>
-    </nav>
-    <div class="hdr__cta">
-      <a class="hdr__signin" href="signin.html">Sign in</a>
-    </div>
-  </div>
-</header>
+<div id="nav" data-nav="public"></div>
 
 <main id="main">
 
@@ -238,8 +225,8 @@
             <li><i class="cmp__n"></i>You still read and shortlist them</li>
             <li><i class="cmp__n"></i>You still chase the references</li>
           </ul>
-          <p class="cmp__price">Per role <span class="tbc">not priced yet</span></p>
-          <p class="cmp__terms">Discussed on 7 October and still to be set. Nothing goes on this page until Kaitlin sets it.</p>
+          <p class="cmp__price">Per role</p>
+          <p class="cmp__terms">Quoted on the role, because writing an advert for a groom and writing one for a stud manager are not the same job. Ask and we will tell you.</p>
           <a class="btn btn--primary" href="#request" style="width:100%">Talk it through</a>
         </div>
 
@@ -262,7 +249,6 @@
         </div>
       </div>
 
-      <p class="compare__note compare__note--draft"><b>Prices are Kaitlin&rsquo;s own, from the approved price list.</b> The middle tier is the one exception &mdash; it was discussed on 7 October and has not been priced, so it carries no number.</p>
       <p class="compare__note">Not sure which you need? <a href="#request">Send the role over</a> and we will tell you honestly — sometimes a listing really is enough.</p>
     </div>
   </section>
@@ -423,5 +409,6 @@
   <span class="chatLaunch__dot"></span> Ask EquiStaff
 </a>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 </body>
 </html>

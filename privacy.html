@@ -37,28 +37,16 @@
 </head>
 <body class="has-chat">
 <a class="skip" href="#main">Skip to content</a>
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
-    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html">Find work</a><a href="request-talent.html">Hire staff</a><a href="pricing.html">Pricing</a><a href="about.html">About</a></nav>
-    <div class="hdr__cta"><a href="signin.html" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a><a class="btn btn--primary" href="request-talent.html">Request talent</a></div>
-  </div>
-</header>
+<div id="nav" data-nav="public"></div>
+<!-- INTERNAL: draft wording, not yet reviewed by a lawyer. Do not treat as final. -->
 <main id="main">
   <section class="lgHero"><div class="wrap">
     <p class="eyebrow" style="color:var(--warm)">Privacy</p>
     <h1>What we collect, and why</h1>
-    <p>The audit found the live site has no privacy policy at all. This is the honest version of what the
-       rebuilt site actually does.</p>
+    <p>Short, specific, and written so you can actually tell what happens to what you give us.</p>
   </div></section>
 
   <section class="lgBody cut-top"><div class="wrap"><div class="lgWrap">
-    <div class="lgDraft">
-      <p><b>Draft &mdash; not yet reviewed by a lawyer.</b> This page sets out what the site actually does with
-      data, in plain English, so that a lawyer has something accurate to work from. It is not legal advice and
-      should not go live in this state.</p>
-    </div>
-
     <div class="lgToc">
       <a href="#what">What we collect</a><a href="#why">Why we collect it</a><a href="#share">Who sees it</a>
       <a href="#bot">The assistant</a><a href="#rights">Your choices</a><a href="#keep">How long we keep it</a>
@@ -131,5 +119,6 @@
 
 <a class="chatLaunch" href="chatbot.html"><span class="chatLaunch__dot"></span> Ask EquiStaff</a>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saved roles | EquiStaff</title>
+<meta name="description" content="Roles you have kept to come back to.">
+<link rel="canonical" href="https://www.equistaff.com/saved.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+.svHead{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-5);flex-wrap:wrap;margin-bottom:var(--s-6)}
+.svNote{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);
+  padding:var(--s-5) var(--s-6);margin-top:var(--s-7);font-size:var(--t-small);color:var(--text-muted)}
+.svNote b{color:#fff}
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<div id="nav" data-nav="seeker"></div>
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <div class="svHead">
+      <div>
+        <p class="eyebrow" style="color:var(--warm)">Job seeker</p>
+        <h1 style="color:#fff;margin:0;font-size:2rem">Saved roles</h1>
+      </div>
+      <a class="btn btn--primary" href="jobs.html">Browse open roles</a>
+    </div>
+    <div id="list"></div>
+    <div class="svNote">
+      <b>Saving a role does not tell the employer anything.</b> It is just a list for you. Nothing is sent
+      until you apply, and nobody sees what you have kept here.
+    </div>
+  </div>
+</main><footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span>
+    <span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span>
+  </div></div>
+</footer>
+<script src="src/state.js"></script><script src="src/nav.js"></script>
+<script>
+function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function paint(){
+  var rows = ES.saved();
+  document.getElementById('list').innerHTML = rows.length ? rows.map(function(r){
+    var org = (r.managed ? '<span class="job__conf">Employer confidential</span> ' : '') + esc(r.org);
+    return '<div class="appRow"><div><h4>'+esc(r.title)+'</h4>'
+      + '<p>'+org+' · '+esc(r.where)+(r.pay?' · '+esc(r.pay):'')+'</p></div>'
+      + '<div style="display:flex;gap:var(--s-3);flex-wrap:wrap">'
+      + '<button class="btn btn--secondary" type="button" onclick="drop(\''+r.title.replace(/'/g,"\\'")+'\')">Remove</button>'
+      + '<a class="btn btn--primary" href="job-detail.html">View role</a></div></div>';
+  }).join('') : '<div class="empty"><p>You haven\u2019t saved any roles yet. Tap <b>Save for later</b> on any listing and it will be here.</p><a class="btn btn--primary" href="jobs.html">Browse 214 open roles</a></div>';
+}
+function drop(t){ ES.toggleSave({title:t}); paint(); }
+paint();
+</script>
+</body>
+</html><script>
+function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function paint(){
+  var rows = ES.saved();
+  document.getElementById('list').innerHTML = rows.length ? rows.map(function(r){
+    var org = (r.managed ? '<span class="job__conf">Employer confidential</span> ' : '') + esc(r.org);
+    return '<div class="appRow"><div><h4>'+esc(r.title)+'</h4>'
+      + '<p>'+org+' · '+esc(r.where)+(r.pay?' · '+esc(r.pay):'')+'</p></div>'
+      + '<div style="display:flex;gap:var(--s-3);flex-wrap:wrap">'
+      + '<button class="btn btn--secondary" type="button" onclick="drop(\''+r.title.replace(/'/g,"\\'")+'\')">Remove</button>'
+      + '<a class="btn btn--primary" href="job-detail.html">View role</a></div></div>';
+  }).join('') : '<div class="empty"><p>You haven\u2019t saved any roles yet. Tap <b>Save for later</b> on any listing and it will be here.</p><a class="btn btn--primary" href="jobs.html">Browse 214 open roles</a></div>';
+}
+function drop(t){ ES.toggleSave({title:t}); paint(); }
+paint();
+</script>
+</body>
+</html>

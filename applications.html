@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your applications | EquiStaff</title>
+<meta name="description" content="Every role you have applied to, and exactly where each one stands.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* APPLICATIONS — the full list behind the profile's preview. The live site
+   gives a job seeker three separate tables and no status, which the audit
+   flagged; this is one list where the status is the organising idea.
+   What a status actually means is spelled out, because "sent to barn" and
+   "being reviewed" are indistinguishable to someone waiting. */
+.apFilters { display:flex; gap:var(--s-3); flex-wrap:wrap; margin-bottom:var(--s-6); }
+.apF { background:transparent; border:1.5px solid var(--navy-500); color:var(--baby-200);
+  border-radius:var(--r-pill); padding:9px 16px; font:600 var(--t-small)/1 var(--font-body);
+  cursor:pointer; min-height:42px; }
+.apF[aria-pressed="true"] { background:var(--baby-200); border-color:var(--baby-200); color:var(--navy-900); }
+.meanings { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-6); margin-top:var(--s-8); }
+.meanings h2 { color:#fff; font-size:1.125rem; margin:0 0 var(--s-4); }
+.mRow { display:grid; grid-template-columns:150px 1fr; gap:var(--s-5); padding:var(--s-4) 0;
+  border-bottom:1px solid var(--navy-500); align-items:start; }
+.mRow:last-child { border-bottom:0; }
+.mRow p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
+@media (max-width:620px){ .mRow { grid-template-columns:1fr; gap:var(--s-3); } }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<div id="nav" data-nav="seeker"></div>
+
+<main id="main">
+  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+    <p class="eyebrow" style="color:var(--warm)">Job seeker</p>
+    <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">Your applications</h1>
+    <p style="color:var(--baby-200);max-width:58ch;margin:0 0 var(--s-6)" id="sub">Every role you have applied to.</p>
+
+    <div class="apFilters" role="group" aria-label="Filter by status">
+      <button class="apF" aria-pressed="true"  onclick="filt('all',this)" id="fAll">All</button>
+      <button class="apF" aria-pressed="false" onclick="filt('Shortlisted',this)">Shortlisted</button>
+      <button class="apF" aria-pressed="false" onclick="filt('Being reviewed',this)">Being reviewed</button>
+      <button class="apF" aria-pressed="false" onclick="filt('Sent to barn',this)">Sent to barn</button>
+    </div>
+
+    <div id="list"></div>
+
+    <div class="meanings">
+      <h2>What each status means</h2>
+      <div class="mRow"><span class="pill pill--review">Being reviewed</span>
+        <p>With Kaitlin's team. Nobody at the barn has seen it yet. This is where most applications sit for the first two or three days.</p></div>
+      <div class="mRow"><span class="pill pill--sent">Sent to barn</span>
+        <p>We have put you forward and the employer has it. The waiting now depends on them, not us.</p></div>
+      <div class="mRow"><span class="pill pill--shortlist">Shortlisted</span>
+        <p>They want to meet you. On a recruiter-managed role this is also the point the barn's name appears, because contact has been made.</p></div>
+      <div class="mRow"><span class="pill pill--sent" style="opacity:.6">Closed</span>
+        <p>Filled, or withdrawn. We tell you either way rather than leaving you wondering &mdash; that is the promise on every listing.</p></div>
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span>
+    <span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script src="src/nav.js"></script>
+<script>
+var VIEW='all';
+function esc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function pillFor(st){
+  var c = st==='Shortlisted' ? 'pill--shortlist' : st==='Sent to barn' ? 'pill--sent' : 'pill--review';
+  return '<span class="pill '+c+'">'+st+'</span>';
+}
+function row(a){
+  var mod = a.status==='Shortlisted' ? ' appRow--good' : a.status==='Sent to barn' ? ' appRow--quiet' : '';
+  // The confidentiality rule holds here too: a managed employer is named
+  // only once contact has been made.
+  var org = (a.managed && !a.disclosed)
+    ? '<span class="job__conf">Employer confidential</span> '+esc(a.org) : esc(a.org);
+  var why = (a.managed && a.disclosed) ? '<p class="appRow__why">Named now that you’re shortlisted.</p>' : '';
+  return '<div class="appRow'+mod+'"><div>'
+       + '<h4>'+esc(a.title)+'</h4>'
+       + '<p>'+org+' · '+esc(a.where)+' · '+esc(a.when)+'</p>'+why
+       + '</div><div style="display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap">'
+       + pillFor(a.status)
+       + '<a class="btn btn--secondary" href="job-detail.html">View role</a>'
+       + '</div></div>';
+}
+function paint(){
+  var all = ES.applications();
+  var rows = all.filter(function(a){ return VIEW==='all' || a.status===VIEW; });
+  document.getElementById('list').innerHTML = rows.length
+    ? rows.map(row).join('')
+    : '<div class="empty"><p>Nothing with that status right now.</p>'
+      + '<a class="btn btn--primary" href="jobs.html">Browse open roles</a></div>';
+  document.getElementById('fAll').textContent = 'All ' + all.length;
+  document.getElementById('sub').textContent =
+    all.length + (all.length===1?' role':' roles') + ' applied to. We tell you either way, usually within two to three days.';
+}
+function filt(v,b){
+  VIEW=v;
+  document.querySelectorAll('.apF').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+  b.setAttribute('aria-pressed','true'); paint();
+}
+paint();
+</script>
+</body>
+</html>

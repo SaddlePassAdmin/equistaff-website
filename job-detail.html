@@ -73,13 +73,7 @@
 </head>
 <body class="has-chat">
 <a class="skip" href="#main">Skip to content</a>
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a class="hdr__logo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff — equine staffing since 1982"></a>
-    <nav class="hdr__nav" aria-label="Main"><a href="jobs.html" style="color:var(--blue-700)">Find work</a><a href="request-talent.html">Hire staff</a><a href="index.html#process">How we work</a><a href="index.html#founder">About</a></nav>
-    <div class="hdr__cta"><a href="signin.html" style="font-size:var(--t-small);font-weight:700;text-decoration:none;color:var(--text-primary)">Sign in</a><a class="btn btn--primary" href="onboarding.html">Apply now</a></div>
-  </div>
-</header>
+<div id="nav" data-nav="public"></div>
 
 <main id="main">
   <section class="jdHero">
@@ -215,6 +209,7 @@
   <span class="chatLaunch__dot"></span> Ask EquiStaff
 </a>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 <script>
 var JOB = { title:'Barn Manager', org:'24-horse hunter/jumper barn', where:'Ocala, FL',
             pay:'$55,000 – $68,000', managed:true };

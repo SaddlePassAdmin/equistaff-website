@@ -23,20 +23,7 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- Signed in = depth 06–07. Same components as the public site, reskinned by mode. -->
-<header class="pHdr">
-  <div class="wrap pHdr__in">
-    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
-    <nav class="pHdr__nav" aria-label="Portal">
-      <a href="profile.html" aria-current="page">Profile</a>
-      <a href="#">Applications</a>
-      <a href="jobs.html">Find work</a>
-      <a href="resume.html">Resume</a>
-      <a href="profile.html">Saved roles</a>
-      <a href="messages.html">Messages</a>
-    </nav>
-    <div class="avatar" title="Dana Whitfield">DW</div>
-  </div>
-</header>
+<div id="nav" data-nav="seeker"></div>
 
 <main id="main">
   <div class="wrap pLayout">
@@ -60,12 +47,12 @@
         <p style="margin:0;font-size:var(--t-label);color:var(--text-muted)">Complete profiles are seen first by the recruiting team.</p>
 
         <div class="todo">
-          <a href="#"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Contact details</a>
-          <a href="#"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Work history</a>
-          <a href="#"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Disciplines</a>
-          <a href="#"><span class="todo__box"></span>Add two references</a>
-          <a href="#"><span class="todo__box"></span>Set your availability</a>
-          <a href="#"><span class="todo__box"></span>Housing preference</a>
+          <a href="#f-contact"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Contact details</a>
+          <a href="#f-history"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Work history</a>
+          <a href="#f-disc"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Disciplines</a>
+          <a href="#f-refs"><span class="todo__box"></span>Add two references</a>
+          <a href="#f-avail"><span class="todo__box"></span>Set your availability</a>
+          <a href="#f-housing"><span class="todo__box"></span>Housing preference</a>
         </div>
       </div>
 
@@ -79,25 +66,49 @@
     <!-- RIGHT -->
     <div>
       <section class="pSection">
-        <div class="pSection__head"><h2>Your applications</h2><a href="#" id="appCount">View all →</a></div>
+        <div class="pSection__head"><h2>Your applications</h2><a href="applications.html" id="appCount">View all &rarr;</a></div>
 
         <div id="apps"></div>
         </section>
 
       <section class="pSection">
-        <div class="pSection__head"><h2>Your details</h2><a href="#">Edit →</a></div>
+        <div class="pSection__head"><h2>Your details</h2><a href="settings.html">Edit &rarr;</a></div>
         <div class="pCard">
           <div class="form__row">
-            <div class="field"><label for="p-n">Full name</label><input id="p-n" value="Dana Whitfield"></div>
+            <div class="field" id="f-contact"><label for="p-n">Full name</label><input id="p-n" value="Dana Whitfield"></div>
             <div class="field"><label for="p-e">Email</label><input id="p-e" type="email" value="d.whitfield@example.com"></div>
           </div>
           <div class="form__row">
             <div class="field"><label for="p-l">Location</label><input id="p-l" value="Ocala, FL"></div>
-            <div class="field"><label for="p-d">Primary discipline</label>
+            <div class="field" id="f-disc"><label for="p-d">Primary discipline</label>
               <select id="p-d"><option>Hunter / Jumper</option><option selected>Dressage</option><option>Eventing</option><option>Racing / Thoroughbred</option><option>Western</option></select>
             </div>
           </div>
-          <div class="field"><label for="p-a">Availability</label>
+          <div class="field" id="f-history">
+            <label for="p-h">Work history</label>
+            <textarea id="p-h" rows="3">Barn Manager, 24-horse hunter/jumper barn, Ocala FL, 2021 to now. Assistant Barn Manager, Willow Bend Equestrian, 2017 to 2021.</textarea>
+            <small>Or <a href="resume.html">let us build it from a few questions</a>.</small>
+          </div>
+
+          <div class="field" id="f-refs">
+            <label for="p-r1">References</label>
+            <input id="p-r1" placeholder="Name, yard, and the best number for them">
+            <input id="p-r2" placeholder="A second one" style="margin-top:var(--s-3)">
+            <small>We call them, never email. Two is enough.</small>
+          </div>
+
+          <div class="field" id="f-housing">
+            <label for="p-ho">Housing</label>
+            <select id="p-ho">
+              <option>Not specified</option>
+              <option>I need housing</option>
+              <option>I need housing, and so will others — people or pets</option>
+              <option>I have my own</option>
+            </select>
+            <small>We ask who else needs housing rather than about family or dependents.</small>
+          </div>
+
+          <div class="field" id="f-avail"><label for="p-a">Availability</label>
             <select id="p-a"><option>Available now</option><option selected>Available in 30 days</option><option>Looking quietly — not urgent</option></select>
             <small>“Looking quietly” hides your profile from your current employer.</small>
           </div>
@@ -122,6 +133,7 @@
   </div>
 </footer>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 
 <script>
 (function(){
@@ -167,6 +179,19 @@
              + '<a class="btn btn--primary" href="job-detail.html">View</a></div>';
       }).join('')
     : '<div class="empty"><svg class="horse horse--sm" viewBox="0 0 282 120" aria-hidden="true" style="color:var(--navy-500);margin-bottom:var(--s-4)"><path d="M36 109c-4 0-7 0-11-2l-7-2c-6-2-13 0-18 4 2-10 12-14 22-13l9 1c8 1 15-2 20-9 4-6 6-12 12-17-5 2-9 5-12 9s-7 8-11 10c-7 3-15 4-22 1-3-1-6-3-8-6 15 6 28 0 39-11 2-3 4-5 7-8 12-10 27-9 41-3 2 1 4 2 5 1 11-6 20-6 32-3l16 3c5 1 10 1 15 0l5-1c-3 0-7-1-9-2-3-2-5-3-8-4 2-1 5-1 7-1 6 0 12-2 16-5 3-2 6-4 9-5l-7 1c-4 1-7 1-11 0-3-1-5-3-6-6 7 2 14 0 20-3 5-3 10-4 15-4 2 0 4-1 4-3-3-2-7-2-10-2-5 1-9 5-14 3 3-1 6-3 8-6 3-4 8-7 14-7h6c6 0 12 2 19-3-4 1-8 1-12-2 5 0 9-1 13-4 8-5 15-4 23-1 1 0 2 0 3 0 2-4 7-7 12-8l-2 8c0 2-1 3-2 5 1 2 2 4 4 5l4 5c1 1 2 2 2 3 1 4 3 8 5 12l8 14c0 1 1 2 0 3-1 3-2 5-4 7-2 2-4 2-6 1-2 0-4-2-4-4 0-2-1-5-3-6-6-6-12-4-17-8-2-1-4-4-3-7 1-6 7-6 11-11 2-3 2-7-1-10-6-4-18 0-25 4-10 5-18 14-22 25-1 4-4 9-9 8-7-1-13 1-18 6h2c1 0 2 2 1 3-4 5-10 8-16 8-5 0-10-1-14-2-11-3-21-6-32 1-3 3-7 4-11 5-6 1-10 5-12 10s-1 10-4 15c-1 1-2 2-3 2h-1c-1 0-2-1-2-3-3-19 9-29 9-29-7-1-15 2-20 8-7 8-7 16-11 24-2 3-4 7-8 9 2-4 3-8 2-13-4 8-9 15-17 19-7 3-14 2-21-2 0 0 0 0 0 0 5 1 9 0 13-3z" fill="currentColor"/></svg><p>You haven\u2019t saved any roles yet. Tap <b>Save for later</b> on any listing to keep it here.</p><a class="btn btn--primary" href="jobs.html">Browse 214 open roles</a></div>';
+})();
+
+/* Arriving from the completion checklist: land on the field and say so,
+   rather than dropping someone at the top of a form to hunt for it. */
+(function(){
+  var id = location.hash.slice(1);
+  if (!id) return;
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior:'smooth', block:'center' });
+  el.classList.add('field--target');
+  var input = el.querySelector('input,select,textarea');
+  if (input) setTimeout(function(){ input.focus({ preventScroll:true }); }, 450);
 })();
 </script>
 </body>

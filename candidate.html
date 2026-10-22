@@ -91,17 +91,7 @@
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="pHdr">
-  <div class="wrap pHdr__in">
-    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
-    <nav class="pHdr__nav" aria-label="Employer portal">
-      <a href="employer.html">Your searches</a>
-      <a href="employer.html" aria-current="page">Shortlists</a>
-      <a href="my-jobs.html">Job posts</a><a href="billing.html">Invoices</a><a href="messages.html">Messages</a>
-    </nav>
-    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
-  </div>
-</header>
+<div id="nav" data-nav="employer"></div>
 
 <main id="main">
   <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
@@ -124,7 +114,7 @@
       </div>
       <div class="cpHead__acts">
         <a class="btn btn--primary" href="messages.html">Message Dana</a>
-        <a class="btn btn--secondary" href="#">Book a call</a>
+        <a class="btn btn--secondary" href="book.html">Book a call</a>
       </div>
     </div>
 
@@ -163,7 +153,7 @@
         </section>
 
         <section class="pSection">
-          <div class="pSection__head"><h2>Experience</h2><a href="#">Download resume &rarr;</a></div>
+          <div class="pSection__head"><h2>Experience</h2><a href="#" onclick="event.preventDefault();dlResume()">Download resume &rarr;</a></div>
           <div class="cpJob">
             <h4>Barn Manager</h4>
             <p class="cpJob__w"><span class="quiet" style="display:flex;width:fit-content;margin:0 0 6px">Current employer withheld</span>24-horse hunter/jumper barn, Ocala FL &middot; 2021 &mdash; now</p>
@@ -211,7 +201,7 @@
             </div>
             <p class="fb__priv">Goes to Kaitlin only. Dana never sees this, and it is not kept on her profile.</p>
             <div class="fb__acts">
-              <a class="btn btn--primary" href="#">Move to interview</a>
+              <button class="btn btn--primary" type="button" onclick="toInterview(this)">Move to interview</button>
               <button class="btn btn--secondary" type="button" id="send" disabled onclick="done()">Pass, and tell Kaitlin why</button>
             </div>
           </div>
@@ -280,5 +270,23 @@ function done(){
 }
 </script>
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
+<script>
+function dlResume(){
+  var txt = ['DANA WHITFIELD','Barn Manager · 9 years · Ocala, FL','',
+    'EXPERIENCE','Barn Manager — 24-horse hunter/jumper barn, Ocala FL — 2021 to now',
+    '  Runs the day-to-day for 24 head: turnout, feed, farrier and vet scheduling.',
+    '  Manages two grooms and a working student. Keeps competition and health records.','',
+    'Assistant Barn Manager — Willow Bend Equestrian, Williston FL — 2017 to 2021',
+    'Groom — Willow Bend Equestrian, Williston FL — 2015 to 2017','',
+    'REFERENCES','All three checked by phone by EquiStaff. Notes available on request.','',
+    'Prepared by EquiStaff · equine staffing since 1982'].join('\n');
+  ES.download('Dana-Whitfield-resume.txt', txt);
+}
+function toInterview(b){
+  b.outerHTML = '<span class="pill pill--shortlist">Moved to interview &middot; Kaitlin notified</span>';
+  ES.notify('Dana Whitfield moved to interview');
+}
+</script>
 </body>
 </html>

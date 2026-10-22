@@ -60,16 +60,7 @@
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="pHdr">
-  <div class="wrap pHdr__in">
-    <a class="pHdr__logo" href="index.html"><img src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff"></a>
-    <nav class="pHdr__nav" aria-label="Employer portal">
-      <a href="employer.html">Your searches</a><a href="my-jobs.html">Job posts</a>
-      <a href="post-job.html">Post a job</a><a href="billing.html" aria-current="page">Billing</a><a href="company.html">Company</a>
-    </nav>
-    <div class="avatar" title="Golden Ocala Equestrian">GO</div>
-  </div>
-</header>
+<div id="nav" data-nav="employer"></div>
 
 <main id="main">
   <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
@@ -108,7 +99,7 @@
     </section>
 
     <section class="pSection">
-      <div class="pSection__head"><h2>Payment method</h2><a href="#" onclick="event.preventDefault()">Update card</a></div>
+      <div class="pSection__head"><h2>Payment method</h2><a href="#" onclick="event.preventDefault();cardForm()">Update card</a></div>
       <div class="card">
         <div class="cardMark">VISA</div>
         <div><b>Visa ending 6411</b><span>Expires 09 / 2029 &middot; Elaine Harper</span></div>
@@ -117,7 +108,7 @@
     </section>
 
     <section class="pSection">
-      <div class="pSection__head"><h2>Invoices</h2><a href="#" onclick="event.preventDefault()">Download all</a></div>
+      <div class="pSection__head"><h2>Invoices</h2><a href="#" onclick="event.preventDefault();dlInvoices()">Download all</a></div>
       <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
       <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
       <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
@@ -160,6 +151,7 @@
 </footer>
 
 <script src="src/state.js"></script>
+<script src="src/nav.js"></script>
 <script>
 function switchTo(name, price){
   ES.notify('Plan changed to ' + name + ' — ' + price);
@@ -178,6 +170,30 @@ function took(t){ say(t + '. Nothing else to do.'); }
 function keep(){ say('Kept. Your plan renews on 14 November as normal.'); }
 function reallyCancel(){
   say('Cancelled. Your posts stay live until 14 November, and you can come back any time without losing your company profile.');
+}
+</script>
+<script>
+function dlInvoices(){
+  ES.download('EquiStaff-invoices-2026.txt',
+   ['GOLDEN OCALA EQUESTRIAN — INVOICES','','Oct 2026  1 month plan  $50.00  PAID',
+    'Sep 2026  1 month plan  $50.00  PAID','Aug 2026  1 month plan  $50.00  PAID','',
+    'EquiStaff · Ocala, Florida'].join('\n'));
+}
+function cardForm(){
+  var c=document.querySelector('.card');
+  if (c.dataset.editing) return;
+  c.dataset.editing='1';
+  c.insertAdjacentHTML('afterend',
+   '<div class="card" style="margin-top:var(--s-4);display:block">'
+   +'<div class="form__row"><div class="field"><label for="cn">Card number</label><input id="cn" inputmode="numeric" placeholder="4242 4242 4242 4242"></div>'
+   +'<div class="field"><label for="ce">Expiry</label><input id="ce" placeholder="09 / 29"></div></div>'
+   +'<div style="display:flex;gap:var(--s-3);flex-wrap:wrap"><button class="btn btn--primary" type="button" onclick="cardSaved(this)">Save card</button>'
+   +'<button class="btn btn--secondary" type="button" onclick="this.closest(\'.card\').remove();document.querySelector(\'.card\').dataset.editing=\'\'">Cancel</button></div></div>');
+}
+function cardSaved(b){
+  var wrap=b.closest('.card');
+  wrap.innerHTML='<p style="margin:0;color:var(--warm);font-size:var(--t-small)">Card updated. Next charge uses the new card.</p>';
+  document.querySelector('.card').dataset.editing='';
 }
 </script>
 </body>

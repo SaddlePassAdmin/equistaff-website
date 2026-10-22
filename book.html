@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a call | EquiStaff</title>
+<meta name="description" content="Fifteen minutes with Kaitlin — whether you are hiring or looking.">
+<link rel="canonical" href="https://www.equistaff.com/book.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="EquiStaff">
+<meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+.bkWrap{min-height:72vh;display:grid;place-items:center;background:var(--depth-01);padding:var(--s-8) var(--s-5)}
+.bk{max-width:46rem;width:100%}
+.bkPick{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin-top:var(--s-6)}
+.bkCard{background:#fff;border:1px solid var(--border-subtle);border-radius:var(--r-lg);padding:var(--s-6);
+  text-decoration:none;color:inherit;box-shadow:var(--e-1);display:flex;flex-direction:column;gap:var(--s-3)}
+.bkCard:hover{border-color:var(--blue-600);box-shadow:var(--e-2)}
+.bkCard b{font-size:1.125rem;font-family:var(--font-display)}
+.bkCard span{font-size:var(--t-small);color:var(--text-muted)}
+.bkWho{display:flex;gap:var(--s-5);align-items:center;background:#fff;border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg);padding:var(--s-6);margin-top:var(--s-6)}
+.bkWho img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.slots{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-5)}
+.slot{background:#fff;border:1.5px solid var(--border-subtle);border-radius:var(--r-sm);padding:11px 16px;
+  font:600 var(--t-small)/1 var(--font-body);cursor:pointer;min-height:44px}
+.slot:hover{border-color:var(--blue-600)}
+.slot[aria-pressed="true"]{background:var(--blue-600);border-color:var(--blue-600);color:#fff}
+@media(max-width:700px){.bkPick{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="has-chat">
+<a class="skip" href="#main">Skip to content</a>
+<div id="nav" data-nav="public"></div>
+<main id="main"><section class="bkWrap"><div class="bk">
+
+  <div id="pick">
+    <p class="eyebrow">Book a call</p>
+    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Fifteen minutes with Kaitlin</h1>
+    <p style="color:var(--text-muted);max-width:54ch;margin:0">She keeps mornings free for new conversations. Which one are you?</p>
+    <div class="bkPick">
+      <a class="bkCard" href="#" onclick="event.preventDefault();who('employer')">
+        <b>I&rsquo;m hiring</b><span>Talk through a role, what it would take to fill it, and what it would cost.</span></a>
+      <a class="bkCard" href="#" onclick="event.preventDefault();who('seeker')">
+        <b>I&rsquo;m looking for work</b><span>Talk about what you want next and what she has that you will not see on the board.</span></a>
+    </div>
+  </div>
+
+  <div id="slots" hidden>
+    <p class="eyebrow" id="slotsKind">Book a call</p>
+    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Pick a time</h1>
+    <p style="color:var(--text-muted);margin:0" id="slotsNote">All times Eastern. Fifteen minutes, by phone unless you ask otherwise.</p>
+    <div class="bkWho">
+      <img src="img/kaitlin.jpg" alt="">
+      <div><b style="display:block;font-family:var(--font-display);font-size:1.125rem">Kaitlin Veltkamp</b>
+        <span style="font-size:var(--t-small);color:var(--text-muted)">Owner &middot; placing since 1982 &middot; Ocala, FL</span></div>
+    </div>
+    <div class="slots" role="group" aria-label="Available times">
+      <button class="slot" onclick="pick(this,'Thursday 9:00am')">Thu 9:00</button>
+      <button class="slot" onclick="pick(this,'Thursday 9:30am')">Thu 9:30</button>
+      <button class="slot" onclick="pick(this,'Thursday 11:00am')">Thu 11:00</button>
+      <button class="slot" onclick="pick(this,'Friday 8:30am')">Fri 8:30</button>
+      <button class="slot" onclick="pick(this,'Friday 10:00am')">Fri 10:00</button>
+      <button class="slot" onclick="pick(this,'Monday 9:00am')">Mon 9:00</button>
+    </div>
+    <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)">
+      <button class="btn btn--primary btn--lg" type="button" id="confirm" disabled onclick="done()">Confirm</button>
+      <button class="btn btn--secondary btn--lg" type="button" onclick="back()">Back</button>
+    </div>
+  </div>
+
+  <div id="done" hidden style="text-align:center">
+    <div style="width:66px;height:66px;border-radius:50%;background:var(--ok-bg);display:grid;place-items:center;margin:0 auto var(--s-5)">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h1 style="font-size:1.875rem;margin-bottom:var(--s-3)">You&rsquo;re booked</h1>
+    <p style="color:var(--text-muted);margin:0 auto var(--s-5);max-width:46ch" id="doneLine"></p>
+    <div style="display:flex;gap:var(--s-3);justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--primary btn--lg" href="jobs.html">Browse roles</a>
+      <a class="btn btn--secondary btn--lg" href="index.html">Back to the site</a>
+    </div>
+  </div>
+
+</div></section></main><footer class="ftr">
+  <img class="ftr__horses" src="assets/horses-blue-ondark.svg" alt="" aria-hidden="true">
+<div class="wrap">
+  <div class="ftr__grid">
+    <div><img class="ftr__logo" src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff">
+      <p class="ftr__meta">Equine staffing since 1982 &middot; online since 2000<br>Ocala, Florida</p>
+      <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
+    <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="signup.html">Create a profile</a></div>
+    <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="pricing.html">Pricing</a></div>
+    <div><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="ftr__bar"><span>&copy; 2026 EquiStaff. All rights reserved.</span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span></div>
+</div></footer>
+<a class="chatLaunch" href="chatbot.html"><span class="chatLaunch__dot"></span> Ask EquiStaff</a>
+<script src="src/state.js"></script><script src="src/nav.js"></script>
+<script>
+var KIND='', SLOT='';
+function show(id){ ['pick','slots','done'].forEach(function(k){ document.getElementById(k).hidden = (k!==id); }); window.scrollTo({top:0,behavior:'smooth'}); }
+function who(k){
+  KIND=k;
+  document.getElementById('slotsKind').textContent = k==='employer' ? 'Hiring' : 'Looking for work';
+  document.getElementById('slotsNote').textContent = k==='employer'
+    ? 'All times Eastern. Bring the role if you have it — she can usually tell you on the call whether a listing would be enough.'
+    : 'All times Eastern. Nothing to prepare. She will ask what you want next and what you are avoiding.';
+  show('slots');
+}
+function pick(b,label){
+  SLOT=label;
+  document.querySelectorAll('.slot').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+  b.setAttribute('aria-pressed','true');
+  document.getElementById('confirm').disabled = false;
+}
+function done(){
+  document.getElementById('doneLine').textContent =
+    SLOT + ', Eastern. A calendar invite is on its way, and Kaitlin has the context from this site already.';
+  ES.notify('Call booked — ' + SLOT);
+  show('done');
+}
+function back(){ show('pick'); }
+</script>
+</body></html>
