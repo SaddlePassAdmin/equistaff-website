@@ -256,6 +256,26 @@
     </section>
   </div>
 
+
+  <div class="wishes" style="margin-top:var(--s-9)">
+    <h2>Try it live</h2>
+    <p style="font-size:var(--t-small);color:var(--text-muted);max-width:60ch;margin:0 0 var(--s-5)">
+      The assistant now works on every page of this prototype. Each link opens it partway through a real conversation,
+      so a reviewer can jump straight to the moment they want to check. Use &ldquo;Try as&rdquo; inside the panel to switch between visitor, job seeker and employer.
+    </p>
+    <ul style="font-size:var(--t-small);line-height:2;margin:0;padding-left:1.2em">
+      <li><a href="index.html?chatdemo=greeting">Greeting and the four paths</a></li>
+      <li><a href="index.html?chatdemo=intake">Job seeker: the intake questions</a></li>
+      <li><a href="index.html?chatdemo=seeker">Job seeker: two matching jobs (never a shortlist)</a></li>
+      <li><a href="job-detail.html?chatdemo=job">On a job page: answers only from the posting, employer kept confidential</a></li>
+      <li><a href="index.html?chatdemo=employer">Employer: Request Talent, captured one answer at a time</a></li>
+      <li><a href="index.html?chatdemo=pricing">Published prices, and why it won&rsquo;t quote a search fee</a></li>
+      <li><a href="index.html?chatdemo=cancel">Cancelling: the save offers</a></li>
+      <li><a href="index.html?chatdemo=handoff">Hand-off to Kaitlin, with the right calendar</a></li>
+      <li><a href="index.html?chatdemo=fallback">Two misses, then a person</a></li>
+      <li><a href="profile.html?chatdemo=greeting">Signed in as a job seeker</a> &middot; <a href="employer.html?chatdemo=greeting">signed in as an employer</a></li>
+    </ul>
+  </div>
   <div class="wishes" style="margin-top:var(--s-9)">
     <h2>The launcher</h2>
     <p style="font-size:var(--t-small);color:var(--text-muted);max-width:60ch;margin:0 0 var(--s-5)">
@@ -267,5 +287,7 @@
     </button>
   </div>
 </main>
+<script src="src/state.js"></script>
+<script src="src/chat.js"></script>
 </body>
 </html>
