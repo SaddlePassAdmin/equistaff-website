@@ -58,6 +58,11 @@ body{background:var(--depth-01)}
 .mtag--new{background:var(--blue-600);color:#fff}
 .mtag--fin{background:var(--warm);color:var(--warm-ink)}
 .mtag--alt{background:var(--depth-02);color:var(--depth-06)}
+.mtag--rev{background:#FBEADF;color:#B5731A}
+.revkey{display:flex;gap:var(--s-4);align-items:center;background:#FBEADF;border-radius:var(--r-lg);
+  padding:var(--s-5) var(--s-6);margin-top:var(--s-6)}
+.revkey p{margin:0;font-size:var(--t-small);color:#6B4310}
+.revkey b{color:#8A5410}
 
 /* reference + notes */
 .ref{margin-top:var(--s-9)}
@@ -126,6 +131,11 @@ body{background:var(--depth-01)}
   </div>
 
 
+  <div class="revkey">
+    <p><b>Twenty screens changed in this round.</b> They carry a <b>Revised</b> chip below, and on the screen itself
+       an amber marker in the bottom-left corner &mdash; click it to see exactly what changed and why.</p>
+  </div>
+
   <!-- ============ PUBLIC ============ -->
   <section class="jny jny--pub">
     <div class="jny__head">
@@ -135,22 +145,22 @@ body{background:var(--depth-01)}
     </div>
     <a class="mstep" href="index.html">
       <span class="mstep__n">1</span>
-      <div><h4>Landing <span class="mtag mtag--fin">Final</span></h4><p>Option A, confirmed 21 October. Video hero, then two doors beneath it. This is the page that goes to engineering.</p></div>
+      <div><h4>Landing <span class="mtag mtag--fin">Final</span> <span class="mtag mtag--rev">Revised</span></h4><p>Option A, confirmed 21 October. Video hero, then two doors beneath it. This is the page that goes to engineering.</p></div>
       <span class="mstep__f">index.html</span>
     </a>
     <a class="mstep" href="landing-b.html">
       <span class="mstep__n">2</span>
-      <div><h4>Landing, the alternate <span class="mtag mtag--alt">On record</span></h4><p>The two doors <em>are</em> the hero, side by side. Documented, not being built. Option C was retired on 7 October.</p></div>
+      <div><h4>Landing, the alternate <span class="mtag mtag--alt">On record</span> <span class="mtag mtag--rev">Revised</span></h4><p>The two doors <em>are</em> the hero, side by side. Documented, not being built. Option C was retired on 7 October.</p></div>
       <span class="mstep__f">landing-b.html</span>
     </a>
     <a class="mstep" href="pricing.html">
       <span class="mstep__n">3</span>
-      <div><h4>Pricing</h4><p>Your real price list &mdash; $50 a month, $140 a quarter, $460 a year, and $1,000 to start a managed search. The placement percentage is deliberately never stated.</p></div>
+      <div><h4>Pricing <span class="mtag mtag--rev">Revised</span></h4><p>Your real price list &mdash; $49.99 a month, $139.99 a quarter, $469.99 a year, and $1,000 to start a managed search. The placement percentage is deliberately never stated.</p></div>
       <span class="mstep__f">pricing.html</span>
     </a>
     <a class="mstep" href="about.html">
       <span class="mstep__n">4</span>
-      <div><h4>About</h4><p>Forty-two years, the phone-reference rule, and why a managed advert never names the barn.</p></div>
+      <div><h4>About <span class="mtag mtag--rev">Revised</span></h4><p>Forty-two years, the phone-reference rule, and why a managed advert never names the barn.</p></div>
       <span class="mstep__f">about.html</span>
     </a>
     <a class="mstep" href="contact.html">
@@ -170,7 +180,7 @@ body{background:var(--depth-01)}
     </div>
     <a class="mstep" href="jobs.html">
       <span class="mstep__n">1</span>
-      <div><h4>Browses the board</h4><p>Pay on every row, so she doesn&rsquo;t have to open eleven listings to rule them out. No account needed.</p></div>
+      <div><h4>Browses the board <span class="mtag mtag--rev">Revised</span></h4><p>Pay on every row, so she doesn&rsquo;t have to open eleven listings to rule them out. No account needed.</p></div>
       <span class="mstep__f">jobs.html</span>
     </a>
     <a class="mstep" href="job-detail.html">
@@ -195,32 +205,32 @@ body{background:var(--depth-01)}
     </a>
     <a class="mstep" href="profile.html">
       <span class="mstep__n">6</span>
-      <div><h4>Her profile and checklist</h4><p>Every item deep-links to the screen that completes it. Applying above puts a real row here.</p></div>
+      <div><h4>Her profile and checklist <span class="mtag mtag--rev">Revised</span></h4><p>Every item deep-links to the screen that completes it. Applying above puts a real row here.</p></div>
       <span class="mstep__f">profile.html</span>
     </a>
     <a class="mstep" href="applications.html">
       <span class="mstep__n">7</span>
-      <div><h4>Where each application stands <span class="mtag mtag--new">New</span></h4><p>One list, four statuses, and a panel spelling out what each status actually means. The live site gives her three tables and no status at all.</p></div>
+      <div><h4>Where each application stands <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>One list, four statuses, and a panel spelling out what each status actually means. The live site gives her three tables and no status at all.</p></div>
       <span class="mstep__f">applications.html</span>
     </a>
     <a class="mstep" href="resume.html">
       <span class="mstep__n">8</span>
-      <div><h4>Builds a resume <span class="mtag mtag--new">New</span></h4><p>Plain questions on the left, a real document assembling itself on the right. Downloadable.</p></div>
+      <div><h4>Builds a resume <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Plain questions on the left, a real document assembling itself on the right. Downloadable.</p></div>
       <span class="mstep__f">resume.html</span>
     </a>
     <a class="mstep" href="saved.html">
       <span class="mstep__n">9</span>
-      <div><h4>Roles she saved <span class="mtag mtag--new">New</span></h4><p>Saving tells the employer nothing &mdash; the page says so, because people assume otherwise.</p></div>
+      <div><h4>Roles she saved <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Saving tells the employer nothing &mdash; the page says so, because people assume otherwise.</p></div>
       <span class="mstep__f">saved.html</span>
     </a>
     <a class="mstep" href="messages.html">
       <span class="mstep__n">10</span>
-      <div><h4>Messages <span class="mtag mtag--new">New</span></h4><p>Two tabs, not one inbox. A note from your team and a note from a barn need different attention.</p></div>
+      <div><h4>Messages <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Two tabs, not one inbox. A note from your team and a note from a barn need different attention.</p></div>
       <span class="mstep__f">messages.html</span>
     </a>
     <a class="mstep" href="settings.html">
       <span class="mstep__n">11</span>
-      <div><h4>Settings <span class="mtag mtag--new">New</span></h4><p>Job alerts off by default, a &ldquo;looking quietly&rdquo; switch, and a plain note that employer feedback never reaches the candidate.</p></div>
+      <div><h4>Settings <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Job alerts off by default, a &ldquo;looking quietly&rdquo; switch, and a plain note that employer feedback never reaches the candidate.</p></div>
       <span class="mstep__f">settings.html</span>
     </a>
   </section>
@@ -235,7 +245,7 @@ body{background:var(--depth-01)}
     </div>
     <a class="mstep" href="request-talent.html">
       <span class="mstep__n">1</span>
-      <div><h4>Sends the role over <span class="mtag mtag--new">New</span></h4><p>Eight real questions &mdash; EM-Q1 to EM-Q8 in the engineering handoff &mdash; so this and the assistant collect exactly the same things.</p></div>
+      <div><h4>Sends the role over <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Eight real questions &mdash; EM-Q1 to EM-Q8 in the engineering handoff &mdash; so this and the assistant collect exactly the same things.</p></div>
       <span class="mstep__f">request-talent.html</span>
     </a>
     <a class="mstep" href="book.html">
@@ -245,12 +255,12 @@ body{background:var(--depth-01)}
     </a>
     <a class="mstep" href="employer.html">
       <span class="mstep__n">3</span>
-      <div><h4>Her searches and shortlist</h4><p>Progress on each search, a shortlist of four rather than fifty, and a nudge on an advert that isn&rsquo;t working.</p></div>
+      <div><h4>Her searches and shortlist <span class="mtag mtag--rev">Revised</span></h4><p>Progress on each search, a shortlist sized to the role rather than fifty, and a nudge on an advert that isn&rsquo;t working.</p></div>
       <span class="mstep__f">employer.html</span>
     </a>
     <a class="mstep" href="candidate.html">
       <span class="mstep__n">4</span>
-      <div><h4>Reads a candidate, rates them <span class="mtag mtag--new">New</span></h4><p>Your assessment leads, then the phone-checked references that back it up. The star rating is required before anyone can be closed out, and it reaches you only &mdash; never the candidate.</p></div>
+      <div><h4>Reads a candidate, rates them <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Your assessment leads, then the phone-checked references that back it up. The star rating is required before anyone can be closed out, and it reaches you only &mdash; never the candidate.</p></div>
       <span class="mstep__f">candidate.html</span>
     </a>
   </section>
@@ -265,27 +275,27 @@ body{background:var(--depth-01)}
     </div>
     <a class="mstep" href="post-job.html">
       <span class="mstep__n">1</span>
-      <div><h4>Writes the post <span class="mtag mtag--new">New</span></h4><p>Live preview of the real card as he types, and a completeness meter that nags about pay and housing.</p></div>
+      <div><h4>Writes the post <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Live preview of the real card as he types, and a completeness meter that nags about pay and housing.</p></div>
       <span class="mstep__f">post-job.html</span>
     </a>
     <a class="mstep" href="my-jobs.html">
       <span class="mstep__n">2</span>
-      <div><h4>His job posts <span class="mtag mtag--new">New</span></h4><p>Views and applicants on the row. A post running long with few applicants gets called out.</p></div>
+      <div><h4>His job posts <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Views and applicants on the row. A post running long with few applicants gets called out.</p></div>
       <span class="mstep__f">my-jobs.html</span>
     </a>
     <a class="mstep" href="applicants.html">
       <span class="mstep__n">3</span>
-      <div><h4>Who applied <span class="mtag mtag--new">New</span></h4><p>Status filters built for working a list in passes. Says plainly that nobody has been spoken to &mdash; and offers to hand the role to you.</p></div>
+      <div><h4>Who applied <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Status filters built for working a list in passes. Says plainly that nobody has been spoken to &mdash; and offers to hand the role to you.</p></div>
       <span class="mstep__f">applicants.html</span>
     </a>
     <a class="mstep" href="billing.html">
       <span class="mstep__n">4</span>
-      <div><h4>Plan and billing <span class="mtag mtag--new">New</span></h4><p>Your real prices. Cancelling runs the save offers first, per EM-4.</p></div>
+      <div><h4>Plan and billing <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Your real prices. Cancelling runs the save offers first, per EM-4.</p></div>
       <span class="mstep__f">billing.html</span>
     </a>
     <a class="mstep" href="company.html">
       <span class="mstep__n">5</span>
-      <div><h4>Company profile <span class="mtag mtag--new">New</span></h4><p>Shows both versions at once: what a candidate sees on his own post, and what is withheld on a managed search.</p></div>
+      <div><h4>Company profile <span class="mtag mtag--new">New</span> <span class="mtag mtag--rev">Revised</span></h4><p>Shows both versions at once: what a candidate sees on his own post, and what is withheld on a managed search.</p></div>
       <span class="mstep__f">company.html</span>
     </a>
   </section>
@@ -301,7 +311,7 @@ body{background:var(--depth-01)}
       <a class="rc" href="forgot.html"><h4>Forgot password</h4><p>Four states in one page. Never confirms whether an address has an account.</p></a>
       <a class="rc" href="blog.html"><h4>Equine Prose</h4><p>The blog, filterable by audience. Six posts with real headlines.</p></a>
       <a class="rc" href="blog-post.html"><h4>A blog post</h4><p>&ldquo;Why your advert has been up for forty days&rdquo; — the long-form template.</p></a>
-      <a class="rc" href="privacy.html"><h4>Privacy policy</h4><p>The live site has none at all. Plain English, still needs a lawyer.</p></a>
+      <a class="rc" href="privacy.html"><h4>Privacy policy <span class="mtag mtag--rev">Revised</span></h4><p>The live site has none at all. Plain English, still needs a lawyer.</p></a>
       <a class="rc" href="terms.html"><h4>Terms of use</h4><p>Short, and honest about the two rules that actually matter.</p></a>
       <a class="rc" href="404.html"><h4>404</h4><p>Branded, with three ways back in. The audit found no 404 page.</p></a>
     </div>

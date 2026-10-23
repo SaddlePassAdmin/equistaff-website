@@ -322,6 +322,13 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .cmp__y::after { content: ""; position: absolute; inset: 0; background: center/11px no-repeat
   url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B2545' stroke-width='3.5'><path d='M20 6L9 17l-5-5'/></svg>"); }
 .cmp__n { background: var(--depth-02); }
+/* 23 Oct — Kaitlin read the cross next to "You write the advert" as a promise
+   that Kaitlin would NOT write it, rather than as "this one is on you". The
+   glyph was doing the opposite of its job on a revenue-critical block, so
+   these rows now take a neutral marker and the text carries the meaning. */
+.cmp__self { background: var(--depth-02); }
+.cmp__self::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 2px;
+  margin: -1px 0 0 -4.5px; border-radius: 2px; background: var(--text-muted); }
 .cmp__n::after { content: ""; position: absolute; inset: 0; background: center/10px no-repeat
   url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A6580' stroke-width='3.5'><path d='M6 6l12 12M18 6L6 18'/></svg>"); }
 .cmp__fee { font-size: var(--t-small); color: var(--baby-200); margin: var(--s-4) 0 0; text-align: center; }
