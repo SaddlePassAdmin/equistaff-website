@@ -1,0 +1,28 @@
+/* Skill picker — namespaced .sp- throughout. */
+.sp__chips { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:var(--s-3); }
+.sp__chip { display:inline-flex; align-items:center; gap:7px; background:var(--baby-200); color:var(--navy-900);
+  border:0; border-radius:var(--r-pill); padding:7px 12px; cursor:pointer;
+  font:700 var(--t-label)/1 var(--font-body); }
+.sp__chip:hover { background:var(--baby-300); }
+.sp__chip i { font-style:normal; font-size:14px; opacity:.7; }
+.sp__none { margin:0; font-size:var(--t-small); color:var(--text-muted); }
+.sp__count { margin:0 0 var(--s-4); font-size:var(--t-label); color:var(--text-muted); }
+.sp__search { width:100%; padding:12px 15px; border-radius:var(--r-md); border:1.5px solid var(--border-subtle);
+  background:var(--surface-raised); color:var(--text-primary); font:400 var(--t-small)/1.3 var(--font-body);
+  margin-bottom:var(--s-4); }
+.sp__search:focus { outline:3px solid var(--baby-300); outline-offset:1px; }
+.sp__body { display:grid; gap:7px; max-height:460px; overflow-y:auto; padding-right:4px; }
+.sp__g { border:1px solid var(--border-subtle); border-radius:var(--r-md); overflow:hidden; }
+.sp__gh { width:100%; display:flex; align-items:center; gap:var(--s-4); background:none; border:0; cursor:pointer;
+  padding:13px 15px; text-align:left; color:var(--text-primary); font:700 var(--t-small)/1.2 var(--font-body); }
+.sp__gh:hover { background:var(--surface-raised); }
+.sp__gn { flex:1; }
+.sp__gm { font:600 var(--t-label)/1 var(--font-mono); color:var(--text-muted); }
+.sp__gc { font-size:17px; color:var(--text-muted); width:16px; text-align:center; }
+.sp__list { display:flex; flex-wrap:wrap; gap:7px; padding:0 15px 14px; }
+.sp__opt { display:inline-flex; align-items:center; gap:7px; border:1.5px solid var(--border-subtle);
+  border-radius:var(--r-pill); padding:8px 13px; cursor:pointer;
+  font:400 var(--t-label)/1 var(--font-body); color:var(--text-primary); }
+.sp__opt:hover { border-color:var(--action-primary); }
+.sp__opt.is-on { background:var(--action-primary); border-color:var(--action-primary); color:var(--action-ink); font-weight:700; }
+.sp__opt input { margin:0; }
