@@ -19,7 +19,7 @@
    inbox with a toggle, which the audit flagged. Two tabs instead, because a
    note from the recruiting team and a note from a barn need different attention. */
 .msWrap{display:grid;grid-template-columns:340px 1fr;gap:var(--s-7);align-items:start}
-.msTabs{display:flex;gap:4px;background:rgba(255,255,255,.06);border:1px solid var(--navy-500);border-radius:var(--r-pill);padding:4px;margin-bottom:var(--s-5)}
+.msTabs{display:flex;gap:4px;background:rgba(255,255,255,.06);border:1px solid var(--portal-line);border-radius:var(--r-pill);padding:4px;margin-bottom:var(--s-5)}
 .msTabs button{flex:1;background:none;border:0;color:var(--baby-200);cursor:pointer;padding:10px;border-radius:var(--r-pill);font:700 var(--t-label)/1 var(--font-body);min-height:40px}
 .msTabs button[aria-pressed="true"]{background:var(--baby-200);color:var(--navy-900)}
 .msItem{display:grid;grid-template-columns:auto 1fr;gap:var(--s-4);padding:var(--s-4);border-radius:var(--r-md);cursor:pointer;border:1px solid transparent;margin-bottom:6px}
@@ -48,15 +48,15 @@
   text-decoration:underline;padding:6px}
 .msBar button:hover{color:#fff}
 .msPane{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);display:flex;flex-direction:column;min-height:60vh}
-.msHead{padding:var(--s-5) var(--s-6);border-bottom:1px solid var(--navy-500);display:flex;gap:var(--s-4);align-items:center}
+.msHead{padding:var(--s-5) var(--s-6);border-bottom:1px solid var(--portal-line);display:flex;gap:var(--s-4);align-items:center}
 .msHead b{color:#fff}.msHead span{color:var(--text-muted);font-size:var(--t-label);display:block}
 .msBody{padding:var(--s-6);display:grid;gap:var(--s-4);flex:1}
 .bub{max-width:76%;padding:12px 16px;border-radius:14px;font-size:var(--t-small);line-height:1.55}
 .bub--them{background:var(--portal-ground,#102F52);color:#fff;border-bottom-left-radius:4px}
 .bub--me{background:var(--baby-200);color:var(--navy-900);margin-left:auto;border-bottom-right-radius:4px;font-weight:600}
 .bubTime{font-size:10px;font-family:var(--font-mono);color:var(--baby-300);margin-top:4px;display:block}
-.msFoot{border-top:1px solid var(--navy-500);padding:var(--s-4) var(--s-6);display:flex;gap:10px;align-items:center}
-.msFoot input{flex:1;background:var(--depth-07);border:1.5px solid var(--navy-500);border-radius:var(--r-pill);color:#fff;padding:12px 18px;font:inherit;font-size:var(--t-small);min-height:46px}
+.msFoot{border-top:1px solid var(--portal-line);padding:var(--s-4) var(--s-6);display:flex;gap:10px;align-items:center}
+.msFoot input{flex:1;background:var(--portal-sunken);border:1.5px solid var(--portal-edge);border-radius:var(--r-pill);color:#fff;padding:12px 18px;font:inherit;font-size:var(--t-small);min-height:46px}
 .msFoot input::placeholder{color:#7FA3C4}
 @media(max-width:900px){.msWrap{grid-template-columns:1fr}}
 </style>
@@ -145,7 +145,7 @@ function send(){
 }
 paintList(); paintPane();
 </script>
-<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+<footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
     <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
   </div></div>

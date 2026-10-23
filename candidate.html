@@ -23,8 +23,8 @@
 .cp { display:grid; grid-template-columns:1fr 340px; gap:var(--s-8); align-items:start; }
 
 .cpHead { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-6); align-items:center;
-  background:linear-gradient(145deg,var(--depth-06),var(--depth-07));
-  border:1px solid var(--navy-500); border-radius:var(--r-lg); padding:var(--s-7); margin-bottom:var(--s-6); }
+  background:linear-gradient(145deg,var(--portal-ground),var(--portal-sunken));
+  border:1px solid var(--portal-line); border-radius:var(--r-lg); padding:var(--s-7); margin-bottom:var(--s-6); }
 .cpAv { width:92px; height:92px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
   display:grid; place-items:center; font:900 2rem/1 var(--font-body); }
 .cpHead h1 { color:#fff; margin:0 0 4px; font-size:2rem; }
@@ -45,21 +45,21 @@
 
 /* Reference checks — the promise is "checked by phone", so show the evidence. */
 .ref { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-4); align-items:center;
-  padding:var(--s-4) 0; border-bottom:1px solid var(--navy-500); }
+  padding:var(--s-4) 0; border-bottom:1px solid var(--portal-line); }
 .ref:last-child { border-bottom:0; }
 .ref__tick { width:24px; height:24px; border-radius:50%; background:var(--ok-bg); display:grid; place-items:center; }
 .ref b { color:#fff; display:block; font-size:1rem; }
 .ref span { color:var(--text-muted); font-size:var(--t-small); }
 .ref__when { color:var(--baby-300); font-size:var(--t-label); font-family:var(--font-mono); white-space:nowrap; }
 
-.cpJob { padding:var(--s-5) 0; border-bottom:1px solid var(--navy-500); }
+.cpJob { padding:var(--s-5) 0; border-bottom:1px solid var(--portal-line); }
 .cpJob:last-child { border-bottom:0; }
 .cpJob h4 { margin:0 0 3px; color:#fff; font-family:var(--font-display); font-size:1.1875rem; }
 .cpJob__w { color:var(--text-muted); font-size:var(--t-small); font-family:var(--font-mono); margin:0 0 var(--s-3); }
 .cpJob p { color:var(--baby-200); font-size:var(--t-small); margin:0; line-height:1.6; }
 
 .skills { display:flex; flex-wrap:wrap; gap:8px; }
-.skills span { background:rgba(255,255,255,.08); color:#fff; border:1px solid var(--navy-500);
+.skills span { background:rgba(255,255,255,.08); color:#fff; border:1px solid var(--portal-line);
   border-radius:var(--r-pill); padding:6px 13px; font-size:var(--t-small); }
 
 /* Side rail */
@@ -68,7 +68,7 @@
   border-radius:var(--r-lg); padding:var(--s-6); }
 .railCard h3 { color:#fff; font-size:1.0625rem; margin:0 0 var(--s-4); }
 .kv { display:flex; justify-content:space-between; gap:var(--s-4); padding:var(--s-3) 0;
-  border-bottom:1px solid var(--navy-500); font-size:var(--t-small); }
+  border-bottom:1px solid var(--portal-line); font-size:var(--t-small); }
 .kv:last-child { border-bottom:0; }
 .kv dt { color:var(--text-muted); margin:0; }
 .kv dd { color:#fff; margin:0; font-weight:700; text-align:right; }
@@ -79,7 +79,7 @@
   border-radius:var(--r-pill); padding:3px 9px; font:900 11px/1.45 var(--font-body);
   letter-spacing:.06em; text-transform:uppercase; }
 .quietNote { color:var(--baby-300); font-size:var(--t-label); margin:var(--s-3) 0 0;
-  border-left:2px solid var(--navy-500); padding-left:var(--s-4); }
+  border-left:2px solid var(--portal-edge); padding-left:var(--s-4); }
 
 @media (max-width:1040px){ .cp { grid-template-columns:1fr; } .rail { position:static; } }
 @media (max-width:680px){
@@ -185,7 +185,7 @@
         <!-- Same gate as the shortlist: no rating, no close-out. -->
         <section class="pSection">
           <div class="pSection__head"><h2>Decide on Dana</h2></div>
-          <div class="fb" style="border:1px solid var(--navy-500);border-radius:var(--r-lg);background:rgba(0,0,0,.16)">
+          <div class="fb" style="border:1px solid var(--portal-line);border-radius:var(--r-lg);background:rgba(0,0,0,.16)">
             <p class="fb__q">How close was Dana to what you wanted?</p>
             <div class="fb__stars" role="radiogroup" aria-label="Rating out of five">
               <button type="button" class="star" aria-label="1 out of 5" onclick="rate(1)">&#9733;</button>
@@ -223,7 +223,7 @@
           </dl>
         </div>
 
-        <div class="railCard" style="background:var(--depth-06);border-color:var(--baby-300)">
+        <div class="railCard" style="background:var(--portal-ground);border-color:var(--baby-300)">
           <p style="font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;color:var(--warm);margin:0 0 var(--s-3)">WHERE SHE IS</p>
           <div class="track track--rail" style="margin-top:0">
             <div class="track__s track__s--done"><div class="track__l">SPOKEN TO</div></div>
@@ -246,7 +246,7 @@
   </div>
 </main>
 
-<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+<footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
     <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
   </div></div>
