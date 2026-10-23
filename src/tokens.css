@@ -21,10 +21,17 @@
 
   /* ---------- Portal grounds ----------
      The signed-in screens read as heavy and airless on depth 06/07, raised
-     on 19 Oct. These lift the portal a step without crossing the ink
+     Lifted again 23 Oct (third pass, at Kaitlin's request): lighter and
+     bluer across the whole ramp rather than patched screen by screen.
+     Measured against white: sunken 11.3:1 · ground 8.6:1 · raised 6.3:1.
+     All clear AA; the ramp is now three distinct steps instead of two.
+     These lift the portal without crossing the ink
      boundary: white stays above 9:1 and baby-200 above 6.7:1 on both.    */
-  --portal-ground: #102F52;
-  --portal-raised: #1B4A7D;
+  --portal-ground: #1D4E7D;
+  --portal-raised: #2A6396;
+  --portal-sunken: #163C62;
+  --portal-line:   #4C83AB;   /* dividers — decorative, 2.1:1 */
+  --portal-edge:   #6B9FC6;   /* interactive borders — 3.03:1, clears WCAG 1.4.11 */
 
   /* ---------- Brand ---------- */
   --blue-600: #007AB8;   /* EquiStaff blue — the action colour  */
@@ -114,12 +121,12 @@
 [data-mode="deep"] {
   --surface-page:   var(--portal-ground);
   --surface-raised: var(--portal-raised);
-  --surface-sunken: var(--depth-06);
+  --surface-sunken: var(--portal-sunken);
   --surface-tint:   var(--portal-raised);
   --text-primary:   var(--white);
   --text-muted:     var(--baby-200);
   --text-link:      var(--baby-200);
-  --border-subtle:  var(--navy-500);
+  --border-subtle:  var(--portal-line);
   --border-strong:  var(--baby-300);
   --action-primary: var(--baby-200);
   --action-hover:   var(--baby-300);
