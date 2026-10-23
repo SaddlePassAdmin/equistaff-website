@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css"><link rel="stylesheet" href="src/skillpicker.css">
 <style>
 /* RESUME BUILDER — audit finding #21/#57: the live site demands a resume up front
    and links out to Indeed to get one. Most grooms and riders have never written one.
@@ -144,7 +144,7 @@
           <h2>What are you good at?</h2>
           <p class="rb__lede">Tick anything you've genuinely done. This is what the recruiting team searches on, so it matters more than it looks.</p>
 
-          <div class="chips" id="skills"></div>
+          <div id="skills"></div>
 
           <div class="field" style="margin-top:var(--s-6)">
             <label for="extra">Anything else worth knowing?</label>
@@ -213,6 +213,8 @@
   </div></div>
 </footer>
 
+<script src="src/skills.js"></script>
+<script src="src/skillpicker.js"></script>
 <script>
 // Seeded with one real-looking entry so the page never opens empty — an empty
 // builder is the thing that makes people leave.
@@ -220,10 +222,10 @@ var YARDS = [
   { role:"Barn Manager", yard:"24-horse hunter/jumper barn, Ocala FL", years:"2021 — now",
     did:"Ran the day-to-day for 24 head: turnout, feed, farrier and vet scheduling. Managed two grooms and a working student. Kept competition and health records." }
 ];
-var SKILLS = ["Barn management","Staff rostering","Feed programmes","Medicating","Clipping","Plaiting",
-  "Foaling","Rehab / cold hosing","Lungeing","Backing youngstock","Towing","Show prep",
-  "Competition records","Ordering & budgets","Vet liaison","Farrier liaison"];
-var PICKED = ["Barn management","Staff rostering","Medicating","Show prep","Vet liaison"];
+/* 23 Oct — replaced our 16 invented skills with Kaitlin's real list of 186,
+   grouped in src/skills.js. The picker handles the volume; see skillpicker.js. */
+var PICKED = ["Barn Manager (Medium Program)","Grooming (Intermediate)","Braiding (Hunters)",
+  "IM Medications","Records Keeping"];
 
 function esc(s){ return (s||"").replace(/[&<>"]/g, function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
@@ -248,14 +250,8 @@ function yardsUI(){
   document.getElementById("yards").innerHTML = h;
 }
 function skillsUI(){
-  document.getElementById("skills").innerHTML = SKILLS.map(function(s){
-    return '<label><input type="checkbox" '+(PICKED.indexOf(s)>-1?"checked":"")
-      +' onchange="toggle(\''+s+'\',this.checked)"><span>'+esc(s)+'</span></label>';
-  }).join("");
+  mountSkillPicker("skills", PICKED, function(){ draw(); });
 }
-function setY(i,k,v){ YARDS[i][k]=v; draw(); }
-function addYard(){ YARDS.push({role:"",yard:"",years:"",did:""}); yardsUI(); draw(); }
-function delYard(i){ YARDS.splice(i,1); yardsUI(); draw(); }
 function toggle(s,on){ var i=PICKED.indexOf(s); if(on&&i<0)PICKED.push(s); if(!on&&i>-1)PICKED.splice(i,1); draw(); }
 
 function val(id){ var e=document.getElementById(id); return e?e.value:""; }
@@ -310,5 +306,8 @@ yardsUI(); skillsUI(); draw();
 </script>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+
+<script src="src/revised.js"></script>
+<script>REVISED('23 Oct', ["Kaitlin's real list of 186 skills, replacing the 16 we had invented.", "Grouped into 14 sections with search, because 186 checkboxes is a reading task, not a choice.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>

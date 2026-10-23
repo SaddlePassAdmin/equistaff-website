@@ -73,23 +73,23 @@
         <div class="plan plan--on">
           <span class="plan__tag">Current plan</span>
           <h3>1 month</h3>
-          <p class="plan__price">$50<span> / month</span></p>
+          <p class="plan__price">$49.99<span> / month</span></p>
           <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Cancel any time</li></ul>
           <button class="btn btn--secondary" type="button" disabled style="opacity:.5">This is your plan</button>
         </div>
         <div class="plan">
           <span class="plan__tag">Save $10</span>
           <h3>3 months</h3>
-          <p class="plan__price">$140<span> / quarter</span></p>
+          <p class="plan__price">$139.99<span> / quarter</span></p>
           <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Works out at about $47 a month</li></ul>
-          <button class="btn btn--primary" type="button" onclick="switchTo('3 months','$140')">Switch to this</button>
+          <button class="btn btn--primary" type="button" onclick="switchTo('3 months','$139.99')">Switch to this</button>
         </div>
         <div class="plan">
           <span class="plan__tag">Best value</span>
           <h3>1 year</h3>
-          <p class="plan__price">$460<span> / year</span></p>
+          <p class="plan__price">$469.99<span> / year</span></p>
           <ul><li><b style="color:#fff">5</b> job posts</li><li>Unlimited candidate searches</li><li>Under $39 a month</li></ul>
-          <button class="btn btn--primary" type="button" onclick="switchTo('1 year','$460')">Switch to this</button>
+          <button class="btn btn--primary" type="button" onclick="switchTo('1 year','$469.99')">Switch to this</button>
         </div>
       </div>
       <p style="color:var(--text-muted);font-size:var(--t-small);margin-top:var(--s-5)">
@@ -109,9 +109,9 @@
 
     <section class="pSection">
       <div class="pSection__head"><h2>Invoices</h2><a href="#" onclick="event.preventDefault();dlInvoices()">Download all</a></div>
-      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
-      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
-      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$50.00</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
     </section>
 
     <section class="pSection">
@@ -175,8 +175,8 @@ function reallyCancel(){
 <script>
 function dlInvoices(){
   ES.download('EquiStaff-invoices-2026.txt',
-   ['GOLDEN OCALA EQUESTRIAN — INVOICES','','Oct 2026  1 month plan  $50.00  PAID',
-    'Sep 2026  1 month plan  $50.00  PAID','Aug 2026  1 month plan  $50.00  PAID','',
+   ['GOLDEN OCALA EQUESTRIAN — INVOICES','','Oct 2026  1 month plan  $49.99  PAID',
+    'Sep 2026  1 month plan  $49.99  PAID','Aug 2026  1 month plan  $49.99  PAID','',
     'EquiStaff · Ocala, Florida'].join('\n'));
 }
 function cardForm(){
@@ -196,5 +196,8 @@ function cardSaved(b){
   document.querySelector('.card').dataset.editing='';
 }
 </script>
+
+<script src="src/revised.js"></script>
+<script>REVISED('23 Oct', ["Plan prices corrected to $49.99, $139.99 and $469.99.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>

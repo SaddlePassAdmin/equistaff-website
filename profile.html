@@ -110,7 +110,7 @@
 
           <div class="field" id="f-avail"><label for="p-a">Availability</label>
             <select id="p-a"><option>Available now</option><option selected>Available in 30 days</option><option>Looking quietly — not urgent</option></select>
-            <small>“Looking quietly” hides your profile from your current employer.</small>
+            <small>“Looking quietly” hides your profile from all employer searches.</small>
           </div>
           <div class="ob__actions"><button class="btn btn--primary">Save changes</button><span class="ob__skip">Last saved 2 days ago</span></div>
         </div>
@@ -194,5 +194,8 @@
   if (input) setTimeout(function(){ input.focus({ preventScroll:true }); }, 450);
 })();
 </script>
+
+<script src="src/revised.js"></script>
+<script>REVISED('23 Oct', ["\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>

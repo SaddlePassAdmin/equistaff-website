@@ -75,10 +75,35 @@
             <div class="field"><label for="r1">Most recent job</label><input id="r1" placeholder="Groom · Live Oak Stables · 2024–now"><small>Role, barn, roughly when. Rough is fine.</small></div>
             <div class="field"><label for="r2">The one before that</label><input id="r2" placeholder="Working student · Bridlewood Farm · 2022–2024"></div>
             <div class="field">
-              <label for="dis">Disciplines you've worked in</label>
-              <select id="dis"><option>Hunter / Jumper</option><option>Dressage</option><option>Eventing</option><option>Racing / Thoroughbred</option><option>Western</option><option>Mixed / general barn work</option></select>
+              <label for="dis">Disciplines you&rsquo;ve worked in</label>
+              <small style="display:block;margin-bottom:6px">Pick as many as apply &mdash; hold &#8984; or Ctrl to choose more than one.</small>
+              <select id="dis" multiple size="6"><option>Hunter / Jumper</option><option>Dressage</option><option>Eventing</option><option>Racing / Thoroughbred</option><option>Western</option><option>Mixed / general barn work</option></select>
             </div>
             <div class="field"><label for="note">Anything the barn should know?</label><textarea id="note" rows="3" placeholder="Availability, housing needs, whether you drive…"></textarea><small>Optional.</small></div>
+            <!-- 23 Oct: capture urgency at the point someone is already telling us
+                 about their situation. The upgrade is offered here, but never blocks
+                 the application — applying stays free. -->
+            <div class="field">
+              <label>How soon do you need something?</label>
+              <div class="pick">
+                <label><input type="radio" name="urg" checked onchange="urg(false)"><span><b>I&rsquo;m looking, no rush</b><span>Happy to wait for the right role.</span></span></label>
+                <label><input type="radio" name="urg" onchange="urg(true)"><span><b>I need something soon</b><span>Within the next few weeks.</span></span></label>
+              </div>
+            </div>
+
+            <div class="field" id="urgBox" hidden>
+              <div style="background:var(--warm);border-radius:var(--r-md);padding:var(--s-5)">
+                <p style="margin:0 0 var(--s-3);font-weight:700;color:#3B2E1B">Want the recruiting team to know?</p>
+                <p style="margin:0 0 var(--s-4);font-size:var(--t-small);color:#5C4A3A">
+                  <b>Urgently looking</b> flags you to Kaitlin&rsquo;s team so they check you first, and can put a small
+                  badge on your profile photo. It&rsquo;s part of Featured Jobseeker, the optional paid upgrade.
+                  Your application goes through either way &mdash; applying is always free.</p>
+                <label style="display:flex;gap:10px;align-items:flex-start;font-size:var(--t-small);color:#3B2E1B">
+                  <input type="checkbox" id="urgOptIn" style="margin-top:3px">
+                  <span>Yes, tell me more about Featured Jobseeker after I&rsquo;ve applied</span></label>
+              </div>
+            </div>
+
             <div class="ob__actions">
               <button class="btn btn--primary btn--lg" type="submit">Review and send</button>
               <a class="ob__skip" href="#" onclick="event.preventDefault();goTo(1)">Back</a>
@@ -187,5 +212,14 @@ function sendApplication(){
   goTo(3);
 }
 </script>
+<script>
+function urg(on) {
+  var b = document.getElementById('urgBox');
+  if (b) b.hidden = !on;
+}
+</script>
+
+<script src="src/revised.js"></script>
+<script>REVISED('23 Oct', ["Captures whether someone is urgently looking, and offers the paid upgrade without blocking the application.", "Disciplines is now multi-select, as you asked."]);</script>
 </body>
 </html>
