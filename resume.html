@@ -22,19 +22,19 @@
    for them. The paper panel on the right is the actual output, updating as they type —
    the point is that they can see a real resume appearing from answers they can give. */
 .rb { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-8); align-items:start; }
-.rb__form { background:var(--depth-06); border:1px solid var(--navy-500); border-radius:var(--r-lg); padding:var(--s-7); }
+.rb__form { background:var(--portal-ground); border:1px solid var(--portal-line); border-radius:var(--r-lg); padding:var(--s-7); }
 .rb__form h2 { color:#fff; font-size:1.5rem; margin:0 0 var(--s-2); }
 .rb__lede { color:var(--baby-200); font-size:var(--t-small); margin:0 0 var(--s-6); max-width:48ch; }
 
 /* dark-mode form controls */
 .rb .field label { color:#fff; }
 .rb .field input, .rb .field textarea, .rb .field select {
-  background:rgba(255,255,255,.07); border:1.5px solid var(--navy-500); color:#fff; }
+  background:rgba(255,255,255,.07); border:1.5px solid var(--portal-edge); color:#fff; }
 .rb .field input::placeholder, .rb .field textarea::placeholder { color:#7FA3C4; }
 .rb .field input:focus, .rb .field textarea:focus { border-color:var(--baby-200); outline:2px solid rgba(189,227,255,.35); }
 
 /* one yard someone has worked at */
-.yard { border:1.5px solid var(--navy-500); border-radius:var(--r-md); padding:var(--s-5); margin-bottom:var(--s-4); background:rgba(255,255,255,.03); }
+.yard { border:1.5px solid var(--portal-edge); border-radius:var(--r-md); padding:var(--s-5); margin-bottom:var(--s-4); background:rgba(255,255,255,.03); }
 .yard__head { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--s-4); }
 .yard__n { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; color:var(--warm); text-transform:uppercase; }
 .yard__del { background:none; border:0; color:var(--baby-300); font-size:var(--t-small); cursor:pointer; text-decoration:underline; padding:4px; }
@@ -46,7 +46,7 @@
 /* skills as big friendly targets, not a dropdown */
 .chips { display:flex; flex-wrap:wrap; gap:var(--s-3); }
 .chips label { display:inline-flex; gap:8px; align-items:center; cursor:pointer;
-  border:1.5px solid var(--navy-500); border-radius:var(--r-pill); padding:9px 15px;
+  border:1.5px solid var(--portal-edge); border-radius:var(--r-pill); padding:9px 15px;
   color:var(--baby-200); font-size:var(--t-small); min-height:44px; transition:all .15s var(--ease); }
 .chips label:hover { border-color:var(--baby-200); color:#fff; }
 .chips input { width:17px; height:17px; accent-color:#BDE3FF; }
@@ -207,7 +207,7 @@
   </div>
 </main>
 
-<footer class="ftr" style="background:var(--depth-07);border-top:1px solid var(--navy-500)">
+<footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
     <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
   </div></div>
