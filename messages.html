@@ -29,7 +29,24 @@
 .msAv img{width:100%;height:100%;object-fit:cover}
 .msItem b{display:block;color:#fff;font-size:var(--t-small)}
 .msItem p{margin:2px 0 0;font-size:var(--t-label);color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.msUnread{width:8px;height:8px;border-radius:50%;background:var(--warm);align-self:center;flex:0 0 auto}
+/* 23 Oct — an 8px dot was the only thing separating read from unread, which
+   is not enough to scan a list by. Unread now changes four things at once:
+   a left accent, a brighter ground, the name in white bold, and a labelled
+   dot. Read rows recede rather than unread rows merely gaining a speck. */
+.msUnread{width:9px;height:9px;border-radius:50%;background:var(--warm);align-self:center;flex:0 0 auto;
+  box-shadow:0 0 0 3px rgba(249,244,237,.18)}
+.msItem--unread{background:rgba(189,227,255,.09);box-shadow:inset 3px 0 0 0 var(--warm)}
+.msItem--unread b{color:#fff;font-weight:900}
+.msItem--unread p{color:var(--baby-200)}
+.msItem--read b{color:var(--baby-200);font-weight:600}
+.msItem--read .msAv{opacity:.72}
+.msCount{display:inline-block;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--warm);
+  color:var(--warm-ink);font:900 11px/18px var(--font-body);margin-left:6px;vertical-align:1px}
+.msTabs button[aria-pressed="true"] .msCount{background:var(--navy-900);color:#fff}
+.msBar{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);margin-bottom:var(--s-4)}
+.msBar button{background:none;border:0;color:var(--baby-200);cursor:pointer;font:600 var(--t-label)/1 var(--font-body);
+  text-decoration:underline;padding:6px}
+.msBar button:hover{color:#fff}
 .msPane{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);display:flex;flex-direction:column;min-height:60vh}
 .msHead{padding:var(--s-5) var(--s-6);border-bottom:1px solid var(--navy-500);display:flex;gap:var(--s-4);align-items:center}
 .msHead b{color:#fff}.msHead span{color:var(--text-muted);font-size:var(--t-label);display:block}
@@ -52,9 +69,14 @@
     <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Messages</h1>
     <div class="msWrap">
       <div>
+        <div class="msBar">
+          <span style="color:var(--baby-300);font:600 var(--t-label)/1 var(--font-body)">Your messages</span>
+          <button type="button" id="markAll" onclick="markAllRead()" hidden>Mark all as read</button>
+        </div>
         <div class="msTabs" role="group" aria-label="Filter messages">
-          <button aria-pressed="true" onclick="tab('all',this)">All</button>
-          <button aria-pressed="false" onclick="tab('team',this)">EquiStaff</button>
+          <button aria-pressed="true"  onclick="tab('all',this)">All</button>
+          <button aria-pressed="false" onclick="tab('unread',this)">Unread<span class="msCount" id="unreadN">0</span></button>
+          <button aria-pressed="false" onclick="tab('team',this)">Kaitlin</button>
           <button aria-pressed="false" onclick="tab('barn',this)">Employers</button>
         </div>
         <div id="list"></div>
@@ -85,14 +107,25 @@ var CUR = T[0].id, VIEW = 'all';
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function initials(n){return n.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();}
 function paintList(){
-  var rows = T.filter(function(t){ return VIEW==='all' || t.kind===VIEW; });
+  var rows = T.filter(function(t){ return VIEW==='all' ? true : VIEW==='unread' ? t.unread : t.kind===VIEW; });
   document.getElementById('list').innerHTML = rows.map(function(t){
     var av = t.img ? '<span class="msAv"><img src="'+t.img+'" alt=""></span>' : '<span class="msAv">'+initials(t.who)+'</span>';
     var last = t.msgs[t.msgs.length-1];
-    return '<div class="msItem" aria-current="'+(t.id===CUR)+'" onclick="open_(\''+t.id+'\')">'+av
-      + '<div style="min-width:0"><b>'+esc(t.who)+'</b><p>'+esc(last[1])+'</p></div>'
-      + (t.unread ? '<span class="msUnread"></span>' : '') + '</div>';
+    var cls = 'msItem ' + (t.unread ? 'msItem--unread' : 'msItem--read');
+    var from = t.kind === 'team' ? ' <span style="font:700 10px/1 var(--font-body);letter-spacing:.07em;'
+             + 'text-transform:uppercase;color:var(--warm)">· EquiStaff</span>' : '';
+    return '<div class="'+cls+'" aria-current="'+(t.id===CUR)+'" onclick="open_(\''+t.id+'\')">'+av
+      + '<div style="min-width:0"><b>'+esc(t.who)+from+'</b><p>'+esc(last[1])+'</p></div>'
+      + (t.unread ? '<span class="msUnread" title="Unread" aria-label="Unread"></span>' : '') + '</div>';
   }).join('');
+  var n = T.filter(function(x){ return x.unread; }).length;
+  var badge = document.getElementById('unreadN');
+  if (badge) { badge.textContent = n; badge.style.display = n ? '' : 'none'; }
+  var mk = document.getElementById('markAll');
+  if (mk) mk.hidden = !n;
+  var empty = document.getElementById('list');
+  if (!rows.length) empty.innerHTML = '<p style="color:var(--baby-200);font-size:var(--t-small);padding:var(--s-5)">'
+    + 'Nothing unread. You are all caught up.</p>';
 }
 function paintPane(){
   var t = T.find(function(x){return x.id===CUR;});
@@ -120,7 +153,15 @@ paintList(); paintPane();
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 
+<script>
+function markAllRead() {
+  T.forEach(function (t) { t.unread = false; });
+  paintList();
+  if (window.ES && ES.notify) ES.notify('All messages marked as read');
+}
+</script>
+
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('23 Oct', ["Unread is no longer an 8px dot. Unread rows get a left accent, a brighter ground and a bolder name.", "New Unread filter with a live count, plus Mark all as read.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>
