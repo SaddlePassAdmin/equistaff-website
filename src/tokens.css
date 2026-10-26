@@ -76,11 +76,16 @@
   --font-body:    'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   /* Numbers were set in Cutive Mono. It is a lovely typewriter face and it is
      not legible at the sizes pay figures actually appear at, which the client
-     raised on 19 Oct. IBM Plex Mono keeps the monospaced alignment that makes
+     raised on 19 Oct. Azeret Mono keeps the monospaced alignment that makes
      a column of salaries scannable, and unlike Cutive it has real weights.
-     Cutive is kept as a token so the original intent is not lost. */
-  --font-mono:       'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --font-typewriter: 'Cutive Mono', ui-monospace, Menlo, monospace;
+     */
+  /* Azeret Mono, chosen by Brittany and confirmed 26 Oct. It replaces IBM Plex
+     Mono, which was itself a stopgap for Cutive Mono — Cutive had no bold weight
+     and the job numbers were genuinely hard to read. Azeret carries 400 to 700
+     plus italics, which is what the numbers needed. */
+  --font-mono:       'Azeret Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* --font-typewriter removed 26 Oct: nothing used it, and Cutive is no longer
+     loaded, so it would have silently fallen back to Menlo if anyone had. */
 
   /* Type scale — body never below 17px (audit finding: live site sets 13px) */
   --t-display: clamp(2.75rem, 5.5vw, 4.5rem);
