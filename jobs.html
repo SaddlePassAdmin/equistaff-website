@@ -83,7 +83,7 @@
       <div class="jbSearch">
         <input placeholder="Barn manager, groom, trainer…" aria-label="Search roles">
         <input placeholder="Ocala, FL" aria-label="Location">
-        <select aria-label="Role type"><option>All role types</option><option>Grooms &amp; barn staff</option><option>Trainers &amp; riding instructors</option><option>Barn &amp; facility managers</option><option>Sales &amp; customer service</option><option>Marketing &amp; sponsorship</option><option>Executive &amp; C-suite</option></select>
+        <select aria-label="Role type" data-other="Which role?"><option>All role types</option><option>Grooms &amp; barn staff</option><option>Riders / trainers / instructors</option><option>Sales / customer service / marketing</option><option>Show facility staff</option><option>Veterinary staff</option><option>Executive</option><option>Other</option></select>
         <button class="btn btn--onDark">Search</button>
       </div>
     </div>
@@ -246,5 +246,6 @@
 
 <script src="src/revised.js"></script>
 <script>REVISED('23 Oct', ["Role filter rebuilt to your six categories. \"Estate & property\" removed as you asked."]);</script>
+<script src="src/otherfield.js"></script>
 </body>
 </html>

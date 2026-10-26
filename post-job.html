@@ -103,7 +103,7 @@
           <div class="form__row">
             <div class="field"><label for="loc">Location</label><input id="loc" oninput="draw()" placeholder="Ocala, FL"></div>
             <div class="field"><label for="type">Commitment</label>
-              <select id="type" onchange="draw()"><option>Full time</option><option>Part time</option><option>Seasonal</option><option>Working student</option><option>Freelance or event</option></select>
+              <select data-other="What kind of arrangement?" id="type" onchange="draw()"><option>Full time</option><option>Part time</option><option>Seasonal</option><option>Working student</option><option>Freelance or event</option><option>Other</option></select>
             </div>
           </div>
           <div class="form__row">
@@ -132,7 +132,7 @@
           <div class="field"><label for="housing">Housing</label>
             <select id="housing" onchange="draw()">
               <option>Not specified</option><option>On-site housing included</option>
-              <option>Housing allowance</option><option>No housing</option><option>Negotiable</option>
+              <option>Housing allowance</option><option>No housing</option><option>Negotiable</option><option>Not applicable</option>
             </select>
             <small>Second only to pay. Candidates filter on it.</small>
           </div>
@@ -265,5 +265,6 @@ draw();
 
 <script src="src/revised.js"></script>
 <script>REVISED('23 Oct', ["Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script src="src/otherfield.js"></script>
 </body>
 </html>
