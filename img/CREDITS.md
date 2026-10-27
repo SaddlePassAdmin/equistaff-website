@@ -33,3 +33,24 @@ facilities — not glossy horse portraits.
 Same licence and the same caveat as the stills: placeholder only. The brief
 calls for real people and real barns, and EquiStaff's own footage replaces
 these before launch. See `media/README.md` for the shoot spec.
+
+
+## Candidate placeholder portraits
+
+Pexels licence. **Placeholders** — replaced by client-supplied photography before launch, same as every other image here.
+
+| Slot | Photographer | Source |
+| :- | :- | :- |
+| `img/people/dana.jpg` | Monstera Production | [6311668](https://www.pexels.com/photo/smiling-black-woman-showing-teeth-braces-6311668/) |
+| `img/people/sarah.jpg` | Uday Ahir | [39567150](https://www.pexels.com/photo/black-and-white-portrait-of-a-smiling-young-woman-39567150/) |
+| `img/people/imogen.jpg` | Jean Marc Bonnel | [17697073](https://www.pexels.com/photo/smiling-woman-in-black-and-white-17697073/) |
+| `img/people/hallie.jpg` | Donviour  Photography | [15361970](https://www.pexels.com/photo/portrait-of-smiling-woman-15361970/) |
+| `img/people/sofia.jpg` | Abisola Odewale | [9714052](https://www.pexels.com/photo/grayscale-photo-of-laughing-woman-9714052/) |
+| `img/people/mara.jpg` | Francois Van Vuuren | [8557732](https://www.pexels.com/photo/grayscale-photo-of-woman-smiling-8557732/) |
+| `img/people/ruby.jpg` | Kevin Shervin Mascarenhas | [29811345](https://www.pexels.com/photo/professional-woman-smiling-in-business-attire-29811345/) |
+| `img/people/marcus.jpg` | Joseph Eulo | [12311572](https://www.pexels.com/photo/man-wearing-black-suit-on-white-background-12311572/) |
+| `img/people/tom.jpg` | August de Richelieu | [7432863](https://www.pexels.com/photo/a-man-in-striped-shirt-smiling-7432863/) |
+| `img/people/tomas.jpg` | Van Anh Nguyen | [31637723](https://www.pexels.com/photo/black-and-white-portrait-of-smiling-man-31637723/) |
+| `img/people/pete.jpg` | Moïsek2l Officiel | [16955073](https://www.pexels.com/photo/smiling-man-face-reflection-16955073/) |
+| `img/people/dale.jpg` | Bhargava Marripati | [5334146](https://www.pexels.com/photo/man-in-black-crew-neck-shirt-5334146/) |
+| `img/people/chris.jpg` | Matheus Bertelli | [12446392](https://www.pexels.com/photo/close-up-shot-of-a-man-smiling-12446392/) |
