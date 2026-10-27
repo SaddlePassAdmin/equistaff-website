@@ -151,11 +151,11 @@
             usually means a better shortlist and a shorter call.
           </p>
 
-          <div class="form__row">
-            <div class="field"><label for="disc">Discipline</label><input id="disc" list="discs" placeholder="Hunter / jumper">
-              <datalist id="discs"><option>Hunter</option><option>Show Jumping</option><option>Dressage</option><option>3-Day Eventing</option><option>Equitation</option><option>Western Pleasure</option><option>Reining</option><option>Cutting</option><option>Barrel Racing</option><option>Thoroughbred Industry</option><option>Standardbred Racing</option><option>Breeding</option><option>Polo</option><option>General Horse Care</option><option>Working Ranch / Stock Horse</option></datalist>
-            </div>
-            <div class="field"><label for="horses">How many horses?</label><input id="horses" placeholder="24"></div>
+          <!-- "How many horses?" removed 27 Oct at Kaitlin's request: it reads as a
+               barn question and puts off the corporate and white-collar clients who
+               are now most of her business. Discipline stays and takes the full width. -->
+          <div class="field"><label for="disc">Discipline or industry</label><input id="disc" list="discs" placeholder="Hunter / jumper, or your industry">
+            <datalist id="discs"><option>Hunter</option><option>Show Jumping</option><option>Dressage</option><option>3-Day Eventing</option><option>Equitation</option><option>Western Pleasure</option><option>Reining</option><option>Cutting</option><option>Barrel Racing</option><option>Thoroughbred Industry</option><option>Standardbred Racing</option><option>Breeding</option><option>Polo</option><option>General Horse Care</option><option>Working Ranch / Stock Horse</option></datalist>
           </div>
           <div class="field"><label for="staff">How many staff?</label><input id="staff" placeholder="4 — two grooms, a working student, a part-time rider"></div>
           <div class="field"><label for="day">What does a day in the life look like?</label><textarea id="day" rows="3" placeholder="Early starts, competing most weekends through the winter season"></textarea></div>
@@ -249,7 +249,7 @@ function send(){
     pay: v('pay'), housing: v('housing'),
     contact_name: v('name'), email: v('email'), phone: v('phone'),
     urgency: v('urgency'),
-    program: { discipline: v('disc'), horse_count: v('horses'), staff_count: v('staff') },
+    program: { discipline: v('disc'), staff_count: v('staff') },
     day_in_life: v('day'), key_attributes: v('qualities'),
     tags: ['request_talent'], status: 'new'
   });
@@ -261,6 +261,6 @@ function send(){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Added sales & customer service, marketing & sponsorship, and show staff.", "Removed property manager and the farrier/vet tech entries.", "The shortlist line no longer promises four people."]);</script>
+<script>REVISED('27 Oct', ["\"How many horses?\" removed — it reads as a barn question and puts off corporate clients.", "Discipline relabelled \"Discipline or industry\" and widened to fill the row.", "Added sales & customer service, marketing & sponsorship, and show staff.", "Removed property manager and the farrier/vet tech entries.", "The shortlist line no longer promises four people."]);</script>
 </body>
 </html>
