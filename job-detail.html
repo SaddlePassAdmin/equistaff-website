@@ -49,6 +49,8 @@
   font:900 12px/1 var(--font-body); color:var(--navy-900); border:2px solid var(--portal-ground);
   margin-left:-10px; }
 .avStack__pile span:first-child { margin-left:0; }
+.avStack__pile span { overflow:hidden; background:var(--baby-200); }
+.avStack__pile img { width:100%; height:100%; object-fit:cover; display:block; }
 .avStack p { margin:0; font-size:var(--t-small); color:var(--baby-200); }
 /* share — she asked for it next to the job reference */
 .jdShare { display:inline-flex; align-items:center; gap:6px; background:none; border:0; cursor:pointer;
@@ -201,9 +203,9 @@
 
           <div class="avStack">
             <span class="avStack__pile">
-              <span style="background:#BDE3FF">RN</span>
-              <span style="background:#8FC7EF">TV</span>
-              <span style="background:#A9D6F2">HB</span>
+              <span><img src="img/people/ruby.jpg" alt=""></span>
+              <span><img src="img/people/tomas.jpg" alt=""></span>
+              <span><img src="img/people/hallie.jpg" alt=""></span>
               <span style="background:#F7E7D2">+6</span>
             </span>
             <p>9 people have applied this week.</p>

@@ -25,13 +25,14 @@
   display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-5); align-items:center; }
 .apRow--new { box-shadow:inset 3px 0 0 0 var(--baby-200); padding-left:calc(var(--s-6) + 3px); }
 .apRow--out { background:transparent; border-style:dashed; opacity:.75; }
-.apAv { width:46px; height:46px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
+.apAv { width:46px; height:46px; border-radius:50%; overflow:hidden; background:var(--baby-200); color:var(--navy-900);
   display:grid; place-items:center; font:900 1rem/1 var(--font-body); flex:0 0 auto; }
 .apRow h4 { margin:0 0 3px; font-family:var(--font-display); font-size:1.125rem; color:#fff; }
 .apRow p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
 .apActs { display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; }
 .unvetted { background:rgba(249,244,237,.12); border:1px solid var(--warm); border-radius:var(--r-md);
   padding:var(--s-5); margin-bottom:var(--s-6); display:flex; gap:var(--s-4); align-items:center; flex-wrap:wrap; }
+.apAv img { width:100%; height:100%; object-fit:cover; display:block; }
 .unvetted img { width:40px; height:40px; border-radius:50%; object-fit:cover; flex:0 0 auto; }
 .unvetted p { margin:0; font-size:var(--t-small); color:var(--baby-200); flex:1 1 300px; }
 .unvetted b { color:#fff; }
@@ -88,15 +89,15 @@
 <script src="src/nav.js"></script>
 <script>
 var PEOPLE = [
-  { id:'ap1', n:'Imogen Clarke',  i:'IC', m:'2 years · working student, Wellington · available now',            s:'New' },
-  { id:'ap2', n:'Tomas Vieira',   i:'TV', m:'3 years · groom, Ocala · has own transport',                        s:'New' },
-  { id:'ap3', n:'Ruby Nakamura',  i:'RN', m:'1 year · pony club, Georgia · needs housing',                        s:'New' },
-  { id:'ap4', n:'Hallie Brandt',  i:'HB', m:'4 years · show groom, Aiken · available in 2 weeks',                 s:'New' },
-  { id:'ap5', n:'Pete Donnelly',  i:'PD', m:'6 years · barn staff, Lexington · relocating to Ocala',              s:'Shortlisted' },
-  { id:'ap6', n:'Sofia Marchetti',i:'SM', m:'2 years · eventing yard, Middleburg · drives',                       s:'Shortlisted' },
-  { id:'ap7', n:'Dale Whitcomb',  i:'DW', m:'5 years · hunter barn, Wellington · spoke Tuesday',                  s:'Contacted' },
-  { id:'ap8', n:'Mara Ellison',   i:'ME', m:'No barn experience · career changer',                                s:'Not for this' },
-  { id:'ap9', n:'Chris Udall',    i:'CU', m:'Applied to 3 of your posts · looking for full time, not seasonal',   s:'Not for this' }
+  { id:'ap1', n:'Imogen Clarke',  i:'IC', img:'img/people/imogen.jpg', m:'2 years · working student, Wellington · available now',            s:'New' },
+  { id:'ap2', n:'Tomas Vieira',   i:'TV', img:'img/people/tomas.jpg', m:'3 years · groom, Ocala · has own transport',                        s:'New' },
+  { id:'ap3', n:'Ruby Nakamura',  i:'RN', img:'img/people/ruby.jpg', m:'1 year · pony club, Georgia · needs housing',                        s:'New' },
+  { id:'ap4', n:'Hallie Brandt',  i:'HB', img:'img/people/hallie.jpg', m:'4 years · show groom, Aiken · available in 2 weeks',                 s:'New' },
+  { id:'ap5', n:'Pete Donnelly',  i:'PD', img:'img/people/pete.jpg', m:'6 years · barn staff, Lexington · relocating to Ocala',              s:'Shortlisted' },
+  { id:'ap6', n:'Sofia Marchetti',i:'SM', img:'img/people/sofia.jpg', m:'2 years · eventing yard, Middleburg · drives',                       s:'Shortlisted' },
+  { id:'ap7', n:'Dale Whitcomb',  i:'DW', img:'img/people/dale.jpg', m:'5 years · hunter barn, Wellington · spoke Tuesday',                  s:'Contacted' },
+  { id:'ap8', n:'Mara Ellison',   i:'ME', img:'img/people/mara.jpg', m:'No barn experience · career changer',                                s:'Not for this' },
+  { id:'ap9', n:'Chris Udall',    i:'CU', img:'img/people/chris.jpg', m:'Applied to 3 of your posts · looking for full time, not seasonal',   s:'Not for this' }
 ];
 var VIEW = 'all';
 
@@ -108,7 +109,7 @@ function pill(s){
 function row(p){
   var cls = 'apRow' + (p.s === 'New' ? ' apRow--new' : p.s === 'Not for this' ? ' apRow--out' : '');
   return '<div class="' + cls + '">'
-    + '<div class="apAv">' + p.i + '</div>'
+    + (p.img ? '<div class="apAv"><img src="'+p.img+'" alt=""></div>' : '<div class="apAv">'+p.i+'</div>')
     + '<div><h4>' + p.n + '</h4><p>' + p.m + '</p></div>'
     + '<div class="apActs">' + pill(p.s)
     + '<a class="btn btn--primary" href="candidate.html">View</a>'
@@ -137,6 +138,6 @@ paint();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('27 Oct', ["Applicant photos on every row.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>

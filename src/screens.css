@@ -179,6 +179,8 @@
 .cand h4, .cand p { overflow-wrap:anywhere; }
 .fb { border-top:1px solid var(--navy-500); padding:var(--s-5) var(--s-6) var(--s-6); background:rgba(0,0,0,.16); }
 .fb__q { margin:0 0 var(--s-4); color:#fff; font-weight:700; font-size:1.0625rem; }
+.cand__av { overflow:hidden; }
+.cand__av img { width:100%; height:100%; object-fit:cover; display:block; }
 .fb__stars { display:flex; gap:6px; }
 /* 27 Oct — Brittany's horseshoes replace the placeholder stars. The button
    keeps its class and its .on state so rate() is untouched; only the glyph
