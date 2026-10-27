@@ -81,7 +81,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .hero__in { position: relative; padding: var(--s-9) 0 calc(var(--s-9) + 40px); }
 .hero h1 { color: #fff; font-size: var(--t-display); max-width: 15ch; }
 .hero .lede { color: var(--baby-200); max-width: 46ch; font-size: 1.1875rem; }
-.hero__rule { width: 96px; height: 3px; background: var(--warm); margin: var(--s-5) 0; border: 0; }
+.hero__rule { width: 96px; height: 3px; background: var(--warm); margin: var(--s-7) 0 var(--s-6); border: 0; }
 .hero__meta { color: var(--baby-200); font-size: var(--t-small); margin-top: var(--s-5); }
 
 /* ---------- Diagonal cuts ---------- */
@@ -262,7 +262,13 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .ftr { background: var(--depth-07); color: #fff; padding: var(--s-9) 0 var(--s-6); }
 .ftr__grid { display: grid; grid-template-columns: 1.4fr repeat(3,1fr); gap: var(--s-7); }
 .ftr h4 { font-size: var(--t-small); margin: 0 0 var(--s-4); letter-spacing: .04em; }
-.ftr a { display: block; color: var(--baby-200); text-decoration: none; font-size: var(--t-small); margin-bottom: var(--s-3); }
+/* Scoped to the nav columns on 26 Oct. It used to hit every link in the footer,
+   so "Privacy · Terms · Accessibility" in the bottom bar broke into four lone
+   lines — the "floater text" Brittany hammered on book and employer. */
+.ftr__grid a { display: block; color: var(--baby-200); text-decoration: none; font-size: var(--t-small); margin-bottom: var(--s-3); }
+.ftr a { color: var(--baby-200); text-decoration: none; font-size: var(--t-small); }
+.ftr__bar a { display: inline; margin: 0; }
+.ftr__bar > span { white-space: nowrap; }
 .ftr a:hover { color: #fff; }
 .ftr__brand { font-family: var(--font-display); font-size: 1.5rem; }
 .ftr__brand b { color: var(--baby-200); } .ftr__brand span { font-style: italic; }
@@ -302,7 +308,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 
 /* ---------- Conversion: DIY listing vs paid recruiter-managed search ---------- */
 .compare { background: var(--depth-01); padding: var(--s-9) 0; }
-.compare__grid { display: grid; grid-template-columns: 1fr 1.1fr 1.25fr; gap: var(--s-5); margin-top: var(--s-7); align-items: start; }
+.compare__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); margin-top: var(--s-7); align-items: start; }
 @media (max-width: 1100px){ .compare__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
 .cmp { background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--r-lg); padding: var(--s-7); }
 .cmp--hero { background: linear-gradient(160deg, var(--depth-07), var(--depth-06)); color: #fff; border-color: var(--baby-300); box-shadow: var(--e-3); position: relative; }
@@ -414,7 +420,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   color: #fff; font-family: var(--font-display); font-size: 1.375rem;
   margin: var(--s-7) 0 var(--s-4); opacity: .92;
 }
-.hero__choice { display: flex; gap: var(--s-4); flex-wrap: wrap; }
+.hero__choice { display: flex; gap: var(--s-5); flex-wrap: wrap; margin-top: var(--s-5); }
 .hero__choice .btn { min-width: 210px; }
 @media (max-width: 680px) {
   .hero__choice { flex-direction: column; align-items: stretch; }

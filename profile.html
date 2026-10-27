@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="src/tokens.css">
 <link rel="stylesheet" href="src/styles.css">
 <link rel="stylesheet" href="src/screens.css">
@@ -81,7 +81,7 @@
           <div class="form__row">
             <div class="field"><label for="p-l">Location</label><input id="p-l" value="Ocala, FL"></div>
             <div class="field" id="f-disc"><label for="p-d">Primary discipline</label>
-              <select id="p-d"><option>Hunter / Jumper</option><option selected>Dressage</option><option>Eventing</option><option>Racing / Thoroughbred</option><option>Western</option></select>
+              <select id="p-d" data-other="Which discipline?"><option>Hunter / Jumper</option><option selected>Dressage</option><option>Eventing</option><option>Racing / Thoroughbred</option><option>Western</option><option>Not applicable</option><option>Other</option></select>
             </div>
           </div>
           <div class="field" id="f-history">
@@ -197,5 +197,6 @@
 
 <script src="src/revised.js"></script>
 <script>REVISED('23 Oct', ["\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script src="src/otherfield.js"></script>
 </body>
 </html>

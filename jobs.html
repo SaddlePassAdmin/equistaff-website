@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="src/tokens.css">
 <link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css">
 <style>
@@ -83,7 +83,7 @@
       <div class="jbSearch">
         <input placeholder="Barn manager, groom, trainer…" aria-label="Search roles">
         <input placeholder="Ocala, FL" aria-label="Location">
-        <select aria-label="Role type"><option>All role types</option><option>Grooms &amp; barn staff</option><option>Trainers &amp; riding instructors</option><option>Barn &amp; facility managers</option><option>Sales &amp; customer service</option><option>Marketing &amp; sponsorship</option><option>Executive &amp; C-suite</option></select>
+        <select aria-label="Role type" data-other="Which role?"><option>All role types</option><option>Grooms &amp; barn staff</option><option>Riders / trainers / instructors</option><option>Sales / customer service / marketing</option><option>Show facility staff</option><option>Veterinary staff</option><option>Executive</option><option>Other</option></select>
         <button class="btn btn--onDark">Search</button>
       </div>
     </div>
@@ -246,5 +246,6 @@
 
 <script src="src/revised.js"></script>
 <script>REVISED('23 Oct', ["Role filter rebuilt to your six categories. \"Estate & property\" removed as you asked."]);</script>
+<script src="src/otherfield.js"></script>
 </body>
 </html>
