@@ -180,8 +180,13 @@
 .fb { border-top:1px solid var(--navy-500); padding:var(--s-5) var(--s-6) var(--s-6); background:rgba(0,0,0,.16); }
 .fb__q { margin:0 0 var(--s-4); color:#fff; font-weight:700; font-size:1.0625rem; }
 .fb__stars { display:flex; gap:6px; }
-.star { background:none; border:0; cursor:pointer; font-size:2rem; line-height:1; padding:2px 4px;
-  color:var(--navy-500); transition:color .12s var(--ease); }
+/* 27 Oct — Brittany's horseshoes replace the placeholder stars. The button
+   keeps its class and its .on state so rate() is untouched; only the glyph
+   changed, from a text character to an SVG that inherits currentColor. */
+.star { background:none; border:0; cursor:pointer; line-height:0; padding:3px 4px;
+  color:var(--navy-500); transition:color .14s var(--ease), transform .14s var(--ease); }
+.star .hs { width:26px; height:29px; display:block; }
+.star:hover { transform:translateY(-1px); }
 .star:hover, .star.on { color:var(--warm); }
 .star:focus-visible { outline:2px solid var(--baby-200); border-radius:4px; }
 .fb__hint { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-3) 0 0; }
