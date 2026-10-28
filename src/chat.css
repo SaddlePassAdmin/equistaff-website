@@ -25,7 +25,10 @@
   box-shadow: var(--e-3);
 }
 .chatLaunch:hover { background: var(--depth-06); }
-.chatLaunch__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm); flex: 0 0 auto; }
+/* 28 Oct — the launcher used a plain dot. Brittany's horseshoe stands in until
+   she has sourced the icon library; it reads at this size and it is already in
+   the sprite, so no new asset. Inherits currentColor like every other icon. */
+.chatLaunch__hs { width: 17px; height: 19px; flex: 0 0 auto; color: var(--warm); }
 /* Never sit on top of a control: the page reserves room for it. */
 body.has-chat { padding-bottom: 96px; }
 @media (max-width: 620px) { .chatLaunch { right: 16px; bottom: 16px; } }

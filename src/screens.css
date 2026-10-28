@@ -70,6 +70,8 @@
 .pHdr__logo { display: flex; align-items: baseline; font-family: var(--font-display); font-size: 1.5rem; text-decoration: none; }
 .pHdr__logo b { color: var(--baby-200); font-weight: 700; } .pHdr__logo span { color: #fff; font-style: italic; }
 .pHdr__nav { display: flex; gap: var(--s-6); margin-left: auto; }
+/* Same separation in the portal bar, so the two headers agree. */
+.pHdr__cta { margin-left: var(--s-2); }
 .pHdr__nav a { color: var(--baby-200); text-decoration: none; font-size: var(--t-small); font-weight: 600; }
 .pHdr__nav a[aria-current] { color: #fff; }
 .avatar {

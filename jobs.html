@@ -239,7 +239,7 @@
 <!-- AI concierge launcher. The page reserves space for it (body.has-chat) so it
      never sits on top of a control, which the audit found on the live site. -->
 <a class="chatLaunch" href="chatbot.html">
-  <span class="chatLaunch__dot"></span> Ask EquiStaff
+  <svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask EquiStaff
 </a>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
@@ -247,5 +247,6 @@
 <script src="src/revised.js"></script>
 <script>REVISED('23 Oct', ["Role filter rebuilt to your six categories. \"Estate & property\" removed as you asked."]);</script>
 <script src="src/otherfield.js"></script>
+<script src="src/icons.js"></script>
 </body>
 </html>
