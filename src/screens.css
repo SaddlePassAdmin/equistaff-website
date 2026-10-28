@@ -181,6 +181,9 @@
 .fb__q { margin:0 0 var(--s-4); color:#fff; font-weight:700; font-size:1.0625rem; }
 .cand__av { overflow:hidden; }
 .cand__av img { width:100%; height:100%; object-fit:cover; display:block; }
+/* 28 Oct — the Paid pill reused the shortlist style, which puts baby blue on a
+   pale green ground at 1.16:1. Its own token now, 6.78:1. */
+.pill--paid { background:#E9F0EA; color:#2E5B3A; }
 .fb__stars { display:flex; gap:6px; }
 /* 27 Oct — Brittany's horseshoes replace the placeholder stars. The button
    keeps its class and its .on state so rate() is untouched; only the glyph
