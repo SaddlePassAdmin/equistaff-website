@@ -81,10 +81,9 @@ function pillFor(st){
 }
 function row(a){
   var mod = a.status==='Shortlisted' ? ' appRow--good' : a.status==='Sent to barn' ? ' appRow--quiet' : '';
-  // The confidentiality rule holds here too: a managed employer is named
-  // only once contact has been made.
-  var org = (a.managed && !a.disclosed)
-    ? '<span class="job__conf">Employer confidential</span> '+esc(a.org) : esc(a.org);
+  // Same as the profile: the rule is in the data. An undisclosed managed role
+  // stores a description, a disclosed one stores the barn's name.
+  var org = esc(a.org);
   var why = (a.managed && a.disclosed) ? '<p class="appRow__why">Named now that you’re shortlisted.</p>' : '';
   return '<div class="appRow'+mod+'"><div>'
        + '<h4>'+esc(a.title)+'</h4>'
@@ -114,6 +113,6 @@ paint();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('28 Oct', ["\"Employer confidential\" badge removed from the tracker.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>

@@ -49,7 +49,7 @@ function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;'
 function paint(){
   var rows = ES.saved();
   document.getElementById('list').innerHTML = rows.length ? rows.map(function(r){
-    var org = (r.managed ? '<span class="job__conf">Employer confidential</span> ' : '') + esc(r.org);
+    var org = esc(r.org);
     return '<div class="appRow"><div><h4>'+esc(r.title)+'</h4>'
       + '<p>'+org+' · '+esc(r.where)+(r.pay?' · '+esc(r.pay):'')+'</p></div>'
       + '<div style="display:flex;gap:var(--s-3);flex-wrap:wrap">'
@@ -62,14 +62,14 @@ paint();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('28 Oct', ["\"Employer confidential\" badge removed.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html><script>
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function paint(){
   var rows = ES.saved();
   document.getElementById('list').innerHTML = rows.length ? rows.map(function(r){
-    var org = (r.managed ? '<span class="job__conf">Employer confidential</span> ' : '') + esc(r.org);
+    var org = esc(r.org);
     return '<div class="appRow"><div><h4>'+esc(r.title)+'</h4>'
       + '<p>'+org+' · '+esc(r.where)+(r.pay?' · '+esc(r.pay):'')+'</p></div>'
       + '<div style="display:flex;gap:var(--s-3);flex-wrap:wrap">'
