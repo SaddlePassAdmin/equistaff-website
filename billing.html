@@ -42,7 +42,9 @@
   align-items:center; padding:var(--s-4) 0; border-bottom:1px solid var(--portal-line); }
 .inv:last-child { border-bottom:0; }
 .inv b { color:#fff; font-size:var(--t-small); font-weight:700; }
-.inv span { color:var(--text-muted); font-size:var(--t-small); }
+/* :not(.pill) added 28 Oct — this was overriding the status pill's own colour,
+   which in deep mode made it baby blue on pale green at 1.16:1. */
+.inv span:not(.pill) { color:var(--text-muted); font-size:var(--t-small); }
 .inv .amt { font-family:var(--font-mono); font-weight:600; color:#fff; font-variant-numeric:tabular-nums; }
 
 /* EM-4: the save offers come before the cancel, every time. */
@@ -109,9 +111,9 @@
 
     <section class="pSection">
       <div class="pSection__head"><h2>Invoices</h2><a href="#" onclick="event.preventDefault();dlInvoices()">Download all</a></div>
-      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
-      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
-      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--shortlist">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
     </section>
 
     <section class="pSection">
@@ -131,7 +133,7 @@
             <button class="btn btn--primary" type="button" onclick="took('Discount applied — next month is $25')">Take the discount</button></div>
           <div class="saveOpt"><p><b>Fifteen minutes with Kaitlin.</b> She&rsquo;ll look at your posts and tell you honestly what&rsquo;s wrong with them.</p>
             <a class="btn btn--primary" href="request-talent.html">Book the call</a></div>
-          <div class="saveOpt"><p><b>Hand the role over entirely.</b> A managed search, four people, every reference checked.</p>
+          <div class="saveOpt"><p><b>Hand the role over entirely.</b> A managed search, every candidate spoken to, every reference checked.</p>
             <a class="btn btn--primary" href="request-talent.html">How that works</a></div>
         </div>
         <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;align-items:center">
@@ -198,6 +200,6 @@ function cardSaved(b){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Plan prices corrected to $49.99, $139.99 and $469.99.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('28 Oct', ["The Paid pill was baby blue on pale green at 1.16:1 — it has its own colour now.", "Save offer no longer promises a fixed number of candidates.", "Plan prices corrected to $49.99, $139.99 and $469.99.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 </body>
 </html>

@@ -278,7 +278,9 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 /* ---------- Section intro ---------- */
 .sec-head { max-width: 62ch; }
 .sec-head h2 { margin-bottom: var(--s-3); }
-.sec-head p { color: var(--text-muted); }
+/* 28 Oct: this was clobbering .eyebrow--on-dark, because the eyebrow is a <p>
+   and .sec-head p (0,1,1) outranks a single class. Eyebrows keep their own ink. */
+.sec-head p:not([class*="eyebrow"]) { color: var(--text-muted); }
 
 /* ---------- Accessibility ---------- */
 .skip { position: absolute; left: -9999px; }

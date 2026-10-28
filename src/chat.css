@@ -71,7 +71,7 @@ body.has-chat { padding-bottom: 96px; }
 .liveNote {
   display: block; margin-top: 8px; padding-top: 8px;
   border-top: 1px solid rgba(255,255,255,.18);
-  font-size: var(--t-label); color: var(--baby-300); font-style: italic;
+  font-size: var(--t-label); color: var(--baby-200); font-style: italic;
 }
 
 /* Quick replies — the bot offers the next move rather than a blank box. */
