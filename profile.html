@@ -147,11 +147,11 @@
   function row(a){
     var mod = a.status === 'Shortlisted' ? ' appRow--good'
             : a.status === 'Sent to barn' ? ' appRow--quiet' : '';
-    // The confidentiality rule, applied to the candidate's own tracker:
-    // a managed employer is named only once contact has been made.
-    var org = (a.managed && !a.disclosed)
-      ? '<span class="job__conf">Employer confidential</span> ' + a.org
-      : a.org;
+    // The confidentiality rule lives in the data, not in a label: an undisclosed
+    // managed role stores a description where a named one stores the barn.
+    // The badge that used to announce this was removed on 28 Oct — the rule
+    // still holds, it just no longer draws attention to itself.
+    var org = a.org;
     var why = (a.managed && a.disclosed)
       ? '<p class="appRow__why">Named now that you\u2019re shortlisted.</p>' : '';
     return '<div class="appRow' + mod + '"><div>'
@@ -173,7 +173,7 @@
   var sv = ES.saved();
   document.getElementById('savedWrap').innerHTML = sv.length
     ? sv.map(function(r){
-        var org = (r.managed ? '<span class="job__conf">Employer confidential</span> ' : '') + r.org;
+        var org = r.org;
         return '<div class="appRow"><div><h4>' + r.title + '</h4><p>' + org + ' \u00b7 ' + r.where
              + (r.pay ? ' \u00b7 ' + r.pay : '') + '</p></div>'
              + '<a class="btn btn--primary" href="job-detail.html">View</a></div>';
@@ -196,7 +196,7 @@
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('28 Oct', ["\"Employer confidential\" badge removed.", "\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/otherfield.js"></script>
 </body>
 </html>
