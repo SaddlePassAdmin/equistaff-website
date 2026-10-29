@@ -112,7 +112,7 @@
             <select id="p-a"><option>Available now</option><option selected>Available in 30 days</option><option>Looking quietly — not urgent</option></select>
             <small>“Looking quietly” hides your profile from all employer searches.</small>
           </div>
-          <div class="ob__actions"><button class="btn btn--primary">Save changes</button><span class="ob__skip">Last saved 2 days ago</span></div>
+          <div class="ob__actions"><button class="btn btn--primary" type="button" onclick="saveProfile()">Save changes</button><span class="ob__skip" id="savedAt">Last saved 2 days ago</span></div>
         </div>
       </section>
 
@@ -199,5 +199,12 @@
 <script>REVISED('29 Oct', ["\"All Industry\" added to discipline, your wording.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "Each checklist item is a 44px tap target on a phone, and the \"Complete profiles…\" note is 15px.", "\"Employer confidential\" badge removed.", "\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/otherfield.js"></script>
 <script src="src/chat.js"></script>
+<script>
+/* 29 Oct: Save changes used to do nothing. */
+function saveProfile(){
+  document.getElementById('savedAt').textContent = 'Saved just now';
+  if (window.ES && ES.notify) ES.notify('Profile saved');
+}
+</script>
 </body>
 </html>
