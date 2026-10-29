@@ -10,7 +10,16 @@ body {
   font-size: var(--t-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* 29 Oct — short pages left the footer floating with the page ground showing
+     beneath it: 618px of it on saved.html at a 1440-tall window. The footer now
+     sits on the bottom of the viewport when the content does not fill it, and
+     behaves normally when it does. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+body > main { flex: 1 0 auto; }
+body > footer { flex-shrink: 0; }
 img { max-width: 100%; display: block; }
 a { color: var(--text-link); }
 

@@ -29,8 +29,14 @@
    she has sourced the icon library; it reads at this size and it is already in
    the sprite, so no new asset. Inherits currentColor like every other icon. */
 .chatLaunch__hs { width: 17px; height: 19px; flex: 0 0 auto; color: var(--warm); }
-/* Never sit on top of a control: the page reserves room for it. */
-body.has-chat { padding-bottom: 96px; }
+/* Never sit on top of a control: the page reserves room for it.
+   29 Oct — this used to be padding on <body>. Once the body became a flex
+   column so the footer could reach the bottom of a short page, that padding
+   sat BELOW the footer and left a 96px band of page ground under it. The
+   clearance belongs to whatever is actually at the bottom: the footer when
+   there is one, main when there is not. */
+body.has-chat > footer { padding-bottom: 88px; }
+body.has-chat > main:last-of-type { padding-bottom: 88px; }
 @media (max-width: 620px) { .chatLaunch { right: 16px; bottom: 16px; } }
 
 /* ---------- Panel ---------- */
