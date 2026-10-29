@@ -108,6 +108,46 @@
             <small>We ask who else needs housing rather than about family or dependents.</small>
           </div>
 
+          <div class="field" id="f-photo">
+            <label>Your photo</label>
+            <div class="photoRow">
+              <img class="photoRow__img" src="img/people/dana.jpg" alt="Your current profile photo">
+              <label class="photoUp" for="photoUpIn">Upload a photo
+                <input type="file" id="photoUpIn" accept="image/*" hidden>
+              </label>
+            </div>
+            <small>A clear headshot. Employers open profiles with a photo far more often.</small>
+          </div>
+
+          <!-- She asks for a range, not a number, because candidates refuse to
+               name one figure — and the ceiling has to clear $200k. -->
+          <div class="field" id="f-pay">
+            <label for="p-pay">Desired salary range</label>
+            <div class="payRow">
+              <select id="p-pay">
+                <option>Stipend / working student</option>
+                <option>$30,000 &ndash; $45,000</option>
+                <option selected>$45,000 &ndash; $60,000</option>
+                <option>$60,000 &ndash; $80,000</option>
+                <option>$80,000 &ndash; $110,000</option>
+                <option>$110,000 &ndash; $150,000</option>
+                <option>$150,000 &ndash; $200,000</option>
+                <option>$200,000+</option>
+                <option>I would rather discuss it</option>
+              </select>
+              <label class="payChk"><input type="checkbox" id="p-payneg" checked> Negotiable</label>
+            </div>
+            <small>Only the recruiter sees this. It is never shown on your public profile.</small>
+          </div>
+
+          <div class="field" id="f-links">
+            <label for="p-lk1">Supporting links</label>
+            <input id="p-lk1" placeholder="Riding video &mdash; YouTube, Vimeo, or a Drive link">
+            <input id="p-lk2" placeholder="Portfolio, r&eacute;sum&eacute; site, or LinkedIn" style="margin-top:var(--s-3)">
+            <input id="p-lk3" placeholder="Instagram or another social account" style="margin-top:var(--s-3)">
+            <small>Optional. A riding video does more for a barn role than anything you can write.</small>
+          </div>
+
           <div class="field" id="f-avail"><label for="p-a">Availability</label>
             <select id="p-a"><option>Available now</option><option selected>Available in 30 days</option><option>Looking quietly — not urgent</option></select>
             <small>“Looking quietly” hides your profile from all employer searches.</small>
@@ -127,7 +167,7 @@
 <footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap">
     <div class="ftr__bar" style="border:0;margin:0;padding:0">
-      <span>© 2026 EquiStaff · Equine staffing since 1982</span>
+      <span>© 2026 EquiStaff · Equine recruiting since 1982</span>
       <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Accessibility <span class="ftr__by">· Built by <b>Saddle Pass Technology</b></span></span>
     </div>
   </div>
@@ -196,7 +236,10 @@
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["\"All Industry\" added to discipline, your wording.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "Each checklist item is a 44px tap target on a phone, and the \"Complete profiles…\" note is 15px.", "\"Employer confidential\" badge removed.", "\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', [
+  "Desired salary range as a range, not a figure, with a Negotiable tick and a $200,000+ band at the top. Only the recruiter sees it.",
+  "Supporting links — riding video, portfolio or LinkedIn, and a social account.",
+  "A photo upload, with the note that profiles with a photo get opened far more often.","\"All Industry\" added to discipline, your wording.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "Each checklist item is a 44px tap target on a phone, and the \"Complete profiles…\" note is 15px.", "\"Employer confidential\" badge removed.", "\"Looking quietly\" now says it hides you from all employer searches, not just your current employer.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/otherfield.js"></script>
 <script src="src/chat.js"></script>
 </body>

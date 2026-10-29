@@ -23,6 +23,8 @@
   .open h2 { font-size:1.0625rem; margin:0 0 var(--s-3); color:#3B2E1B; }
   .open li { font-size:var(--t-small); color:#3B2E1B; margin-bottom:6px; }
   .open ul { margin:0; padding-left:20px; }
+.goals { margin:0 0 var(--s-3); padding-left:19px; }
+.goals li { margin-bottom:5px; }
 </style>
 </head>
 <body>
@@ -85,8 +87,15 @@
           <div class="chat__human"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> A person is one tap away, any time</div>
         </div>
         <div class="chat__body">
-          <div class="msg msg--bot"><p>Evening. I can help with most things here, and put you through to Kaitlin&rsquo;s team whenever you&rsquo;d rather talk to a person.</p><p>To point you the right way &mdash; are you hiring, or looking for work?</p></div>
-          <div class="chips2"><button type="button">I&rsquo;m hiring</button><button type="button">I&rsquo;m looking for work</button><button type="button">Something else</button></div>
+          <div class="msg msg--bot"><p>Evening &mdash; I&rsquo;m Evie, EquiStaff&rsquo;s assistant.</p>
+            <p>Three things I&rsquo;m good for:</p>
+            <ul class="goals">
+              <li>Finding the roles or the people that match what you need</li>
+              <li>Answering what we charge, and what we do for it</li>
+              <li>Getting you onto Kaitlin&rsquo;s calendar</li>
+            </ul>
+            <p>Anything beyond that, I hand to a person rather than guess. So &mdash; are you hiring, or looking for work?</p></div>
+          <div class="chips2"><button type="button">I&rsquo;m hiring</button><button type="button">I&rsquo;m looking for work</button><button type="button">What do you charge?</button><button type="button">Something else</button></div>
         </div>
         <div class="chat__foot">
           <input placeholder="Type a message&hellip;" aria-label="Message">
@@ -144,7 +153,7 @@
             <p>A full recruiting search is quoted per role, and I won&rsquo;t put a number on it &mdash; it depends on the seniority and how hard the brief is. <b>Kaitlin quotes those herself, before any work starts.</b></p>
             <p>Want me to set that up? It takes about fifteen minutes.</p>
           </div>
-          <div class="chips2"><button type="button">Book a call with Kaitlin</button><button type="button">Show published prices</button></div>
+          <div class="chips2"><button type="button">Request a call with Kaitlin</button><button type="button">Show published prices</button></div>
         </div>
         <div class="chat__foot">
           <input placeholder="Type a message&hellip;" aria-label="Message">
@@ -286,14 +295,16 @@
       reserves space for it rather than letting it float over the content. It is a button, reachable by keyboard, and it says what it is.
     </p>
     <button class="chatLaunch" data-specimen tabindex="-1" aria-hidden="true" style="position:static;box-shadow:none">
-      <svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask EquiStaff
+      <svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask Evie
     </button>
   </div>
 </main>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Your comments from the Figma file are in: your welcome-back line, your compensation question, your pricing line and your About answer, word for word.", "Cancelling now asks whether the job was filled first. If it was, especially through us, Evie congratulates them and does not try to keep them.", "Your About answer says \"since 1982\" instead of \"over 42 years\", so it never goes out of date.", "The assistant is now Evie at EquiStaff, with a profile photo. Her intro still says she’s AI, not a person.", "The chat now works on every page — open it from \"Ask EquiStaff\". The links under \"Try it live\" jump to a point partway through a conversation.", "New Design drawer inside the chat: try colours, launcher shape, side, size, name, greeting and typing speed live.", "Chat launcher uses Brittany's horseshoe instead of a plain dot.", "Live-note text lifted to clear AA on the brightened portal."]);</script>
+<script>REVISED('29 Oct', [
+  "Evie opens by saying what she is for — three things, and that anything else goes to a person. Added a “What do you charge?” pill.",
+  "The launcher on every page now says Ask Evie rather than Ask EquiStaff.","On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Your comments from the Figma file are in: your welcome-back line, your compensation question, your pricing line and your About answer, word for word.", "Cancelling now asks whether the job was filled first. If it was, especially through us, Evie congratulates them and does not try to keep them.", "Your About answer says \"since 1982\" instead of \"over 42 years\", so it never goes out of date.", "The assistant is now Evie at EquiStaff, with a profile photo. Her intro still says she’s AI, not a person.", "The chat now works on every page — open it from \"Ask EquiStaff\". The links under \"Try it live\" jump to a point partway through a conversation.", "New Design drawer inside the chat: try colours, launcher shape, side, size, name, greeting and typing speed live.", "Chat launcher uses Brittany's horseshoe instead of a plain dot.", "Live-note text lifted to clear AA on the brightened portal."]);</script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
 </body>

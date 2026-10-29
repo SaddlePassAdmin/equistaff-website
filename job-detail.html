@@ -63,6 +63,14 @@
   font:600 var(--t-small)/1 var(--font-body); text-decoration:none; cursor:pointer; }
 .jdPay { font-family:var(--font-mono); font-size:1.625rem; font-weight:600; letter-spacing:-.01em; color:#fff; margin:var(--s-5) 0 0; }
 .jdBody { background:var(--depth-01); padding:var(--s-8) 0 var(--s-9); }
+.jdList { margin:0 0 var(--s-6); padding-left:20px; }
+.jdList li { margin-bottom:8px; }
+.jdHousing { border:1px solid var(--border-subtle); border-radius:var(--r-md); background:#fff;
+  padding:var(--s-4) var(--s-5); margin-bottom:var(--s-6); }
+.jdHousing summary { cursor:pointer; font-weight:700; font-size:var(--t-small); color:var(--navy-900); }
+.jdHousing summary::marker { color:var(--blue-600); }
+.jdHousing div { padding-top:var(--s-4); }
+.jdHousing p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
 .jdLayout { display:grid; grid-template-columns:1fr 380px; gap:var(--s-8); align-items:start; }
 .jdMain { background:#fff; border:1px solid var(--border-subtle); border-radius:var(--r-lg); padding:var(--s-8); }
 .jdMain h2 { font-size:1.5rem; margin-top:var(--s-7); }
@@ -133,7 +141,7 @@
   <section class="jdBody cut-top">
     <div class="wrap jdLayout">
       <article class="jdMain">
-        <h2>About the role</h2>
+        <h2>Job description</h2>
         <p>A 24-horse hunter/jumper operation ten minutes from the World Equestrian Center is looking for a barn manager to run its day-to-day. You'd be leading a team of four — two grooms, a working student and a part-time rider — and reporting directly to the owner.</p>
         <p>This is a role for someone who has done it before. The horses are competing most weekends through the winter season, so the barn runs to a schedule and the owner wants someone who can hold it without being asked twice.</p>
 
@@ -146,7 +154,7 @@
           <div><div class="jdFact__l">Reports to</div><div class="jdFact__v">Owner</div></div>
         </div>
 
-        <h2>What you'd be doing</h2>
+        <h2>Main duties</h2>
         <ul>
           <li>Running the daily schedule — turnout, feed, farrier, vet and training</li>
           <li>Managing and rostering a team of four</li>
@@ -155,7 +163,7 @@
           <li>Being the point of contact for the owner's trainer and the vet</li>
         </ul>
 
-        <h2>What they're looking for</h2>
+        <h2>Requirements</h2>
         <ul>
           <li>Three or more years managing a barn of a comparable size</li>
           <li>Comfortable handling young and competition horses</li>
@@ -163,7 +171,7 @@
           <li>Clean driving licence; towing experience is a plus, not a requirement</li>
         </ul>
 
-        <h2>The operation</h2>
+        <h2>About the facility</h2>
         <figure class="jdEmp">
           <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
           <figcaption>Representative of the yard, not the barn itself. Their own photos come with the introduction.</figcaption>
@@ -176,6 +184,25 @@
           <div><div class="jdFact__l">Area</div><div class="jdFact__v">Ocala, FL</div></div>
           <div><div class="jdFact__l">Team size</div><div class="jdFact__v">5 including you</div></div>
         </div>
+
+        <h2>Benefits</h2>
+        <ul class="jdList">
+          <li>Health contribution after ninety days</li>
+          <li>Two weeks paid leave, plus the quiet weeks between circuits</li>
+          <li>Continuing education and clinic fees covered</li>
+          <li>Entry fees and travel covered when you go to shows</li>
+        </ul>
+
+        <!-- Housing is a toggle because it is irrelevant on roughly half of what
+             she places now. Collapsed by default rather than printing "n/a". -->
+        <details class="jdHousing">
+          <summary>Housing — included with this role</summary>
+          <div>
+            <p>A one-bedroom apartment over the barn office, separately metered, with its own entrance
+               and parking. Pets considered. Available from the start date, and there is no deduction
+               from salary for it.</p>
+          </div>
+        </details>
       </article>
 
       <aside>
@@ -243,7 +270,7 @@
 <div class="wrap">
   <div class="ftr__grid">
     <div><img class="ftr__logo" src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff">
-      <p class="ftr__meta">Equine staffing since 1982 · online since 2000<br>Ocala, Florida</p>
+      <p class="ftr__meta">Equine recruiting since 1982 · online since 2000<br>Ocala, Florida</p>
       <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
     <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="settings.html">Job alerts</a></div>
     <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="employer.html">Employer portal</a></div>
@@ -255,7 +282,7 @@
 <!-- AI concierge launcher. The page reserves space for it (body.has-chat) so it
      never sits on top of a control, which the audit found on the live site. -->
 <a class="chatLaunch" href="chatbot.html">
-  <svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask EquiStaff
+  <svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask Evie
 </a>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
@@ -300,7 +327,9 @@ function shareRole() {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Share control beside the job reference — copy link, email, text, Facebook, LinkedIn.", "Share is one control now, not five pills — native share sheet on a phone, copy link everywhere else.", "Introduction line says employer rather than barn.", "Confidentiality chip removed. The one-line explanation stays for anyone who wonders why there is no name.", "Recruiter block fixed — it was using portal colours on a light page, putting baby blue on white at 1.35:1.", "Circle avatars added: Kaitlin as your named contact, and the people already applying.", "The employer stays faceless; the confidentiality rule outranks the brightening."]);</script>
+<script>REVISED('29 Oct', [
+  "Split into the sections you asked for: Job description, Main duties, Requirements, About the facility, Benefits.",
+  "Housing is a collapsible block, because it does not apply to about half of what you place now. Collapsed by default rather than printing “n/a”.","On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Share control beside the job reference — copy link, email, text, Facebook, LinkedIn.", "Share is one control now, not five pills — native share sheet on a phone, copy link everywhere else.", "Introduction line says employer rather than barn.", "Confidentiality chip removed. The one-line explanation stays for anyone who wonders why there is no name.", "Recruiter block fixed — it was using portal colours on a light page, putting baby blue on white at 1.35:1.", "Circle avatars added: Kaitlin as your named contact, and the people already applying.", "The employer stays faceless; the confidentiality rule outranks the brightening."]);</script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
 </body>

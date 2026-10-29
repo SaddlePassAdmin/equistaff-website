@@ -110,6 +110,34 @@
 @media (max-width:680px){
   .quietNote, .fb__priv { font-size:var(--t-small); }
 }
+
+/* 29 Oct — contact gating, prominent resume, staff switch */
+.contact__dl { margin:0 0 var(--s-4); display:flex; flex-direction:column; gap:var(--s-3); }
+.contact__dl div { display:flex; justify-content:space-between; gap:var(--s-4); align-items:baseline; }
+.contact__dl dt { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em;
+  color:var(--text-muted); margin:0; }
+.contact__dl dd { margin:0; font-size:var(--t-small); font-weight:700; text-align:right; }
+.contact__dl dd a { color:var(--blue-700); }
+.contact__blur { color:var(--text-muted); filter:blur(3.5px); user-select:none; }
+.contact__why { font-size:var(--t-small); color:var(--text-muted); margin:0 0 var(--s-4); }
+
+.btn--resume { display:inline-flex; align-items:center; gap:7px; cursor:pointer;
+  font:700 var(--t-small)/1 var(--font-body); color:var(--navy-900);
+  background:var(--warm); border:1px solid var(--warm-700, #B88A28);
+  border-radius:999px; padding:8px 16px; }
+.btn--resume:hover { filter:brightness(1.06); }
+.btn--resume svg { flex:0 0 auto; }
+
+.staffBar { display:flex; flex-wrap:wrap; align-items:center; gap:var(--s-5);
+  background:var(--portal-sunken); border:1px solid var(--portal-edge);
+  border-radius:var(--r-lg); padding:var(--s-4) var(--s-5); margin-bottom:var(--s-5); }
+.staffBar__tag { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em;
+  color:var(--warm); flex:0 0 auto; }
+.staffBar__sw { display:flex; align-items:center; gap:8px; cursor:pointer; margin:0;
+  font-size:var(--t-small); font-weight:700; color:#fff; }
+.staffBar__sw input { width:17px; height:17px; accent-color:var(--warm); cursor:pointer; }
+.staffBar__note { font-size:var(--t-small); color:var(--baby-200); margin-left:auto; }
+@media (max-width:680px){ .staffBar__note { margin-left:0; } }
 </style>
 </head>
 <body class="portal">
@@ -167,6 +195,24 @@
       </div>
     </div>
 
+    <!-- EquiStaff staff only. This is the switch Kaitlin holds; the client never
+         sees this strip. Both gates on one control because they are one decision:
+         has this client earned direct access to this candidate yet. -->
+    <div class="staffBar" id="staffBar">
+      <span class="staffBar__tag">EQUISTAFF STAFF</span>
+      <label class="staffBar__sw">
+        <input type="checkbox" id="swMsg" role="switch" aria-checked="true" checked
+               onchange="setGates()">
+        <span>Allow client to message candidates</span>
+      </label>
+      <label class="staffBar__sw">
+        <input type="checkbox" id="swContact" role="switch" aria-checked="false"
+               onchange="setGates()">
+        <span>Release contact details</span>
+      </label>
+      <span class="staffBar__note">Off until the fee is settled</span>
+    </div>
+
     <div class="tierLock" id="tierLock" hidden>
       <div>
         <b>Direct messaging is off for this search.</b>
@@ -211,7 +257,9 @@
         </section>
 
         <section class="pSection">
-          <div class="pSection__head"><h2>Experience</h2><a href="#" onclick="event.preventDefault();dlResume()">Download resume &rarr;</a></div>
+          <div class="pSection__head"><h2>Experience</h2><button class="btn--resume" type="button" onclick="dlResume()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+            Download r&eacute;sum&eacute;</button></div>
           <div class="cpJob">
             <h4>Barn Manager</h4>
             <p class="cpJob__w"><span class="quiet" style="display:flex;width:fit-content;margin:0 0 6px">Current employer withheld</span>24-horse hunter/jumper barn, Ocala FL &middot; 2021 &mdash; now</p>
@@ -294,6 +342,34 @@
           </p>
         </div>
 
+        <!-- The whole fee rests on this. Until the placement is paid, the client
+             sees that a real person exists and nothing they could use to go round
+             Kaitlin. Locked and unlocked are the same card, so nothing shifts. -->
+        <div class="railCard contact" id="contactCard">
+          <h3>Her contact details</h3>
+
+          <div id="contactLocked">
+            <dl class="contact__dl">
+              <div><dt>Phone</dt><dd class="contact__blur">(000) 000&ndash;0000</dd></div>
+              <div><dt>Email</dt><dd class="contact__blur">name@example.com</dd></div>
+            </dl>
+            <p class="contact__why">
+              Released when the placement fee is settled. Every candidate here was
+              found, called and referenced by EquiStaff &mdash; this is how that work
+              is protected.
+            </p>
+            <a class="btn btn--secondary" href="billing.html" style="width:100%">See what is outstanding</a>
+          </div>
+
+          <div id="contactOpen" hidden>
+            <dl class="contact__dl">
+              <div><dt>Phone</dt><dd><a href="tel:+13525550148">(352) 555&ndash;0148</a></dd></div>
+              <div><dt>Email</dt><dd><a href="mailto:d.whitfield@example.com">d.whitfield@example.com</a></dd></div>
+            </dl>
+            <p class="contact__why">Released 24 October. Dana knows you have these.</p>
+          </div>
+        </div>
+
         <div class="railCard">
           <h3>The other three</h3>
           <p style="color:var(--text-muted);font-size:var(--t-small);margin:0 0 var(--s-4)">All phone-referenced, all available inside 60 days.</p>
@@ -306,7 +382,7 @@
 
 <footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
-    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility <span class="ftr__by">&middot; Built by <b>Saddle Pass Technology</b></span></span>
+    <span>&copy; 2026 EquiStaff &middot; Equine recruiting since 1982</span><span>Privacy &middot; Terms &middot; Accessibility <span class="ftr__by">&middot; Built by <b>Saddle Pass Technology</b></span></span>
   </div></div>
 </footer>
 
@@ -348,20 +424,29 @@ function toInterview(b){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes about references and her current yard are 15px on a phone, and \"Download resume\" is easier to tap.", "Photo on the profile instead of initials — placeholder, replaced before launch.", "\"Book a call\" removed. Messaging is the single action for now.", "Direct messaging is tier-gated, hard-coded — this becomes a toggle in your admin.", "New \"Make a note\": the employer's own private note, which you never see.", "Brittany's horseshoes replace the placeholder stars on the rating.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', [
+  "Her contact details are now held behind the fee. The locked and unlocked cards are the same size, so nothing on the page shifts when they are released — and the locked one says why, rather than just refusing.",
+  "Download résumé is a highlighted pill rather than a text link, and it is there on every tier.",
+  "Added the EquiStaff staff strip — the two switches Kaitlin holds: let this client message candidates, and release contact details. The client never sees this strip; it is here so the behaviour can be tried rather than described.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes about references and her current yard are 15px on a phone, and \"Download resume\" is easier to tap.", "Photo on the profile instead of initials — placeholder, replaced before launch.", "\"Book a call\" removed. Messaging is the single action for now.", "Direct messaging is tier-gated, hard-coded — this becomes a toggle in your admin.", "New \"Make a note\": the employer's own private note, which you never see.", "Brittany's horseshoes replace the placeholder stars on the rating.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/icons.js"></script>
 <script>
 /* TIER GATE — hard-coded for the prototype. Kaitlin flips this per client from
    her admin screens; the constant below is the thing that becomes that toggle.
    Try it by setting CAN_MESSAGE to false. */
-var CAN_MESSAGE = true;          // Post a Job + Write & Advertise: true. Recruiter Managed: false until she introduces.
+/* Two gates, one place. Kaitlin flips these per client; the prototype exposes
+   them on the staff strip so the behaviour can be seen rather than described. */
+function setGates(){
+  var m = document.getElementById('swMsg'), c = document.getElementById('swContact');
+  m.setAttribute('aria-checked', m.checked);
+  c.setAttribute('aria-checked', c.checked);
 
-function applyTier() {
-  var btn = document.getElementById('msgBtn'), lock = document.getElementById('tierLock');
-  if (!btn || !lock) return;
-  btn.hidden = !CAN_MESSAGE;
-  lock.hidden = CAN_MESSAGE;
+  document.getElementById('msgBtn').hidden   = !m.checked;
+  document.getElementById('tierLock').hidden =  m.checked;
+
+  document.getElementById('contactOpen').hidden   = !c.checked;
+  document.getElementById('contactLocked').hidden =  c.checked;
 }
+setGates();
 
 function openNote() {
   var p = document.getElementById('pnote');
@@ -376,7 +461,6 @@ function saveNote() {
     ? 'Saved just now — only you can see this.' : 'Nothing to save yet.';
   if (t && window.ES && ES.notify) ES.notify('Note saved to Dana — private to you');
 }
-applyTier();
 </script>
 <script src="src/chat.js"></script>
 </body>
