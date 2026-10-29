@@ -232,9 +232,9 @@
     misses = 0; path = null;
     if (persona === 'seeker') {
       var p = ES ? ES.profile() : { name: 'Dana Whitfield' };
-      return bot('Hi ' + esc(p.name.split(' ')[0]) + ', it’s Evie. Welcome back. What can I help with?', seekerNeeds());
+      return bot('Welcome back, ' + esc(p.name.split(' ')[0]) + '! Is there anything I can help you with today?', seekerNeeds());
     }
-    if (persona === 'employer') return bot('Welcome back, it’s Evie. What do you need today?', employerNeeds());
+    if (persona === 'employer') return bot('Welcome back! Is there anything I can help you with today?', employerNeeds()); // Kaitlin's wording, 26 Oct
     if (fromSocial && !hello.socialAsked) {
       hello.socialAsked = true;
       return bot('Hi! Are you looking for a job you saw on social media? ' + tbc('opener: Kaitlin’s idea, to confirm'),
@@ -378,7 +378,7 @@
       ['business_name', 'Barn or business name, and where are you?', 'Barn'],
       ['role', 'What role are you filling?', 'Role'],
       ['duties', 'What are the main duties?', 'Duties'],
-      ['pay', 'What pay and housing come with it?', 'Pay & housing'],
+      ['pay', 'What is your compensation range? And any perks you provide?', 'Pay & perks'], // Kaitlin's wording, 26 Oct
       ['contact_name', 'Your name?', 'Name'],
       ['email', 'And the best way to reach you, email or phone?', 'Contact']
     ];
@@ -416,11 +416,26 @@
   function pricing() {
     card('<div class="priceCard">' + PRICES.map(function (p) { return '<div class="priceRow"><div><b>' + p[0] + '</b><span>' + p[1] + '</span></div><span class="liveFig">' + p[2] + '</span></div>'; }).join('') +
       '<div class="priceRow priceRow--dh"><div><b>Direct hire</b><span>' + DIRECT_HIRE + '</span></div></div></div>');
-    bot('Those are the published prices. For a specific search, the exact fee comes from Kaitlin. <span class="ruleTag">R3</span>',
+    bot('Those are our published prices. For our recruiting services, Kaitlin will be able to give you a quote based on your needs and the current market. <span class="ruleTag">R3</span>',
       [['What would my search cost?', function () { refuse('That depends on the role, so I don’t estimate it. Kaitlin will give you a straight answer on a short call.', 'R3'); }], ['Request talent', requestTalent], ['Back to the start', hello]]);
   }
+  /* Kaitlin, 26 Oct: check whether the job was filled before offering
+     anything. If they're done hiring (above all, if they hired through us)
+     we don't try to keep them. */
   function cancel() {
-    bot('Sorry to hear it. Before you go, can I offer one of these?', [
+    bot('Before you go, did you fill the position?', [
+      ['Yes, through EquiStaff', function () { doneHiring('Congratulations, that’s wonderful news, and thank you for hiring through EquiStaff! I won’t try to talk you out of cancelling.'); }],
+      ['Yes, another way', function () { doneHiring('Congratulations on finding the right person!'); }],
+      ['We’ve stopped hiring', function () { doneHiring('Understood, thanks for letting us know.'); }],
+      ['Not yet, still looking', saveOffers]
+    ]);
+  }
+  function doneHiring(lead) {
+    bot(lead + ' You can cancel from Billing in a couple of clicks, or Kaitlin can do it with you. We’ll be here whenever you’re hiring again.',
+      [['Go to billing', function () { location.href = 'billing.html'; }], ['Have Kaitlin cancel it', function () { handoff('cancel', 'employer'); }], ['Back to the start', hello]]);
+  }
+  function saveOffers() {
+    bot('Sorry the search is taking a while. Before you go, can I offer one of these?', [
       ['50% off next month', function () { bot('Done in the prototype. In the live site this flags your account for Kaitlin to apply the discount. ' + tbc('how it’s applied: to confirm'), [['Back to the start', hello]]); }],
       ['Intro call with Kaitlin', function () { handoff('cancel_save', 'employer'); }],
       ['Full-service recruiting', requestTalent],
@@ -434,7 +449,10 @@
     hint('Or type your own question. Kaitlin’s top 10 answers are still to come.');
   }
   function about() {
-    bot('<p>EquiStaff has placed equine professionals <b>since 1982</b>, from grooms and riders to barn and estate managers.</p><p>There are two ways to work with us: post on the <b>job board</b> yourself, or have Kaitlin run a <b>full-service search</b>.</p> ' + tbc('Kaitlin’s own wording to come'), nudge());
+    // Kaitlin's wording (Figma, 26 Oct); her "over 42 years" written as "since 1982" so it never goes stale.
+    bot('<p>EquiStaff has been matching equine industry talent with quality opportunities <b>since 1982</b>, covering all types of roles from the Barn to the Board Room.</p>' +
+      '<p>If you’re looking to hire, there’s two ways to work with us: advertise on our <b>Job Board</b> yourself, or let Kaitlin take the stress off your plate with a <b>Direct Recruitment</b> search.</p>' +
+      '<p>Our services are always free for jobseekers!</p>', nudge());
   }
   function liveNumbers() {
     bot('Right now there are <span class="liveFig">' + JOBS.length + ' open roles</span>, and <span class="liveFig">1,240 job seekers</span> were active in the last 30 days.<span class="liveNote">Sample figures in the prototype. The live assistant reads them from the platform when you ask (R5).</span>', nudge());
@@ -478,7 +496,8 @@
     employer: ['I’m hiring', 'Request talent', '>Live Oak Stables, Ocala FL', '>Head Groom', '>Daily care for 20 show horses, travel to shows', '>$45k + housing'],
     pricing: ['I just have a question', 'What does it cost?'],
     cancel: ['I’m hiring', 'Billing or cancel'],
-    handoff: ['I’m hiring', 'Billing or cancel', 'Intro call with Kaitlin'],
+    cancelsave: ['I’m hiring', 'Billing or cancel', 'Not yet, still looking'],
+    handoff: ['I’m hiring', 'Billing or cancel', 'Not yet, still looking', 'Intro call with Kaitlin'],
     fallback: ['>is the barn near the beach', '>what about my horse trailer'],
     rule: ['>what would my search cost for a barn manager']
   };
