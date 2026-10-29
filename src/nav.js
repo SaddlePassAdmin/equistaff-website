@@ -92,9 +92,28 @@
       }).join('') + '</div>';
     }
 
+    // On a phone the public links don't fit in the bar, and a swipe row was
+    // spilling out of the header on top of the page (29 Oct mobile audit).
+    // So below 760px they move into a Menu panel — Sign in included, since
+    // the bar itself only has room for "Request talent".
+    var menu = '';
+    if (!n.portal) {
+      var all = n.items.concat((n.cta || []).filter(function (c) { return !c[2]; }));
+      menu =
+        '<button class="hdr__menu" type="button" aria-expanded="false" aria-controls="hdrPanel">' +
+          '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">' +
+            '<path class="hdr__menuOpen" d="M4 7h16M4 12h16M4 17h16"/><path class="hdr__menuClose" d="M6 6l12 12M18 6L6 18"/></svg>' +
+          '<span>Menu</span></button>';
+      var panelLinks = all.map(function (it) {
+        var on = (it[0] === me);
+        return '<a href="' + it[0] + '"' + (on ? ' aria-current="page"' : '') + '>' + it[1] + '</a>';
+      }).join('');
+      menu += '<div class="hdr__panel" id="hdrPanel" hidden><nav aria-label="Menu">' + panelLinks + '</nav></div>';
+    }
+
     var right = n.portal
       ? (cta + '<div class="avatar" title="' + n.avatarTitle + '">' + n.avatar + '</div>')
-      : cta;
+      : cta + menu;
 
     mount.outerHTML =
       '<header class="' + (n.portal ? 'pHdr' : 'hdr') + '">' +
@@ -109,10 +128,27 @@
       '</header>';
   }
 
+  function wireMenu() {
+    var btn = d.querySelector('.hdr__menu'), panel = d.getElementById('hdrPanel');
+    if (!btn || !panel) return;
+    function set(open) {
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.querySelector('span').textContent = open ? 'Close' : 'Menu';
+      d.documentElement.classList.toggle('menu-open', open);
+    }
+    btn.addEventListener('click', function () { set(panel.hidden); if (!panel.hidden) { var a = panel.querySelector('a'); if (a) a.focus(); } });
+    d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+    d.addEventListener('click', function (e) { if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) set(false); });
+    // Rotating a tablet past the breakpoint shouldn't leave the panel open.
+    if (w.matchMedia) w.matchMedia('(min-width: 761px)').addEventListener('change', function (m) { if (m.matches) set(false); });
+  }
+
   function boot() {
     var mount = d.getElementById('nav');
     if (!mount) return;
     render(mount, mount.getAttribute('data-nav') || 'public');
+    wireMenu();
   }
 
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot);

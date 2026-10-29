@@ -78,7 +78,7 @@
   width: 38px; height: 38px; border-radius: 50%; background: var(--baby-200); color: var(--navy-900);
   display: grid; place-items: center; font: 700 .875rem/1 var(--font-body);
 }
-.pLayout { display: grid; grid-template-columns: 300px 1fr; gap: var(--s-8); padding: var(--s-7) 0 var(--s-9); align-items: start; }
+.pLayout { display: grid; grid-template-columns: 300px 1fr; gap: var(--s-8); padding-block: var(--s-7) var(--s-9); align-items: start; }
 .pCard { background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-lg); padding: var(--s-6); }
 .pCard h3 { color: var(--text-primary); font-size: 1.25rem; margin-bottom: var(--s-4); }
 
@@ -218,3 +218,39 @@
 .field--target > label { color:var(--warm) !important; }
 .field--target input, .field--target select, .field--target textarea {
   border-color:var(--warm) !important; box-shadow:0 0 0 3px rgba(249,244,237,.18); }
+
+/* ---------- Portal header on phones (29 Oct mobile audit) ----------
+   The tab row used to wrap onto a second line while the header stayed a
+   fixed 64px tall, so the tabs hung below it over the page. Now the header
+   grows to hold both rows. The fade on the right says "there's more —
+   swipe". Lives here, not styles.css, because this file loads second. */
+@media (max-width: 760px) {
+  .pHdr__in { height: auto; min-height: 64px; flex-wrap: wrap; row-gap: 0; padding-block: var(--s-3) 0; }
+  .pHdr__logo img { height: 25px; }
+  .pHdr__cta { margin-left: auto; }
+  .pHdr__nav {
+    display: flex !important; flex: 1 1 100%; order: 3; min-width: 0; gap: var(--s-5);
+    overflow-x: auto; scrollbar-width: none; margin: var(--s-2) calc(var(--s-5) * -1) 0; padding: 0 var(--s-5);
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+            mask-image: linear-gradient(90deg, #000 85%, transparent);
+  }
+  .pHdr__nav::-webkit-scrollbar { display: none; }
+  .pHdr__nav a { display: flex; align-items: center; min-height: 44px; white-space: nowrap; font-size: var(--t-small); }
+  .pHdr__nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--baby-200); }
+}
+@media (max-width: 680px) {
+  /* Employer bar: "Post a job" as a compact button so logo, button and
+     avatar fit on one line at 360. */
+  .pHdr__cta .btn { min-height: 44px; padding: 0 var(--s-4); font-size: .9375rem; white-space: nowrap; }
+}
+@media (max-width: 680px) {
+  .todo a { min-height: 44px; }
+  .fb__priv { font-size: var(--t-small); }
+}
+@media (max-width: 680px) {
+  /* "Edit →", "View all", "Update card", "PDF": the small links that sit in
+     section headers and invoice rows were 24px tall. */
+  .pSection__head a, .inv a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+@media (max-width: 680px) { .ob__skip { display: inline-flex; align-items: center; min-height: 44px; } }
+.pSection__head .btn { white-space: nowrap; }
