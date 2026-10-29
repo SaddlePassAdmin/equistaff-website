@@ -64,9 +64,10 @@
         <div class="coGroup">
           <h3>The basics</h3>
           <div class="coLogo" style="margin-bottom:var(--s-5)">
-            <div class="coLogo__box">Add<br>logo</div>
+            <div class="coLogo__box" id="logoBox">Add<br>logo</div>
             <div>
-              <button class="btn btn--secondary" type="button">Upload a logo</button>
+              <button class="btn btn--secondary" type="button" onclick="document.getElementById('logoFile').click()">Upload a logo</button>
+              <input type="file" id="logoFile" accept="image/*" hidden onchange="showLogo(this)">
               <p style="color:var(--text-muted);font-size:var(--t-small);margin:var(--s-3) 0 0">Square, at least 400px. Shows on your posts and in search.</p>
             </div>
           </div>
@@ -170,5 +171,20 @@ draw();
 <script src="src/revised.js"></script>
 <script>REVISED('29 Oct', ["\"See all jobs\" added to the employer card.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes under the logo and the preview are 15px instead of 13px.", "The worked example is now a commercial employer — an equine nutrition business, 38 people.", "\"Discipline\" is \"Industry or discipline\"; horses is optional; \"Staff\" is \"Team size\".", "The preview now shows what a candidate actually sees — unnamed, with no badge.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
+<script>
+/* 29 Oct: Upload a logo used to do nothing. It previews the chosen image
+   here (nothing is uploaded anywhere in the prototype). */
+function showLogo(input){
+  var f = input.files && input.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function () {
+    var b = document.getElementById('logoBox');
+    b.textContent = '';
+    b.style.background = 'center / cover no-repeat url(' + r.result + ')';
+    if (window.ES && ES.notify) ES.notify('Logo added');
+  };
+  r.readAsDataURL(f);
+}
+</script>
 </body>
 </html>

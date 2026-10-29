@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- QA fixes before the final round: the resume builder's employer fields work again (three functions had gone missing on 23 Oct); the resume preview no longer covers its Download and Email buttons; Download opens a real Save-as-PDF of the resume, and Email confirms; jobs Search filters the list; profile Save changes confirms; Upload a logo opens a file picker and previews it. The checker now flags any button that calls a function that doesn't exist.
 - No notes in the product UI: the Revised pill, test-accounts box, chat prototype bar, "Kaitlin to confirm" and rule tags, and the placeholder-quotes line are gone from screens. Internal review mode via `?review=1`. Test logins work in the normal sign-in form and are shared in Slack.
 - Sign-in and sign-up: a decorative glow was covering the forms and swallowing every click. Fixed, the two halves of sign-in now line up, a jump link at the top leads to the test accounts, and the checker flags any overlay that could block clicks again.
 - Test accounts on the sign-in page (prototype only): job seeker, employer through Kaitlin, self-serve employer, plus Start fresh. Evie now always matches the portal you're in.

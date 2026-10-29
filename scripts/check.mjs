@@ -39,6 +39,17 @@ for (const page of pages) {
   const markup = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<!--[\s\S]*?-->/g, '');
   const opens = (markup.match(/<div\b/g) || []).length, closes = (markup.match(/<\/div>/g) || []).length;
   if (opens !== closes) fail(page, `${opens} <div> but ${closes} </div>`);
+  // Every function an on*="..." handler calls must exist in the page or in a
+  // script it loads (29 Oct: resume.html called setY/addYard/delYard, which
+  // had been deleted, so its employer fields silently broke).
+  const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)];
+  let defined = scripts.map(m => m[2]).join('\n');
+  for (const m of scripts) { const src = (m[1].match(/src="([^"]+)"/) || [])[1]; if (src && existsSync(join(root, src))) defined += readFileSync(join(root, src), 'utf8'); }
+  const known = new Set(['event','this','window','document','location','history','alert','confirm','return','if','void','setTimeout','scrollTo','print','ES','REVISED']);
+  for (const [, code] of html.matchAll(/\bon[a-z]+=\\?["']([^"']+)/g))
+    for (const [, fn] of code.matchAll(/(?:^|[^.\w$])([A-Za-z_$][\w$]*)\s*\(/g))
+      if (!known.has(fn) && !new RegExp('function\\s+' + fn + '\\b|\\b' + fn + '\\s*=\\s*(?:function|\\()|[,{]\\s*' + fn + '\\s*:').test(defined))
+        fail(page, `handler calls ${fn}() but it isn't defined anywhere the page loads`);
   // A decorative ::before/::after stretched over a section catches every click
   // unless it has pointer-events:none (29 Oct: sign-in and sign-up forms).
   for (const [rule] of html.matchAll(/::(?:before|after)\s*\{[^}]*\}/g))

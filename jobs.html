@@ -83,10 +83,10 @@
       <h1>Every open role, with the pay on it.</h1>
       <p class="lede">No account needed to browse. Apply in one short form, and a person reads it.</p>
       <div class="jbSearch">
-        <input placeholder="Barn manager, groom, trainer…" aria-label="Search roles">
-        <input placeholder="Ocala, FL" aria-label="Location">
+        <input id="jbQ" placeholder="Barn manager, groom, trainer…" aria-label="Search roles" onkeydown="if(event.key==='Enter')searchJobs()">
+        <input id="jbWhere" placeholder="Ocala, FL" aria-label="Location" onkeydown="if(event.key==='Enter')searchJobs()">
         <select aria-label="Role type" data-other="Which role?"><option>All role types</option><option>Grooms &amp; barn staff</option><option>Riders / trainers / instructors</option><option>Sales / customer service / marketing</option><option>Show facility staff</option><option>Veterinary staff</option><option>Executive</option><option>Other</option></select>
-        <button class="btn btn--onDark">Search</button>
+        <button class="btn btn--onDark" type="button" onclick="searchJobs()">Search</button>
       </div>
     </div>
   </section>
@@ -117,7 +117,7 @@
 
       <div>
         <div class="jbCount">
-          <b>214 roles</b>
+          <b id="jbTotal">214 roles</b>
           <select style="min-height:44px;padding:0 12px;border-radius:var(--r-sm);border:1px solid var(--border-subtle);font:inherit">
             <option>Newest first</option><option>Highest paid</option><option>Closest to me</option>
           </select>
@@ -253,5 +253,32 @@
 <script src="src/otherfield.js"></script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
+<script>
+/* 29 Oct: Search used to do nothing. It now narrows the list on this page by
+   role and place; an empty search shows everything again. */
+function searchJobs(){
+  var q = (document.getElementById('jbQ').value || '').trim().toLowerCase();
+  var where = (document.getElementById('jbWhere').value || '').trim().toLowerCase();
+  var rows = document.querySelectorAll('.jbList > article'), shown = 0;
+  rows.forEach(function (r) {
+    var t = r.textContent.toLowerCase();
+    var ok = (!q || q.split(/\s+/).every(function (w) { return t.indexOf(w) > -1; })) &&
+             (!where || where.split(/[ ,]+/).filter(Boolean).some(function (w) { return t.indexOf(w) > -1; }));
+    r.hidden = !ok; if (ok) shown++;
+  });
+  var none = document.getElementById('jbNone');
+  if (!none) { none = document.createElement('p'); none.id = 'jbNone'; none.className = 'jbNone';
+    none.innerHTML = 'No roles match that search. <button type="button" class="linkBtn" onclick="clearJobs()">Show all roles</button>';
+    document.querySelector('.jbList').after(none); }
+  none.hidden = shown > 0;
+  document.getElementById('jbTotal').textContent = (q || where) ? shown + (shown === 1 ? ' role' : ' roles') + ' match' : '214 roles';
+  document.querySelector('.jbCount').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function clearJobs(){ document.getElementById('jbQ').value = ''; document.getElementById('jbWhere').value = ''; searchJobs(); }
+</script>
+<style>
+  .jbNone { padding:var(--s-6); background:#fff; border-radius:var(--r-md); box-shadow:var(--e-1); }
+  .linkBtn { background:none; border:0; padding:0; min-height:44px; color:var(--blue-700); font:inherit; font-weight:700; text-decoration:underline; cursor:pointer; }
+</style>
 </body>
 </html>

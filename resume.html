@@ -53,9 +53,14 @@
 .chips input:checked + span { color:#fff; font-weight:700; }
 .chips label:has(input:checked) { background:rgba(189,227,255,.14); border-color:var(--baby-200); }
 
+/* 29 Oct: the paper used to be sticky on its own, so on scroll it slid over
+   its own Download / Email buttons. The paper, buttons and note now stick
+   together as one column. */
+.rbDoc { position:sticky; top:96px; align-self:start; }
+
 /* THE PAPER — the resume itself, light on the dark portal ground */
 .paper { background:#fff; border-radius:var(--r-lg); padding:var(--s-8); box-shadow:var(--e-3);
-  position:sticky; top:96px; max-height:calc(100vh - 140px); overflow:auto;
+  max-height:calc(100vh - 260px); overflow:auto;
   /* A light island inside a deep-mode page. Without this the inherited Deep
      tokens apply --text-primary:#fff to body copy and the resume renders
      white-on-white. Re-declare the Light values so the paper is really light. */
@@ -85,9 +90,18 @@
 
 @media (max-width:1040px){
   .rb { grid-template-columns:1fr; }
-  .paper { position:static; max-height:none; }
+  .rbDoc { position:static; }
+  .paper { max-height:none; }
 }
 @media (max-width:620px){ .rb__form, .paper { padding:var(--s-5); } }
+/* Printing (Download as PDF) shows only the resume. */
+@media print {
+  body * { visibility:hidden !important; }
+  #paper, #paper * { visibility:visible !important; }
+  html, body, main, .rb, section { background:#fff !important; }
+  #paper { position:absolute; left:0; top:0; width:100%; max-height:none; overflow:visible; box-shadow:none; border-radius:0; }
+  .rbDoc { position:static; }
+}
 </style>
 </head>
 <body class="portal">
@@ -195,11 +209,11 @@
       </section>
 
       <!-- ============ THE DOCUMENT ============ -->
-      <section>
+      <section class="rbDoc">
         <div class="paper" id="paper"></div>
         <div class="paperBar">
           <button class="btn btn--onDark" type="button" onclick="dl()">Download as PDF</button>
-          <button class="btn btn--secondary" type="button" onclick="dl()">Email it to me</button>
+          <button class="btn btn--secondary" type="button" onclick="mailIt()">Email it to me</button>
         </div>
         <p class="paperNote" id="dlnote">Updates as you type. Nothing is shared until you choose to apply.</p>
       </section>
@@ -250,6 +264,11 @@ function yardsUI(){
   });
   document.getElementById("yards").innerHTML = h;
 }
+/* 29 Oct: these three went missing in the 23 Oct round, so typing in the
+   employer fields threw errors and "Add another employer" did nothing. */
+function setY(i,k,v){ YARDS[i][k]=v; draw(); }
+function addYard(){ YARDS.push({role:"",yard:"",years:"",did:""}); yardsUI(); draw(); }
+function delYard(i){ YARDS.splice(i,1); yardsUI(); draw(); }
 function skillsUI(){
   mountSkillPicker("skills", PICKED, function(){ draw(); });
 }
@@ -300,8 +319,14 @@ function go(n){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 // Prototype: no PDF service wired up yet, so say so rather than fail silently.
-function dl(){ document.getElementById("dlnote").textContent =
-  "In the built site this downloads a PDF. Not wired up in the prototype."; }
+/* 29 Oct: no notes in the UI. Download opens the browser's print dialog
+   with only the resume on the page, where "Save as PDF" makes a real PDF.
+   Email confirms the way the product will (no email is sent here). */
+function dl(){ window.print(); }
+function mailIt(){
+  var who = (window.ES && ES.profile && ES.profile().email) || "your email";
+  document.getElementById("dlnote").textContent = "Sent. Your resume is on its way to " + who + ".";
+}
 
 yardsUI(); skillsUI(); draw();
 </script>
