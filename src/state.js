@@ -16,7 +16,7 @@
    ============================================================ */
 (function (w) {
   'use strict';
-  var KEY = 'equistaff.prototype.v2';
+  var KEY = 'equistaff.prototype.v3';   // bumped 29 Oct: seeded posts changed
 
   // Seed data matches what the static screens showed before state existed, so
   // a first-time visitor sees a populated, believable account rather than an
@@ -43,7 +43,7 @@
     resume: null,
     inquiries: [],
     posts: [
-      { id: 'p1', title: 'Working Student — seasonal', posted: 14, views: 112, applicants: 9, state: 'Live on the board' },
+      { id: 'p1', title: 'Regional Sales Manager — Southeast', posted: 14, views: 112, applicants: 9, state: 'Live on the board' },
       { id: 'p2', title: 'Part-time Groom', posted: 41, views: 203, applicants: 2, state: 'Not performing' }
     ],
     ratings: {},
