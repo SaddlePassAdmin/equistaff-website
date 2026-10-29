@@ -11,19 +11,20 @@ Built by **Saddle Pass Inc.** for **EquiStaff** (Ocala, Florida).
 `robots.txt` disallows crawling, so this can never compete with equistaff.com
 in search.
 
-Design-stage prototype. This repo currently holds the **design system** and a
-**working static prototype** of the public site, used to prove the layouts,
-motion and component behaviour before the application build starts.
+Design prototype, **in handoff to engineering.** The production build lives in
+`SaddlePassAdmin/EquiStaff-PROD`. **Start with [`HANDOFF.md`](HANDOFF.md)**: screens and their status,
+states, business rules, data records and open decisions. The chat assistant spec is
+[`docs/chatbot-spec.md`](docs/chatbot-spec.md).
 
-It is deliberately framework-free right now so the stack decision stays open.
 `src/tokens.css` is the piece that carries forward unchanged.
 
 | | |
 |---|---|
-| Launch target | 2 November 2026 (outside date 6 November) |
+| Live prototype | https://saddlepassadmin.github.io/equistaff-website/start.html |
+| Launch target | 9 November 2026 · site testing ~23 Nov → 1 Dec |
 | Package | B — full rebuild: agency site + job board + application experience |
-| Design file | Figma — EquiStaff |
-| Engineering | TBC |
+| Design file | Figma — EquiStaff-Website, section "10 · All live screens" |
+| Engineering | Uraiz Ali |
 | Design | Carrington Smurl, Saddle Pass |
 
 ---
@@ -44,22 +45,13 @@ Then open **http://127.0.0.1:4321**
 
 No build step, no dependencies, nothing to install.
 
-| Page | Mode | What it is |
-|---|---|---|
-| `index.html` | Light | **Landing option A — Editorial.** Video-ready hero, two doors, process, roles, conversion comparison, SEO block |
-| `landing-b.html` | Light | **Landing option B — Split decision.** The two doors *are* the hero; employer side weighted |
-| `landing-c.html` | Light | **Landing option C — The gradient dive.** Video hero, gradient bands descending the depth ramp |
-| `jobs.html` | Light | Job board — filters, scannable listings, recruiter-managed treatment |
-| `job-detail.html` | Light | Single role, with JobPosting schema and apply |
-| `signin.html` | Both | The threshold — light on one side, deep on the other |
-| `onboarding.html` | Light | Apply-triggered sign-up (3 steps) + the gated employer path |
-| `profile.html` | **Deep** | Job-seeker profile and portal |
-| `employer.html` | **Deep** | Employer portal — searches, shortlist, job posts |
+Open **http://127.0.0.1:4321/start.html** for the prototype menu: every screen, grouped by
+journey (public site, looking for work, hiring through Kaitlin, posting it yourself). The full
+page-by-page list with production routes is in [`HANDOFF.md`](HANDOFF.md#1-screens-and-status).
 
 ### Video
 
-`index.html` and `landing-c.html` both reference `media/hero.mp4`. Drop the
-file in and it plays; until then the poster image carries it. See
+`index.html` plays `media/hero.mp4`, a stock placeholder until client footage exists. See
 [`media/README.md`](media/README.md) for shoot guidance.
 
 `profile.html` is the reference implementation for Deep mode: it sets
@@ -118,7 +110,7 @@ between text, never behind it.
 |---|---|---|
 | Display / headings | Lora | Pending final sign-off; swap `--font-display` in one place |
 | Body / UI | Lato | Never below 17px for prose — the live site sets 13px, which was an audit finding |
-| Metadata | Roboto Mono | Salary, IDs, dates. Replaced IBM Plex Mono, whose dotted zero the client rejected |
+| Metadata | Azeret Mono | Salary, IDs, dates. Replaced IBM Plex Mono, whose dotted zero the client rejected |
 
 ---
 
@@ -131,7 +123,7 @@ From the client inspiration document and the 2 October feedback:
 - **Motion** — Ken Burns on the hero (standing in for a video header until footage exists), diagonal section cuts, live-scrolling opportunities ticker
 - **Imagery per role category** — every category gets its own photograph
 - **Proof throughout** — trust bar, stats, testimonials, recruiter-managed badges. The client reports that good listings are often mistaken for scams, so credibility signals matter
-- **Short forms** — Request Talent is five fields, three required. Screening happens on the discovery call
+- **Short forms** — screening happens on the discovery call, not in the form
 - **Job board must be scannable** — pay, location, housing and commitment visible before the click
 
 ---
