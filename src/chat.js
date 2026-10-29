@@ -122,7 +122,10 @@
 
   var body = dock.querySelector('.chat__body');
   var input = dock.querySelector('#esChatIn');
-  var persona = LS.get(K_PERSONA, null) || pageRole;
+  // On portal pages the page decides (an employer page is always the employer);
+  // a saved "Try as" choice only applies on public pages. Fixes testers who
+  // tried "Visitor" once and then got the visitor greeting inside a portal.
+  var persona = pageRole !== 'visitor' ? pageRole : (LS.get(K_PERSONA, null) || pageRole);
   var misses = 0, started = false, path = null;
   var waiting = null; // a function that consumes the next free-text answer
 
