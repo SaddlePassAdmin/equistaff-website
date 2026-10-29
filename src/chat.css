@@ -404,3 +404,11 @@ button.chat__human:hover { background: rgba(249,244,237,.2); }
    when the chat moves left, and keep it off the full-screen chat on phones. */
 .chat-side-left .rv-pill, .chat-side-left .rv-panel { left: auto; right: 18px; }
 @media (max-width: 620px) { .chat-open .rv-pill, .chat-open .rv-panel { display: none !important; } }
+
+/* ---------- No notes in the product (29 Oct) ----------
+   Prototype scaffolding inside the chat only shows in review mode
+   (?review=1). Everyone else sees the chat exactly as a customer would. */
+html:not(.es-review) .chat__demo,
+html:not(.es-review) .chat .tbc,
+html:not(.es-review) .chat .ruleTag,
+html:not(.es-review) .chat .liveNote { display: none !important; }

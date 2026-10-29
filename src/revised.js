@@ -35,8 +35,21 @@
   + "padding:10px;cursor:pointer;font:700 13px/1 'Lato',system-ui,sans-serif}"
   + '@media print{.rv-pill,.rv-panel{display:none!important}}';
 
+  /* 29 Oct: Carrington wants no notes in the product UI. The pill now shows
+     only in review mode: add ?review=1 to any link (remembered in this
+     browser), ?review=0 to switch it off. The change notes themselves are
+     posted to Slack each round. */
+  w.ES_REVIEW = (function () {
+    try {
+      var q = new URLSearchParams(location.search).get('review');
+      if (q === '1') localStorage.setItem('equistaff.review', '1');
+      if (q === '0') localStorage.removeItem('equistaff.review');
+      return localStorage.getItem('equistaff.review') === '1';
+    } catch (e) { return false; }
+  })();
+
   w.REVISED = function (when, items) {
-    if (!items || !items.length) return;
+    if (!items || !items.length || !w.ES_REVIEW) return;
     var st = d.createElement('style'); st.textContent = CSS; d.head.appendChild(st);
 
     var pill = d.createElement('button');

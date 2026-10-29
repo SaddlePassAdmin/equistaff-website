@@ -40,7 +40,9 @@ It is deliberately framework-free right now so the stack decision stays open.
 
   Run them locally with `node scripts/check.mjs`. A red check blocks the merge.
 - **Carrington approves before anything merges.** Merges are squash merges, so `main` reads as one commit per change.
-- **Every merge adds a line to `CHANGELOG.md`**, and every changed screen gets a `REVISED('<date>', [...])` note so Kaitlin can see what moved.
+- **No notes in the product UI.** Screens show only what a real user would see. Change notes for each round go to Slack (#job-board-equistaff), and every merge adds a line to `CHANGELOG.md`.
+- **Review mode for the internal team:** add `?review=1` to any link to see the per-screen "Revised" notes and the chat's prototype bar and tags; `?review=0` turns them off. Pages still declare `REVISED('<date>', [...])`, which only renders in review mode.
+- **Test logins** (any password), shared in Slack and never shown on screen: `hiring@test.com` (employer through Kaitlin), `posting@test.com` (employer posting jobs), any other email (job seeker).
 - **Merged branches are deleted.** Open PRs that are superseded get closed with a pointer to what replaced them.
 
 ## Run it
