@@ -97,8 +97,8 @@
     '<section class="chat chat--live" role="dialog" aria-modal="false" aria-labelledby="esChatTitle">' +
       '<header class="chat__hdr">' +
         '<div class="chat__who">' +
-          '<span class="chat__mark" aria-hidden="true"><img src="assets/logo-icon.svg" alt="" width="26" height="26"></span>' +
-          '<div><b id="esChatTitle" class="chat__name">EquiStaff Assistant</b><span>An AI assistant, not a person</span></div>' +
+          '<span class="chat__mark" aria-hidden="true"><img src="img/evie.jpg" alt="" width="38" height="38"></span>' +
+          '<div><b id="esChatTitle" class="chat__name">Evie at EquiStaff</b><span>An AI assistant, not a person</span></div>' +
           '<button class="chat__x" type="button" aria-label="Close chat">&times;</button>' +
         '</div>' +
         '<button class="chat__human" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg> Talk to a person · Kaitlin and her team</button>' +
@@ -127,7 +127,7 @@
   var waiting = null; // a function that consumes the next free-text answer
 
   /* Design drawer settings (src/chat-tweaks.js writes them). */
-  function tweak(k) { var t = LS.get('equistaff.chat.tweaks', {}) || {}; return t[k]; }
+  function tweak(k) { var t = LS.get('equistaff.chat.tweaks.v2', {}) || {}; return t[k]; }
   function speed() { var v = tweak('speed'); return v === 'off' ? 0 : v === 'slow' ? 1100 : 420; }
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -173,7 +173,7 @@
 
   /* ---------- free text: match to the fixed intent list (R11) ---------- */
   var INTENTS = [
-    [/\b(are you|is this) (a )?(real|human|person|bot|ai|robot)\b/i, function () { bot('I’m EquiStaff’s AI assistant, not a person. Kaitlin and her team are one tap away whenever you want them.', [['Talk to a person', function () { handoff('asked'); }], ['Keep going', hello]]); }],
+    [/\b(are you|is this) (a )?(real|human|person|bot|ai|robot)\b/i, function () { bot('I’m Evie, EquiStaff’s AI assistant. I’m not a person, but Kaitlin and her team are one tap away whenever you want them.', [['Talk to a person', function () { handoff('asked'); }], ['Keep going', hello]]); }],
     [/\b(person|human|someone|talk to|call|kaitlin|agent|representative)\b/i, function () { handoff('asked'); }],
     [/\b(visa|sponsor|international|work permit|authori[sz]ation)\b/i, visa],
     [/\b(how long|timeline|when will i|guarantee)\b.*\b(place|hire|job|placement)\b|\bplacement\b.*\b(how long|time)\b/i, function () { refuse('I can’t promise a placement or a timeline for one. Every search is different, so Kaitlin is the right person to ask.', 'R2'); }],
@@ -232,9 +232,9 @@
     misses = 0; path = null;
     if (persona === 'seeker') {
       var p = ES ? ES.profile() : { name: 'Dana Whitfield' };
-      return bot('Hi ' + esc(p.name.split(' ')[0]) + ', welcome back. What can I help with?', seekerNeeds());
+      return bot('Hi ' + esc(p.name.split(' ')[0]) + ', it’s Evie. Welcome back. What can I help with?', seekerNeeds());
     }
-    if (persona === 'employer') return bot('Welcome back. What do you need today?', employerNeeds());
+    if (persona === 'employer') return bot('Welcome back, it’s Evie. What do you need today?', employerNeeds());
     if (fromSocial && !hello.socialAsked) {
       hello.socialAsked = true;
       return bot('Hi! Are you looking for a job you saw on social media? ' + tbc('opener: Kaitlin’s idea, to confirm'),
@@ -242,10 +242,10 @@
     }
     if (onJob && !hello.jobAsked) {
       hello.jobAsked = true;
-      return bot('Hi! I’m EquiStaff’s assistant. Want to ask about this <b>Barn Manager</b> role?',
+      return bot('Hi! I’m Evie, EquiStaff’s assistant. Want to ask about this <b>Barn Manager</b> role?',
         [['Ask about this job', function () { jobQuestions(JOBS[0]); }], ['Something else', function () { hello(); }]]);
     }
-    bot(esc(tweak('greeting') || 'Hi! Welcome to EquiStaff. What brings you here today?'), mainChips());
+    bot(esc(tweak('greeting') || 'Hi! I’m Evie at EquiStaff. What brings you here today?'), mainChips());
   }
   function somethingElse() { bot('Sure, tell me in your own words.'); input.focus(); }
 

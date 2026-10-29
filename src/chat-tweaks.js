@@ -14,12 +14,12 @@
 (function (w, d) {
   'use strict';
   var C = w.ESChat; if (!C || w.__esTweaks) return; w.__esTweaks = true;
-  var KEY = 'equistaff.chat.tweaks';
+  var KEY = 'equistaff.chat.tweaks.v2'; // v2: Evie became the default (29 Oct)
   var DEF = {
     theme: 'navy', shape: 'pill', label: 'Ask EquiStaff', side: 'right', size: 'standard',
-    name: 'EquiStaff Assistant', tagline: 'An AI assistant, not a person',
-    greeting: 'Hi! Welcome to EquiStaff. What brings you here today?',
-    avatar: 'logo', speed: 'normal', marks: 'show', human: 'top', nudge: 'off'
+    name: 'Evie at EquiStaff', tagline: 'An AI assistant, not a person',
+    greeting: 'Hi! I’m Evie at EquiStaff. What brings you here today?',
+    avatar: 'evie', speed: 'normal', marks: 'show', human: 'top', nudge: 'off'
   };
   function load() { try { return Object.assign({}, DEF, JSON.parse(w.localStorage.getItem(KEY) || '{}')); } catch (e) { return Object.assign({}, DEF); } }
   function save(t) { try { w.localStorage.setItem(KEY, JSON.stringify(t)); } catch (e) {} }
@@ -30,17 +30,17 @@
     ['shape', 'Launcher', [['pill', 'Pill + label'], ['round', 'Round icon']]],
     ['side', 'Side', [['right', 'Right'], ['left', 'Left']]],
     ['size', 'Panel size', [['compact', 'Compact'], ['standard', 'Standard'], ['tall', 'Tall']]],
-    ['avatar', 'Avatar', [['logo', 'Logo'], ['horseshoe', 'Horseshoe'], ['kaitlin', 'Kaitlin']]],
+    ['avatar', 'Avatar', [['evie', 'Evie'], ['logo', 'Logo'], ['horseshoe', 'Horseshoe'], ['kaitlin', 'Kaitlin']]],
     ['human', '“Talk to a person”', [['top', 'Banner'], ['icon', 'Icon only']]],
     ['speed', 'Typing', [['off', 'Instant'], ['normal', 'Normal'], ['slow', 'Slow']]],
     ['marks', 'Reviewer tags', [['show', 'Show'], ['hide', 'Hide']]],
     ['nudge', 'Nudge bubble', [['off', 'Off'], ['on', 'After 4s']]]
   ];
   var TEXTS = [
-    ['label', 'Launcher label', ['Ask EquiStaff', 'Questions? Ask us', 'Hiring or job hunting?']],
-    ['name', 'Assistant name', ['EquiStaff Assistant', 'Ask EquiStaff', 'EquiStaff Concierge']],
+    ['label', 'Launcher label', ['Ask EquiStaff', 'Ask Evie', 'Chat with Evie', 'Questions? Ask us']],
+    ['name', 'Assistant name', ['Evie at EquiStaff', 'Evie', 'EquiStaff Assistant']],
     ['tagline', 'Line under the name', ['An AI assistant, not a person', 'Answers in seconds · Kaitlin’s team behind it']],
-    ['greeting', 'First message', ['Hi! Welcome to EquiStaff. What brings you here today?', 'Hi! Are you hiring, or looking for your next job?']]
+    ['greeting', 'First message', ['Hi! I’m Evie at EquiStaff. What brings you here today?', 'Hi, I’m Evie! Are you hiring, or looking for your next job?', 'Hi! Welcome to EquiStaff. What brings you here today?']]
   ];
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
@@ -78,7 +78,8 @@
     var nm = C.dock.querySelector('.chat__name'); if (nm) nm.textContent = t.name;
     var tg = C.dock.querySelector('.chat__who > div > span'); if (tg) tg.textContent = t.tagline;
     var mk = C.dock.querySelector('.chat__mark');
-    if (mk) mk.innerHTML = t.avatar === 'kaitlin' ? '<img src="img/kaitlin.jpg" alt="" width="38" height="38">'
+    if (mk) mk.innerHTML = t.avatar === 'evie' ? '<img src="img/evie.jpg" alt="" width="38" height="38">'
+      : t.avatar === 'kaitlin' ? '<img src="img/kaitlin.jpg" alt="" width="38" height="38">'
       : t.avatar === 'horseshoe' ? '<svg class="chat__markHs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg>'
       : '<img src="assets/logo-icon.svg" alt="" width="26" height="26">';
     box.querySelectorAll('[data-k]').forEach(function (b) { var on = t[b.dataset.k] === b.dataset.v; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on); });
@@ -121,7 +122,7 @@
     timer = setTimeout(function () {
       if (C.isOpen()) return;
       bubble = d.createElement('div'); bubble.className = 'chatNudge';
-      bubble.innerHTML = '<p>Hiring, or looking for work? I can point you the right way.</p>' +
+      bubble.innerHTML = '<div class="chatNudge__who"><img src="img/evie.jpg" alt=""><b>Evie at EquiStaff</b></div><p>Hiring, or looking for work? I can point you the right way.</p>' +
         '<div><button type="button" data-go>Ask a question</button><button type="button" data-no>Not now</button></div>';
       d.body.appendChild(bubble);
       bubble.addEventListener('click', function (e) {
