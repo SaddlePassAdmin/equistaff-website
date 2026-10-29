@@ -131,3 +131,267 @@ body.has-chat { padding-bottom: 96px; }
   .chat { width: 100%; }
   .board2 { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   Live prototype (src/chat.js). Everything below styles the working
+   panel; the specimen styles above stay as they were.
+   ============================================================ */
+.chatLaunch { border: 1px solid var(--navy-500); text-decoration: none; }
+.chatLaunch.is-open { background: var(--depth-06); }
+.chatLaunch:focus-visible, .chat button:focus-visible, .chat a:focus-visible, .chat input:focus-visible {
+  outline: 3px solid var(--warm); outline-offset: 2px;
+}
+.chatDock {
+  position: fixed; right: 24px; bottom: 92px; z-index: 61;
+  width: 400px; max-width: calc(100vw - 32px);
+  height: min(640px, calc(100vh - 120px));
+}
+.chatDock[hidden] { display: none !important; }
+.chat--live { width: 100%; height: 100%; }
+.chat--live .chat__body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; align-content: start; overscroll-behavior: contain;
+}
+.chat__who > div { flex: 1; min-width: 0; }
+.chat__x {
+  background: transparent; border: 0; color: var(--baby-200); font-size: 28px; line-height: 1;
+  width: 44px; height: 44px; margin: -8px -10px 0 0; cursor: pointer; border-radius: 50%;
+}
+.chat__x:hover { background: rgba(255,255,255,.08); color: #fff; }
+.chat__mark img { display: block; object-fit: contain; }
+button.chat__human { width: 100%; cursor: pointer; font-family: var(--font-body); text-align: left; }
+button.chat__human:hover { background: rgba(249,244,237,.2); }
+
+/* Typing dots — skipped entirely under reduced motion (chat.js sets no delay). */
+.msg--typing { display: inline-flex; gap: 5px; align-items: center; width: auto; }
+.msg--typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--baby-300); animation: esDot 1s infinite ease-in-out; }
+.msg--typing span:nth-child(2) { animation-delay: .15s; } .msg--typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes esDot { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .msg--typing span { animation: none; } }
+
+.chips2 button:disabled { opacity: .45; cursor: default; }
+.chips2 button.is-picked { opacity: 1; background: var(--baby-200); color: var(--navy-900); border-color: var(--baby-200); }
+.chat__hint { margin: -6px 0 0; font-size: var(--t-label); color: var(--baby-300); font-style: italic; }
+
+/* "Kaitlin to confirm" — anything not yet decided is visible as such. */
+.tbc {
+  display: inline-block; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .02em;
+  color: #3B2E1B; background: var(--warm); border-radius: 4px; padding: 2px 6px; line-height: 1.4;
+}
+.chat__hdr .tbc { margin-left: 4px; vertical-align: 1px; }
+/* Which hard rule an answer is enforcing — prototype only, for reviewers. */
+.ruleTag {
+  display: inline-block; font: 600 10.5px/1.4 var(--font-mono); color: var(--baby-300);
+  border: 1px solid var(--navy-500); border-radius: 4px; padding: 0 5px; margin-left: 4px; vertical-align: 1px;
+}
+
+/* Job match card — at most two ever show (no shortlists). */
+.jobMini {
+  background: rgba(255,255,255,.06); border: 1px solid var(--navy-500); border-radius: var(--r-md);
+  padding: 12px 14px; display: grid; gap: 4px; font-size: var(--t-label); color: var(--baby-200);
+}
+.jobMini b { color: #fff; font-size: var(--t-small); }
+.jobMini__conf { font-style: normal; color: var(--warm); font-weight: 700; }
+.jobMini__pay { font-family: var(--font-mono); color: #fff; }
+.jobMini__act { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.jobMini__act a, .jobMini__act button {
+  font: 700 var(--t-label)/1 var(--font-body); color: var(--navy-900); background: var(--baby-200);
+  border: 0; border-radius: var(--r-pill); padding: 9px 14px; min-height: 36px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center;
+}
+.jobMini__act button { background: transparent; color: var(--baby-200); border: 1.5px solid var(--navy-500); }
+
+/* Published prices, read from one table (Kaitlin's Oct 15 list). */
+.priceCard { background: rgba(255,255,255,.06); border: 1px solid var(--navy-500); border-radius: var(--r-md); overflow: hidden; }
+.priceRow { display: flex; justify-content: space-between; gap: 12px; padding: 11px 14px; border-top: 1px solid rgba(255,255,255,.08); font-size: var(--t-label); }
+.priceRow:first-child { border-top: 0; }
+.priceRow b { color: #fff; display: block; font-size: var(--t-small); }
+.priceRow span { color: var(--baby-300); }
+.priceRow--dh span { font-style: italic; }
+
+.handoff .btn { width: 100%; justify-content: center; }
+.handoff__note { margin: 0; font-size: var(--t-label); color: var(--baby-300); }
+
+/* Prototype switch — lets a reviewer try each experience without signing in. */
+.chat__demo {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  padding: 8px var(--s-5) 10px; background: var(--depth-07); border-top: 1px dashed var(--navy-500);
+  font: 600 11px/1 var(--font-body); color: var(--baby-300); letter-spacing: .02em;
+}
+.chat__demo button {
+  background: transparent; border: 1px solid var(--navy-500); color: var(--baby-200); border-radius: var(--r-pill);
+  padding: 6px 10px; font: inherit; cursor: pointer; min-height: 28px;
+}
+.chat__demo button.is-on { background: var(--baby-200); color: var(--navy-900); border-color: var(--baby-200); }
+.chat__demo [data-reset] { margin-left: auto; }
+.chat__demoNote { flex-basis: 100%; margin: 4px 0 0; font-weight: 600; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 620px) {
+  .chatDock { right: 0; left: 0; bottom: 0; top: 0; width: 100%; max-width: none; height: 100%; }
+  .chat--live { border-radius: 0; border: 0; }
+}
+
+/* ============================================================
+   Design drawer options (src/chat-tweaks.js). Classes sit on <html>
+   as chat-<setting>-<value>, so every option is plain CSS.
+   ============================================================ */
+.chat__name { display: block; }
+.chat__markHs { width: 20px; height: 22px; color: var(--navy-900); }
+.chat__mark img[src$=".jpg"] { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+
+/* Side */
+.chat-side-left .chatLaunch { right: auto; left: 24px; }
+.chat-side-left .chatDock { right: auto; left: 24px; }
+
+/* Launcher shape */
+.chat-shape-round .chatLaunch { width: 60px; height: 60px; padding: 0; justify-content: center; border-radius: 50%; }
+.chat-shape-round .chatLaunch__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.chat-shape-round .chatLaunch__hs { width: 24px; height: 27px; }
+
+/* Panel size */
+.chat-size-compact .chatDock { width: 360px; height: min(540px, calc(100vh - 120px)); }
+.chat-size-tall .chatDock { width: 440px; height: calc(100vh - 180px); } /* stops under the 72px site header */
+
+/* Typing speed "Instant" also hides the dots */
+.chat-speed-off .msg--typing { display: none; }
+
+/* Reviewer tags */
+.chat-marks-hide .chat .tbc, .chat-marks-hide .chat .ruleTag, .chat-marks-hide .chat .liveNote,
+.chat-marks-hide .chat .chat__demoNote { display: none; }
+
+/* "Talk to a person" as an icon in the header instead of a banner */
+.chat-human-icon .chat__hdr { position: relative; }
+.chat-human-icon button.chat__human {
+  position: absolute; top: var(--s-5); right: 56px; width: 44px; height: 44px; margin: -8px 0 0;
+  padding: 0; justify-content: center; border-radius: 50%; font-size: 0; gap: 0;
+}
+.chat-human-icon button.chat__human svg { width: 18px; height: 18px; }
+.chat-human-icon .chat__who > div { padding-right: 48px; }
+
+/* Theme: Light */
+.chat-theme-light .chat--live { background: #fff; border-color: var(--border-subtle); }
+.chat-theme-light .chat__hdr { background: var(--depth-01, #F3F8FC); border-color: var(--border-subtle); }
+.chat-theme-light .chat__hdr b { color: var(--navy-900); }
+.chat-theme-light .chat__hdr span { color: var(--text-muted); }
+.chat-theme-light .chat__x { color: var(--navy-900); }
+.chat-theme-light .chat__x:hover { background: rgba(10,37,69,.06); color: var(--navy-900); }
+.chat-theme-light button.chat__human { color: #6B4A12; background: #FBF3E4; border-color: #D9B77A; }
+.chat-theme-light .msg--bot { background: #EAF3FB; color: var(--navy-900); }
+.chat-theme-light .msg--bot b { color: var(--navy-900); }
+.chat-theme-light .msg--me { background: var(--blue-600); color: #fff; }
+.chat-theme-light .msg--me b { color: #fff; }
+.chat-theme-light .liveFig { color: var(--blue-700); }
+.chat-theme-light .liveNote { color: var(--text-muted); border-color: var(--border-subtle); }
+.chat-theme-light .chips2 button { color: var(--blue-700); border-color: #B9D3EA; }
+.chat-theme-light .chips2 button:hover { color: var(--navy-900); border-color: var(--blue-600); }
+.chat-theme-light .chips2 button.is-picked { background: var(--blue-600); color: #fff; border-color: var(--blue-600); }
+.chat-theme-light .chat__hint { color: var(--text-muted); }
+.chat-theme-light .jobMini, .chat-theme-light .priceCard, .chat-theme-light .leadCard { background: #F6FAFD; border-color: var(--border-subtle); color: var(--text-muted); }
+.chat-theme-light .jobMini b, .chat-theme-light .priceRow b, .chat-theme-light .jobMini__pay, .chat-theme-light .leadRow dd { color: var(--navy-900); }
+.chat-theme-light .priceRow span, .chat-theme-light .leadRow dt, .chat-theme-light .leadRow--todo dd { color: var(--text-muted); }
+.chat-theme-light .priceRow { border-color: var(--border-subtle); }
+.chat-theme-light .jobMini__act button { color: var(--blue-700); border-color: #B9D3EA; }
+.chat-theme-light .handoff { background: #F1F7FC; border-color: #B9D3EA; }
+.chat-theme-light .handoff__top b { color: var(--navy-900); }
+.chat-theme-light .handoff__top span, .chat-theme-light .handoff__note { color: var(--text-muted); }
+.chat-theme-light .ruleTag { color: var(--text-muted); border-color: var(--border-subtle); }
+.chat-theme-light .chat__foot { border-color: var(--border-subtle); }
+.chat-theme-light .chat__foot input { background: #fff; color: var(--navy-900); border-color: #B9D3EA; }
+.chat-theme-light .chat__foot input::placeholder { color: #5E7A95; }
+.chat-theme-light .chat__send { background: var(--blue-600); color: #fff; }
+.chat-theme-light .chatLaunch { background: #fff; color: var(--navy-900); border-color: var(--border-subtle); }
+.chat-theme-light .chatLaunch__hs { color: var(--blue-600); }
+
+/* Theme: Sand — the warm brand colour carries the panel */
+.chat-theme-sand .chat--live { background: #FBF6EE; border-color: #E2D3BA; }
+.chat-theme-sand .chat__hdr { background: var(--warm); border-color: #D9C29C; }
+.chat-theme-sand .chat__hdr b, .chat-theme-sand .chat__x { color: #3B2E1B; }
+.chat-theme-sand .chat__hdr span { color: #6B5536; }
+.chat-theme-sand button.chat__human { color: #3B2E1B; background: rgba(255,255,255,.55); border-color: #B89A6A; }
+.chat-theme-sand .msg--bot { background: #fff; color: #2B2116; border: 1px solid #EADCC4; }
+.chat-theme-sand .msg--bot b { color: #2B2116; }
+.chat-theme-sand .msg--me { background: var(--navy-900); color: #fff; }
+.chat-theme-sand .msg--me b { color: #fff; }
+.chat-theme-sand .liveFig { color: #8A5A12; }
+.chat-theme-sand .liveNote, .chat-theme-sand .chat__hint { color: #6B5536; border-color: #EADCC4; }
+.chat-theme-sand .chips2 button { color: #3B2E1B; border-color: #CDB48A; }
+.chat-theme-sand .chips2 button:hover { border-color: #3B2E1B; color: #2B2116; }
+.chat-theme-sand .chips2 button.is-picked { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+.chat-theme-sand .jobMini, .chat-theme-sand .priceCard, .chat-theme-sand .leadCard, .chat-theme-sand .handoff { background: #fff; border-color: #EADCC4; color: #6B5536; }
+.chat-theme-sand .jobMini b, .chat-theme-sand .priceRow b, .chat-theme-sand .jobMini__pay, .chat-theme-sand .leadRow dd, .chat-theme-sand .handoff__top b { color: #2B2116; }
+.chat-theme-sand .priceRow span, .chat-theme-sand .leadRow dt, .chat-theme-sand .leadRow--todo dd, .chat-theme-sand .handoff__top span, .chat-theme-sand .handoff__note { color: #6B5536; }
+.chat-theme-sand .priceRow { border-color: #EADCC4; }
+.chat-theme-sand .jobMini__act a { background: var(--navy-900); color: #fff; }
+.chat-theme-sand .jobMini__act button { color: #3B2E1B; border-color: #CDB48A; }
+.chat-theme-sand .ruleTag { color: #6B5536; border-color: #CDB48A; }
+.chat-theme-sand .chat__foot { border-color: #EADCC4; }
+.chat-theme-sand .chat__foot input { background: #fff; color: #2B2116; border-color: #CDB48A; }
+.chat-theme-sand .chat__foot input::placeholder { color: #7D6646; }
+.chat-theme-sand .chat__send { background: var(--navy-900); color: #fff; }
+.chat-theme-sand .chatLaunch { background: var(--warm); color: #3B2E1B; border-color: #CDB48A; }
+.chat-theme-sand .chatLaunch__hs { color: #3B2E1B; }
+
+/* ---------- The drawer itself ---------- */
+.chat__design { border-style: dashed !important; }
+.chatTweaks {
+  position: fixed; z-index: 62; bottom: 92px; right: calc(24px + 400px + 16px);
+  width: 300px; max-height: calc(100vh - 120px); display: flex; flex-direction: column;
+  background: #fff; color: var(--navy-900); border: 1px solid var(--border-subtle);
+  border-radius: var(--r-lg); box-shadow: var(--e-3); font-family: var(--font-body); overflow: hidden;
+}
+.chatTweaks[hidden] { display: none; }
+.chat-size-compact .chatTweaks { right: calc(24px + 360px + 16px); }
+.chat-size-tall .chatTweaks { right: calc(24px + 440px + 16px); }
+.chat-side-left .chatTweaks { right: auto; left: calc(24px + 400px + 16px); }
+.chat-side-left.chat-size-compact .chatTweaks { left: calc(24px + 360px + 16px); }
+.chat-side-left.chat-size-tall .chatTweaks { left: calc(24px + 440px + 16px); }
+.chatTweaks__hd { position: relative; padding: 14px 52px 12px 16px; border-bottom: 1px solid var(--border-subtle); background: #FBF3E4; }
+.chatTweaks__hd b { display: block; font-size: var(--t-small); }
+.chatTweaks__hd span { font-size: 12px; color: var(--text-muted); }
+.chatTweaks__x { position: absolute; top: 6px; right: 6px; width: 40px; height: 40px; border: 0; background: none; font-size: 24px; cursor: pointer; border-radius: 50%; color: var(--navy-900); }
+.chatTweaks__x:hover { background: rgba(10,37,69,.06); }
+.chatTweaks__bd { overflow-y: auto; padding: 8px 16px 12px; display: grid; gap: 12px; }
+.chatTweaks fieldset { border: 0; margin: 0; padding: 0; }
+.chatTweaks legend, .chatTweaks .tw label { font: 700 12px/1.3 var(--font-body); color: var(--text-muted); margin-bottom: 6px; padding: 0; display: block; }
+.chatTweaks .seg { display: flex; flex-wrap: wrap; gap: 4px; }
+.chatTweaks .seg button {
+  flex: 1 1 auto; min-height: 34px; padding: 6px 10px; border: 1px solid #C9DBEB; background: #fff; color: var(--navy-900);
+  border-radius: 8px; font: 600 13px/1.1 var(--font-body); cursor: pointer;
+}
+.chatTweaks .seg button:hover { border-color: var(--blue-600); }
+.chatTweaks .seg button.is-on { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+.chatTweaks .tw input { width: 100%; box-sizing: border-box; min-height: 38px; padding: 8px 10px; border: 1px solid #C9DBEB; border-radius: 8px; font: 14px/1.3 var(--font-body); color: var(--navy-900); }
+.chatTweaks__ft { display: flex; gap: 8px; padding: 10px 16px 14px; border-top: 1px solid var(--border-subtle); }
+.chatTweaks__ft button { flex: 1; min-height: 38px; border-radius: 8px; border: 1px solid #C9DBEB; background: #fff; font: 700 13px/1 var(--font-body); color: var(--navy-900); cursor: pointer; }
+.chatTweaks button:focus-visible, .chatTweaks input:focus-visible { outline: 3px solid var(--blue-600); outline-offset: 1px; }
+
+/* The nudge bubble */
+.chatNudge {
+  position: fixed; z-index: 60; right: 24px; bottom: 92px; width: 280px;
+  background: #fff; color: var(--navy-900); border: 1px solid var(--border-subtle); border-radius: 14px 14px 4px 14px;
+  box-shadow: var(--e-3); padding: 14px 16px; font: 15px/1.45 var(--font-body);
+  animation: esNudge .35s var(--ease, ease) both;
+}
+.chat-side-left .chatNudge { right: auto; left: 24px; border-radius: 14px 14px 14px 4px; }
+.chatNudge p { margin: 0 0 10px; }
+.chatNudge div { display: flex; gap: 8px; }
+.chatNudge button { min-height: 36px; padding: 0 12px; border-radius: var(--r-pill); font: 700 13px/1 var(--font-body); cursor: pointer; border: 1px solid #C9DBEB; background: #fff; color: var(--navy-900); }
+.chatNudge [data-go] { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+@keyframes esNudge { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .chatNudge { animation: none; } }
+
+/* Narrow screens: chat is full screen, so the drawer is a sheet over its lower half. */
+@media (max-width: 900px) {
+  .chatTweaks, .chat-side-left .chatTweaks, .chat-size-compact .chatTweaks, .chat-size-tall .chatTweaks { left: 16px !important; right: 16px !important; width: auto; bottom: 16px; max-height: 55vh; }
+}
+@media (max-width: 620px) {
+  .chat-side-left .chatDock { left: 0; }
+  .chat-size-compact .chatDock, .chat-size-tall .chatDock { width: 100%; height: 100%; }
+  .chatNudge, .chat-side-left .chatNudge { right: 16px; left: 16px; width: auto; bottom: 84px; }
+  .chat-side-left .chatLaunch { left: 16px; }
+}
+
+/* The prototype's "Revised" pill lives bottom-left: give it the other corner
+   when the chat moves left, and keep it off the full-screen chat on phones. */
+.chat-side-left .rv-pill, .chat-side-left .rv-panel { left: auto; right: 18px; }
+@media (max-width: 620px) { .chat-open .rv-pill, .chat-open .rv-panel { display: none !important; } }
