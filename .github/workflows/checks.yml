@@ -1,0 +1,19 @@
+# Runs scripts/check.mjs on every pull request and every push to main.
+# A red check means: broken link, a script that won't parse, a page
+# missing its title, or copy that breaks a rule agreed with the client.
+name: Site checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check.mjs
