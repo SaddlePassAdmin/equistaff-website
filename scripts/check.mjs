@@ -39,6 +39,11 @@ for (const page of pages) {
   const markup = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<!--[\s\S]*?-->/g, '');
   const opens = (markup.match(/<div\b/g) || []).length, closes = (markup.match(/<\/div>/g) || []).length;
   if (opens !== closes) fail(page, `${opens} <div> but ${closes} </div>`);
+  // A decorative ::before/::after stretched over a section catches every click
+  // unless it has pointer-events:none (29 Oct: sign-in and sign-up forms).
+  for (const [rule] of html.matchAll(/::(?:before|after)\s*\{[^}]*\}/g))
+    if (/position:\s*absolute/.test(rule) && /inset:\s*0/.test(rule) && !/pointer-events:\s*none/.test(rule))
+      fail(page, 'full-cover overlay without pointer-events:none: ' + rule.slice(0, 60));
   // Comments explain history and may quote old copy; don't police those.
   // Comments and the "Revised" notes explain history and may quote old copy.
   const visible = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<script>REVISED\([\s\S]*?<\/script>/g, '');
