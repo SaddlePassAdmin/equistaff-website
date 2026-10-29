@@ -63,7 +63,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
    item in the list rather than a separate action. The row gap is --s-6 (32px);
    adding --s-2 takes the nav-to-CTA distance to 40px, which is --s-7 on the
    scale. A step up the ramp rather than a one-off 10px. */
-.hdr__cta { display: flex; gap: var(--s-3); align-items: center; margin-left: var(--s-2); }
+.hdr__cta { display: flex; gap: var(--s-3); align-items: center; margin-left: var(--s-6); }
 
 /* ---------- Hero: movement without video ---------- */
 .hero { position: relative; overflow: hidden; background: var(--navy-900); }

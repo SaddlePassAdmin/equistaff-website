@@ -67,25 +67,25 @@
               <p style="color:var(--text-muted);font-size:var(--t-label);margin:var(--s-3) 0 0">Square, at least 400px. Shows on your posts and in search.</p>
             </div>
           </div>
-          <div class="field"><label for="name">Barn or business name</label><input id="name" value="Golden Ocala Equestrian" oninput="draw()"></div>
+          <div class="field"><label for="name">Business name</label><input id="name" value="Carrick Equine Nutrition" oninput="draw()"></div>
           <div class="form__row">
-            <div class="field"><label for="loc">Location</label><input id="loc" value="Ocala, FL" oninput="draw()"></div>
-            <div class="field"><label for="site">Website</label><input id="site" placeholder="goldenocala.com"></div>
+            <div class="field"><label for="loc">Location</label><input id="loc" value="Lexington, KY" oninput="draw()"></div>
+            <div class="field"><label for="site">Website</label><input id="site" placeholder="carrickequine.com"></div>
           </div>
         </div>
 
         <div class="coGroup">
-          <h3>The yard</h3>
+          <h3>The business</h3>
           <div class="form__row">
-            <div class="field"><label for="disc">Discipline</label><input id="disc" value="Hunter / jumper" oninput="draw()"></div>
-            <div class="field"><label for="horses">Horses</label><input id="horses" value="24" oninput="draw()"></div>
+            <div class="field"><label for="disc">Industry or discipline</label><input id="disc" value="Equine nutrition &mdash; feed and supplements" oninput="draw()"></div>
+            <div class="field"><label for="horses">Horses, if it applies</label><input id="horses" value="" oninput="draw()"></div>
           </div>
           <div class="form__row">
-            <div class="field"><label for="staff">Staff</label><input id="staff" value="5" oninput="draw()"></div>
-            <div class="field"><label for="since">Established</label><input id="since" value="2004" oninput="draw()"></div>
+            <div class="field"><label for="staff">Team size</label><input id="staff" value="38" oninput="draw()"></div>
+            <div class="field"><label for="since">Established</label><input id="since" value="1998" oninput="draw()"></div>
           </div>
-          <div class="field"><label for="about">About the yard</label>
-            <textarea id="about" rows="4" oninput="draw()">Twenty-four stalls, two arenas, a covered round pen and direct hack access, ten minutes from the World Equestrian Center. The same vet and farrier for eleven years.</textarea>
+          <div class="field"><label for="about">About the business</label>
+            <textarea id="about" rows="4" oninput="draw()">Thirty-eight people across formulation, sales and customer support. We supply feed and supplements to barns, clinics and retailers in twenty-two states, and most of our team came out of the industry rather than into it.</textarea>
             <small>Candidates read this more carefully than anything else on a post.</small>
           </div>
         </div>
@@ -114,9 +114,9 @@
           <p class="coLabel">On a job you post yourself</p>
           <div class="coCard">
             <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
-            <h4 id="pName">Golden Ocala Equestrian</h4>
-            <p id="pMeta">Hunter / jumper · 24 horses · Ocala, FL</p>
-            <p id="pAbout">Twenty-four stalls, two arenas…</p>
+            <h4 id="pName">Carrick Equine Nutrition</h4>
+            <p id="pMeta">Equine nutrition — feed and supplements · Lexington, KY</p>
+            <p id="pAbout">Thirty-eight people across formulation, sales…</p>
           </div>
         </div>
 
@@ -124,9 +124,9 @@
           <p class="coLabel">On a managed search, before contact</p>
           <div class="coCard">
             <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
-            <h4 style="color:#4A6580;font-style:italic;font-weight:400">Your barn, unnamed</h4>
-            <p id="pMeta2" style="margin-top:var(--s-3)">Hunter / jumper · 24 horses · Ocala, FL</p>
-            <p id="pAbout2">Twenty-four stalls, two arenas…</p>
+            <h4 style="color:#4A6580;font-style:italic;font-weight:400">Your business, unnamed</h4>
+            <p id="pMeta2" style="margin-top:var(--s-3)">Equine nutrition — feed and supplements · Lexington, KY</p>
+            <p id="pAbout2">Thirty-eight people across formulation, sales…</p>
             <p style="font-size:var(--t-label);font-style:italic;color:#4A6580;border-top:1px solid #CFE4F3;padding-top:var(--s-3);margin-top:var(--s-3)">
               Your name, website and logo are held back, quietly — no badge announcing it. Everything that helps someone picture the job still shows.
             </p>
@@ -149,10 +149,10 @@
 function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
 function draw(){
   var meta = [v('disc'), v('horses') ? v('horses') + ' horses' : '', v('loc')].filter(Boolean).join(' · ');
-  document.getElementById('pName').textContent  = v('name') || 'Your barn';
+  document.getElementById('pName').textContent  = v('name') || 'Your business';
   document.getElementById('pMeta').textContent  = meta;
   document.getElementById('pMeta2').textContent = meta;
-  var a = v('about') || 'Tell candidates about the yard.';
+  var a = v('about') || 'Tell candidates about the business.';
   document.getElementById('pAbout').textContent  = a;
   document.getElementById('pAbout2').textContent = a;
 }
@@ -164,7 +164,7 @@ draw();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('28 Oct', ["The preview now shows what a candidate actually sees — unnamed, with no badge.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["The worked example is now a commercial employer — an equine nutrition business, 38 people.", "\"Discipline\" is \"Industry or discipline\"; horses is optional; \"Staff\" is \"Team size\".", "The preview now shows what a candidate actually sees — unnamed, with no badge.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
 </body>
 </html>
