@@ -143,6 +143,14 @@
       return p;
     },
 
+    /* 29 Oct — closing used to be one-way. Employers rehire the same role
+       several times a year, so a post is open or closed, not alive or dead. */
+    setPostState: function (id, state) {
+      var p = db.posts.find(function (x) { return x.id === id; });
+      if (p) { p.state = state; commit(); }
+      return p;
+    },
+
     ratings: function () { return db.ratings; },
     rate: function (candidateId, stars, note) {
       db.ratings[candidateId] = { stars: stars, note: note || '', at: Date.now() };

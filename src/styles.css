@@ -273,6 +273,10 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .ftr a { color: var(--baby-200); text-decoration: none; font-size: var(--t-small); }
 .ftr__bar a { display: inline; margin: 0; }
 .ftr__bar > span { white-space: nowrap; }
+/* 29 Oct — a quiet maker's mark. Saddle Pass builds equine technology, and
+   the footer of a site we built is where that belongs. */
+.ftr__by { opacity: .72; }
+.ftr__by b { font-weight: 700; color: var(--baby-200); }
 .ftr a:hover { color: #fff; }
 .ftr__brand { font-family: var(--font-display); font-size: 1.5rem; }
 .ftr__brand b { color: var(--baby-200); } .ftr__brand span { font-style: italic; }
