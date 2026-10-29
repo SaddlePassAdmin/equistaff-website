@@ -36,6 +36,8 @@
 .recBar img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
 .recBar p { margin:0; font-size:var(--t-small); color:var(--baby-200); }
 .recBar b { color:#fff; }
+/* 29 Oct mobile audit: on a phone the button drops under the note, full width. */
+@media (max-width:680px){ .recBar { flex-wrap:wrap; } .recBar p { flex:1 1 200px; } .recBar .btn { margin-left:0 !important; width:100%; } }
 
 @media (max-width:760px){
   .cand__row { grid-template-columns:1fr; }
@@ -50,7 +52,7 @@
 <div id="nav" data-nav="employer"></div>
 
 <main id="main">
-  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
     <div class="pSection__head" style="margin-bottom:var(--s-6)">
       <div>
         <p class="eyebrow" style="color:var(--warm)">Golden Ocala Equestrian</p>
@@ -297,7 +299,7 @@ function dlShortlist(){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["Job post title matches the applicants page again.", "Candidate photos on the shortlist.", "Brittany's horseshoes replace the placeholder stars on all four feedback blocks.", "Past placements removed at your request. Phase 2 at the earliest.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Book the call\" drops under Kaitlin's note on a phone instead of squeezing against the edge.", "Job post title matches the applicants page again.", "Candidate photos on the shortlist.", "Brittany's horseshoes replace the placeholder stars on all four feedback blocks.", "Past placements removed at your request. Phase 2 at the earliest.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
 </body>

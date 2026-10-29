@@ -30,6 +30,8 @@
   .filters label { display:flex; gap:var(--s-3); align-items:center; font-size:var(--t-small); margin-bottom:var(--s-3); cursor:pointer; }
   .filters input { width:18px; height:18px; accent-color: var(--blue-600); }
   .filters hr { border:0; border-top:1px solid var(--border-subtle); margin:var(--s-5) 0; }
+  /* 29 Oct mobile audit: on a phone the whole row is the tap target, 44px tall. */
+  @media (max-width:680px){ .filters label { min-height:44px; margin-bottom:0; } .filters input { width:22px; height:22px; } }
   .jbCount { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--s-5); flex-wrap:wrap; gap:var(--s-3); }
   .jbCount b { font-family:var(--font-display); font-size:1.5rem; }
   .jbList { display:flex; flex-direction:column; gap:var(--s-4); }
@@ -247,7 +249,7 @@
 <script src="src/nav.js"></script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["Two listings swapped for the work she actually places: National Sales Director ($150–185k) and Equestrian Director ($110–140k).", "The board now runs from a working-student stipend to $185,000.", "\"Employer confidential\" badge removed. The barn is still unnamed; it just no longer announces it.", "Role filter rebuilt to your six categories. \"Estate & property\" removed as you asked."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Each filter row is a 44px tap target on a phone, not just the small box.", "Two listings swapped for the work she actually places: National Sales Director ($150–185k) and Equestrian Director ($110–140k).", "The board now runs from a working-student stipend to $185,000.", "\"Employer confidential\" badge removed. The barn is still unnamed; it just no longer announces it.", "Role filter rebuilt to your six categories. \"Estate & property\" removed as you asked."]);</script>
 <script src="src/otherfield.js"></script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>

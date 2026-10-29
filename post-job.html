@@ -59,6 +59,7 @@
 .pjEmpty { color:#5C6B7A; font-style:italic; }
 .pjPrevBar { display:flex; gap:var(--s-3); align-items:center; margin-top:var(--s-5); flex-wrap:wrap; }
 .pjNote { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0; }
+@media (max-width:680px){ .pjMeter p, .pjNote { font-size:var(--t-small); } }
 
 /* Kaitlin's offer, per EM-2 in the handoff doc */
 .pjOffer { background:rgba(249,244,237,.12); border:1px solid var(--warm);
@@ -77,7 +78,7 @@
 <div id="nav" data-nav="employer"></div>
 
 <main id="main">
-  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
     <p class="eyebrow" style="color:var(--warm)">Post a job</p>
     <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">Write it once, properly.</h1>
     <p style="color:var(--baby-200);max-width:62ch;margin:0 0 var(--s-6)">
@@ -264,7 +265,7 @@ draw();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('28 Oct', ["Empty-state preview text darkened from 2.17:1 to 5.47:1.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes under the form are 15px on a phone instead of 13px.", "Empty-state preview text darkened from 2.17:1 to 5.47:1.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/otherfield.js"></script>
 <script src="src/chat.js"></script>
 </body>

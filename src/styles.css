@@ -14,7 +14,7 @@ body {
 img { max-width: 100%; display: block; }
 a { color: var(--text-link); }
 
-.wrap { max-width: var(--c-standard); margin: 0 auto; padding: 0 var(--s-5); }
+.wrap { max-width: var(--c-standard); margin: 0 auto; padding-inline: var(--s-5); }
 .eyebrow {
   font-size: var(--t-label); font-weight: 900; letter-spacing: .12em;
   text-transform: uppercase; color: var(--blue-700); margin: 0 0 var(--s-3);
@@ -82,7 +82,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   position: absolute; inset: 0;
   background: linear-gradient(100deg, rgba(11,37,69,.93) 0%, rgba(11,37,69,.80) 42%, rgba(11,37,69,.35) 100%);
 }
-.hero__in { position: relative; padding: var(--s-9) 0 calc(var(--s-9) + 40px); }
+.hero__in { position: relative; padding-block: var(--s-9) calc(var(--s-9) + 40px); }
 .hero h1 { color: #fff; font-size: var(--t-display); max-width: 15ch; }
 .hero .lede { color: var(--baby-200); max-width: 46ch; font-size: 1.1875rem; }
 .hero__rule { width: 96px; height: 3px; background: var(--warm); margin: var(--s-7) 0 var(--s-6); border: 0; }
@@ -307,7 +307,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 @media (max-width: 680px) {
   .hdr__nav { display: none; }
   .process__grid, .roles__grid, .board__grid, .quotes__grid, .ftr__grid, .form__row { grid-template-columns: 1fr; }
-  .hero__in { padding: var(--s-8) 0 calc(var(--s-8) + 30px); }
+  .hero__in { padding-block: var(--s-7) calc(var(--s-8) + 30px); }
   .door { min-height: 0; padding: var(--s-6); }
   .cut-top, .cut-both { clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%); margin-top: -5vw; }
 }
@@ -385,7 +385,6 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   .hdr__in { gap: var(--s-3); height: 64px; }
   .hdr__logo img { height: 27px; }
   .hdr__cta { margin-left: auto; gap: var(--s-3); }
-  .hdr__cta > a:not(.btn) { display: none; }      /* "Sign in" lives in the page, not the bar */
   .hdr__cta .btn { padding: 0 var(--s-4); font-size: .9375rem; white-space: nowrap; }
   .pHdr__in { gap: var(--s-3); height: 64px; }
   .pHdr__logo img { height: 25px; }
@@ -484,22 +483,58 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .esFlash--out { opacity:0; transform:translateX(-50%) translateY(8px); }
 @media (prefers-reduced-motion:reduce){ .esFlash{transition:none} }
 
-/* The portal nav used to be display:none under 680px, which left a phone with
-   no navigation at all. It scrolls sideways instead — pHdr__nav scrolls. */
+/* Phone navigation (29 Oct mobile audit).
+   Before: below 760px both navs wrapped onto a second row, but the header kept
+   a fixed 64px height, so the row hung outside it — over the navy hero, dark
+   text on dark, which is why the nav "wasn't there" on a phone.
+   Public header: the links move into a Menu panel (built in nav.js).
+   Portal header: the swipeable tab row stays, as a real second row inside
+   the header — see the end of screens.css, which loads after this file. */
+.hdr__menu, .hdr__panel { display: none; }
 @media (max-width: 760px) {
-  .pHdr__nav, .hdr__nav {
-    display: flex !important; gap: var(--s-4);
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; margin: 0 calc(var(--s-4) * -1); padding: 0 var(--s-4);
-    flex: 1 1 100%; order: 3; min-width: 0;
+  .hdr__nav { display: none; }
+  .hdr__cta { margin-left: auto; }
+  .hdr__cta > a:not(.btn) { display: none; }      /* Sign in moves into the menu */
+  .hdr__menu {
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 44px; min-width: 44px; padding: 0 var(--s-2); margin-right: calc(var(--s-2) * -1);
+    background: none; border: 0; border-radius: 8px; cursor: pointer;
+    color: var(--text-primary); font: 700 var(--t-small)/1 var(--font-body);
   }
-  .pHdr__nav::-webkit-scrollbar, .hdr__nav::-webkit-scrollbar { display: none; }
-  .pHdr__nav a, .hdr__nav a { white-space: nowrap; padding: 10px 0; font-size: var(--t-small); }
-  .pHdr__in, .hdr__in { flex-wrap: wrap; row-gap: var(--s-3); }
-  .pHdr__cta, .hdr__cta { margin-left: auto; }
+  .hdr__menu:focus-visible { outline: 3px solid var(--blue-600); outline-offset: 2px; }
+  .hdr__menu .hdr__menuClose { display: none; }
+  .hdr__menu[aria-expanded="true"] .hdr__menuOpen { display: none; }
+  .hdr__menu[aria-expanded="true"] .hdr__menuClose { display: inline; }
+  .hdr__panel:not([hidden]) {
+    display: block; position: absolute; left: 0; right: 0; top: 100%;
+    background: #fff; border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 12px 24px rgba(10, 25, 47, .12);
+    padding: var(--s-2) var(--s-5) var(--s-5);
+    max-height: calc(100vh - 64px); overflow-y: auto;
+  }
+  .hdr__panel nav { display: flex; flex-direction: column; }
+  .hdr__panel a {
+    display: flex; align-items: center; min-height: 52px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary); text-decoration: none; font-size: var(--t-body); font-weight: 700;
+  }
+  .hdr__panel a:last-child { border-bottom: 0; }
+  .hdr__panel a[aria-current="page"] { color: var(--blue-700); }
 }
 /* Current page, in both navs. */
 .pHdr__nav a[aria-current="page"] { color: #fff; font-weight: 900; }
 .hdr__nav a[aria-current="page"] { color: var(--blue-700); font-weight: 900; }
 .hdr__plain { font-size: var(--t-small); font-weight: 700; text-decoration: none; color: var(--text-primary); }
 .pHdr__cta { display: flex; gap: var(--s-3); align-items: center; }
+
+/* ---------- Phone tap targets and reading size (29 Oct mobile audit) ----------
+   Our rule is 44px for anything you tap and no sentences at label size.
+   The audit found footer links 24px tall and a few notes set at 13px. */
+@media (max-width: 680px) {
+  .ftr__grid a { display: flex; align-items: center; min-height: 44px; margin-bottom: 0; }
+  .ftr__bar a { display: inline-flex; align-items: center; min-height: 44px; }
+  .job__link { display: inline-flex; align-items: center; min-height: 44px; }
+  .cmp__terms { font-size: var(--t-small); }
+}
+/* A standalone small link (e.g. "Forgotten your password?") still gets a 44px row. */
+@media (max-width: 680px) { .tapLink { display: inline-flex; align-items: center; min-height: 44px; } }

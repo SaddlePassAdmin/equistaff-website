@@ -81,6 +81,7 @@
 .paper__empty { color:#9BB3C7; font-style:italic; font-size:var(--t-small); }
 .paperBar { display:flex; gap:var(--s-3); align-items:center; margin-top:var(--s-5); flex-wrap:wrap; }
 .paperNote { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0; }
+@media (max-width:680px){ .paperNote { font-size:var(--t-small); } }
 
 @media (max-width:1040px){
   .rb { grid-template-columns:1fr; }
@@ -95,7 +96,7 @@
 <div id="nav" data-nav="seeker"></div>
 
 <main id="main">
-  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
 
     <div style="margin-bottom:var(--s-6)">
       <p class="eyebrow" style="color:var(--warm)">Resume builder</p>
@@ -308,7 +309,7 @@ yardsUI(); skillsUI(); draw();
 <script src="src/nav.js"></script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["\"Yard\" replaced with \"employer\" throughout — the flow assumed everyone works at a barn.", "Kaitlin's real list of 186 skills, replacing the 16 we had invented.", "Grouped into 14 sections with search, because 186 checkboxes is a reading task, not a choice.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Save and come back later\" is easier to tap, and the note under the preview is 15px on a phone.", "\"Yard\" replaced with \"employer\" throughout — the flow assumed everyone works at a barn.", "Kaitlin's real list of 186 skills, replacing the 16 we had invented.", "Grouped into 14 sections with search, because 186 checkboxes is a reading task, not a choice.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
 </body>
 </html>

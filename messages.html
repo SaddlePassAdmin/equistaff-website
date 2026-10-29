@@ -58,14 +58,15 @@
 .msFoot{border-top:1px solid var(--portal-line);padding:var(--s-4) var(--s-6);display:flex;gap:10px;align-items:center}
 .msFoot input{flex:1;background:var(--portal-sunken);border:1.5px solid var(--portal-edge);border-radius:var(--r-pill);color:#fff;padding:12px 18px;font:inherit;font-size:var(--t-small);min-height:46px}
 .msFoot input::placeholder{color:#7FA3C4}
-@media(max-width:900px){.msWrap{grid-template-columns:1fr}}
+@media(max-width:900px){.msWrap{grid-template-columns:1fr}.msWrap>*{min-width:0}}
+@media(max-width:680px){.msBar button{min-height:44px}.msItem p{font-size:var(--t-small)}.msFoot{padding:var(--s-4)}.msFoot input{min-width:0;flex:1 1 auto}}
 </style>
 </head>
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
 <div id="nav" data-nav="seeker"></div>
 <main id="main">
-  <div class="wrap" style="padding:var(--s-7) 0 var(--s-9)">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
     <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Messages</h1>
     <div class="msWrap">
       <div>
@@ -162,7 +163,7 @@ function markAllRead() {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('23 Oct', ["Unread is no longer an 8px dot. Unread rows get a left accent, a brighter ground and a bolder name.", "New Unread filter with a live count, plus Mark all as read.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The reply box and Send button fit on smaller phones, message previews are 15px, and \"Mark all as read\" is easier to tap.", "Unread is no longer an 8px dot. Unread rows get a left accent, a brighter ground and a bolder name.", "New Unread filter with a live count, plus Mark all as read.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
 </body>
 </html>

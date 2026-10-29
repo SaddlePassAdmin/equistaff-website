@@ -4,8 +4,8 @@
 // 1. Every script in src/ parses.
 // 2. Every local link and asset an HTML page points to exists.
 // 3. Copy rules agreed with the client are kept (see BANNED below).
-// 4. Each page has a <title> and a lang attribute, and no leftover
-//    merge-conflict markers.
+// 4. Each page has a <title> and a lang attribute, balanced <div>s, and
+//    no leftover merge-conflict markers.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
@@ -34,6 +34,11 @@ for (const page of pages) {
   const html = readFileSync(join(root, page), 'utf8');
   if (!/<title>[^<]+<\/title>/.test(html)) fail(page, 'missing <title>');
   if (!/<html[^>]*\blang=/.test(html)) fail(page, 'missing lang on <html>');
+  // An unmatched </div> silently closes a container early (29 Oct: the
+  // pricing FAQ lost its side margin this way). Count, outside scripts.
+  const markup = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<!--[\s\S]*?-->/g, '');
+  const opens = (markup.match(/<div\b/g) || []).length, closes = (markup.match(/<\/div>/g) || []).length;
+  if (opens !== closes) fail(page, `${opens} <div> but ${closes} </div>`);
   // Comments explain history and may quote old copy; don't police those.
   // Comments and the "Revised" notes explain history and may quote old copy.
   const visible = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<script>REVISED\([\s\S]*?<\/script>/g, '');
