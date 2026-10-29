@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Sign-in and sign-up: a decorative glow was covering the forms and swallowing every click. Fixed, the two halves of sign-in now line up, a jump link at the top leads to the test accounts, and the checker flags any overlay that could block clicks again.
 - Test accounts on the sign-in page (prototype only): job seeker, employer through Kaitlin, self-serve employer, plus Start fresh. Evie now always matches the portal you're in.
 - Phone layout: Menu button in the public header, portal tabs inside the header, 20px side margins, 44px tap targets, 15px notes ([#14](https://github.com/SaddlePassAdmin/equistaff-website/pull/14))
 - Pricing FAQ had no side margin on any screen size: a stray closing tag ended its container early. Fixed, and the checker now counts tags so it can't happen again ([#14](https://github.com/SaddlePassAdmin/equistaff-website/pull/14))

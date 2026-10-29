@@ -21,15 +21,19 @@
 .thr { min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr; align-items:stretch; }
 .thr__left {
   background:linear-gradient(170deg,#FFFFFF 0%,#E3F1FB 34%,#BDE3FF 62%,#5E9DC8 100%);
-  padding:var(--s-8) var(--s-8); display:flex; flex-direction:column; justify-content:center;
+  padding:var(--s-9) var(--s-8); display:flex; flex-direction:column; justify-content:flex-start;
 }
 .thr__right {
   background:linear-gradient(170deg,#2C6591 0%,#16395C 48%,#0B2545 100%);
-  padding:var(--s-9) var(--s-8); display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+  padding:var(--s-9) var(--s-8); display:flex; flex-direction:column; justify-content:flex-start; position:relative; overflow:hidden;
 }
-.thr__right::after { content:""; position:absolute; inset:0;
+/* 29 Oct: the glow sat on top of the whole column and swallowed every click
+   (sign-in fields included). It now lets clicks through and sits underneath.
+   Both columns also start from the top with matching padding, so the two
+   logos line up however long either side gets. */
+.thr__right::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
   background:radial-gradient(900px 420px at 110% -10%, rgba(189,227,255,.18), transparent 60%); }
-.thr__in { max-width:30rem; width:100%; margin:0 auto; position:relative; }
+.thr__in { max-width:30rem; width:100%; margin:0 auto; position:relative; z-index:1; }
 .thr__left h1 { color:var(--navy-900); font-size:clamp(2rem,3vw,2.75rem); max-width:16ch; }
 .thr__left p { color:#2F5572; }
 .thr__right h2 { color:#fff; }
@@ -69,6 +73,12 @@
 .testAcc__row button { margin-left:auto; min-height:44px; padding:0 var(--s-4); border-radius:var(--r-pill); border:1.5px solid var(--warm);
   background:transparent; color:var(--warm); font:700 var(--t-small)/1 var(--font-body); cursor:pointer; }
 .testAcc a:focus-visible, .testAcc button:focus-visible { outline:3px solid var(--warm); outline-offset:2px; }
+/* Sits in the top padding, so it doesn't push the logo out of line with the right column. */
+.testJump { position:absolute; top:calc((var(--s-9) - var(--s-5)) * -1); left:0; display:inline-flex; align-items:center; min-height:40px; padding:0 var(--s-4);
+  border:2px dashed #C99A4E; border-radius:var(--r-pill); color:#6B4A12; background:#FBF3E4; font:700 var(--t-small)/1 var(--font-body); text-decoration:none; white-space:nowrap; }
+@media (max-width:900px){ .testJump { top:calc((var(--s-8) - var(--s-3)) * -1); } }
+.testJump:hover { background:#F6E7CC; }
+#testAcc { scroll-margin-top:var(--s-6); }
 </style>
 </head>
 <body>
@@ -78,6 +88,7 @@
   <!-- Light side: what you get. Stays above the crossover, so navy ink. -->
   <section class="thr__left">
     <div class="thr__in">
+      <a class="testJump" href="#testAcc">Prototype: use a test account &darr;</a>
       <a class="thrLogo" href="index.html"><img src="assets/logo-lockup-thick.svg" alt="EquiStaff"></a>
       <h1>You don't need an account to look around.</h1>
       <p style="font-size:1.125rem">Browsing is open to everyone — always has been. An account just saves you typing.</p>
@@ -135,7 +146,7 @@
       <!-- Prototype only (29 Oct): there are no real accounts, so reviewers
            pick who to be. Any email and password above also works and opens
            the job seeker side. Removed before launch. -->
-      <div class="testAcc" aria-labelledby="testAccH">
+      <div class="testAcc" id="testAcc" aria-labelledby="testAccH">
         <p class="testAcc__tag">Prototype only</p>
         <h2 id="testAccH">Test accounts</h2>
         <p>There are no real logins yet. Pick who you want to be:</p>
@@ -152,7 +163,7 @@
   </section>
 </main>
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["Test accounts box (prototype only): sign in as a job seeker, an employer hiring through Kaitlin, or an employer posting jobs. Start fresh wipes what you've tried.", "Apple sign-in removed. Google stays, and now takes the full width."]);</script>
+<script>REVISED('29 Oct', ["Test accounts box (prototype only), with a jump link at the top of the page: sign in as a job seeker, an employer hiring through Kaitlin, or an employer posting jobs. Start fresh wipes what you've tried.", "Apple sign-in removed. Google stays, and now takes the full width."]);</script>
 <script src="src/state.js"></script>
 <script>
   // Test accounts: tell the chat who you are, and let a reviewer wipe what
