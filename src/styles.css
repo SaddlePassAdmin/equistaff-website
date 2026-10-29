@@ -360,6 +360,23 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .seoBlock__cols li { margin-bottom: var(--s-3); }
 .seoBlock__cols a { font-size: var(--t-small); text-decoration: none; }
 .seoBlock__cols a:hover { text-decoration: underline; }
+/* FIND WORK BY STATE — all fifty, because she places in all fifty and the
+   site only said so in a statistic. Open states carry a count; the rest are
+   still links, since an empty state page is the right place to leave an
+   email address. Also the strongest SEO surface on the page. */
+.states { margin-top: var(--s-8); padding-top: var(--s-7); border-top: 1px solid var(--border-subtle); }
+.states__head h3 { font-size: 1.125rem; margin-bottom: 4px; }
+.states__head p { color: var(--text-muted); font-size: var(--t-small); margin: 0 0 var(--s-5); }
+.states__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px var(--s-5); }
+.st { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3);
+  padding: 7px 10px; border-radius: var(--r-sm); text-decoration: none;
+  font-size: var(--t-small); color: var(--text-muted); }
+.st:hover { background: var(--depth-02); color: var(--navy-900); }
+.st--open { color: var(--navy-900); font-weight: 600; }
+.st__n { font-family: var(--font-mono); font-size: var(--t-label); font-weight: 600;
+  color: var(--blue-700); font-variant-numeric: tabular-nums; }
+@media (max-width: 1040px){ .states__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 680px){ .states__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 1040px){ .compare__grid { grid-template-columns: 1fr; } .seoBlock__cols { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 680px){ .seoBlock__cols { grid-template-columns: 1fr; } }
 
