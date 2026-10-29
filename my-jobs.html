@@ -65,7 +65,7 @@
 
 <footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
-    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility</span>
+    <span>&copy; 2026 EquiStaff &middot; Equine staffing since 1982</span><span>Privacy &middot; Terms &middot; Accessibility <span class="ftr__by">&middot; Built by <b>Saddle Pass Technology</b></span></span>
   </div></div>
 </footer>
 
@@ -92,9 +92,9 @@ function row(p){
         + (p.pay ? '<span>' + esc(p.pay) + '</span>' : '')
         + '</p></div>'
         + '<div class="jpActs">' + pill
-        + (closed ? '' : '<a class="btn btn--primary" href="applicants.html">Applicants</a>'
-                       + '<a class="btn btn--secondary" href="post-job.html">Edit</a>'
-                       + '<button class="btn btn--secondary" type="button" onclick="close_(\'' + p.id + '\')">Close</button>')
+        + '<a class="btn btn--primary" href="applicants.html">Applicants</a>'
+        + '<button class="btn btn--secondary" type="button" role="switch" aria-checked="' + (!closed)
+        +   '" onclick="toggleOpen(\'' + p.id + '\')">' + (closed ? 'Reopen' : 'Close') + '</button>'
         + '</div>';
 
   if (stale) {
@@ -116,12 +116,28 @@ function paint(){
   var live = posts.filter(function(p){ return p.state !== 'Closed'; }).length;
   document.getElementById('left').textContent = Math.max(0, 3 - live);
 }
-function close_(id){ ES.closePost(id); paint(); }
+function toggleOpen_legacy(id){ ES.closePost(id); paint(); }
 paint();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["\"Close\" is an Open/Closed toggle now, with Reopen. Employers rehire the same role several times a year.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
+<script>
+/* 29 Oct — employers rehire the same role several times a year, so closing a
+   post is a state you come back from, not an ending. Reopen restores it with
+   its view and applicant history intact. */
+function toggleOpen(id){
+  var posts = ES.posts();
+  var p = posts.filter(function(x){ return x.id === id; })[0];
+  if (!p) return;
+  var nowClosed = p.state !== 'Closed';
+  ES.setPostState ? ES.setPostState(id, nowClosed ? 'Closed' : 'Live on the board')
+                  : (p.state = nowClosed ? 'Closed' : 'Live on the board');
+  if (window.ES && ES.notify) ES.notify(nowClosed ? 'Post closed — you can reopen it any time'
+                                                  : 'Post is live on the board again');
+  paint();
+}
+</script>
 </body>
 </html>
