@@ -63,7 +63,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
    item in the list rather than a separate action. The row gap is --s-6 (32px);
    adding --s-2 takes the nav-to-CTA distance to 40px, which is --s-7 on the
    scale. A step up the ramp rather than a one-off 10px. */
-.hdr__cta { display: flex; gap: var(--s-3); align-items: center; margin-left: var(--s-2); }
+.hdr__cta { display: flex; gap: var(--s-3); align-items: center; margin-left: var(--s-6); }
 
 /* ---------- Hero: movement without video ---------- */
 .hero { position: relative; overflow: hidden; background: var(--navy-900); }
@@ -369,12 +369,15 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .ftr { position: relative; overflow: hidden; }
 /* Deliberately bleeds off the right edge — the head runs out of frame.
    Carrington asked for it stronger and for that crop to stay. */
+/* 29 Oct — the horses hung 110px off the right edge and 80px below, so the
+   drawing was cropped on two sides. Footer is 401px tall and the art is 387px
+   at this width, so it fits whole with a little breathing room. */
 .ftr__horses {
-  position: absolute; right: -110px; bottom: -80px; width: 600px;
-  opacity: .62; pointer-events: none; user-select: none;
+  position: absolute; right: 20px; bottom: 10px; width: 500px;
+  opacity: .34; pointer-events: none; user-select: none;
 }
 .ftr > .wrap { position: relative; z-index: 1; }
-@media (max-width: 900px) { .ftr__horses { width: 330px; opacity: .45; right: -70px; bottom: -30px; } }
+@media (max-width: 900px) { .ftr__horses { width: 300px; opacity: .40; right: 8px; bottom: 6px; } }
 
 /* ---------- Header at phone widths ----------
    Both header actions were wrapping onto two lines at 390. */

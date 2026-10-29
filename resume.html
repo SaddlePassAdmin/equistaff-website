@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Build your resume | EquiStaff</title>
-<meta name="description" content="No resume? Answer a few questions about the yards you've worked at and we'll build one for you.">
+<meta name="description" content="No resume? Answer a few questions about where you've worked and we'll build one for you.">
 
 <link rel="canonical" href="https://www.equistaff.com/resume.html">
 <meta property="og:type" content="website">
@@ -18,7 +18,7 @@
 <style>
 /* RESUME BUILDER — audit finding #21/#57: the live site demands a resume up front
    and links out to Indeed to get one. Most grooms and riders have never written one.
-   So we ask plain questions about yards they've worked at and assemble the document
+   So we ask plain questions about where they've worked and assemble the document
    for them. The paper panel on the right is the actual output, updating as they type —
    the point is that they can see a real resume appearing from answers they can give. */
 .rb { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-8); align-items:start; }
@@ -102,7 +102,7 @@
       <p class="eyebrow" style="color:var(--warm)">Resume builder</p>
       <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">You don't need a resume to start.</h1>
       <p style="color:var(--baby-200);max-width:60ch;margin:0">
-        Tell us about the yards you've worked at and we'll write it up for you. Most people finish in about five
+        Tell us about the places you've worked and we'll write it up for you. Most people finish in about five
         minutes. You can download it, or just leave it on your profile for the recruiting team to read.
       </p>
     </div>
@@ -132,7 +132,7 @@
 
           <div id="yards"></div>
 
-          <button type="button" class="rb__add" onclick="addYard()">+ Add another yard</button>
+          <button type="button" class="rb__add" onclick="addYard()">+ Add another employer</button>
 
           <div class="ob__actions">
             <button class="btn btn--onDark btn--lg" type="button" onclick="go(2)">Next</button>
@@ -175,7 +175,7 @@
 
           <div class="field">
             <label for="where">Where would you work?</label>
-            <input id="where" value="Ocala FL, or will relocate for the right barn" oninput="draw()">
+            <input id="where" value="Ocala FL, or will relocate for the right role" oninput="draw()">
           </div>
 
           <div class="reassure" style="margin-top:var(--s-5)">
@@ -235,12 +235,12 @@ function yardsUI(){
   var h = "";
   YARDS.forEach(function(y,i){
     h += '<div class="yard">'
-      +  '<div class="yard__head"><span class="yard__n">Yard '+(i+1)+'</span>'
+      +  '<div class="yard__head"><span class="yard__n">Employer '+(i+1)+'</span>'
       +  (YARDS.length>1 ? '<button type="button" class="yard__del" onclick="delYard('+i+')">Remove</button>' : '')
       +  '</div>'
       +  '<div class="field"><label>What was your job?</label>'
-      +  '<input value="'+esc(y.role)+'" oninput="setY('+i+',\'role\',this.value)" placeholder="Groom, rider, barn manager&hellip;"></div>'
-      +  '<div class="field"><label>Which yard, and where?</label>'
+      +  '<input value="'+esc(y.role)+'" oninput="setY('+i+',\'role\',this.value)" placeholder="Groom, rider, barn manager, sales director&hellip;"></div>'
+      +  '<div class="field"><label>Where was it, and where are they?</label>'
       +  '<input value="'+esc(y.yard)+'" oninput="setY('+i+',\'yard\',this.value)" placeholder="You can describe it instead of naming it"></div>'
       +  '<div class="field"><label>Roughly when?</label>'
       +  '<input value="'+esc(y.years)+'" oninput="setY('+i+',\'years\',this.value)" placeholder="2021 — now"></div>'
@@ -272,11 +272,11 @@ function draw(){
     any = true;
     p += '<div class="pJob">'
       +  '<p class="pJob__t">'+esc(y.role||"Role")+'</p>'
-      +  '<p class="pJob__w">'+esc(y.yard||"Yard")+(y.years?' &middot; '+esc(y.years):'')+'</p>'
+      +  '<p class="pJob__w">'+esc(y.yard||"Employer")+(y.years?' &middot; '+esc(y.years):'')+'</p>'
       +  (y.did ? '<p class="pJob__d">'+esc(y.did)+'</p>' : '')
       +  '</div>';
   });
-  if(!any) p += '<p class="paper__empty">Your yards will appear here as you add them.</p>';
+  if(!any) p += '<p class="paper__empty">Your roles will appear here as you add them.</p>';
 
   if(PICKED.length){
     p += '<h4>What I can do</h4><div class="paper__skills">'
@@ -309,6 +309,7 @@ yardsUI(); skillsUI(); draw();
 <script src="src/nav.js"></script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Save and come back later\" is easier to tap, and the note under the preview is 15px on a phone.", "Kaitlin's real list of 186 skills, replacing the 16 we had invented.", "Grouped into 14 sections with search, because 186 checkboxes is a reading task, not a choice.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Save and come back later\" is easier to tap, and the note under the preview is 15px on a phone.", "\"Yard\" replaced with \"employer\" throughout — the flow assumed everyone works at a barn.", "Kaitlin's real list of 186 skills, replacing the 16 we had invented.", "Grouped into 14 sections with search, because 186 checkboxes is a reading task, not a choice.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script src="src/chat.js"></script>
 </body>
 </html>

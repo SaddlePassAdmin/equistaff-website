@@ -58,13 +58,9 @@
 .jdShare { display:inline-flex; align-items:center; gap:6px; background:none; border:0; cursor:pointer;
   color:var(--baby-200); font:600 var(--t-small)/1 var(--font-body); padding:6px 8px; border-radius:var(--r-pill); }
 .jdShare:hover { background:rgba(255,255,255,.1); color:#fff; }
-.shSheet { display:none; gap:8px; flex-wrap:wrap; margin-top:var(--s-4); }
-.shSheet.on { display:flex; }
-.shSheet a, .shSheet button { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.08);
+.jdShare.done { color:var(--warm); }
   border:1px solid var(--portal-edge); color:#fff; border-radius:var(--r-pill); padding:9px 15px;
   font:600 var(--t-small)/1 var(--font-body); text-decoration:none; cursor:pointer; }
-.shSheet a:hover, .shSheet button:hover { background:var(--baby-200); color:var(--navy-900); }
-.jdMeta__item { display:flex; gap:var(--s-3); align-items:center; color:var(--baby-200); font-size:var(--t-small); }
 .jdPay { font-family:var(--font-mono); font-size:1.625rem; font-weight:600; letter-spacing:-.01em; color:#fff; margin:var(--s-5) 0 0; }
 .jdBody { background:var(--depth-01); padding:var(--s-8) 0 var(--s-9); }
 .jdLayout { display:grid; grid-template-columns:1fr 380px; gap:var(--s-8); align-items:start; }
@@ -116,28 +112,21 @@
       <p class="jdOrg">
         <span class="jdOrg__desc">24-horse hunter/jumper barn · Ocala, Florida</span>
       </p>
-      <p class="jdOrg__why">We introduce you to the barn once your application is in. That is how a managed search works.</p>
+      <p class="jdOrg__why">We introduce you to the employer once your application is in. That is how a managed search works.</p>
       <p class="jdPay">$55,000 – $68,000 <span style="color:var(--baby-300);font-size:1rem">· housing included</span></p>
       <div class="jdMeta">
         <span class="jdMeta__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Full time</span>
         <span class="jdMeta__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg> 24 horses · hunter/jumper</span>
         <span class="jdMeta__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg> Listing verified 3 Oct</span>
         <span class="jdMeta__item" style="font-family:var(--font-mono)">REF 10480 · posted 3 days ago</span>
-        <button class="jdShare" type="button" id="shareBtn" aria-expanded="false" onclick="toggleShare()">
+        <button class="jdShare" type="button" id="shareBtn" onclick="shareRole()">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
             <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/>
-          </svg>Share this role</button>
+          </svg><span>Share this role</span></button>
       </div>
 
-      <div class="shSheet" id="shSheet">
-        <button type="button" onclick="shCopy()" id="shCopyBtn">Copy link</button>
-        <a id="shMail" href="#">Email it</a>
-        <a id="shSms"  href="#">Text it</a>
-        <a id="shFb"   href="#" target="_blank" rel="noopener">Facebook</a>
-        <a id="shLi"   href="#" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
     </div>
   </section>
 
@@ -258,7 +247,7 @@
       <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
     <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="settings.html">Job alerts</a></div>
     <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="employer.html">Employer portal</a></div>
-    <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
+    <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Advice</a><a href="privacy.html">Privacy</a></div>
   </div>
   <div class="ftr__bar"><span>© 2026 EquiStaff. All rights reserved.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Accessibility</span></div>
 </div></footer>
@@ -280,43 +269,39 @@ function toggleSave(){ ES.toggleSave(JOB); paintSave(); }
 paintSave();
 </script>
 <script>
-/* Share — no backend, so everything here is a real link the browser can
-   follow. Native share first on a phone, since that is where someone is
-   when they want to send a job to a friend. */
-function shareTargets() {
+/* One share control. Native share sheet where the browser has one — which is
+   where someone actually is when they want to send a job to a friend — and a
+   copy-link fallback everywhere else. Five pills were four decisions too many. */
+function shareRole() {
   var url = location.href.split('#')[0];
-  var title = 'Barn Manager — Ocala, FL · EquiStaff';
-  var blurb = title + ' ' + url;
-  document.getElementById('shMail').href = 'mailto:?subject=' + encodeURIComponent(title)
-    + '&body=' + encodeURIComponent('Thought of you for this one:\n\n' + url);
-  document.getElementById('shSms').href  = 'sms:?&body=' + encodeURIComponent(blurb);
-  document.getElementById('shFb').href   = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
-  document.getElementById('shLi').href   = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
-}
-function toggleShare() {
-  var btn = document.getElementById('shareBtn'), sheet = document.getElementById('shSheet');
-  var url = location.href.split('#')[0];
+  var btn = document.getElementById('shareBtn');
+  function confirmCopied() {
+    var label = btn.querySelector('span');
+    btn.classList.add('done');
+    if (label) label.textContent = 'Link copied';
+    setTimeout(function () {
+      btn.classList.remove('done');
+      if (label) label.textContent = 'Share this role';
+    }, 2200);
+  }
   if (navigator.share) {
     navigator.share({ title: 'Barn Manager — Ocala, FL', text: 'Thought of you for this one', url: url })
-      .catch(function () { sheet.classList.add('on'); btn.setAttribute('aria-expanded', 'true'); });
+      .catch(function () { /* dismissed; nothing to do */ });
     return;
   }
-  var open = !sheet.classList.contains('on');
-  sheet.classList.toggle('on', open);
-  btn.setAttribute('aria-expanded', String(open));
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(confirmCopied).catch(confirmCopied);
+  else {
+    var t = document.createElement('textarea');
+    t.value = url; document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    t.remove(); confirmCopied();
+  }
 }
-function shCopy() {
-  var url = location.href.split('#')[0], b = document.getElementById('shCopyBtn');
-  function done() { b.textContent = 'Link copied'; setTimeout(function () { b.textContent = 'Copy link'; }, 2000); }
-  if (navigator.clipboard) { navigator.clipboard.writeText(url).then(done).catch(done); }
-  else { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t);
-         t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); done(); }
-}
-shareTargets();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Confidentiality chip removed. The one-line explanation stays for anyone who wonders why there is no name.", "Recruiter block fixed — it was using portal colours on a light page, putting baby blue on white at 1.35:1.", "Circle avatars added: Kaitlin as your named contact, and the people already applying.", "Share control beside the job reference — copy link, email, text, Facebook, LinkedIn.", "The employer stays faceless; the confidentiality rule outranks the brightening."]);</script>
+<script>REVISED('29 Oct', ["On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Share control beside the job reference — copy link, email, text, Facebook, LinkedIn.", "Share is one control now, not five pills — native share sheet on a phone, copy link everywhere else.", "Introduction line says employer rather than barn.", "Confidentiality chip removed. The one-line explanation stays for anyone who wonders why there is no name.", "Recruiter block fixed — it was using portal colours on a light page, putting baby blue on white at 1.35:1.", "Circle avatars added: Kaitlin as your named contact, and the people already applying.", "The employer stays faceless; the confidentiality rule outranks the brightening."]);</script>
 <script src="src/icons.js"></script>
+<script src="src/chat.js"></script>
 </body>
 </html>

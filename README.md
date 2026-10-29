@@ -28,6 +28,21 @@ It is deliberately framework-free right now so the stack decision stays open.
 
 ---
 
+## How we work
+
+- **Nothing goes to `main` directly.** Every change is a branch and a pull request. `main` is what the client sees: GitHub Pages publishes it about a minute after a merge.
+- **Every PR explains itself in plain English**, using the template: what changed, why (link the Figma comment or feedback), how it was checked, and before/after screenshots.
+- **Automatic checks run on every PR** (`.github/workflows/checks.yml` → `scripts/check.mjs`). They catch:
+  - broken links and missing images
+  - scripts that don't parse
+  - pages missing a title
+  - copy that breaks a client rule ("since 1982", never a year count; no "Employer confidential" badge)
+
+  Run them locally with `node scripts/check.mjs`. A red check blocks the merge.
+- **Carrington approves before anything merges.** Merges are squash merges, so `main` reads as one commit per change.
+- **Every merge adds a line to `CHANGELOG.md`**, and every changed screen gets a `REVISED('<date>', [...])` note so Kaitlin can see what moved.
+- **Merged branches are deleted.** Open PRs that are superseded get closed with a pointer to what replaced them.
+
 ## Run it
 
 **Easiest:** double-click `serve.command`. It starts the server and opens the
