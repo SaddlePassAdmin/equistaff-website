@@ -53,6 +53,22 @@
 .thrHorses { width:min(300px,62%); margin-top:var(--s-7); opacity:.9; }
 @media (max-width:900px){ .thrHorses{ width:min(220px,55%); margin-top:var(--s-6); } }
 @media (max-width:900px){ .thr{grid-template-columns:1fr} .thr__left{padding:var(--s-8) var(--s-5)} .thr__right{padding:var(--s-8) var(--s-5)} }
+/* Prototype test accounts — dashed amber border so it reads as scaffolding, not product. */
+.testAcc { margin-top:var(--s-7); border:2px dashed #C99A4E; border-radius:var(--r-lg); padding:var(--s-5); background:rgba(249,244,237,.06); }
+.testAcc__tag { margin:0 0 4px; font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; text-transform:uppercase; color:var(--warm); }
+.testAcc h2 { color:#fff; font-size:1.25rem; margin:0 0 6px; }
+.testAcc p { color:var(--baby-200); font-size:var(--t-small); margin:0 0 var(--s-4); }
+.testAcc__btn { display:flex; flex-direction:column; gap:2px; min-height:56px; justify-content:center; padding:10px var(--s-4); margin-bottom:var(--s-3);
+  border:1.5px solid #32597F; border-radius:var(--r-md); text-decoration:none; background:rgba(255,255,255,.05); }
+.testAcc__btn:hover { border-color:var(--baby-200); background:rgba(255,255,255,.09); }
+.testAcc__btn b { color:#fff; font-size:var(--t-small); }
+.testAcc__btn span { color:var(--baby-300); font-size:var(--t-small); }
+.testAcc__note { font-style:italic; }
+.testAcc__row { display:flex; gap:var(--s-4); align-items:center; flex-wrap:wrap; }
+.testAcc__row a { color:var(--baby-200); font-weight:700; font-size:var(--t-small); min-height:44px; display:inline-flex; align-items:center; }
+.testAcc__row button { margin-left:auto; min-height:44px; padding:0 var(--s-4); border-radius:var(--r-pill); border:1.5px solid var(--warm);
+  background:transparent; color:var(--warm); font:700 var(--t-small)/1 var(--font-body); cursor:pointer; }
+.testAcc a:focus-visible, .testAcc button:focus-visible { outline:3px solid var(--warm); outline-offset:2px; }
 </style>
 </head>
 <body>
@@ -115,11 +131,41 @@
         New here? <a href="signup.html">Create an account</a> — it takes about a minute.<br>
         Hiring instead? <a href="request-talent.html">Request talent</a>.
       </p>
+
+      <!-- Prototype only (29 Oct): there are no real accounts, so reviewers
+           pick who to be. Any email and password above also works and opens
+           the job seeker side. Removed before launch. -->
+      <div class="testAcc" aria-labelledby="testAccH">
+        <p class="testAcc__tag">Prototype only</p>
+        <h2 id="testAccH">Test accounts</h2>
+        <p>There are no real logins yet. Pick who you want to be:</p>
+        <a class="testAcc__btn" href="profile.html" data-as="seeker"><b>Job seeker</b><span>Dana Whitfield, barn manager</span></a>
+        <a class="testAcc__btn" href="employer.html" data-as="employer"><b>Employer, hiring through Kaitlin</b><span>Golden Ocala Equestrian</span></a>
+        <a class="testAcc__btn" href="my-jobs.html" data-as="employer"><b>Employer, posting jobs yourself</b><span>Job posts, applicants, billing</span></a>
+        <p class="testAcc__note">The admin portal is Phase 2 and isn&rsquo;t in this prototype.</p>
+        <div class="testAcc__row">
+          <a href="start.html">See every screen</a>
+          <button type="button" id="testReset">Start fresh</button>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 <script src="src/revised.js"></script>
-<script>REVISED('27 Oct', ["Apple sign-in removed. Google stays, and now takes the full width."]);</script>
+<script>REVISED('29 Oct', ["Test accounts box (prototype only): sign in as a job seeker, an employer hiring through Kaitlin, or an employer posting jobs. Start fresh wipes what you've tried.", "Apple sign-in removed. Google stays, and now takes the full width."]);</script>
+<script src="src/state.js"></script>
+<script>
+  // Test accounts: tell the chat who you are, and let a reviewer wipe what
+  // they've done (applications, saves, requests) to test from the beginning.
+  document.querySelectorAll('.testAcc__btn').forEach(function (a) {
+    a.addEventListener('click', function () { try { localStorage.setItem('equistaff.chat.persona', JSON.stringify(a.dataset.as)); } catch (e) {} });
+  });
+  document.getElementById('testReset').addEventListener('click', function () {
+    if (window.ES) ES.reset();
+    try { Object.keys(localStorage).filter(function (k) { return k.indexOf('equistaff.chat.') === 0; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {}
+    if (window.ES && ES.notify) ES.notify('Prototype reset. Everything is back to the start.'); else this.textContent = 'Done';
+  });
+</script>
 <script src="src/chat.js"></script>
 </body>
 </html>
