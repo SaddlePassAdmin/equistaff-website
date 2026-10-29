@@ -33,6 +33,18 @@
     set: function (k, v) { try { w.localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   };
   var K_PERSONA = 'equistaff.chat.persona', K_LOG = 'equistaff.chat.unanswered', K_HAND = 'equistaff.chat.handoffs', K_INTAKE = 'equistaff.chat.intake';
+  // Review mode (?review=1, see revised.js): shows the prototype bar, the
+  // "Kaitlin to confirm" tags and the rule tags. Off by default, so the chat
+  // looks exactly like the product.
+  var review = (function () {
+    try {
+      var q = new URLSearchParams(location.search).get('review');
+      if (q === '1') localStorage.setItem('equistaff.review', '1');
+      if (q === '0') localStorage.removeItem('equistaff.review');
+      return localStorage.getItem('equistaff.review') === '1';
+    } catch (e) { return false; }
+  })();
+  if (review) d.documentElement.classList.add('es-review');
   var reduce = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- where are we? ---------- */
@@ -208,7 +220,7 @@
     }
     card('<div class="handoff"><div class="handoff__top"><img src="img/kaitlin.jpg" alt=""><div><b>Kaitlin Snyder</b><span>EquiStaff recruiting · placing equine professionals since 1982</span></div></div>' +
       '<a class="btn btn--primary" href="#" onclick="return false">Book a call · ' + (audience === 'employer' ? 'employer' : 'job seeker') + ' calendar</a>' +
-      '<p class="handoff__note">' + tbc('booking link: Kaitlin to send') + ' · Your conversation goes with you, so you won’t have to repeat yourself.</p></div>');
+      '<p class="handoff__note">Your conversation goes with you, so you won’t have to repeat yourself. ' + tbc('booking link: Kaitlin to send') + '</p></div>');
     bot('Prefer to leave a message instead?', [['Leave a message', function () { leaveMessage(audience, reason); }], ['Back to the start', hello]]);
   }
   function leaveMessage(audience, reason) {
@@ -439,7 +451,7 @@
   }
   function saveOffers() {
     bot('Sorry the search is taking a while. Before you go, can I offer one of these?', [
-      ['50% off next month', function () { bot('Done in the prototype. In the live site this flags your account for Kaitlin to apply the discount. ' + tbc('how it’s applied: to confirm'), [['Back to the start', hello]]); }],
+      ['50% off next month', function () { bot('Done. Kaitlin will apply 50% off your next month and confirm by email. ' + tbc('how it’s applied: to confirm'), [['Back to the start', hello]]); }],
       ['Intro call with Kaitlin', function () { handoff('cancel_save', 'employer'); }],
       ['Full-service recruiting', requestTalent],
       ['Still cancel', function () { refuse('I can’t cancel a paid subscription myself. You can do it from billing, or Kaitlin can do it with you.', 'R7'); }]
@@ -449,7 +461,7 @@
   /* ---------- questions ---------- */
   function questions() {
     bot('Ask away. Popular ones:', [['About EquiStaff', about], ['What does it cost?', pricing], ['How many jobs are open?', liveNumbers], ['Can you sponsor a visa?', visa], ['Account trouble', account]]);
-    hint('Or type your own question. Kaitlin’s top 10 answers are still to come.');
+    hint('Or type your own question.');
   }
   function about() {
     // Kaitlin's wording (Figma, 26 Oct); her "over 42 years" written as "since 1982" so it never goes stale.

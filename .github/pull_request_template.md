@@ -10,7 +10,8 @@
 - [ ] `node scripts/check.mjs` passes (also runs automatically on this PR)
 - [ ] Clicked through the changed screens at desktop **and** phone width (390px)
 - [ ] Desktop layout unchanged where it wasn't meant to change
-- [ ] Each changed page has a `REVISED('<date>', [...])` note in plain language for Kaitlin
+- [ ] No notes, tags or "prototype" text visible on product screens (only in `?review=1`)
+- [ ] Each changed page has a `REVISED('<date>', [...])` note (review mode only), and the round's change notes are posted to Slack
 
 ## Screenshots
 <!-- Before / after for anything visual. -->
