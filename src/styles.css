@@ -43,9 +43,13 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   min-height: 48px; padding: 0 var(--s-6);
   border-radius: var(--r-sm); border: 1.5px solid transparent;
   font: 700 1rem/1 var(--font-body); text-decoration: none; cursor: pointer;
-  transition: transform .15s var(--ease), background .15s var(--ease);
+  transition: background .15s var(--ease), filter .15s var(--ease),
+              border-color .15s var(--ease);
 }
-.btn:active { transform: translateY(1px); }
+/* Press feedback must not move anything: the label sits under the finger.
+   filter paints, it does not lay out. */
+.btn:active { filter: brightness(.9); }
+.btn--secondary:active, .btn--ghostDark:active { filter: brightness(1.15); }
 .btn--primary { background: var(--action-primary); color: var(--action-ink); }
 .btn--primary:hover { background: var(--action-hover); }
 .btn--secondary { background: transparent; color: var(--text-primary); border-color: var(--border-strong); }

@@ -191,9 +191,8 @@
    keeps its class and its .on state so rate() is untouched; only the glyph
    changed, from a text character to an SVG that inherits currentColor. */
 .star { background:none; border:0; cursor:pointer; line-height:0; padding:3px 4px;
-  color:var(--navy-500); transition:color .14s var(--ease), transform .14s var(--ease); }
+  color:var(--navy-500); transition:color .14s var(--ease); }
 .star .hs { width:26px; height:29px; display:block; }
-.star:hover { transform:translateY(-1px); }
 .star:hover, .star.on { color:var(--warm); }
 .star:focus-visible { outline:2px solid var(--baby-200); border-radius:4px; }
 .fb__hint { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-3) 0 0; }
