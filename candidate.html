@@ -174,14 +174,15 @@
       </div>
     </div>
 
-    <!-- The employer's OWN note. Deliberately a different thing from the
-         feedback that goes to Kaitlin further down the page: this one is
-         private to them, stays on the candidate, and Kaitlin never sees it. -->
+    <!-- The employer's note on a candidate. Kaitlin sees these: 29 Oct, she
+         asked for them deliberately — the note is often where the real reason
+         sits, and she cannot work the search without it. The candidate never
+         sees it, which is the boundary that matters. -->
     <div class="pnote" id="pnote" hidden>
       <div class="pnote__h">
         <div>
           <h3>Your note on Pete</h3>
-          <p>Private to you. Kaitlin does not see this, and neither does Pete.</p>
+          <p>Kaitlin sees your notes so she can act on them. Pete never does.</p>
         </div>
         <button class="pnote__x" type="button" onclick="closeNote()" aria-label="Close">&times;</button>
       </div>
@@ -424,6 +425,7 @@ function toInterview(b){
 
 <script src="src/revised.js"></script>
 <script>REVISED('29 Oct', [
+  "Your note on a candidate now goes to Kaitlin. It used to say she could not see it; she asked for the opposite, because the note is usually where the real reason sits. The candidate still never sees it.",
   "This profile is now Pete Donnelly, the regional sales director already sitting on your applicants list — so clicking a commercial applicant lands on a commercial profile. Pete sells into barns and events at preliminary, which is the barn-to-boardroom case made by example rather than by adjective.",
   "Everything built this week is unchanged underneath it: the contact gate, your staff switches, the résumé pill, the private note.",
   "Her contact details are now held behind the fee. The locked and unlocked cards are the same size, so nothing on the page shifts when they are released — and the locked one says why, rather than just refusing.",
@@ -459,8 +461,8 @@ function closeNote(){ document.getElementById('pnote').hidden = true; }
 function saveNote() {
   var t = document.getElementById('pnoteText').value.trim();
   document.getElementById('pnoteWhen').textContent = t
-    ? 'Saved just now — only you can see this.' : 'Nothing to save yet.';
-  if (t && window.ES && ES.notify) ES.notify('Note saved to Pete — private to you');
+    ? 'Saved just now — shared with Kaitlin.' : 'Nothing to save yet.';
+  if (t && window.ES && ES.notify) ES.notify('Note saved — Kaitlin can see this');
 }
 </script>
 <script src="src/chat.js"></script>
