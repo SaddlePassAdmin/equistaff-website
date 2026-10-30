@@ -19,7 +19,7 @@
   position: fixed; right: 24px; bottom: 24px; z-index: 60;
   display: inline-flex; gap: 10px; align-items: center;
   background: var(--depth-07); color: #fff;
-  border: 1px solid var(--navy-500); border-radius: var(--r-pill);
+  border: 2px solid var(--baby-300); border-radius: var(--r-pill);
   padding: 14px 20px; min-height: 52px; cursor: pointer;
   font: 700 var(--t-small)/1 var(--font-body);
   box-shadow: var(--e-3);
@@ -38,6 +38,25 @@
 body.has-chat > footer { padding-bottom: 88px; }
 body.has-chat > main:last-of-type { padding-bottom: 88px; }
 @media (max-width: 620px) { .chatLaunch { right: 16px; bottom: 16px; } }
+
+/* ── 30 Oct — the dock ────────────────────────────────────────────────────
+   The launcher is an <a>/<button>, so the dismiss control cannot live inside
+   it. The dock is the fixed thing; the launcher goes static within it. */
+.evieDock { position: fixed; right: 24px; bottom: 24px; z-index: 60; }
+.evieDock .chatLaunch { position: static; right: auto; bottom: auto; }
+.evieDock__x {
+  position: absolute; top: -9px; right: -9px;
+  width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
+  background: var(--depth-07); color: #fff;
+  border: 2px solid var(--baby-300);
+  font: 700 15px/1 var(--font-body);
+  display: grid; place-items: center; padding: 0;
+}
+.evieDock__x:hover { background: var(--navy-500); }
+.evieDock__x:focus-visible,
+.evieDock .chatLaunch:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+@media (max-width: 620px) { .evieDock { right: 16px; bottom: 16px; } }
+
 
 /* ---------- Panel ---------- */
 .chat {

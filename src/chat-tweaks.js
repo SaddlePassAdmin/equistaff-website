@@ -16,7 +16,7 @@
   var C = w.ESChat; if (!C || w.__esTweaks) return; w.__esTweaks = true;
   var KEY = 'equistaff.chat.tweaks.v2'; // v2: Evie became the default (29 Oct)
   var DEF = {
-    theme: 'navy', shape: 'pill', label: 'Ask EquiStaff', side: 'right', size: 'standard',
+    theme: 'navy', shape: 'pill', label: 'Ask Evie', side: 'right', size: 'standard',
     name: 'Evie at EquiStaff', tagline: 'An AI assistant, not a person',
     greeting: 'Hi! I’m Evie at EquiStaff. What brings you here today?',
     avatar: 'evie', speed: 'normal', marks: 'show', human: 'top', nudge: 'off'
@@ -37,7 +37,7 @@
     ['nudge', 'Nudge bubble', [['off', 'Off'], ['on', 'After 4s']]]
   ];
   var TEXTS = [
-    ['label', 'Launcher label', ['Ask EquiStaff', 'Ask Evie', 'Chat with Evie', 'Questions? Ask us']],
+    ['label', 'Launcher label', ['Ask Evie', 'Ask EquiStaff', 'Chat with Evie', 'Questions? Ask us']],
     ['name', 'Assistant name', ['Evie at EquiStaff', 'Evie', 'EquiStaff Assistant']],
     ['tagline', 'Line under the name', ['An AI assistant, not a person', 'Answers in seconds · Kaitlin’s team behind it']],
     ['greeting', 'First message', ['Hi! I’m Evie at EquiStaff. What brings you here today?', 'Hi, I’m Evie! Are you hiring, or looking for your next job?', 'Hi! Welcome to EquiStaff. What brings you here today?']]
