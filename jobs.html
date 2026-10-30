@@ -41,7 +41,7 @@
     border-left:4px solid var(--border-subtle); box-shadow:var(--e-1);
     transition: transform .18s var(--ease), box-shadow .18s var(--ease);
   }
-  .row:hover { transform:translateX(3px); box-shadow:var(--e-3); }
+  .row:hover { box-shadow:var(--e-3); border-color:var(--border-strong); }
   .row--managed { border-left-color: var(--navy-900); }
   .row h3 { margin:0 0 4px; font-size:1.3125rem; }
   .row__org { font-size:var(--t-small); color:var(--text-muted); margin:0 0 var(--s-3); }
@@ -250,6 +250,7 @@
 
 <script src="src/revised.js"></script>
 <script>REVISED('29 Oct', [
+  "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
   "Ask Evie added to the footer, so hiding the floating button never loses her.",
   "Built by Saddle Pass Technology sits on the left of the footer bar now, beside the copyright.","On a phone, the links now sit behind a Menu button — the five pages plus Sign in. Before, they spilled out under the header onto the page, dark on dark, so the nav looked missing.", "Footer links are full-height rows on a phone, so each one is easy to tap.", "Each filter row is a 44px tap target on a phone, not just the small box.", "Two listings swapped for the work she actually places: National Sales Director ($150–185k) and Equestrian Director ($110–140k).", "The board now runs from a working-student stipend to $185,000.", "\"Employer confidential\" badge removed. The barn is still unnamed; it just no longer announces it.", "Role filter rebuilt to your six categories. \"Estate & property\" removed as you asked."]);</script>
