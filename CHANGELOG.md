@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Visas (Kaitlin's FigJam ask): every job post now shows "International applicants" with "EquiStaff can't sponsor visas"; Evie's answer about a specific job says the same. The chat no longer asks employers for a horse count (dropped 26 Oct).
 - Find work by state (landing page): each open-roles count sits right next to its state name, so the number reads as part of the state instead of floating at the far edge of the column.
 - QA fixes before the final round: the resume builder's employer fields work again (three functions had gone missing on 23 Oct); the resume preview no longer covers its Download and Email buttons; Download opens a real Save-as-PDF of the resume, and Email confirms; jobs Search filters the list; profile Save changes confirms; Upload a logo opens a file picker and previews it. The checker now flags any button that calls a function that doesn't exist.
 - No notes in the product UI: the Revised pill, test-accounts box, chat prototype bar, "Kaitlin to confirm" and rule tags, and the placeholder-quotes line are gone from screens. Internal review mode via `?review=1`. Test logins work in the normal sign-in form and are shared in Slack.
