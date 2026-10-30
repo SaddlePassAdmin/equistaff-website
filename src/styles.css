@@ -381,7 +381,7 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .states__head h3 { font-size: 1.125rem; margin-bottom: 4px; }
 .states__head p { color: var(--text-muted); font-size: var(--t-small); margin: 0 0 var(--s-5); }
 .states__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px var(--s-5); }
-.st { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3);
+.st { display: flex; align-items: baseline; justify-content: flex-start; gap: var(--s-2);
   padding: 7px 10px; border-radius: var(--r-sm); text-decoration: none;
   font-size: var(--t-small); color: var(--text-muted); }
 .st:hover { background: var(--depth-02); color: var(--navy-900); }
