@@ -75,23 +75,23 @@
         <div class="plan plan--on">
           <span class="plan__tag">Current plan</span>
           <h3>1 month</h3>
-          <p class="plan__price">$49.99<span> / month</span></p>
+          <p class="plan__price">$50<span> / month</span></p>
           <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Cancel any time</li></ul>
           <button class="btn btn--secondary" type="button" disabled style="opacity:.5">This is your plan</button>
         </div>
         <div class="plan">
           <span class="plan__tag">Save $10</span>
           <h3>3 months</h3>
-          <p class="plan__price">$139.99<span> / quarter</span></p>
+          <p class="plan__price">$140<span> / quarter</span></p>
           <ul><li>3 job posts</li><li>Unlimited candidate searches</li><li>Works out at about $47 a month</li></ul>
-          <button class="btn btn--primary" type="button" onclick="switchTo('3 months','$139.99')">Switch to this</button>
+          <button class="btn btn--primary" type="button" onclick="switchTo('3 months','$140')">Switch to this</button>
         </div>
         <div class="plan">
           <span class="plan__tag">Best value</span>
           <h3>1 year</h3>
-          <p class="plan__price">$469.99<span> / year</span></p>
+          <p class="plan__price">$460<span> / year</span></p>
           <ul><li><b style="color:#fff">5</b> job posts</li><li>Unlimited candidate searches</li><li>Under $39 a month</li></ul>
-          <button class="btn btn--primary" type="button" onclick="switchTo('1 year','$469.99')">Switch to this</button>
+          <button class="btn btn--primary" type="button" onclick="switchTo('1 year','$460')">Switch to this</button>
         </div>
       </div>
       <p style="color:var(--text-muted);font-size:var(--t-small);margin-top:var(--s-5)">
@@ -111,9 +111,9 @@
 
     <section class="pSection">
       <div class="pSection__head"><h2>Invoices</h2><a href="#" onclick="event.preventDefault();dlInvoices()">Download all</a></div>
-      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
-      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
-      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$49.99</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>October 2026</b><span>1 month plan</span></div><span class="amt">$50</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>September 2026</b><span>1 month plan</span></div><span class="amt">$50</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
+      <div class="inv"><div><b>August 2026</b><span>1 month plan</span></div><span class="amt">$50</span><span class="pill pill--paid">Paid</span><a href="#" onclick="event.preventDefault()">PDF</a></div>
     </section>
 
     <section class="pSection">
@@ -177,8 +177,8 @@ function reallyCancel(){
 <script>
 function dlInvoices(){
   ES.download('EquiStaff-invoices-2026.txt',
-   ['GOLDEN OCALA EQUESTRIAN — INVOICES','','Oct 2026  1 month plan  $49.99  PAID',
-    'Sep 2026  1 month plan  $49.99  PAID','Aug 2026  1 month plan  $49.99  PAID','',
+   ['GOLDEN OCALA EQUESTRIAN — INVOICES','','Oct 2026  1 month plan  $50  PAID',
+    'Sep 2026  1 month plan  $50  PAID','Aug 2026  1 month plan  $50  PAID','',
     'EquiStaff · Ocala, Florida'].join('\n'));
 }
 function cardForm(){
@@ -200,7 +200,8 @@ function cardSaved(b){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('30 Oct', [
+  "Prices now match Kaitlin's list: $50 for 1 month (3 posts), $140 for 3 months (3 posts), $460 for a year (5 posts).",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Update card\", \"Download all\" and the PDF links are easier to tap on a phone.", "The Paid pill was baby blue on pale green at 1.16:1 — it has its own colour now.", "Save offer no longer promises a fixed number of candidates.", "Plan prices corrected to $49.99, $139.99 and $469.99.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
