@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Book a call | EquiStaff</title>
+<title>Request a call | EquiStaff</title>
 <meta name="description" content="Fifteen minutes with Kaitlin — whether you are hiring or looking.">
 <link rel="canonical" href="https://www.equistaff.com/book.html">
 <meta property="og:type" content="website"><meta property="og:site_name" content="EquiStaff">
@@ -30,6 +30,13 @@
 .slot:hover{border-color:var(--blue-600)}
 .slot[aria-pressed="true"]{background:var(--blue-600);border-color:var(--blue-600);color:#fff}
 @media(max-width:700px){.bkPick{grid-template-columns:1fr}}
+
+.bkReq { margin-top:var(--s-6); }
+.bkReq__two { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-5); margin-top:var(--s-5); }
+@media (max-width:620px){ .bkReq__two { grid-template-columns:1fr; } }
+.bkSelf { margin:var(--s-6) 0 0; padding-top:var(--s-5); border-top:1px solid var(--border-subtle);
+  font-size:var(--t-small); color:var(--text-muted); }
+.bkSelf a { font-weight:700; color:var(--blue-700); }
 </style>
 </head>
 <body class="has-chat">
@@ -38,7 +45,7 @@
 <main id="main"><section class="bkWrap"><div class="bk">
 
   <div id="pick">
-    <p class="eyebrow">Book a call</p>
+    <p class="eyebrow">Request a call</p>
     <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Fifteen minutes with Kaitlin</h1>
     <p style="color:var(--text-muted);max-width:54ch;margin:0">She keeps mornings free for new conversations. Which one are you?</p>
     <div class="bkPick">
@@ -50,32 +57,51 @@
   </div>
 
   <div id="slots" hidden>
-    <p class="eyebrow" id="slotsKind">Book a call</p>
-    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Pick a time</h1>
-    <p style="color:var(--text-muted);margin:0" id="slotsNote">All times Eastern. Fifteen minutes, by phone unless you ask otherwise.</p>
+    <p class="eyebrow" id="slotsKind">Request a call</p>
+    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Tell her when suits you</h1>
+    <p style="color:var(--text-muted);margin:0" id="slotsNote">Fifteen minutes. She confirms by the end of the next working day.</p>
     <div class="bkWho">
       <img src="img/kaitlin.jpg" alt="">
       <div><b style="display:block;font-family:var(--font-display);font-size:1.125rem">Kaitlin Veltkamp</b>
         <span style="font-size:var(--t-small);color:var(--text-muted)">Owner &middot; placing since 1982 &middot; Ocala, FL</span></div>
     </div>
-    <div class="slots" role="group" aria-label="Available times">
-      <button class="slot" onclick="pick(this,'Thursday 9:00am')">Thu 9:00</button>
-      <button class="slot" onclick="pick(this,'Thursday 9:30am')">Thu 9:30</button>
-      <button class="slot" onclick="pick(this,'Thursday 11:00am')">Thu 11:00</button>
-      <button class="slot" onclick="pick(this,'Friday 8:30am')">Fri 8:30</button>
-      <button class="slot" onclick="pick(this,'Friday 10:00am')">Fri 10:00</button>
-      <button class="slot" onclick="pick(this,'Monday 9:00am')">Mon 9:00</button>
+    <!-- 29 Oct: the slot grid promised a calendar that does not exist. Two honest
+         routes instead — say when you are free, or open her real Bookings page. -->
+    <div class="bkReq">
+      <div class="field">
+        <label for="bkWhen">When are you free?</label>
+        <textarea id="bkWhen" rows="3" required
+          placeholder="Weekday mornings before 9, or any afternoon after the horses are done. Eastern."></textarea>
+        <small>In your own words. She works around the barn day, so there is no wrong answer.</small>
+      </div>
+      <div class="bkReq__two">
+        <div class="field">
+          <label for="bkPh">Best number</label>
+          <input id="bkPh" type="tel" placeholder="(000) 000-0000">
+        </div>
+        <div class="field">
+          <label for="bkHow">How to reach you</label>
+          <select id="bkHow">
+            <option>Phone call</option><option>Text first</option>
+            <option>Email</option><option>Video call</option>
+          </select>
+        </div>
+      </div>
     </div>
+
     <div style="display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)">
-      <button class="btn btn--primary btn--lg" type="button" id="confirm" disabled onclick="done()">Confirm</button>
+      <button class="btn btn--primary btn--lg" type="button" id="confirm" onclick="done()">Request a call</button>
       <button class="btn btn--secondary btn--lg" type="button" onclick="back()">Back</button>
     </div>
+
+    <p class="bkSelf">Would rather pick a time yourself?
+      <a href="https://bookings.cloud.microsoft/bookwithme/user/b749ee5c1a164bc2a8d2976bafc96e27@equistaff.com?anonymous&amp;ismsaljsauthenabled&amp;ep=pcard" target="_blank" rel="noopener">Open Kaitlin&rsquo;s calendar &rarr;</a></p>
   </div>
 
   <div id="done" hidden style="text-align:center">
     <div style="width:66px;height:66px;border-radius:50%;background:var(--ok-bg);display:grid;place-items:center;margin:0 auto var(--s-5)">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-    <h1 style="font-size:1.875rem;margin-bottom:var(--s-3)">You&rsquo;re booked</h1>
+    <h1 style="font-size:1.875rem;margin-bottom:var(--s-3)">Your request is in</h1>
     <p style="color:var(--text-muted);margin:0 auto var(--s-5);max-width:46ch" id="doneLine"></p>
     <div style="display:flex;gap:var(--s-3);justify-content:center;flex-wrap:wrap">
       <a class="btn btn--primary btn--lg" href="jobs.html">Browse roles</a>
@@ -88,41 +114,44 @@
 <div class="wrap">
   <div class="ftr__grid">
     <div><img class="ftr__logo" src="assets/logo-lockup-thick-reversed.svg" alt="EquiStaff">
-      <p class="ftr__meta">Equine staffing since 1982 &middot; online since 2000<br>Ocala, Florida</p>
+      <p class="ftr__meta">Equine recruiting since 1982 &middot; online since 2000<br>Ocala, Florida</p>
       <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p></div>
     <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="profile.html">Your profile</a><a href="signup.html">Create a profile</a></div>
     <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="pricing.html">Pricing</a></div>
     <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Advice</a><a href="privacy.html">Privacy</a></div>
   </div>
-  <div class="ftr__bar"><span>&copy; 2026 EquiStaff. All rights reserved.</span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility <span class="ftr__by">&middot; Built by <b>Saddle Pass Technology</b></span></span></div>
+  <div class="ftr__bar"><span>&copy; 2026 EquiStaff. All rights reserved. <span class="ftr__by">&middot; Built by <b>Saddle Pass Technology</b></span></span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span></div>
 </div></footer>
-<a class="chatLaunch" href="chatbot.html"><svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask EquiStaff</a>
+<a class="chatLaunch" href="chatbot.html"><svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> Ask Evie</a>
 <script src="src/state.js"></script><script src="src/nav.js"></script>
 <script>
-var KIND='', SLOT='';
+var KIND='';
 function show(id){ ['pick','slots','done'].forEach(function(k){ document.getElementById(k).hidden = (k!==id); }); window.scrollTo({top:0,behavior:'smooth'}); }
 function who(k){
   KIND=k;
   document.getElementById('slotsKind').textContent = k==='employer' ? 'Hiring' : 'Looking for work';
   document.getElementById('slotsNote').textContent = k==='employer'
-    ? 'All times Eastern. Bring the role if you have it — she can usually tell you on the call whether a listing would be enough.'
-    : 'All times Eastern. Nothing to prepare. She will ask what you want next and what you are avoiding.';
+    ? 'Bring the role if you have it — she can usually tell you on the call whether a listing would be enough.'
+    : 'Nothing to prepare. She will ask what you want next and what you are avoiding.';
   show('slots');
 }
-function pick(b,label){
-  SLOT=label;
-  document.querySelectorAll('.slot').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
-  b.setAttribute('aria-pressed','true');
-  document.getElementById('confirm').disabled = false;
-}
 function done(){
-  document.getElementById('doneLine').textContent =
-    SLOT + ', Eastern. A calendar invite is on its way, and Kaitlin has the context from this site already.';
-  ES.notify('Call booked — ' + SLOT);
+  var when = (document.getElementById('bkWhen').value || '').trim();
+  var how  = document.getElementById('bkHow').value;
+  document.getElementById('doneLine').textContent = when
+    ? 'Kaitlin has your availability — ' + when.replace(/\s+/g,' ') +
+      ' — and will confirm a time by ' + how.toLowerCase() + ' before the end of the next working day.'
+    : 'Kaitlin will be in touch by ' + how.toLowerCase() + ' before the end of the next working day to find a time.';
   show('done');
 }
 function back(){ show('pick'); }
 </script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
+<script src="src/revised.js"></script>
+<script>REVISED('29 Oct', [
+  "Built by Saddle Pass Technology sits on the left of the footer bar now, beside the copyright.",
+  "Rebuilt as Request a call. The old time grid promised a calendar that did not exist; now you either say when you are free in your own words, or open your real Bookings page and pick a time yourself.",
+  "Asks for the best number and how you would rather be reached.",
+]);</script>
 </body></html>
