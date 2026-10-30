@@ -19,13 +19,18 @@
 /* Employer portal — Deep mode. This is the revenue side, so the
    recruiter relationship is the spine of the screen, not a sidebar. */
 .shortlist { display:grid; gap:var(--s-4); }
+/* The three columns belong on .cand__row — it is the only child of .cand, so a
+   grid on the parent did nothing and the row collapsed to its content width.
+   That left the buttons floating mid-card at a different spot on every row. */
 .cand { background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-md);
-  padding:var(--s-5) var(--s-6); display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-5); align-items:center; }
+  padding:var(--s-5) var(--s-6); }
+.cand__row { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-5); align-items:center; }
+.cand__acts { justify-self:end; }
 .cand__av { width:48px; height:48px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
   display:grid; place-items:center; font:700 1rem/1 var(--font-body); }
 .cand h4 { margin:0 0 3px; font-family:var(--font-display); font-size:1.1875rem; color:#fff; }
 .cand p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
-.cand__acts { display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; }
+.cand__acts { display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; justify-content:flex-end; }
 .searchCard { background:linear-gradient(145deg,var(--portal-ground),var(--portal-sunken)); border:1px solid var(--portal-line);
   border-radius:var(--r-lg); padding:var(--s-6); margin-bottom:var(--s-5); }
 .searchCard__top { display:flex; justify-content:space-between; gap:var(--s-5); align-items:flex-start; flex-wrap:wrap; }
@@ -82,7 +87,7 @@
       <div class="recBar">
         <img src="img/kaitlin.jpg" alt="">
         <p><b>Kaitlin has four people for you.</b> All four phone-referenced. She's free Thursday morning to walk you through them.</p>
-        <a class="btn btn--primary" href="book.html" style="margin-left:auto;white-space:nowrap">Book the call</a>
+        <a class="btn btn--primary" href="book.html" style="margin-left:auto;white-space:nowrap">Request a call</a>
       </div>
     </div>
 
@@ -299,7 +304,9 @@ function dlShortlist(){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', ["\"Close out\" is \"Reject\" — it is what the control does.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Book the call\" drops under Kaitlin's note on a phone instead of squeezing against the edge.", "Job post title matches the applicants page again.", "Candidate photos on the shortlist.", "Brittany's horseshoes replace the placeholder stars on all four feedback blocks.", "Past placements removed at your request. Phase 2 at the earliest.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
+<script>REVISED('29 Oct', [
+  "Shortlist buttons are pinned to the right edge of each card and line up in one column. They were floating mid-card at a different spot on every row, because the card's three-column grid was on the wrong element and the row was collapsing to its content.",
+  "\"Book the call\" is \"Request a call\", matching the rest of the site.","\"Close out\" is \"Reject\" — it is what the control does.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Book the call\" drops under Kaitlin's note on a phone instead of squeezing against the edge.", "Job post title matches the applicants page again.", "Candidate photos on the shortlist.", "Brittany's horseshoes replace the placeholder stars on all four feedback blocks.", "Past placements removed at your request. Phase 2 at the earliest.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
 </body>
