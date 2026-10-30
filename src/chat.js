@@ -59,7 +59,7 @@
 
   /* ---------- content (from Kaitlin's Oct 15 answers) ---------- */
   var JOBS = [
-    { title: 'Barn Manager', org: '24-horse hunter/jumper barn', where: 'Ocala, FL', state: 'FL', pay: '$55,000 – $68,000', housing: 'On-site, 1 bed', horses: '24 · hunter/jumper', days: 'Two, rotating', start: 'Flexible, ideally November', discipline: 'Hunter / Jumper', type: 'Full time', managed: true, intl: null, day: 'Running the daily schedule (turnout, feed, farrier, vet and training), leading a team of four, and keeping competition records. The horses compete most weekends through the winter season.' },
+    { title: 'Barn Manager', org: '24-horse hunter/jumper barn', where: 'Ocala, FL', state: 'FL', pay: '$55,000 – $68,000', housing: 'On-site, 1 bed', horses: '24 · hunter/jumper', days: 'Two, rotating', start: 'Flexible, ideally November', discipline: 'Hunter / Jumper', type: 'Full time', managed: true, intl: 'Case by case', day: 'Running the daily schedule (turnout, feed, farrier, vet and training), leading a team of four, and keeping competition records. The horses compete most weekends through the winter season.' },
     { title: 'Estate Manager', org: 'Private estate', where: 'Aiken, SC', state: 'SC', pay: '$95,000 – $120,000', housing: 'Included', discipline: 'Private estate', type: 'Full time', managed: true },
     { title: 'Assistant Trainer', org: 'Bridlewood Farm', where: 'Wellington, FL', state: 'FL', pay: '$42,000 – $52,000', housing: null, horses: '18', discipline: 'Hunter / Jumper', type: 'Full time', managed: false },
     { title: 'Head Groom', org: 'Clearwater Sport Horses', where: 'Lexington, KY', state: 'KY', pay: '$38,000 – $46,000', housing: 'Available', discipline: 'Dressage', type: 'Full time', managed: false },
@@ -399,7 +399,7 @@
       'Start date': function () { return j.start ? 'Start: <b>' + esc(j.start) + '</b>.' : null; },
       'Day in the life': function () { return j.day ? esc(j.day) : null; },
       'Who’s the employer?': function () { return j.managed ? '__R1' : 'It’s <b>' + esc(j.org) + '</b>.'; },
-      'International applicants?': function () { return j.intl == null ? '__INTL' : esc(j.intl); }
+      'International applicants?': function () { return j.intl == null ? '__INTL' : 'International applicants: <b>' + esc(j.intl) + '</b>, so it’s the employer’s call. EquiStaff itself can’t sponsor visas.'; }
     };
     (function menu(first) {
       bot(first ? 'What would you like to know about <b>' + esc(j.title) + '</b>? I answer only from what the employer put in the posting.' : 'Anything else about this role?',
@@ -459,7 +459,7 @@
     })();
   }
   function optionalDetail(q) {
-    ask('Tell me about your program: discipline, number of horses, number of staff.', [['Skip', hello]], function (t) { me(t); q.program = t;
+    ask('Tell me about your program: discipline and number of staff.', [['Skip', hello]], function (t) { me(t); q.program = t;
       ask('What does a day in the life look like in this role?', [['Skip', hello]], function (t2) { me(t2); q.day_in_life = t2;
         bot('Thanks, that’s added to your request. It saves Kaitlin a question on your first call.', [['Back to the start', hello]]); }); });
   }

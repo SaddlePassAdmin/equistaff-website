@@ -77,6 +77,7 @@
 .jdMain h2:first-child { margin-top:0; }
 .jdMain ul { padding-left:20px; }
 .jdMain li { margin-bottom:var(--s-3); }
+.jdFact--wide { grid-column:1 / -1; }
 .jdFacts { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s-5); background:var(--depth-01); border-radius:var(--r-md); padding:var(--s-6); margin:var(--s-6) 0; }
 .jdFact__l { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; color:var(--blue-700); text-transform:uppercase; }
 .jdFact__v { font-size:1.0625rem; font-weight:700; margin-top:6px; }
@@ -152,6 +153,7 @@
           <div><div class="jdFact__l">Housing</div><div class="jdFact__v">On-site, 1 bed</div></div>
           <div><div class="jdFact__l">Start</div><div class="jdFact__v">Flexible, ideally Nov</div></div>
           <div><div class="jdFact__l">Reports to</div><div class="jdFact__v">Owner</div></div>
+          <div class="jdFact--wide"><div class="jdFact__l">International applicants</div><div class="jdFact__v">Case by case · EquiStaff can’t sponsor visas</div></div>
         </div>
 
         <h2>Main duties</h2>
@@ -327,7 +329,8 @@ function shareRole() {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('30 Oct', [
+  "New fact: International applicants, with 'EquiStaff can't sponsor visas', so the answer to Kaitlin's most common question is on every post.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
   "Ask Evie added to the footer, so hiding the floating button never loses her.",
