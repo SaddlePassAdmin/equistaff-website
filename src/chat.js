@@ -67,10 +67,10 @@
     { title: 'Working Student', org: 'Live Oak Stables', where: 'Ocala, FL', state: 'FL', pay: 'Stipend', housing: 'Housing and board included', discipline: 'Eventing', type: 'Seasonal', managed: false }
   ];
   var PRICES = [ // pricing.html, Kaitlin's list
-    ['Job board · 1 month', '3 job posts · unlimited searches', '$49.99'],
+    ['Job board · 1 month', '3 job posts · unlimited searches', '$50'],
     ['Job board · 1 month, featured', '3 job posts · featured bar', '$69.99'],
-    ['Job board · 3 months', '3 job posts · unlimited searches', '$139.99'],
-    ['Job board · 1 year', '10 job posts · unlimited searches', '$469.99']
+    ['Job board · 3 months', '3 job posts · unlimited searches', '$140'],
+    ['Job board · 1 year', '5 job posts · unlimited searches', '$460']
   ];
   var DIRECT_HIRE = '“Percentage of the first year salary figure, with $1000 due up front to get the search going, and the remainder due on our chosen candidate’s first day of employment with you.”';
   var VISA = 'EquiStaff can’t sponsor visas. Whether an employer will consider international applicants is up to each employer, and it’s shown on the job post when they’ve told us.';
