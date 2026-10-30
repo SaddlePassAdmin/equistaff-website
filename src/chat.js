@@ -81,14 +81,56 @@
   if (!d.querySelector('link[href$="chat.css"]')) {
     var l = d.createElement('link'); l.rel = 'stylesheet'; l.href = 'src/chat.css'; d.head.appendChild(l);
   }
+  /* 30 Oct — Evie is a pre-sales assistant: she triages hiring vs looking,
+     answers on price, and books Kaitlin. None of that applies once someone is
+     signed in and working inside the portal, where they already have a real
+     message thread with Kaitlin. So: public pages only.
+     This also retires two problems at once — on the dark portal ground the
+     launcher sat at 1.16:1 against its surroundings, and it covered the
+     Reject and Shortlist controls. */
+  var IS_PORTAL = d.body.classList.contains('portal');
+  var HIDE_KEY  = 'equistaff.evie.hidden';
+  function dismissed() {
+    try { return localStorage.getItem(HIDE_KEY) === '1'; } catch (e) { return false; }
+  }
+
   var launch = d.querySelector('.chatLaunch:not([data-specimen])'); // the spec page shows a static specimen
+  if (IS_PORTAL || dismissed()) {
+    if (launch && launch.parentNode) launch.parentNode.removeChild(launch);
+    d.body.classList.remove('has-chat');
+    return;                      // nothing else on this page needs the widget
+  }
   if (!launch) {
     launch = d.createElement('button');
     launch.className = 'chatLaunch';
-    launch.innerHTML = '<svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> <span class="chatLaunch__label">Ask EquiStaff</span>';
-    d.body.appendChild(launch);
-    d.body.classList.add('has-chat');
+    launch.innerHTML = '<svg class="chatLaunch__hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg> <span class="chatLaunch__label">Ask Evie</span>';
   }
+
+  /* The launcher is an <a>/<button>, so the dismiss control cannot nest inside
+     it — invalid, and a click would hit both. It sits beside it in a dock. */
+  var dock = d.createElement('div');
+  dock.className = 'evieDock';          // NOT chatDock — that is the chat panel
+  if (launch.parentNode) launch.parentNode.removeChild(launch);
+  dock.appendChild(launch);
+
+  var x = d.createElement('button');
+  x.type = 'button';
+  x.className = 'evieDock__x';
+  x.setAttribute('aria-label', 'Hide the assistant');
+  x.title = 'Hide the assistant';
+  x.innerHTML = '&times;';
+  x.addEventListener('click', function (ev) {
+    ev.preventDefault(); ev.stopPropagation();
+    try { localStorage.setItem(HIDE_KEY, '1'); } catch (e) {}
+    [].slice.call(d.querySelectorAll('.evieDock')).forEach(function (n) { n.remove(); });
+    var stray = d.querySelector('.chatLaunch:not([data-specimen])');
+    if (stray && stray.parentNode) stray.parentNode.removeChild(stray);
+    d.body.classList.remove('has-chat');
+  });
+  dock.appendChild(x);
+
+  d.body.appendChild(dock);
+  d.body.classList.add('has-chat');
   if (!d.getElementById('es-sprite') && !d.querySelector('script[src$="icons.js"]')) {
     var ic = d.createElement('script'); ic.src = 'src/icons.js'; d.body.appendChild(ic);
   }

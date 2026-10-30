@@ -128,6 +128,8 @@
 .btn--resume:hover { filter:brightness(1.06); }
 .btn--resume svg { flex:0 0 auto; }
 
+.btn--hasNote { border-color:var(--warm) !important; color:var(--warm) !important; }
+.btn--hasNote svg { fill:rgba(249,244,237,.16); }
 .staffBar { display:flex; flex-wrap:wrap; align-items:center; gap:var(--s-5);
   background:var(--portal-sunken); border:1px solid var(--portal-edge);
   border-radius:var(--r-lg); padding:var(--s-4) var(--s-5); margin-bottom:var(--s-5); }
@@ -167,10 +169,10 @@
       <div class="cpHead__acts">
         <!-- Messaging is tier-gated; the switch is on the staff strip above. -->
         <a class="btn btn--primary" id="msgBtn" href="messages.html">Message Pete</a>
-        <button class="btn btn--secondary" type="button" onclick="openNote()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" style="vertical-align:-2px;margin-right:5px" aria-hidden="true">
-            <path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Make a note</button>
+        <button class="btn btn--secondary" type="button" id="noteBtn" onclick="openNote()">
+          <svg id="noteIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px" aria-hidden="true">
+            <path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg><span id="noteBtnLabel">Make a note</span></button>
       </div>
     </div>
 
@@ -425,6 +427,7 @@ function toInterview(b){
 
 <script src="src/revised.js"></script>
 <script>REVISED('29 Oct', [
+  "Saving a note now closes the card by itself, and the button becomes the indicator — it turns gold and reads “View note” with a page icon, so you can see at a glance that a candidate has one. Saving an empty note does nothing, so the flag never lies.",
   "Your note on a candidate now goes to Kaitlin. It used to say she could not see it; she asked for the opposite, because the note is usually where the real reason sits. The candidate still never sees it.",
   "This profile is now Pete Donnelly, the regional sales director already sitting on your applicants list — so clicking a commercial applicant lands on a commercial profile. Pete sells into barns and events at preliminary, which is the barn-to-boardroom case made by example rather than by adjective.",
   "Everything built this week is unchanged underneath it: the contact gate, your staff switches, the résumé pill, the private note.",
@@ -460,9 +463,28 @@ function openNote() {
 function closeNote(){ document.getElementById('pnote').hidden = true; }
 function saveNote() {
   var t = document.getElementById('pnoteText').value.trim();
-  document.getElementById('pnoteWhen').textContent = t
-    ? 'Saved just now — shared with Kaitlin.' : 'Nothing to save yet.';
-  if (t && window.ES && ES.notify) ES.notify('Note saved — Kaitlin can see this');
+  if (!t) { document.getElementById('pnoteWhen').textContent = 'Nothing to save yet.'; return; }
+
+  document.getElementById('pnoteWhen').textContent = 'Saved just now — shared with Kaitlin.';
+  if (window.ES && ES.notify) ES.notify('Note saved — Kaitlin can see this');
+
+  /* 30 Oct — the card used to stay open after saving, so there was no sign
+     anything had happened and nothing on the candidate said a note existed.
+     It now closes itself and the button becomes the indicator. */
+  markHasNote();
+  setTimeout(function () { document.getElementById('pnote').hidden = true; }, 900);
+}
+
+/* The button is the indicator: a filled paper icon and "View note" means a
+   note is on this candidate. No extra badge to miss. */
+function markHasNote() {
+  var b = document.getElementById('noteBtn');
+  b.classList.add('btn--hasNote');
+  document.getElementById('noteBtnLabel').textContent = 'View note';
+  document.getElementById('noteIcon').innerHTML =
+    '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>' +
+    '<path d="M14 2v6h6M9 13h6M9 17h4"/>';
+  b.setAttribute('aria-label', 'View your note on this candidate');
 }
 </script>
 <script src="src/chat.js"></script>
