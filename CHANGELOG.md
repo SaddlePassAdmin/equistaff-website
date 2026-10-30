@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Chat assistant, per Kaitlin's FigJam note ("no foothold in the true estate market"): the sample Estate Manager job is now a Show Manager role with an international show jumping team, and "Private estate" in the discipline list is now "Private Country Club" from her list.
 - Pricing matches Kaitlin's list everywhere (landing, pricing, billing, chat, prototype menu): $50 / 1 month / 3 posts · $140 / 3 months / 3 posts · $460 / 1 year / 5 posts.
 - Visas (Kaitlin's FigJam ask): every job post now shows "International applicants" with "EquiStaff can't sponsor visas"; Evie's answer about a specific job says the same. The chat no longer asks employers for a horse count (dropped 26 Oct).
 - Find work by state (landing page): each open-roles count sits right next to its state name, so the number reads as part of the state instead of floating at the far edge of the column.
