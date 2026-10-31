@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pete Donnelly — shortlisted for Regional Sales Manager | EquiStaff</title>
-<meta name="description" content="Candidate profile, references checked by phone, with the recruiter's assessment.">
+<title>Candidate | EquiStaff</title>
+<meta name="description" content="A candidate presented on a recruiter-managed search: resume first, EquiStaff's feedback, and your decision.">
 
 <link rel="canonical" href="https://www.equistaff.com/candidate.html">
 <meta property="og:type" content="website">
@@ -16,130 +16,182 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
 <style>
-/* CANDIDATE PROFILE — what the employer opens from the shortlist.
-   The employer's only real question is "should I meet this person?", so
-   Kaitlin's judgement leads and the evidence follows. A job board shows you
-   a resume; the thing EquiStaff sells is that a person already checked. */
-.cp { display:grid; grid-template-columns:1fr 340px; gap:var(--s-8); align-items:start; }
+/* CANDIDATE — what a direct-hire (recruiter-managed) client opens from their
+   shortlist. Reworked 31 Oct from Kaitlin's review: the resume comes first,
+   then EquiStaff's feedback, then the evidence; references sit at the very
+   bottom; the client's decision is always in reach on the right, and it
+   needs written feedback, because "no" on its own tells Kaitlin nothing.
+   Everything is read from the candidate record in state.js, so each person
+   on the shortlist opens their own page (?id=). */
+[hidden] { display:none !important; }
+.cp { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:var(--s-8); align-items:start; }
 
-.cpHead { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-6); align-items:center;
+.cpHead { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:var(--s-6); align-items:center;
   background:linear-gradient(145deg,var(--portal-ground),var(--portal-sunken));
-  border:1px solid var(--portal-line); border-radius:var(--r-lg); padding:var(--s-7); margin-bottom:var(--s-6); }
-.cpAv { width:92px; height:92px; border-radius:50%; overflow:hidden; background:var(--baby-200); color:var(--navy-900);
-  border:3px solid var(--baby-300); flex:0 0 auto;
-  display:grid; place-items:center; font:900 2rem/1 var(--font-body); }
-.cpHead h1 { color:#fff; margin:0 0 4px; font-size:2rem; }
-.cpHead__role { color:var(--baby-200); margin:0 0 var(--s-3); font-size:1.0625rem; }
-.cpFacts { display:flex; gap:var(--s-5); flex-wrap:wrap; }
-.cpFacts span { color:var(--text-muted); font-size:var(--t-small); display:flex; gap:7px; align-items:center; }
-.cpHead__acts { display:flex; flex-direction:column; gap:var(--s-3); }
+  border:1px solid var(--portal-line); border-radius:var(--r-lg) var(--r-lg) 0 0; padding:var(--s-7); }
+.cpAv { width:96px; height:96px; border-radius:50%; overflow:hidden; background:var(--baby-200); color:var(--navy-900);
+  border:3px solid var(--baby-300); display:grid; place-items:center; font:900 2rem/1 var(--font-body); }
 .cpAv img { width:100%; height:100%; object-fit:cover; display:block; }
+.cpHead h1 { color:var(--white); margin:0 0 4px; font-size:2rem; display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; }
+.cpHead__role { color:var(--baby-200); margin:0 0 var(--s-4); font-size:1.0625rem; }
+.cpFacts { display:flex; gap:var(--s-3) var(--s-5); flex-wrap:wrap; margin:0 0 var(--s-4); }
+.cpFacts span { color:var(--baby-200); font-size:var(--t-small); display:flex; gap:7px; align-items:center; }
+.cpFacts svg { color:var(--baby-300); flex:0 0 auto; }
+.cpHead__acts { display:flex; flex-direction:column; gap:var(--s-3); }
+.cpHead__acts .btn { white-space:nowrap; }
+
+/* Contact sits in the header. Locked and released are the same chips, so
+   nothing shifts; released text is white on the dark chip, 9:1+. */
+.contact { display:flex; gap:var(--s-3); flex-wrap:wrap; align-items:center; }
+.contact a, .contact span.chip { display:inline-flex; align-items:center; gap:8px; color:var(--white); text-decoration:none;
+  background:rgba(255,255,255,.08); border:1px solid var(--portal-edge); border-radius:var(--r-pill);
+  padding:8px 14px; font-size:var(--t-small); font-weight:700; min-height:40px; overflow-wrap:anywhere; }
+.contact a:hover { border-color:var(--baby-200); }
+.contact svg { color:var(--baby-200); flex:0 0 auto; }
+.contact__blur { filter:blur(4px); user-select:none; }
+.contact__why { font-size:var(--t-small); color:var(--baby-200); margin:0; }
+.contact__why a { color:var(--white); font-weight:700; background:none; border:0; padding:0; min-height:0; text-decoration:underline; display:inline; }
+
+/* The resume band — joined to the header, and the loudest thing on the page. */
+.cpResume { display:flex; gap:var(--s-5); align-items:center; flex-wrap:wrap;
+  background:var(--surface-raised); border:1px solid var(--baby-300); border-top:0;
+  border-radius:0 0 var(--r-lg) var(--r-lg); padding:var(--s-5) var(--s-7); margin-bottom:var(--s-6);
+  box-shadow:inset 0 3px 0 0 var(--baby-200); }
+.cpResume__doc { width:52px; height:52px; border-radius:var(--r-md); background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; flex:0 0 auto; }
+.cpResume__t { flex:1 1 220px; min-width:0; }
+.cpResume__t b { display:block; color:var(--white); font-size:1.125rem; }
+.cpResume__t span { color:var(--baby-200); font-size:var(--t-small); font-family:var(--font-mono); overflow-wrap:anywhere; }
+.cpResume__acts { display:flex; gap:var(--s-3); flex-wrap:wrap; }
+.btn--loud { min-height:56px; padding:0 var(--s-6); font-size:1.0625rem; display:inline-flex; align-items:center; gap:9px; }
+
 .pnote { background:var(--warm); border-radius:var(--r-lg); padding:var(--s-6); margin-bottom:var(--s-6); }
 .pnote__h { display:flex; justify-content:space-between; gap:var(--s-4); align-items:flex-start; margin-bottom:var(--s-4); }
-.pnote__h h3 { margin:0 0 3px; font-size:1.125rem; color:#3B2E1B; }
-.pnote__h p { margin:0; font-size:var(--t-small); color:#5C4A3A; }
-.pnote__x { background:none; border:0; font-size:26px; line-height:1; cursor:pointer; color:#5C4A3A; padding:0 4px; }
-.pnote textarea { width:100%; padding:12px 14px; border-radius:var(--r-md); border:1.5px solid #D8C08A;
-  background:#fff; color:#3B2E1B; font:400 var(--t-small)/1.5 var(--font-body); resize:vertical; }
+.pnote__h h3 { margin:0 0 3px; font-size:1.125rem; color:var(--navy-900); }
+.pnote__h p { margin:0; font-size:var(--t-small); color:var(--warm-ink); }
+.pnote__x { background:none; border:0; font-size:26px; line-height:1; cursor:pointer; color:var(--warm-ink); padding:0 4px; min-width:44px; min-height:44px; }
+.pnote textarea { width:100%; padding:12px 14px; border-radius:var(--r-md); border:1.5px solid var(--warm-ink);
+  background:var(--white); color:var(--navy-900); font:400 var(--t-small)/1.5 var(--font-body); resize:vertical; }
 .pnote__acts { display:flex; gap:var(--s-4); align-items:center; margin-top:var(--s-4); }
-.pnote__when { font-size:var(--t-label); color:#5C4A3A; }
-/* A class that sets display beats the browser's [hidden] rule, so the lock
-   rendered next to the message button it was supposed to replace. Guard it. */
-[hidden] { display:none !important; }
-.tierLock { background:var(--surface-raised); border:1px solid var(--portal-edge); border-radius:var(--r-lg);
-  padding:var(--s-5) var(--s-6); margin-bottom:var(--s-6); display:flex; gap:var(--s-5);
-  align-items:center; justify-content:space-between; flex-wrap:wrap; }
-.tierLock b { display:block; color:#fff; font-size:var(--t-small); }
-.tierLock span { display:block; font-size:var(--t-small); color:var(--baby-200); max-width:62ch; margin-top:3px; }
+.pnote__when { font-size:var(--t-label); color:var(--warm-ink); }
+.btn--hasNote { border-color:var(--warm) !important; color:var(--warm) !important; }
 
-/* Kaitlin's assessment — the reason this is not a job board. */
+/* EquiStaff feedback — the reason this is not a job board. */
 .take { background:rgba(189,227,255,.10); border:1px solid var(--baby-300);
-  border-radius:var(--r-lg); padding:var(--s-6); margin-bottom:var(--s-6); }
-.take__who { display:flex; gap:var(--s-4); align-items:center; margin-bottom:var(--s-4); }
+  border-radius:var(--r-lg); padding:var(--s-6); }
+.take h2 { color:var(--white); font-size:1.5rem; margin:0 0 var(--s-4); }
+.take__who { display:flex; gap:var(--s-4); align-items:center; margin-bottom:var(--s-5); }
 .take__who img { width:44px; height:44px; border-radius:50%; object-fit:cover; }
-.take__who b { color:#fff; display:block; font-size:1rem; }
-.take__who span { color:var(--text-muted); font-size:var(--t-label); }
-.take p { color:#fff; margin:0 0 var(--s-3); font-size:1.0625rem; line-height:1.65; }
+.take__who b { color:var(--white); display:block; font-size:1rem; }
+.take__who span { color:var(--baby-200); font-size:var(--t-label); }
+.take p { color:var(--white); margin:0 0 var(--s-3); font-size:1.0625rem; line-height:1.65; }
 .take p:last-child { margin-bottom:0; }
-
-/* Reference checks — the promise is "checked by phone", so show the evidence. */
-.ref { display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-4); align-items:center;
-  padding:var(--s-4) 0; border-bottom:1px solid var(--portal-line); }
-.ref:last-child { border-bottom:0; }
-.ref__tick { width:24px; height:24px; border-radius:50%; background:var(--ok-bg); display:grid; place-items:center; }
-.ref b { color:#fff; display:block; font-size:1rem; }
-.ref span { color:var(--text-muted); font-size:var(--t-small); }
-.ref__when { color:var(--baby-300); font-size:var(--t-label); font-family:var(--font-mono); white-space:nowrap; }
+.unclaimed { margin:var(--s-5) 0 0; padding:var(--s-4) var(--s-5); border-radius:var(--r-md);
+  background:var(--portal-sunken); border:1px dashed var(--portal-edge); color:var(--baby-200); font-size:var(--t-small); }
+.unclaimed b { color:var(--white); }
 
 .cpJob { padding:var(--s-5) 0; border-bottom:1px solid var(--portal-line); }
+.cpJob:first-of-type { padding-top:0; }
 .cpJob:last-child { border-bottom:0; }
-.cpJob h4 { margin:0 0 3px; color:#fff; font-family:var(--font-display); font-size:1.1875rem; }
-.cpJob__w { color:var(--text-muted); font-size:var(--t-small); font-family:var(--font-mono); margin:0 0 var(--s-3); }
-.cpJob p { color:var(--baby-200); font-size:var(--t-small); margin:0; line-height:1.6; }
-
+.cpJob h3 { margin:0 0 4px; color:var(--white); font-family:var(--font-display); font-size:1.1875rem; }
+.cpJob__w { color:var(--baby-200); font-size:var(--t-small); font-weight:700; margin:0 0 3px; }
+.cpJob__d { color:var(--baby-300); font-size:var(--t-label); font-family:var(--font-mono); margin:0 0 var(--s-3); }
+.cpJob p:last-child { color:var(--baby-200); font-size:var(--t-small); margin:0; line-height:1.6; }
+.withheld { display:inline-block; background:var(--warm); color:var(--warm-ink); border-radius:var(--r-pill);
+  padding:3px 9px; font:900 11px/1.45 var(--font-body); letter-spacing:.06em; text-transform:uppercase; }
 .skills { display:flex; flex-wrap:wrap; gap:8px; }
-.skills span { background:rgba(255,255,255,.08); color:#fff; border:1px solid var(--portal-line);
+.skills span { background:rgba(255,255,255,.08); color:var(--white); border:1px solid var(--portal-line);
   border-radius:var(--r-pill); padding:6px 13px; font-size:var(--t-small); }
 
-/* Side rail */
-.rail { position:sticky; top:96px; display:grid; gap:var(--s-5); }
-.railCard { background:var(--surface-raised); border:1px solid var(--border-subtle);
-  border-radius:var(--r-lg); padding:var(--s-6); }
-.railCard h3 { color:#fff; font-size:1.0625rem; margin:0 0 var(--s-4); }
-.kv { display:flex; justify-content:space-between; gap:var(--s-4); padding:var(--s-3) 0;
-  border-bottom:1px solid var(--portal-line); font-size:var(--t-small); }
-.kv:last-child { border-bottom:0; }
-.kv dt { color:var(--text-muted); margin:0; }
-.kv dd { color:#fff; margin:0; font-weight:700; text-align:right; }
-
-/* The candidate is employed and looking quietly, so their yard is withheld
-   from the employer in the same way the barn is withheld from the candidate. */
-.quiet { display:inline-flex; gap:6px; align-items:center; background:var(--warm); color:var(--warm-ink);
-  border-radius:var(--r-pill); padding:3px 9px; font:900 11px/1.45 var(--font-body);
-  letter-spacing:.06em; text-transform:uppercase; }
-.quietNote { color:var(--baby-300); font-size:var(--t-label); margin:var(--s-3) 0 0;
+.ref { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:var(--s-4); align-items:center;
+  padding:var(--s-4) 0; border-bottom:1px solid var(--portal-line); }
+.ref:last-of-type { border-bottom:0; }
+.ref__tick { width:24px; height:24px; border-radius:50%; background:var(--ok-bg); color:var(--ok-ink); display:grid; place-items:center; }
+.ref b { color:var(--white); display:block; font-size:1rem; }
+.ref span { color:var(--baby-200); font-size:var(--t-small); }
+.ref .ref__when { color:var(--baby-300); font-size:var(--t-label); font-family:var(--font-mono); white-space:nowrap; }
+.ref .ref__tick { color:var(--ok-ink); }
+.quietNote { color:var(--baby-200); font-size:var(--t-small); margin:var(--s-4) 0 0;
   border-left:2px solid var(--portal-edge); padding-left:var(--s-4); }
+.cpBack { display:flex; justify-content:space-between; align-items:center; gap:var(--s-4); flex-wrap:wrap;
+  border-top:1px solid var(--portal-line); padding-top:var(--s-6); }
 
-@media (max-width:1040px){ .cp { grid-template-columns:1fr; } .rail { position:static; } }
-@media (max-width:680px){
-  .cpHead { grid-template-columns:1fr; text-align:left; }
-  .cpHead__acts { flex-direction:row; flex-wrap:wrap; }
+/* RAIL — activity and the decision, together, kept in reach. */
+.rail { display:grid; gap:var(--s-5); }
+@media (min-width:1041px) and (min-height:860px){ .rail { position:sticky; top:96px; } }
+.railCard { background:var(--surface-raised); border:1px solid var(--border-subtle);
+  border-radius:var(--r-lg); padding:var(--s-5) var(--s-6); }
+.railCard h2 { color:var(--white); font-size:1.125rem; margin:0 0 var(--s-4); display:flex; justify-content:space-between; gap:var(--s-3); align-items:center; }
+.railCard--decide { border-color:var(--baby-300); background:var(--portal-ground); }
+
+.act { list-style:none; margin:0; padding:0; }
+.act li { display:grid; grid-template-columns:22px minmax(0,1fr) auto; gap:var(--s-3); align-items:center;
+  padding:9px 0; border-bottom:1px solid var(--portal-line); font-size:var(--t-small); }
+.act li:last-child { border-bottom:0; }
+.act__dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--portal-edge); justify-self:center; }
+.act li.is-done .act__dot { background:var(--baby-200); border-color:var(--baby-200); }
+.act li.is-late .act__dot { background:var(--err-bg); border-color:var(--err-ink); box-shadow:0 0 0 3px rgba(251,233,230,.25); }
+.act__l { color:var(--baby-200); }
+.act li.is-done .act__l, .act li.is-late .act__l { color:var(--white); font-weight:700; }
+.act__d { font-family:var(--font-mono); font-size:var(--t-label); color:var(--baby-300); white-space:nowrap; }
+.act li.is-done .act__d { color:var(--white); }
+.attn { display:flex; gap:var(--s-3); align-items:center; margin:var(--s-4) 0 0; padding:var(--s-3) var(--s-4);
+  border-radius:var(--r-md); background:var(--err-bg); color:var(--err-ink); font:700 var(--t-small)/1.35 var(--font-body); }
+.attn svg { flex:0 0 auto; }
+.attn--ok { background:rgba(255,255,255,.08); color:var(--baby-200); font-weight:400; }
+
+.dq { margin:0 0 var(--s-2); color:var(--white); font-weight:700; font-size:var(--t-small); }
+.dq small { color:var(--baby-200); font-weight:400; }
+.fb__stars { margin-bottom:var(--s-4); }
+.railCard--decide .star { color:var(--portal-edge); }
+.railCard--decide .star:hover, .railCard--decide .star.on { color:var(--warm); }
+.dfield label { display:block; color:var(--white); font-weight:700; font-size:var(--t-small); margin:0 0 var(--s-2); }
+.dfield label i { color:var(--warm); font-style:normal; }
+.dfield textarea { width:100%; padding:12px 14px; border-radius:var(--r-md); border:1.5px solid var(--portal-edge);
+  background:var(--portal-sunken); color:var(--white); font:400 var(--t-small)/1.5 var(--font-body); resize:vertical; min-height:96px; }
+.dfield textarea::placeholder { color:var(--baby-300); }
+.dfield textarea:focus { outline:2px solid var(--baby-200); outline-offset:1px; }
+.dfield textarea[aria-invalid="true"] { border-color:var(--err-bg); }
+.dmsg { margin:var(--s-2) 0 0; font-size:var(--t-label); color:var(--warm); display:flex; gap:6px; align-items:center; }
+.dmsg.ok { color:var(--baby-200); }
+.dacts { display:grid; gap:var(--s-3); margin-top:var(--s-5); }
+.dacts .btn { width:100%; }
+.dpriv { font-size:var(--t-label); color:var(--baby-200); margin:var(--s-4) 0 0; }
+.ddone { margin:var(--s-4) 0 0; }
+
+/* Resume viewer — paper on the page. */
+.rsDlg { border:0; padding:0; border-radius:var(--r-lg); width:min(760px, calc(100vw - 32px));
+  max-height:calc(100vh - 48px); background:var(--white); color:var(--navy-900); box-shadow:var(--e-3); }
+.rsDlg::backdrop { background:rgba(11,37,69,.72); }
+.rsDlg__bar { display:flex; justify-content:space-between; align-items:center; gap:var(--s-4);
+  padding:var(--s-4) var(--s-6); border-bottom:1px solid var(--depth-02); background:var(--depth-01); position:sticky; top:0; }
+.rsDlg__bar span { font:600 var(--t-label)/1.3 var(--font-mono); color:var(--text-muted); overflow-wrap:anywhere; }
+.rsDlg__bar .btn--secondary { color:var(--navy-900); border-color:var(--navy-500); }
+.rsDlg__x { background:none; border:0; font-size:28px; line-height:1; cursor:pointer; color:var(--navy-900); width:44px; height:44px; }
+.rsDoc { padding:var(--s-7) var(--s-8) var(--s-8); }
+.rsDoc h2 { margin:0 0 2px; font-size:1.75rem; color:var(--navy-900); }
+.rsDoc .rsSub { margin:0 0 var(--s-6); color:var(--text-muted); }
+.rsDoc h3 { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--blue-700); margin:var(--s-6) 0 var(--s-3); padding-bottom:6px; border-bottom:1px solid var(--depth-02); }
+.rsDoc p, .rsDoc li { font-size:var(--t-small); line-height:1.6; color:var(--navy-900); margin:0 0 var(--s-2); }
+.rsDoc .rsJob { margin-bottom:var(--s-4); }
+.rsDoc .rsJob b { display:block; }
+.rsDoc .rsJob i { color:var(--text-muted); font-style:normal; font-size:var(--t-label); font-family:var(--font-mono); }
+
+@media (max-width:1040px){ .cp { grid-template-columns:1fr; } }
+@media (max-width:760px){
+  .cpHead { grid-template-columns:auto minmax(0,1fr); padding:var(--s-6) var(--s-5); gap:var(--s-5); }
+  .cpAv { width:72px; height:72px; font-size:1.5rem; }
+  .cpHead h1 { font-size:1.625rem; }
+  .cpHead__acts { grid-column:1 / -1; flex-direction:row; }
+  .cpHead__acts .btn { flex:1 1 0; }
+  .cpResume { padding:var(--s-5); }
+  .cpResume__acts { width:100%; }
+  .cpResume__acts .btn { flex:1 1 0; justify-content:center; }
+  .rsDoc { padding:var(--s-6) var(--s-5); }
+  .take { padding:var(--s-5); }
 }
-/* 29 Oct mobile audit: these notes are sentences, so 15px on a phone, and the
-   the "Download resume" link is covered by screens.css. */
-@media (max-width:680px){
-  .quietNote, .fb__priv { font-size:var(--t-small); }
-}
-
-/* 29 Oct — contact gating, prominent resume, staff switch */
-.contact__dl { margin:0 0 var(--s-4); display:flex; flex-direction:column; gap:var(--s-3); }
-.contact__dl div { display:flex; justify-content:space-between; gap:var(--s-4); align-items:baseline; }
-.contact__dl dt { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em;
-  color:var(--text-muted); margin:0; }
-.contact__dl dd { margin:0; font-size:var(--t-small); font-weight:700; text-align:right; }
-.contact__dl dd a { color:var(--blue-700); }
-.contact__blur { color:var(--text-muted); filter:blur(3.5px); user-select:none; }
-.contact__why { font-size:var(--t-small); color:var(--text-muted); margin:0 0 var(--s-4); }
-
-.btn--resume { display:inline-flex; align-items:center; gap:7px; cursor:pointer;
-  font:700 var(--t-small)/1 var(--font-body); color:var(--navy-900);
-  background:var(--warm); border:1px solid var(--warm-700, #B88A28);
-  border-radius:999px; padding:8px 16px; }
-.btn--resume:hover { filter:brightness(1.06); }
-.btn--resume svg { flex:0 0 auto; }
-
-.btn--hasNote { border-color:var(--warm) !important; color:var(--warm) !important; }
-.btn--hasNote svg { fill:rgba(249,244,237,.16); }
-.staffBar { display:flex; flex-wrap:wrap; align-items:center; gap:var(--s-5);
-  background:var(--portal-sunken); border:1px solid var(--portal-edge);
-  border-radius:var(--r-lg); padding:var(--s-4) var(--s-5); margin-bottom:var(--s-5); }
-.staffBar__tag { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em;
-  color:var(--warm); flex:0 0 auto; }
-.staffBar__sw { display:flex; align-items:center; gap:8px; cursor:pointer; margin:0;
-  font-size:var(--t-small); font-weight:700; color:#fff; }
-.staffBar__sw input { width:17px; height:17px; accent-color:var(--warm); cursor:pointer; }
-.staffBar__note { font-size:var(--t-small); color:var(--baby-200); margin-left:auto; }
-@media (max-width:680px){ .staffBar__note { margin-left:0; } }
+@media (max-width:420px){ .cpHead { grid-template-columns:minmax(0,1fr); } .cpHead__acts { flex-wrap:wrap; } .cpHead__acts .btn { white-space:normal; min-width:0; } }
 </style>
 </head>
 <body class="portal">
@@ -150,25 +202,21 @@
 <main id="main">
   <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
 
-    <p class="jdCrumb" style="color:var(--baby-300);font-size:var(--t-small);margin-bottom:var(--s-5)">
-      <a href="employer.html" style="color:var(--baby-200);text-decoration:none">&larr; Regional Sales Manager shortlist</a>
-      &middot; 1 of 2
+    <p style="font-size:var(--t-small);margin:0 0 var(--s-5)">
+      <a href="employer.html" style="color:var(--baby-200);text-decoration:none;display:inline-flex;align-items:center;min-height:44px">&larr;&nbsp;Barn Manager shortlist</a>
     </p>
 
+    <div id="page" hidden>
     <div class="cpHead">
-      <div class="cpAv"><img src="img/people/pete.jpg" alt=""></div>
-      <div>
-        <h1>Pete Donnelly</h1>
-        <p class="cpHead__role">Regional sales director &middot; 12 years &middot; Lexington, KY</p>
-        <div class="cpFacts">
-          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Available in 60 days &mdash; on notice</span>
-          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg> 7-state territory &middot; $4.2M book</span>
-          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> All references clear</span>
-        </div>
+      <div class="cpAv" id="cAv"></div>
+      <div style="min-width:0">
+        <h1><span id="cName"></span> <span class="pill" id="cStage"></span></h1>
+        <p class="cpHead__role" id="cRole"></p>
+        <div class="cpFacts" id="cFacts"></div>
+        <div class="contact" id="cContact"></div>
       </div>
       <div class="cpHead__acts">
-        <!-- Messaging is tier-gated; the switch is on the staff strip above. -->
-        <a class="btn btn--primary" id="msgBtn" href="messages.html">Message Pete</a>
+        <a class="btn btn--primary" id="msgBtn" href="messages.html">Message</a>
         <button class="btn btn--secondary" type="button" id="noteBtn" onclick="openNote()">
           <svg id="noteIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px" aria-hidden="true">
@@ -176,209 +224,126 @@
       </div>
     </div>
 
-    <!-- The employer's note on a candidate. Kaitlin sees these: 29 Oct, she
-         asked for them deliberately — the note is often where the real reason
-         sits, and she cannot work the search without it. The candidate never
-         sees it, which is the boundary that matters. -->
+    <div class="cpResume">
+      <div class="cpResume__doc"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
+      <div class="cpResume__t"><b>Resume</b><span id="cFile"></span></div>
+      <div class="cpResume__acts">
+        <button class="btn btn--primary btn--loud" type="button" onclick="openResume()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Open resume</button>
+        <button class="btn btn--secondary btn--loud" type="button" onclick="dlResume()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+          Download</button>
+      </div>
+    </div>
+
+    <!-- The client's own note on a candidate. Kaitlin sees it; the candidate never does. -->
     <div class="pnote" id="pnote" hidden>
       <div class="pnote__h">
         <div>
-          <h3>Your note on Pete</h3>
-          <p>Kaitlin sees your notes so she can act on them. Pete never does.</p>
+          <h3 id="pnoteH">Your note</h3>
+          <p id="pnoteSub">Kaitlin sees your notes so she can act on them. The candidate never does.</p>
         </div>
         <button class="pnote__x" type="button" onclick="closeNote()" aria-label="Close">&times;</button>
       </div>
-      <textarea id="pnoteText" rows="3" placeholder="Strong on distributor relationships. Check what the notice period really looks like&hellip;"></textarea>
+      <textarea id="pnoteText" rows="3" aria-labelledby="pnoteH" placeholder="Strong on the show calendar. Ask about the notice period&hellip;"></textarea>
       <div class="pnote__acts">
         <button class="btn btn--primary" type="button" onclick="saveNote()">Save note</button>
         <span class="pnote__when" id="pnoteWhen"></span>
       </div>
     </div>
 
-    <!-- EquiStaff staff only. This is the switch Kaitlin holds; the client never
-         sees this strip. Both gates on one control because they are one decision:
-         has this client earned direct access to this candidate yet. -->
-    <div class="staffBar" id="staffBar">
-      <span class="staffBar__tag">EQUISTAFF STAFF</span>
-      <label class="staffBar__sw">
-        <input type="checkbox" id="swMsg" role="switch" aria-checked="true" checked
-               onchange="setGates()">
-        <span>Allow client to message candidates</span>
-      </label>
-      <label class="staffBar__sw">
-        <input type="checkbox" id="swContact" role="switch" aria-checked="false"
-               onchange="setGates()">
-        <span>Release contact details</span>
-      </label>
-      <span class="staffBar__note">Off until the fee is settled</span>
-    </div>
-
-    <div class="tierLock" id="tierLock" hidden>
-      <div>
-        <b>Direct messaging is off for this search.</b>
-        <span>Kaitlin makes the introduction on a recruiter-managed search, then turns messaging on.
-              It is included on Post a Job and Write &amp; Advertise.</span>
-      </div>
-      <a class="btn btn--secondary" href="messages.html">Ask Kaitlin to introduce you</a>
-    </div>
-
     <div class="cp">
       <div>
-
-        <!-- The recruiter's judgement leads. This is the product. -->
-        <div class="take">
-          <div class="take__who">
-            <img src="img/kaitlin.jpg" alt="">
-            <div><b>Kaitlin's take</b><span>Spoke to Pete on 2 October &middot; 50 minutes</span></div>
+        <section class="pSection">
+          <div class="take">
+            <h2>EquiStaff feedback</h2>
+            <div class="take__who">
+              <img src="img/kaitlin.jpg" alt="">
+              <div><b>Kaitlin, EquiStaff</b><span id="cSpoke"></span></div>
+            </div>
+            <div id="cTake"></div>
+            <p class="unclaimed" id="cUnclaimed" hidden></p>
           </div>
-          <p>Pete has carried a seven-state territory in animal health for six years and grew it from $2.6M to $4.2M. That is the closest thing on this shortlist to the job you are actually advertising, and they have done it selling into the same barns and distributors you need to reach.</p>
-          <p>What makes Pete worth your time over a straight consumer-goods salesperson: they grew up on an eventing yard in Versailles and still compete at preliminary. They know why a barn manager will not switch feed in the middle of a show season. You will not spend the first six months explaining the customer to them.</p>
-          <p>They are leaving because their territory was split in a reorganisation and half the accounts they built went to someone else. I checked that with two people. One thing to know going in: they will ask about how the commission structure handles a long sales cycle, and they will ask it early. It is the right question and I would take it as a sign they have been paid badly for patient work before.</p>
-        </div>
+        </section>
+
+        <section class="pSection" id="secExp">
+          <div class="pSection__head"><h2>Experience</h2></div>
+          <div id="cExp"></div>
+          <p class="quietNote" id="cQuiet" hidden></p>
+        </section>
+
+        <section class="pSection" id="secSkills">
+          <div class="pSection__head"><h2>Skills</h2></div>
+          <div class="skills" id="cSkills"></div>
+        </section>
 
         <section class="pSection">
-          <div class="pSection__head"><h2>Reference checks</h2><span class="pill pill--shortlist">3 of 3 clear</span></div>
-          <div class="ref">
-            <span class="ref__tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <div><b>Current employer &mdash; VP of sales</b><span>Confirmed dates, territory size and the reorganisation. No concerns.</span></div>
-            <span class="ref__when">2 OCT</span>
-          </div>
-          <div class="ref">
-            <span class="ref__tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <div><b>Distributor principal &mdash; sold through Pete 5 years</b><span>&ldquo;He is the only rep who ever came out at 6am to see the problem.&rdquo; Confirmed the numbers.</span></div>
-            <span class="ref__when">3 OCT</span>
-          </div>
-          <div class="ref">
-            <span class="ref__tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E5B3A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <div><b>Former direct report</b><span>Managed four people. Described as demanding on forecasts, fair on everything else.</span></div>
-            <span class="ref__when">3 OCT</span>
-          </div>
+          <div class="pSection__head"><h2>Reference checks</h2><span class="pill pill--shortlist" id="cRefN"></span></div>
+          <div id="cRefs"></div>
           <p class="quietNote">Every reference spoken to by phone, never by email. Notes are held by EquiStaff and available on request.</p>
         </section>
 
-        <section class="pSection">
-          <div class="pSection__head"><h2>Experience</h2><button class="btn--resume" type="button" onclick="dlResume()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
-            Download r&eacute;sum&eacute;</button></div>
-          <div class="cpJob">
-            <h4>Regional Sales Director &mdash; animal health</h4>
-            <p class="cpJob__w"><span class="quiet" style="display:flex;width:fit-content;margin:0 0 6px">Current employer withheld</span>Seven-state Southeast territory &middot; 2019 &mdash; now</p>
-            <p>Owns a $4.2M book across seven states, grown from $2.6M. Sells through twelve distributors and direct to about sixty large barns and training operations. Manages four territory reps and carries the forecast for the region.</p>
-          </div>
-          <div class="cpJob">
-            <h4>Territory Manager</h4>
-            <p class="cpJob__w">Bluegrass Animal Nutrition, Lexington KY &middot; 2014 &mdash; 2019</p>
-            <p>Kentucky and Tennessee. Took the territory from ninth to second in the company on revenue. Built the distributor relationships still carried over today.</p>
-          </div>
-          <div class="cpJob">
-            <h4>Inside Sales</h4>
-            <p class="cpJob__w">Bluegrass Animal Nutrition, Lexington KY &middot; 2012 &mdash; 2014</p>
-            <p>Phone and trade-show sales. Promoted to the road after eighteen months.</p>
-          </div>
-          <p class="quietNote">Pete is employed and looking quietly, so their current company is withheld until they agree to an introduction &mdash; the same way your business stays unnamed on the advert.</p>
-        </section>
-
-        <section class="pSection">
-          <div class="pSection__head"><h2>What Pete brings</h2></div>
-          <div class="skills">
-            <span>Territory management</span><span>Key account growth</span><span>Distributor networks</span>
-            <span>Forecasting</span><span>Salesforce</span><span>Contract negotiation</span>
-            <span>Pricing strategy</span><span>P&amp;L responsibility</span>
-            <span>Team leadership</span><span>Trade shows</span><span>Rides &mdash; eventing, preliminary</span>
-          </div>
-        </section>
-
-        <!-- Same gate as the shortlist: no rating, no close-out. -->
-        <section class="pSection">
-          <div class="pSection__head"><h2>Decide on Pete</h2></div>
-          <div class="fb" style="border:1px solid var(--portal-line);border-radius:var(--r-lg);background:rgba(0,0,0,.16)">
-            <p class="fb__q">How close was Pete to what you wanted?</p>
-            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five horseshoes">
-              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(1)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(2)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(3)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(4)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(5)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-            </div>
-            <p class="fb__hint" id="hint">Pick a rating to continue.</p>
-            <div class="field" style="margin:var(--s-4) 0 0">
-              <label for="note">Anything Kaitlin should know? (optional)</label>
-              <textarea id="note" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
-            </div>
-            <p class="fb__priv">Goes to Kaitlin only. Pete never sees this, and it is not kept on their profile.</p>
-            <div class="fb__acts">
-              <button class="btn btn--primary" type="button" onclick="toInterview(this)">Move to interview</button>
-              <button class="btn btn--secondary" type="button" id="send" disabled onclick="done()">Pass, and tell Kaitlin why</button>
-            </div>
-          </div>
-        </section>
+        <div class="cpBack">
+          <a class="btn btn--secondary" href="employer.html">&larr;&nbsp;Back to shortlist</a>
+          <a class="btn btn--secondary" id="nextBtn" href="employer.html">Next candidate &rarr;</a>
+        </div>
       </div>
 
       <!-- RAIL -->
       <aside class="rail">
         <div class="railCard">
-          <h3>At a glance</h3>
-          <dl style="margin:0">
-            <div class="kv"><dt>Available</dt><dd>In 30 days</dd></div>
-            <div class="kv"><dt>Looking for</dt><dd>Full time</dd></div>
-            <div class="kv"><dt>Housing</dt><dd>Prefers on-site</dd></div>
-            <div class="kv"><dt>Relocate</dt><dd>Within Marion County</dd></div>
-            <div class="kv"><dt>Drives</dt><dd>Yes, tows</dd></div>
-            <div class="kv"><dt>Discipline</dt><dd>Hunter / jumper</dd></div>
-            <div class="kv"><dt>Managed</dt><dd>Up to 24 head</dd></div>
-          </dl>
+          <h2>Activity</h2>
+          <ul class="act" id="cAct"></ul>
+          <p class="attn" id="cAttn" hidden></p>
         </div>
 
-        <div class="railCard" style="background:var(--portal-ground);border-color:var(--baby-300)">
-          <p style="font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;color:var(--warm);margin:0 0 var(--s-3)">WHERE THEY ARE</p>
-          <div class="track track--rail" style="margin-top:0">
-            <div class="track__s track__s--done"><div class="track__l">SPOKEN TO</div></div>
-            <div class="track__s track__s--done"><div class="track__l">REFERENCED</div></div>
-            <div class="track__s track__s--now"><div class="track__l">WITH YOU</div></div>
-            <div class="track__s"><div class="track__l">INTERVIEW</div></div>
+        <div class="railCard railCard--decide" id="decide">
+          <h2>Your decision</h2>
+          <p class="dq" id="dq">How close is this person to what you wanted? <small>(optional)</small></p>
+          <div class="fb__stars" role="radiogroup" aria-label="Rating out of five horseshoes">
+            <button type="button" class="star" role="radio" aria-checked="false" aria-label="1 out of 5" onclick="rate(1)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
+            <button type="button" class="star" role="radio" aria-checked="false" aria-label="2 out of 5" onclick="rate(2)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
+            <button type="button" class="star" role="radio" aria-checked="false" aria-label="3 out of 5" onclick="rate(3)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
+            <button type="button" class="star" role="radio" aria-checked="false" aria-label="4 out of 5" onclick="rate(4)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
+            <button type="button" class="star" role="radio" aria-checked="false" aria-label="5 out of 5" onclick="rate(5)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
           </div>
-          <p style="color:var(--baby-200);font-size:var(--t-small);margin:var(--s-5) 0 0">
-            Pete knows they have been put forward and is expecting to hear back this week.
-          </p>
-        </div>
-
-        <!-- The whole fee rests on this. Until the placement is paid, the client
-             sees that a real person exists and nothing they could use to go round
-             Kaitlin. Locked and unlocked are the same card, so nothing shifts. -->
-        <div class="railCard contact" id="contactCard">
-          <h3>Their contact details</h3>
-
-          <div id="contactLocked">
-            <dl class="contact__dl">
-              <div><dt>Phone</dt><dd class="contact__blur">(000) 000&ndash;0000</dd></div>
-              <div><dt>Email</dt><dd class="contact__blur">name@example.com</dd></div>
-            </dl>
-            <p class="contact__why">
-              Released when the placement fee is settled. Every candidate here was
-              found, called and referenced by EquiStaff &mdash; this is how that work
-              is protected.
-            </p>
-            <a class="btn btn--secondary" href="billing.html" style="width:100%">See what is outstanding</a>
+          <div class="dfield">
+            <label for="fbText">Your feedback for EquiStaff <i>(required)</i></label>
+            <textarea id="fbText" rows="3" aria-required="true" aria-describedby="fbMsg" oninput="gate()"
+                      placeholder="What stood out, and what would you want to ask them&hellip;"></textarea>
+            <p class="dmsg" id="fbMsg" role="status">Write a line of feedback to continue.</p>
           </div>
-
-          <div id="contactOpen" hidden>
-            <dl class="contact__dl">
-              <div><dt>Phone</dt><dd><a href="tel:+18595550172">(859) 555&ndash;0172</a></dd></div>
-              <div><dt>Email</dt><dd><a href="mailto:p.donnelly@example.com">p.donnelly@example.com</a></dd></div>
-            </dl>
-            <p class="contact__why">Released 24 October. Pete knows you have these.</p>
+          <div class="dacts" id="dacts">
+            <button class="btn btn--primary" type="button" data-act="interview" disabled onclick="decide('interview')">Move to interview</button>
+            <button class="btn btn--secondary" type="button" data-act="offer" disabled onclick="decide('offer')">Make an offer</button>
+            <button class="btn btn--secondary" type="button" data-act="pass" disabled onclick="decide('pass')">Pass</button>
           </div>
-        </div>
-
-        <div class="railCard">
-          <h3>The other one</h3>
-          <p style="color:var(--text-muted);font-size:var(--t-small);margin:0 0 var(--s-4)">Both phone-referenced, both from commercial backgrounds.</p>
-          <a class="btn btn--secondary" href="employer.html" style="width:100%">Back to shortlist</a>
+          <p class="ddone" id="ddone" hidden></p>
+          <p class="dpriv" id="dpriv">Goes to EquiStaff only. The candidate never sees it.</p>
         </div>
       </aside>
     </div>
+    </div>
+
+    <div id="missing" class="empty" hidden style="max-width:620px;margin:var(--s-8) auto 0">
+      <h1 style="color:var(--white);font-size:1.5rem;margin:0 0 var(--s-3)">This candidate isn&rsquo;t on your shortlist</h1>
+      <p>The link may be out of date. Your shortlist has everyone EquiStaff has presented to you.</p>
+      <a class="btn btn--primary" href="employer.html">Back to shortlist</a>
+    </div>
   </div>
 </main>
+
+<dialog class="rsDlg" id="rsDlg" aria-labelledby="rsName">
+  <div class="rsDlg__bar">
+    <span id="rsFile"></span>
+    <div style="display:flex;gap:var(--s-3);align-items:center">
+      <button class="btn btn--secondary" type="button" onclick="dlResume()">Download</button>
+      <button class="rsDlg__x" type="button" onclick="closeResume()" aria-label="Close resume">&times;</button>
+    </div>
+  </div>
+  <div class="rsDoc" id="rsDoc"></div>
+</dialog>
 
 <footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
   <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
@@ -386,47 +351,234 @@
   </div></div>
 </footer>
 
-<script>
-var R = 0;
-function rate(n){
-  R = n;
-  document.querySelectorAll('.star').forEach(function(s,k){ s.classList.toggle('on', k<n); });
-  var h = document.getElementById('hint');
-  h.textContent = n>=4 ? "Strong match. Kaitlin will look for more like this."
-                : n<=2 ? "Noted. Kaitlin will adjust what she sends you."
-                : "Thanks. That helps shape the next shortlist.";
-  h.classList.add('ok');
-  document.getElementById('send').disabled = false;   // same gate as the shortlist
-}
-function done(){
-  document.querySelector('.fb__acts').innerHTML =
-    '<span class="pill pill--sent">Passed &middot; ' + R + '/5 sent to Kaitlin</span>';
-}
-</script>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script>
-function dlResume(){
-  var txt = ['PETE DONNELLY','Regional sales director · 12 years · Lexington, KY','',
-    'EXPERIENCE','Regional Sales Director, animal health — Southeast — 2019 to now',
-    '  $4.2M book across seven states, grown from $2.6M. Twelve distributors,',
-    '  ~60 direct barn and training accounts. Manages four territory reps.','',
-    'Territory Manager — Bluegrass Animal Nutrition, Lexington KY — 2014 to 2019',
-    '  Kentucky and Tennessee; took the territory from ninth to second on revenue.','',
-    'Inside Sales — Bluegrass Animal Nutrition, Lexington KY — 2012 to 2014','',
-    'IN THE SADDLE','Eventing, competes at preliminary. Raised on a yard in Versailles KY.','',
-    'REFERENCES','All three checked by phone by EquiStaff. Notes available on request.','',
-    'Prepared by EquiStaff · equine recruiting since 1982'].join('\n');
-  ES.download('Pete-Donnelly-resume.txt', txt);
+var params = new URLSearchParams(location.search);
+var MANAGED = ES.managedCandidates();
+var C = ES.candidate(params.get('id') || '') ;
+if (!params.get('id')) C = MANAGED[0] || null;
+if (C && !C.managed) C = null;
+var R = 0;
+
+var STAGE = { Presented:['Presented','pill--review'], Reviewed:['Reviewed','pill--review'], Interviewed:['Interviewing','pill--shortlist'],
+              Offered:['Offer made','pill--shortlist'], Hired:['Hired','pill--paid'], Passed:['Passed','pill--sent'] };
+var I = {
+  pin: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>',
+  clock: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  home: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>',
+  tick: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>',
+  mail: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  phone: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>',
+  warn: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>'
+};
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+function first(n){ return n.split(' ')[0]; }
+var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmt(iso){ if (!iso) return ''; var p = iso.split('-'); return (+p[2]) + ' ' + MON[+p[1] - 1]; }
+
+function employerLine(x){
+  if (x.current && C.visibility === 'quiet') return '<span class="withheld">Current employer withheld</span> &middot; ' + esc(x.location);
+  return esc(x.employer) + ' &middot; ' + esc(x.location);
 }
-function toInterview(b){
-  b.outerHTML = '<span class="pill pill--shortlist">Moved to interview &middot; Kaitlin notified</span>';
-  ES.notify('Pete Donnelly moved to interview');
+
+function paintHead(){
+  var st = STAGE[C.stage] || STAGE.Presented;
+  var s = document.getElementById('cStage');
+  s.textContent = st[0]; s.className = 'pill ' + st[1];
 }
+
+function paintContact(){
+  var el = document.getElementById('cContact');
+  if (C.contactReleased) {
+    el.innerHTML = '<a href="tel:' + C.phone.replace(/[^\d]/g, '') + '">' + I.phone + esc(C.phone) + '</a>' +
+      '<a href="mailto:' + esc(C.email) + '">' + I.mail + esc(C.email) + '</a>' +
+      '<p class="contact__why">Released by EquiStaff. ' + esc(first(C.name)) + ' knows you have these.</p>';
+    document.getElementById('msgBtn').textContent = 'Message ' + first(C.name);
+  } else {
+    el.innerHTML = '<span class="chip">' + I.phone + '<span class="contact__blur" aria-hidden="true">(000) 555-0000</span></span>' +
+      '<span class="chip">' + I.mail + '<span class="contact__blur" aria-hidden="true">name@example.com</span></span>' +
+      '<p class="contact__why">Contact details are released when the placement is settled. <a href="billing.html">See what&rsquo;s outstanding</a></p>';
+    document.getElementById('msgBtn').textContent = 'Message EquiStaff';
+  }
+}
+
+function paintActivity(){
+  var a = C.activity || {}, idle = ES.idle(C);
+  var rows = [['presented', 'Presented'], ['interview', 'Interview'], ['interview2', '2nd interview'], ['offer', 'Offer']];
+  document.getElementById('cAct').innerHTML = rows.map(function(r){
+    var late = idle && idle.flag && (idle.step === r[0] || (idle.step === 'reviewed' && r[0] === 'presented'));
+    var cls = late ? 'is-late' : (a[r[0]] ? 'is-done' : '');
+    return '<li class="' + cls + '"><span class="act__dot" aria-hidden="true"></span><span class="act__l">' + r[1] + '</span>' +
+      '<span class="act__d">' + (a[r[0]] ? fmt(a[r[0]]) : 'Not yet') + '</span></li>';
+  }).join('');
+  var at = document.getElementById('cAttn');
+  if (idle && idle.flag) {
+    at.className = 'attn'; at.innerHTML = I.warn + '<span>' + idle.text + '. Time for a next step.</span>'; at.hidden = false;
+  } else if (C.stage === 'Passed') {
+    at.className = 'attn attn--ok'; at.innerHTML = '<span>You passed on ' + esc(first(C.name)) + '. EquiStaff has your feedback.</span>'; at.hidden = false;
+  } else if (idle) {
+    at.className = 'attn attn--ok'; at.innerHTML = '<span>' + idle.text + '.</span>'; at.hidden = false;
+  } else at.hidden = true;
+}
+
+function render(){
+  document.title = C.name + ' — ' + C.headline + ' | EquiStaff';
+  document.getElementById('cAv').innerHTML = C.photo ? '<img src="' + C.photo + '" alt="">' : esc(C.initials);
+  document.getElementById('cName').textContent = C.name;
+  document.getElementById('cRole').textContent = C.headline + ' · ' + C.location;
+  var nRefs = (C.references || []).length;
+  document.getElementById('cFacts').innerHTML =
+    '<span>' + I.clock + esc(C.availability) + '</span><span>' + I.home + esc(C.housing) + '</span>' +
+    (nRefs ? '<span>' + I.tick + 'References checked by phone</span>' : '');
+  paintHead(); paintContact();
+  document.getElementById('cFile').textContent = C.resume;
+  document.getElementById('pnoteH').textContent = 'Your note on ' + first(C.name);
+  document.getElementById('pnoteSub').textContent = 'Kaitlin sees your notes so she can act on them. ' + first(C.name) + ' never does.';
+
+  document.getElementById('cSpoke').textContent = C.kaitlinSpoke || '';
+  document.getElementById('cTake').innerHTML = (C.kaitlinTake || []).map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('');
+
+  if (C.claimed === false) {
+    // Added from a resume and not yet signed up: only Kaitlin's summary and the resume exist.
+    var u = document.getElementById('cUnclaimed');
+    u.innerHTML = '<b>' + esc(first(C.name)) + ' hasn&rsquo;t set up an EquiStaff profile yet.</b> You&rsquo;re seeing EquiStaff&rsquo;s summary and the resume. Their full experience and skills appear here once they do.';
+    u.hidden = false;
+    document.getElementById('secExp').hidden = true;
+    document.getElementById('secSkills').hidden = true;
+  } else {
+    document.getElementById('cExp').innerHTML = C.experience.map(function(x){
+      return '<div class="cpJob"><h3>' + esc(x.role) + '</h3><p class="cpJob__w">' + employerLine(x) + '</p>' +
+        '<p class="cpJob__d">' + esc(x.dates) + '</p><p>' + esc(x.summary) + '</p></div>';
+    }).join('');
+    if (C.visibility === 'quiet') {
+      var q = document.getElementById('cQuiet');
+      q.textContent = first(C.name) + ' is employed and looking quietly, so their current employer is withheld until they agree to an introduction.';
+      q.hidden = false;
+    }
+    document.getElementById('cSkills').innerHTML = C.skills.map(function(s){ return '<span>' + esc(s) + '</span>'; }).join('');
+  }
+
+  document.getElementById('cRefN').textContent = nRefs + ' of ' + nRefs + ' clear';
+  document.getElementById('cRefs').innerHTML = (C.references || []).map(function(r){
+    return '<div class="ref"><span class="ref__tick">' + I.tick.replace('width="15" height="15"', 'width="13" height="13"') + '</span>' +
+      '<div><b>' + esc(r.who) + '</b><span>' + esc(r.said) + '</span></div><span class="ref__when">' + esc(r.when) + '</span></div>';
+  }).join('');
+
+  var i = MANAGED.findIndex(function(x){ return x.id === C.id; });
+  var nx = MANAGED[(i + 1) % MANAGED.length];
+  var nb = document.getElementById('nextBtn');
+  if (nx && nx.id !== C.id) { nb.href = 'candidate.html?id=' + encodeURIComponent(nx.id); nb.innerHTML = 'Next: ' + esc(nx.name) + ' &rarr;'; }
+  else nb.hidden = true;
+
+  document.getElementById('dq').innerHTML = 'How close is ' + esc(first(C.name)) + ' to what you wanted? <small>(optional)</small>';
+  document.getElementById('dpriv').textContent = 'Goes to EquiStaff only. ' + first(C.name) + ' never sees it.';
+  var prev = ES.ratings()[C.id];
+  if (prev && prev.stars) rate(prev.stars, true);
+  paintActivity(); gateActions();
+
+  if (C.note) { document.getElementById('pnoteText').value = C.note; markHasNote(); }
+  document.getElementById('page').hidden = false;
+}
+
+/* ---------- the decision ---------- */
+function rate(n, quiet){
+  R = n;
+  document.querySelectorAll('.star').forEach(function(s, k){
+    s.classList.toggle('on', k < n); s.setAttribute('aria-checked', k === n - 1 ? 'true' : 'false');
+  });
+}
+function gate(){
+  var t = document.getElementById('fbText'), ok = t.value.trim().length > 0;
+  var m = document.getElementById('fbMsg');
+  m.textContent = ok ? 'Ready to send to EquiStaff.' : 'Write a line of feedback to continue.';
+  m.classList.toggle('ok', ok);
+  t.setAttribute('aria-invalid', ok ? 'false' : 'true');
+  gateActions();
+}
+function gateActions(){
+  var ok = document.getElementById('fbText').value.trim().length > 0;
+  document.querySelectorAll('#dacts .btn').forEach(function(b){
+    var a = b.getAttribute('data-act');
+    // An offer already made can't be made twice; a pass closes the decision.
+    var blocked = (a === 'offer' && C.stage === 'Offered') || C.stage === 'Passed' || C.stage === 'Hired';
+    b.disabled = !ok || blocked;
+  });
+  var iv = document.querySelector('#dacts [data-act="interview"]');
+  iv.textContent = (C.activity && C.activity.interview) ? 'Move to 2nd interview' : 'Move to interview';
+}
+function decide(action){
+  var t = document.getElementById('fbText'), note = t.value.trim();
+  if (!note) { gate(); t.focus(); return; }
+  C = ES.decide(C.id, action, R, note);
+  var said = { interview: 'Moved to interview', offer: 'Offer recorded', pass: 'Passed' }[action];
+  ES.notify(said + ' · ' + C.name + ' · feedback sent to EquiStaff');
+  ES.flash();
+  t.value = ''; gate();
+  var d = document.getElementById('ddone');
+  d.innerHTML = '<span class="pill pill--shortlist">' + said + ' &middot; sent to EquiStaff</span>'; d.hidden = false;
+  paintHead(); paintActivity(); gateActions();
+}
+
+/* ---------- resume ---------- */
+function dlResume(){ if (ES.downloadResume(C)) ES.flash(); }
+function openResume(){
+  document.getElementById('rsFile').textContent = C.resume;
+  var who = function(x){ return (x.current && C.visibility === 'quiet') ? 'Current employer withheld' : esc(x.employer); };
+  document.getElementById('rsDoc').innerHTML =
+    '<h2 id="rsName">' + esc(C.name) + '</h2><p class="rsSub">' + esc(C.headline) + ' &middot; ' + esc(C.location) + '</p>' +
+    (C.goals ? '<h3>Goals</h3><p>' + esc(C.goals) + '</p>' : '') +
+    '<h3>Experience</h3>' + C.experience.map(function(x){
+      return '<div class="rsJob"><b>' + esc(x.role) + ' &mdash; ' + who(x) + ', ' + esc(x.location) + '</b><i>' + esc(x.dates) + '</i><p>' + esc(x.summary) + '</p></div>';
+    }).join('') +
+    '<h3>Skills</h3><p>' + C.skills.map(esc).join(' &middot; ') + '</p>' +
+    (C.achievements && C.achievements.length ? '<h3>Achievements &amp; extras</h3><ul style="padding-left:18px;margin:0">' + C.achievements.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>' : '');
+  var d = document.getElementById('rsDlg');
+  if (d.showModal) d.showModal(); else d.setAttribute('open', '');
+}
+function closeResume(){ var d = document.getElementById('rsDlg'); if (d.close) d.close(); else d.removeAttribute('open'); }
+document.getElementById('rsDlg').addEventListener('click', function(e){ if (e.target === this) closeResume(); });
+
+/* ---------- private note ---------- */
+function openNote(){
+  var p = document.getElementById('pnote');
+  p.hidden = false;
+  document.getElementById('pnoteText').focus();
+  p.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+function closeNote(){ document.getElementById('pnote').hidden = true; }
+function saveNote(){
+  var t = document.getElementById('pnoteText').value.trim();
+  if (!t) { document.getElementById('pnoteWhen').textContent = 'Nothing to save yet.'; return; }
+  ES.setCandidate(C.id, { note: t });
+  document.getElementById('pnoteWhen').textContent = 'Saved just now — shared with Kaitlin.';
+  ES.notify('Note saved — Kaitlin can see this'); ES.flash();
+  markHasNote();
+  setTimeout(function(){ document.getElementById('pnote').hidden = true; }, 900);
+}
+function markHasNote(){
+  var b = document.getElementById('noteBtn');
+  b.classList.add('btn--hasNote');
+  document.getElementById('noteBtnLabel').textContent = 'View note';
+  document.getElementById('noteIcon').innerHTML =
+    '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/>';
+  b.setAttribute('aria-label', 'View your note on this candidate');
+}
+
+if (C) render(); else document.getElementById('missing').hidden = false;
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "Reworked from Kaitlin's review. This is now what a direct-hire client sees for any candidate EquiStaff presents — each person on the shortlist opens their own page.",
+  "The resume comes first: Open resume and Download sit directly under the name, as the loudest thing on the page.",
+  "Then EquiStaff feedback (Kaitlin's take), experience, skills — and reference checks at the very bottom.",
+  "“At a glance” is gone; it was showing the wrong person's details.",
+  "The right-hand rail is now Your decision: an optional horseshoe rating, required written feedback (the buttons stay off until there is some, and it says so), then Move to interview, Make an offer or Pass.",
+  "“Where they are” is replaced by Activity: the date they were presented, interviewed, second-interviewed and offered. If the latest step is more than three days old with nothing after it, it turns red — “6 days since presented”.",
+  "The staff switches are gone from the client view; they belong in Kaitlin's admin. Released contact details are now readable white on the dark chip.",
+  "A candidate Kaitlin added from a resume, who hasn't set up their profile yet, shows only her summary and the resume.",
+  "“The other one” is now Back to shortlist and Next candidate. The breadcrumb reads Barn Manager shortlist.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
   "Saving a note now closes the card by itself, and the button becomes the indicator — it turns gold and reads “View note” with a page icon, so you can see at a glance that a candidate has one. Saving an empty note does nothing, so the flag never lies.",
@@ -437,58 +589,6 @@ function toInterview(b){
   "Download résumé is a highlighted pill rather than a text link, and it is there on every tier.",
   "Added the EquiStaff staff strip — the two switches Kaitlin holds: let this client message candidates, and release contact details. The client never sees this strip; it is here so the behaviour can be tried rather than described.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes about references and her current yard are 15px on a phone, and \"Download resume\" is easier to tap.", "Photo on the profile instead of initials — placeholder, replaced before launch.", "\"Book a call\" removed. Messaging is the single action for now.", "Direct messaging is tier-gated, hard-coded — this becomes a toggle in your admin.", "New \"Make a note\": the employer's own private note, which you never see.", "Brittany's horseshoes replace the placeholder stars on the rating.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/icons.js"></script>
-<script>
-/* TIER GATE — hard-coded for the prototype. Kaitlin flips this per client from
-   her admin screens; the constant below is the thing that becomes that toggle.
-   Try it by setting CAN_MESSAGE to false. */
-/* Two gates, one place. Kaitlin flips these per client; the prototype exposes
-   them on the staff strip so the behaviour can be seen rather than described. */
-function setGates(){
-  var m = document.getElementById('swMsg'), c = document.getElementById('swContact');
-  m.setAttribute('aria-checked', m.checked);
-  c.setAttribute('aria-checked', c.checked);
-
-  document.getElementById('msgBtn').hidden   = !m.checked;
-  document.getElementById('tierLock').hidden =  m.checked;
-
-  document.getElementById('contactOpen').hidden   = !c.checked;
-  document.getElementById('contactLocked').hidden =  c.checked;
-}
-setGates();
-
-function openNote() {
-  var p = document.getElementById('pnote');
-  p.hidden = false;
-  document.getElementById('pnoteText').focus();
-  p.scrollIntoView({ behavior:'smooth', block:'center' });
-}
-function closeNote(){ document.getElementById('pnote').hidden = true; }
-function saveNote() {
-  var t = document.getElementById('pnoteText').value.trim();
-  if (!t) { document.getElementById('pnoteWhen').textContent = 'Nothing to save yet.'; return; }
-
-  document.getElementById('pnoteWhen').textContent = 'Saved just now — shared with Kaitlin.';
-  if (window.ES && ES.notify) ES.notify('Note saved — Kaitlin can see this');
-
-  /* 30 Oct — the card used to stay open after saving, so there was no sign
-     anything had happened and nothing on the candidate said a note existed.
-     It now closes itself and the button becomes the indicator. */
-  markHasNote();
-  setTimeout(function () { document.getElementById('pnote').hidden = true; }, 900);
-}
-
-/* The button is the indicator: a filled paper icon and "View note" means a
-   note is on this candidate. No extra badge to miss. */
-function markHasNote() {
-  var b = document.getElementById('noteBtn');
-  b.classList.add('btn--hasNote');
-  document.getElementById('noteBtnLabel').textContent = 'View note';
-  document.getElementById('noteIcon').innerHTML =
-    '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>' +
-    '<path d="M14 2v6h6M9 13h6M9 17h4"/>';
-  b.setAttribute('aria-label', 'View your note on this candidate');
-}
-</script>
 <script src="src/chat.js"></script>
 </body>
 </html>

@@ -50,6 +50,22 @@
   .cand__acts .btn { flex:1 1 auto; }
 }
 @media (max-width:760px){ .track{flex-wrap:wrap;gap:var(--s-4)} .track__s{flex:1 1 40%} }
+
+/* 31 Oct — the numbers Kaitlin asked for on a managed search, and a flag on
+   anyone who has sat more than three days without a next step. */
+.mTiles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s-4); margin-top:var(--s-6); }
+.mTile { background:var(--portal-sunken); border:1px solid var(--portal-line); border-radius:var(--r-md); padding:var(--s-4) var(--s-5); }
+.mTile b { display:block; font:600 2rem/1.1 var(--font-mono); color:var(--white); }
+.mTile span { display:block; margin-top:4px; font-size:var(--t-small); color:var(--baby-200); }
+.shortlist .cand { padding:0; }
+.cand h4 a { color:inherit; text-decoration:none; }
+.cand h4 a:hover { text-decoration:underline; }
+.cand__idle { margin-top:6px !important; font:700 var(--t-label)/1.3 var(--font-mono) !important; color:var(--baby-300) !important; }
+.cand__idle.is-late { display:inline-block; background:var(--err-bg); color:var(--err-ink) !important; border-radius:var(--r-pill); padding:4px 10px; }
+.cand--late { border-color:var(--err-bg); box-shadow:inset 3px 0 0 0 var(--err-bg); }
+.howLink { margin:var(--s-4) 0 0; font-size:var(--t-small); }
+.howLink a { color:var(--baby-200); font-weight:700; }
+@media (max-width:680px){ .mTiles { gap:var(--s-3); } .mTile { padding:var(--s-3); } .mTile b { font-size:1.5rem; } .mTile span { font-size:var(--t-label); } }
 </style>
 </head>
 <body class="portal">
@@ -71,170 +87,26 @@
       <div class="searchCard__top">
         <div>
           <h3>Barn Manager</h3>
-          <p class="searchCard__meta">Recruiter-managed · opened 18 September · REF 10480</p>
+          <p class="searchCard__meta" id="sMeta">Recruiter-managed · opened 18 September · REF 10480</p>
         </div>
-        <span class="pill pill--review">Shortlist ready</span>
+        <span class="pill pill--review" id="sPill">Shortlist ready</span>
       </div>
 
-      <div class="track">
-        <div class="track__s track__s--done"><div class="track__l">LISTENED</div></div>
-        <div class="track__s track__s--done"><div class="track__l">SEARCHED</div></div>
-        <div class="track__s track__s--now"><div class="track__l">SHORTLIST OF 4</div></div>
-        <div class="track__s"><div class="track__l">REFERENCES</div></div>
-        <div class="track__s"><div class="track__l">PLACED</div></div>
-      </div>
+      <div class="mTiles" id="mTiles"></div>
+
+      <div class="track" id="sTrack" aria-label="Search progress"></div>
 
       <div class="recBar">
         <img src="img/kaitlin.jpg" alt="">
-        <p><b>Kaitlin has four people for you.</b> All four phone-referenced. She's free Thursday morning to walk you through them.</p>
+        <p><b>Kaitlin has a shortlist ready for you.</b> Everyone on it is phone-referenced. Open each person, then tell her what you think &mdash; she uses your feedback to shape what comes next.</p>
         <a class="btn btn--primary" href="book.html" style="margin-left:auto;white-space:nowrap">Request a call</a>
       </div>
+      <p class="howLink"><a href="direct-hire-flow.html">How a direct-hire search works &rarr;</a></p>
     </div>
 
     <section class="pSection">
       <div class="pSection__head"><h2>Your shortlist</h2><a href="#" onclick="event.preventDefault();dlShortlist()">Download the shortlist &rarr;</a></div>
-      <div class="shortlist">
-        <div class="cand" id="c0">
-          <div class="cand__row">
-            <div class="cand__av"><img src="img/people/dana.jpg" alt=""></div>
-            <div><h4>Dana Whitfield</h4><p>9 years · 24-horse hunter/jumper barn, Ocala · available in 30 days</p></div>
-            <div class="cand__acts">
-              <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="candidate.html">View</a>
-              <button class="btn btn--secondary" type="button" onclick="openFb(0)">Reject</button>
-            </div>
-          </div>
-
-          <!-- Required feedback. Kaitlin asked for a rating rather than
-               yes/no/maybe, because "no" on its own tells her nothing about
-               whether to keep sourcing the same kind of person. -->
-          <div class="fb" id="fb0" hidden>
-            <p class="fb__q">How close was Dana Whitfield to what you wanted?</p>
-            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five horseshoes">
-              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(0,1)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(0,2)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(0,3)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(0,4)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(0,5)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-            </div>
-            <p class="fb__hint" id="hint0">Pick a rating to continue.</p>
-            <div class="field" style="margin:var(--s-4) 0 0">
-              <label for="note0">Anything Kaitlin should know? (optional)</label>
-              <textarea id="note0" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
-            </div>
-            <p class="fb__priv">Goes to Kaitlin only. Dana never sees this, and it is not kept on their profile.</p>
-            <div class="fb__acts">
-              <button class="btn btn--primary" type="button" id="send0" disabled onclick="sendFb(0)">Send and reject</button>
-              <button class="btn btn--secondary" type="button" onclick="openFb(0)">Cancel</button>
-            </div>
-          </div>
-        </div>
-        <div class="cand" id="c1">
-          <div class="cand__row">
-            <div class="cand__av"><img src="img/people/marcus.jpg" alt=""></div>
-            <div><h4>Marcus Reyes</h4><p>12 years · facility director, Wellington · available now</p></div>
-            <div class="cand__acts">
-              <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="candidate.html">View</a>
-              <button class="btn btn--secondary" type="button" onclick="openFb(1)">Reject</button>
-            </div>
-          </div>
-
-          <!-- Required feedback. Kaitlin asked for a rating rather than
-               yes/no/maybe, because "no" on its own tells her nothing about
-               whether to keep sourcing the same kind of person. -->
-          <div class="fb" id="fb1" hidden>
-            <p class="fb__q">How close was Marcus Reyes to what you wanted?</p>
-            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five horseshoes">
-              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(1,1)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(1,2)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(1,3)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(1,4)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(1,5)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-            </div>
-            <p class="fb__hint" id="hint1">Pick a rating to continue.</p>
-            <div class="field" style="margin:var(--s-4) 0 0">
-              <label for="note1">Anything Kaitlin should know? (optional)</label>
-              <textarea id="note1" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
-            </div>
-            <p class="fb__priv">Goes to Kaitlin only. Marcus never sees this, and it is not kept on their profile.</p>
-            <div class="fb__acts">
-              <button class="btn btn--primary" type="button" id="send1" disabled onclick="sendFb(1)">Send and reject</button>
-              <button class="btn btn--secondary" type="button" onclick="openFb(1)">Cancel</button>
-            </div>
-          </div>
-        </div>
-        <div class="cand" id="c2">
-          <div class="cand__row">
-            <div class="cand__av"><img src="img/people/sarah.jpg" alt=""></div>
-            <div><h4>Sarah O'Dell</h4><p>6 years · barn manager, Lexington · relocating to Ocala</p></div>
-            <div class="cand__acts">
-              <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="candidate.html">View</a>
-              <button class="btn btn--secondary" type="button" onclick="openFb(2)">Reject</button>
-            </div>
-          </div>
-
-          <!-- Required feedback. Kaitlin asked for a rating rather than
-               yes/no/maybe, because "no" on its own tells her nothing about
-               whether to keep sourcing the same kind of person. -->
-          <div class="fb" id="fb2" hidden>
-            <p class="fb__q">How close was Sarah O'Dell to what you wanted?</p>
-            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five horseshoes">
-              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(2,1)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(2,2)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(2,3)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(2,4)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(2,5)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-            </div>
-            <p class="fb__hint" id="hint2">Pick a rating to continue.</p>
-            <div class="field" style="margin:var(--s-4) 0 0">
-              <label for="note2">Anything Kaitlin should know? (optional)</label>
-              <textarea id="note2" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
-            </div>
-            <p class="fb__priv">Goes to Kaitlin only. Sarah never sees this, and it is not kept on their profile.</p>
-            <div class="fb__acts">
-              <button class="btn btn--primary" type="button" id="send2" disabled onclick="sendFb(2)">Send and reject</button>
-              <button class="btn btn--secondary" type="button" onclick="openFb(2)">Cancel</button>
-            </div>
-          </div>
-        </div>
-        <div class="cand" id="c3">
-          <div class="cand__row">
-            <div class="cand__av"><img src="img/people/tom.jpg" alt=""></div>
-            <div><h4>Tom Brennan</h4><p>15 years · estate & barn management, Aiken · available in 60 days</p></div>
-            <div class="cand__acts">
-              <span class="pill pill--shortlist">References clear</span>
-              <a class="btn btn--primary" href="candidate.html">View</a>
-              <button class="btn btn--secondary" type="button" onclick="openFb(3)">Reject</button>
-            </div>
-          </div>
-
-          <!-- Required feedback. Kaitlin asked for a rating rather than
-               yes/no/maybe, because "no" on its own tells her nothing about
-               whether to keep sourcing the same kind of person. -->
-          <div class="fb" id="fb3" hidden>
-            <p class="fb__q">How close was Tom Brennan to what you wanted?</p>
-            <div class="fb__stars" role="radiogroup" aria-label="Rating out of five horseshoes">
-              <button type="button" class="star" aria-label="1 out of 5" onclick="rate(3,1)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="2 out of 5" onclick="rate(3,2)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="3 out of 5" onclick="rate(3,3)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="4 out of 5" onclick="rate(3,4)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-              <button type="button" class="star" aria-label="5 out of 5" onclick="rate(3,5)"><svg class="hs" aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></button>
-            </div>
-            <p class="fb__hint" id="hint3">Pick a rating to continue.</p>
-            <div class="field" style="margin:var(--s-4) 0 0">
-              <label for="note3">Anything Kaitlin should know? (optional)</label>
-              <textarea id="note3" rows="2" placeholder="Great on paper, wanted more jumping experience&hellip;"></textarea>
-            </div>
-            <p class="fb__priv">Goes to Kaitlin only. Tom never sees this, and it is not kept on their profile.</p>
-            <div class="fb__acts">
-              <button class="btn btn--primary" type="button" id="send3" disabled onclick="sendFb(3)">Send and reject</button>
-              <button class="btn btn--secondary" type="button" onclick="openFb(3)">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="shortlist" id="shortlist"></div>
     </section>
 
     <section class="pSection">
@@ -268,43 +140,67 @@
   </div></div>
 </footer>
 
-<script>
-var RATING = {};
-function openFb(i){ var e=document.getElementById("fb"+i); e.hidden = !e.hidden; }
-function rate(i,n){
-  RATING[i]=n;
-  var stars=document.querySelectorAll("#fb"+i+" .star");
-  stars.forEach(function(s,k){ s.classList.toggle("on", k<n); });
-  var h=document.getElementById("hint"+i);
-  h.textContent = n>=4 ? "Strong match. Kaitlin will look for more like this."
-                : n<=2 ? "Noted. Kaitlin will adjust what she sends you."
-                : "Thanks. That helps shape the next shortlist.";
-  h.classList.add("ok");
-  document.getElementById("send"+i).disabled = false;   // the gate: no rating, no close-out
-}
-function sendFb(i){
-  var c=document.getElementById("c"+i);
-  c.querySelector(".cand__acts").innerHTML =
-    '<span class="pill pill--sent">Closed out &middot; '+RATING[i]+'/5 to Kaitlin</span>';
-  document.getElementById("fb"+i).hidden = true;
-}
-</script>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script>
+var STAGE = { Presented:['Presented','pill--review'], Reviewed:['Reviewed','pill--review'], Interviewed:['Interviewing','pill--shortlist'],
+              Offered:['Offer made','pill--shortlist'], Hired:['Hired','pill--paid'], Passed:['Passed','pill--sent'] };
+var ORDER = ['Presented','Reviewed','Interviewed','Offered','Hired'];
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+
+function paintSearch(){
+  var S = ES.search(), list = ES.managedCandidates();
+  var interviewed = list.filter(function(c){ return c.activity && c.activity.interview; }).length;
+  document.getElementById('sMeta').textContent = 'Recruiter-managed · opened ' + S.opened + ' · REF ' + S.ref;
+  document.getElementById('mTiles').innerHTML = [
+    [S.applied, 'Candidates applied'], [list.length, 'Presented to you'], [interviewed, 'Interviewed']
+  ].map(function(t){ return '<div class="mTile"><b>' + t[0] + '</b><span>' + t[1] + '</span></div>'; }).join('');
+
+  // The search is as far along as its furthest candidate.
+  var far = 0;
+  list.forEach(function(c){ var i = ORDER.indexOf(c.stage); if (i > far) far = i; });
+  document.getElementById('sTrack').innerHTML = ORDER.map(function(st, i){
+    var cls = i < far ? ' track__s--done' : i === far ? ' track__s--now' : '';
+    return '<div class="track__s' + cls + '"><div class="track__l">' + st.toUpperCase() + '</div></div>';
+  }).join('');
+  var pill = document.getElementById('sPill');
+  pill.textContent = far >= 3 ? 'Offer out' : far >= 2 ? 'Interviewing' : 'Shortlist ready';
+
+  document.getElementById('shortlist').innerHTML = list.map(function(c){
+    var st = STAGE[c.stage] || STAGE.Presented, idle = ES.idle(c);
+    var href = 'candidate.html?id=' + encodeURIComponent(c.id);
+    var exp = c.experience && c.experience[0];
+    var line = c.headline + ' · ' + c.location + ' · ' + c.availability.toLowerCase();
+    return '<div class="cand' + (idle && idle.flag ? ' cand--late' : '') + '"><div class="cand__row">' +
+      '<div class="cand__av">' + (c.photo ? '<img src="' + c.photo + '" alt="">' : esc(c.initials)) + '</div>' +
+      '<div><h4><a href="' + href + '">' + esc(c.name) + '</a></h4><p>' + esc(line) + '</p>' +
+        (idle ? '<p class="cand__idle' + (idle.flag ? ' is-late' : '') + '">' + esc(idle.text) + '</p>' : '') + '</div>' +
+      '<div class="cand__acts"><span class="pill ' + st[1] + '">' + st[0] + '</span>' +
+        '<a class="btn btn--primary" href="' + href + '">View</a></div>' +
+    '</div></div>';
+  }).join('');
+}
+paintSearch();
+
 function dlShortlist(){
-  var txt = ['EQUISTAFF — SHORTLIST','Barn Manager · REF 10480 · Golden Ocala Equestrian','',
-   'Dana Whitfield — 9 years — 24-horse hunter/jumper barn, Ocala — available in 30 days — references clear',
-   'Marcus Reyes — 12 years — facility director, Wellington — available now — references clear',
-   "Sarah O'Dell — 6 years — barn manager, Lexington — relocating to Ocala — references clear",
-   'Tom Brennan — 15 years — estate & barn management, Aiken — available in 60 days — references clear','',
-   'Every reference checked by phone. Notes held by EquiStaff and available on request.'].join('\n');
-  ES.download('Barn-Manager-shortlist.txt', txt);
+  var S = ES.search();
+  var txt = ['EQUISTAFF — SHORTLIST', S.title + ' · REF ' + S.ref + ' · Golden Ocala Equestrian', '']
+    .concat(ES.managedCandidates().map(function(c){
+      return c.name + ' — ' + c.headline + ' — ' + c.location + ' — ' + c.availability.toLowerCase() + ' — ' + ((STAGE[c.stage] || STAGE.Presented)[0]).toLowerCase();
+    }))
+    .concat(['', 'Every reference checked by phone. Notes held by EquiStaff and available on request.']).join('\n');
+  if (ES.download('Barn-Manager-shortlist.txt', txt)) ES.flash();
 }
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "The search track now follows the candidates: Presented → Reviewed → Interviewed → Offered → Hired. It sits wherever the furthest person on the shortlist has reached.",
+  "Three numbers on the search: candidates applied, presented to you, and interviewed.",
+  "Every “four” and “of 4” is gone — the note now reads “Kaitlin has a shortlist ready for you.” The page never promises a number.",
+  "Each person on the shortlist shows their status and how long since the last step; more than three days with nothing after it turns red. View opens that person's own candidate page.",
+  "Reject moved onto the candidate page, where it is Pass and needs written feedback.",
+  "New link under the search: How a direct-hire search works.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
   "Shortlist buttons are pinned to the right edge of each card and line up in one column. They were floating mid-card at a different spot on every row, because the card's three-column grid was on the wrong element and the row was collapsing to its content.",
