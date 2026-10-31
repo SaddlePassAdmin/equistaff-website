@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find candidates | EquiStaff for employers</title>
+<meta name="description" content="Search job seekers on EquiStaff who chose to be found by employers.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* FIND CANDIDATES — the job seeker's job search, turned round. Kaitlin's
+   note (31 Oct): "This should look just like the jobseeker's job search,
+   but be candidate profiles instead." Same search bar, same sticky filter
+   column, same count line and list — in the portal's deep colours.
+   Only people who chose "Open to everyone" are ever in this list. */
+.tsSearch { display:grid; grid-template-columns:2fr 1.3fr 1.4fr auto; gap:var(--s-3);
+  background:linear-gradient(145deg,var(--portal-ground),var(--portal-sunken));
+  border:1px solid var(--portal-line); border-radius:var(--r-lg); padding:var(--s-5); margin-bottom:var(--s-7); }
+.tsSearch input, .tsSearch select { min-height:52px; padding:0 14px; border-radius:var(--r-sm);
+  border:1.5px solid var(--portal-edge); background:var(--portal-sunken); color:var(--white);
+  font:inherit; font-size:1rem; min-width:0; width:100%; }
+.tsSearch input::placeholder { color:var(--baby-300); }
+.tsSearch input:focus, .tsSearch select:focus { outline:2px solid var(--baby-200); outline-offset:1px; }
+.tsSearch .btn { min-height:52px; }
+
+.tsLayout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:var(--s-7); align-items:start; }
+.tsFilters { background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  padding:var(--s-5); }
+.tsFilters h4 { margin:0 0 var(--s-3); font:900 var(--t-label)/1 var(--font-body); letter-spacing:.09em;
+  text-transform:uppercase; color:var(--warm); }
+.tsFilters label { display:flex; gap:var(--s-3); align-items:center; font-size:var(--t-small); color:var(--white);
+  margin-bottom:var(--s-3); cursor:pointer; }
+.tsFilters input { width:18px; height:18px; accent-color:var(--baby-200); flex:0 0 auto; }
+.tsFilters__grid > div { padding-bottom:var(--s-5); margin-bottom:var(--s-5); border-bottom:1px solid var(--portal-line); }
+.tsFilters__grid > div:last-child { border-bottom:0; margin-bottom:0; padding-bottom:0; }
+.tsChips { display:flex; flex-wrap:wrap; gap:6px; }
+.tsChip { background:transparent; border:1.5px solid var(--portal-edge); color:var(--baby-200);
+  border-radius:var(--r-pill); padding:7px 12px; font:600 var(--t-label)/1.2 var(--font-body); cursor:pointer; }
+.tsChip[aria-pressed="true"] { background:var(--baby-200); border-color:var(--baby-200); color:var(--navy-900); }
+.tsChip:focus-visible, .tsClear:focus-visible { outline:2px solid var(--baby-200); outline-offset:2px; }
+.tsClear { background:none; border:0; padding:0; color:var(--baby-200); font:700 var(--t-small)/1 var(--font-body);
+  text-decoration:underline; cursor:pointer; margin-top:var(--s-5); min-height:32px; }
+.tsFilterBtn { display:none; }
+
+.tsCount { display:flex; justify-content:space-between; align-items:center; gap:var(--s-4); flex-wrap:wrap;
+  margin-bottom:var(--s-5); }
+.tsCount p { margin:0; color:var(--baby-200); font-size:var(--t-small); }
+.tsCount b { font-family:var(--font-display); font-size:1.5rem; color:var(--white); margin-right:6px; }
+.tsCount select { min-height:44px; padding:0 12px; border-radius:var(--r-sm); border:1.5px solid var(--portal-edge);
+  background:var(--portal-sunken); color:var(--white); font:inherit; font-size:var(--t-small); }
+
+/* Rows — the applicants list's dark row, so the two lists read as one family. */
+.tsRow { background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  padding:var(--s-5) var(--s-6); margin-bottom:var(--s-4);
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:var(--s-5); align-items:center;
+  transition:border-color .15s var(--ease); }
+.tsRow:hover { border-color:var(--baby-300); }
+.tsAv { width:52px; height:52px; border-radius:50%; overflow:hidden; background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; font:900 1rem/1 var(--font-body); }
+.tsAv img { width:100%; height:100%; object-fit:cover; display:block; }
+.tsRow h3 { margin:0 0 3px; font-family:var(--font-display); font-size:1.1875rem; color:var(--white); }
+.tsRow h3 a { color:inherit; text-decoration:none; }
+.tsRow h3 a:hover { text-decoration:underline; }
+.tsMeta { margin:0 0 var(--s-3); font-size:var(--t-small); color:var(--baby-200); }
+.tsMeta span + span::before { content:"·"; margin:0 7px; color:var(--baby-300); }
+.tsTags { display:flex; flex-wrap:wrap; gap:6px; }
+.tsTag { background:rgba(255,255,255,.08); color:var(--white); border:1px solid var(--portal-line);
+  border-radius:var(--r-pill); padding:5px 11px; font-size:var(--t-label); font-weight:700; }
+.tsTag--avail { background:var(--ok-bg); color:var(--ok-ink); border-color:var(--ok-bg); }
+.tsActs { display:flex; gap:var(--s-3); align-items:center; }
+.tsActs .btn { white-space:nowrap; }
+
+@media (max-width:1040px){
+  .tsLayout { grid-template-columns:1fr; gap:var(--s-5); }
+  .tsFilterBtn { display:inline-flex; align-items:center; gap:8px; }
+  .tsFilters { display:none; }
+  .tsFilters.is-open { display:block; }
+  .tsFilters__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 var(--s-6); }
+  .tsFilters__grid > div { border-bottom:0; }
+  .tsSearch { grid-template-columns:1fr 1fr; }
+  .tsSearch .btn { grid-column:1 / -1; }
+}
+@media (max-width:680px){
+  .tsSearch { grid-template-columns:1fr; padding:var(--s-4); }
+  .tsFilters__grid { grid-template-columns:1fr; }
+  .tsFilters label { min-height:44px; margin-bottom:0; }
+  .tsFilters input { width:22px; height:22px; }
+  .tsChip { min-height:40px; }
+  .tsRow { grid-template-columns:auto minmax(0,1fr); padding:var(--s-5); gap:var(--s-4); align-items:start; }
+  .tsActs { grid-column:1 / -1; }
+  .tsActs .btn { flex:1 1 0; }
+}
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<div id="nav" data-nav="employer"></div>
+
+<main id="main">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
+    <div class="pSection__head" style="margin-bottom:var(--s-5);border-bottom:0;padding-bottom:0">
+      <div>
+        <p class="eyebrow" style="color:var(--warm)">Golden Ocala Equestrian</p>
+        <h1 style="color:var(--white);margin:0;font-size:2rem">Find candidates</h1>
+        <p style="color:var(--baby-200);margin:6px 0 0;font-size:var(--t-small)">Everyone on EquiStaff who chose to be found by employers. Message them directly from their profile.</p>
+      </div>
+    </div>
+
+    <form class="tsSearch" role="search" onsubmit="event.preventDefault();runSearch()">
+      <input id="tsQ" type="search" placeholder="Barn manager, groom, sales&hellip;" aria-label="Search by role, skill or name">
+      <input id="tsWhere" type="search" placeholder="City or state, e.g. Ocala or FL" aria-label="Location">
+      <select id="tsFam" aria-label="Role family" onchange="famFromSelect()">
+        <option value="">All role families</option>
+      </select>
+      <button class="btn btn--primary" type="submit">Search</button>
+    </form>
+
+    <div class="tsLayout">
+      <aside class="tsFilters" id="tsFilters" aria-label="Filters">
+        <div class="tsFilters__grid">
+          <div><h4>Role family</h4><div id="fFam"></div></div>
+          <div><h4>Discipline</h4><div id="fDisc"></div></div>
+          <div><h4>Availability</h4><div id="fAvail"></div></div>
+          <div><h4>Housing</h4>
+            <label><input type="checkbox" id="fHousing" onchange="F.housing=this.checked;paint()"> Needs housing</label>
+          </div>
+          <div><h4>Skills</h4><div class="tsChips" id="fSkills"></div></div>
+        </div>
+        <button class="tsClear" type="button" onclick="clearAll()">Clear filters</button>
+      </aside>
+
+      <div>
+        <div class="tsCount">
+          <p aria-live="polite"><b id="tsN">0 candidates</b> only people who chose &lsquo;Open to everyone&rsquo; appear here</p>
+          <div style="display:flex;gap:var(--s-3);align-items:center">
+            <button class="btn btn--secondary tsFilterBtn" type="button" id="tsFilterBtn" aria-expanded="false" aria-controls="tsFilters" onclick="toggleFilters()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              <span id="tsFilterLbl">Filters</span></button>
+            <select id="tsSort" aria-label="Sort" onchange="paint()">
+              <option value="match">Best match</option>
+              <option value="soon">Available soonest</option>
+              <option value="name">Name A&ndash;Z</option>
+            </select>
+          </div>
+        </div>
+        <div id="tsList"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine recruiting since 1982</span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script src="src/nav.js"></script>
+<script>
+var FAMILIES = ['Grooms & Barn Staff', 'Riders / Trainers / Instructors', 'Sales / Customer Service / Marketing',
+                'Show Facility Staff', 'Veterinary Staff', 'Executive', 'Other'];
+var DISCIPLINES = ['Hunter / Jumper', 'Dressage', 'Eventing', 'Racing / Thoroughbred', 'Western'];
+var AVAIL = [['now', 'Available now'], ['30', 'Within 30 days'], ['60', 'In 60 days or more']];
+var AVAIL_RANK = { now: 0, '30': 1, '60': 2 };
+var F = { q: '', where: '', fam: [], disc: [], avail: [], housing: false, skills: [] };
+var POOL = ES.searchable();
+
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+function toggleIn(arr, v){ var i = arr.indexOf(v); if (i > -1) arr.splice(i, 1); else arr.push(v); }
+
+/* Skill chips: the skills most often held by the people in this pool. */
+function topSkills(){
+  var n = {};
+  POOL.forEach(function(c){ c.skills.forEach(function(s){ if (!SKILLS_IS_AVAIL(s)) n[s] = (n[s] || 0) + 1; }); });
+  return Object.keys(n).sort(function(a, b){ return n[b] - n[a] || a.localeCompare(b); }).slice(0, 12);
+}
+function SKILLS_IS_AVAIL(s){ return /^Travel |Seasonal Work/.test(s); }
+
+function boxes(id, list, key){
+  document.getElementById(id).innerHTML = list.map(function(it){
+    var v = Array.isArray(it) ? it[0] : it, l = Array.isArray(it) ? it[1] : it;
+    var count = POOL.filter(function(c){ return matchOne(c, key, v); }).length;
+    return '<label><input type="checkbox" value="' + esc(v) + '"' + (F[key].indexOf(v) > -1 ? ' checked' : '') +
+      ' onchange="boxChange(\'' + key + '\', this)"> ' + esc(l) +
+      ' <span style="margin-left:auto;color:var(--baby-300);font-size:var(--t-label)">' + count + '</span></label>';
+  }).join('');
+}
+function matchOne(c, key, v){
+  if (key === 'fam') return c.roleFamily === v;
+  if (key === 'disc') return c.disciplines.indexOf(v) > -1;
+  if (key === 'avail') return c.availWhen === v;
+  return true;
+}
+function boxChange(key, el){
+  toggleIn(F[key], el.value);
+  if (key === 'fam') document.getElementById('tsFam').value = F.fam.length === 1 ? F.fam[0] : '';
+  paint();
+}
+function famFromSelect(){
+  var v = document.getElementById('tsFam').value;
+  F.fam = v ? [v] : [];
+  boxes('fFam', FAMILIES, 'fam');
+  paint();
+}
+function chip(s){ toggleIn(F.skills, s); paintChips(); paint(); }
+function paintChips(){
+  document.getElementById('fSkills').innerHTML = topSkills().map(function(s){
+    return '<button type="button" class="tsChip" aria-pressed="' + (F.skills.indexOf(s) > -1) + '" onclick="chip(this.dataset.s)" data-s="' + esc(s) + '">' + esc(s) + '</button>';
+  }).join('');
+}
+
+function runSearch(){
+  F.q = document.getElementById('tsQ').value.trim().toLowerCase();
+  F.where = document.getElementById('tsWhere').value.trim().toLowerCase();
+  paint();
+}
+
+function matches(c){
+  if (F.q) {
+    var hay = [c.name, c.headline, c.roleFamily, c.goals].concat(c.skills, c.disciplines).join(' ').toLowerCase();
+    if (!F.q.split(/\s+/).every(function(w){ return hay.indexOf(w) > -1; })) return false;
+  }
+  if (F.where && (c.location + ' ' + c.state).toLowerCase().indexOf(F.where) < 0) return false;
+  if (F.fam.length && F.fam.indexOf(c.roleFamily) < 0) return false;
+  if (F.disc.length && !F.disc.some(function(d){ return c.disciplines.indexOf(d) > -1; })) return false;
+  if (F.avail.length && F.avail.indexOf(c.availWhen) < 0) return false;
+  if (F.housing && !c.needsHousing) return false;
+  if (F.skills.length && !F.skills.every(function(s){ return c.skills.indexOf(s) > -1; })) return false;
+  return true;
+}
+
+function activeCount(){
+  return F.fam.length + F.disc.length + F.avail.length + (F.housing ? 1 : 0) + F.skills.length;
+}
+
+function row(c){
+  // Lead with the skills the employer filtered on, then the rest.
+  var tags = c.skills.filter(function(s){ return F.skills.indexOf(s) > -1; })
+    .concat(c.skills.filter(function(s){ return F.skills.indexOf(s) < 0 && !SKILLS_IS_AVAIL(s); })).slice(0, 3);
+  var href = 'seeker-profile.html?id=' + encodeURIComponent(c.id);
+  return '<article class="tsRow">' +
+    '<div class="tsAv">' + (c.photo ? '<img src="' + c.photo + '" alt="">' : esc(c.initials)) + '</div>' +
+    '<div><h3><a href="' + href + '">' + esc(c.name) + '</a></h3>' +
+      '<p class="tsMeta"><span>' + esc(c.headline) + '</span><span>' + esc(c.location) + '</span></p>' +
+      '<div class="tsTags"><span class="tsTag tsTag--avail">' + esc(c.availability) + '</span>' +
+        tags.map(function(t){ return '<span class="tsTag">' + esc(t) + '</span>'; }).join('') + '</div></div>' +
+    '<div class="tsActs">' +
+      '<button class="btn btn--secondary" type="button" onclick="resume(\'' + c.id + '\')" aria-label="Download ' + esc(c.name) + '’s resume">Resume</button>' +
+      '<a class="btn btn--primary" href="' + href + '">View profile</a>' +
+    '</div></article>';
+}
+
+function paint(){
+  var rows = POOL.filter(matches);
+  var sort = document.getElementById('tsSort').value;
+  rows.sort(function(a, b){
+    if (sort === 'soon') return AVAIL_RANK[a.availWhen] - AVAIL_RANK[b.availWhen] || a.name.localeCompare(b.name);
+    if (sort === 'name') return a.name.localeCompare(b.name);
+    return 0;
+  });
+  document.getElementById('tsN').textContent = rows.length + (rows.length === 1 ? ' candidate' : ' candidates') + ' ·';
+  document.getElementById('tsList').innerHTML = rows.length ? rows.map(row).join('') :
+    '<div class="empty"><p>Nobody matches all of those filters. Try removing one, or widen the location.</p>' +
+    '<button class="btn btn--primary" type="button" onclick="clearAll()">Clear filters</button></div>';
+  var n = activeCount();
+  document.getElementById('tsFilterLbl').textContent = n ? 'Filters (' + n + ')' : 'Filters';
+}
+
+function clearAll(){
+  F = { q: '', where: '', fam: [], disc: [], avail: [], housing: false, skills: [] };
+  document.getElementById('tsQ').value = '';
+  document.getElementById('tsWhere').value = '';
+  document.getElementById('tsFam').value = '';
+  document.getElementById('fHousing').checked = false;
+  build(); paint();
+}
+function toggleFilters(){
+  var a = document.getElementById('tsFilters'), b = document.getElementById('tsFilterBtn');
+  var open = !a.classList.contains('is-open');
+  a.classList.toggle('is-open', open);
+  b.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function resume(id){
+  var c = ES.candidate(id);
+  if (c && ES.downloadResume(c)) ES.flash();
+}
+function build(){
+  boxes('fFam', FAMILIES, 'fam');
+  boxes('fDisc', DISCIPLINES, 'disc');
+  boxes('fAvail', AVAIL, 'avail');
+  paintChips();
+}
+
+document.getElementById('tsFam').innerHTML += FAMILIES.map(function(f){ return '<option value="' + esc(f) + '">' + esc(f) + '</option>'; }).join('');
+build(); paint();
+</script>
+
+<script src="src/revised.js"></script>
+<script>REVISED('31 Oct', [
+  "New screen: Find candidates. A job-board employer can now search job seekers the same way a job seeker searches jobs — keyword, location and role family across the top, filters down the side (role family, discipline, availability, needs housing, skills).",
+  "Only people who chose “Open to everyone” appear. Anyone looking quietly, and anyone already presented on a recruiter-managed search, is never in this list.",
+  "Every row has the resume one click away, and View profile opens what the employer sees.",
+  "On a phone the filters fold away behind a Filters button that shows how many are on."]);</script>
+<script src="src/chat.js"></script>
+</body>
+</html>

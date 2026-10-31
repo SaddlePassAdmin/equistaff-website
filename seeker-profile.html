@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Candidate profile | EquiStaff for employers</title>
+<meta name="description" content="A job seeker's profile as a job-board employer sees it: resume first, then experience and skills.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* JOB-BOARD PROFILE — what a self-serve employer sees when they open a job
+   seeker from Find candidates or their applicants list. Kaitlin, 31 Oct:
+   there was no view of this at all. The person chose to be found, so their
+   contact details are on the page; the resume is the first thing the eye
+   lands on, because it is the first thing an employer reaches for.
+   No salary and no references here — those belong to a managed search. */
+[hidden] { display:none !important; }
+.spHead { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:var(--s-6); align-items:center;
+  background:linear-gradient(145deg,var(--portal-ground),var(--portal-sunken));
+  border:1px solid var(--portal-line); border-radius:var(--r-lg) var(--r-lg) 0 0; padding:var(--s-7); }
+.spAv { width:96px; height:96px; border-radius:50%; overflow:hidden; background:var(--baby-200); color:var(--navy-900);
+  border:3px solid var(--baby-300); display:grid; place-items:center; font:900 2rem/1 var(--font-body); }
+.spAv img { width:100%; height:100%; object-fit:cover; display:block; }
+.spHead h1 { color:var(--white); margin:0 0 4px; font-size:2rem; }
+.spRole { color:var(--baby-200); margin:0 0 var(--s-4); font-size:1.0625rem; }
+.spFacts { display:flex; gap:var(--s-3) var(--s-5); flex-wrap:wrap; margin:0 0 var(--s-4); }
+.spFacts span { color:var(--baby-200); font-size:var(--t-small); display:flex; gap:7px; align-items:center; }
+.spFacts svg { color:var(--baby-300); flex:0 0 auto; }
+.spContact { display:flex; gap:var(--s-3); flex-wrap:wrap; }
+.spContact a { display:inline-flex; align-items:center; gap:8px; color:var(--white); text-decoration:none;
+  background:rgba(255,255,255,.08); border:1px solid var(--portal-edge); border-radius:var(--r-pill);
+  padding:8px 14px; font-size:var(--t-small); font-weight:700; min-height:40px; overflow-wrap:anywhere; }
+.spContact a:hover { border-color:var(--baby-200); }
+.spContact svg { color:var(--baby-200); flex:0 0 auto; }
+.spActs { display:flex; flex-direction:column; gap:var(--s-3); }
+.spActs .btn { white-space:nowrap; }
+.btn--saved { border-color:var(--warm) !important; color:var(--warm) !important; }
+
+/* The resume band: joined to the header so it reads as part of the person,
+   and the loudest thing on the page. */
+.spResume { display:flex; gap:var(--s-5); align-items:center; flex-wrap:wrap;
+  background:var(--surface-raised); border:1px solid var(--baby-300); border-top:0;
+  border-radius:0 0 var(--r-lg) var(--r-lg); padding:var(--s-5) var(--s-7); margin-bottom:var(--s-8);
+  box-shadow:inset 0 3px 0 0 var(--baby-200); }
+.spResume__doc { width:52px; height:52px; border-radius:var(--r-md); background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; flex:0 0 auto; }
+.spResume__t { flex:1 1 220px; min-width:0; }
+.spResume__t b { display:block; color:var(--white); font-size:1.125rem; }
+.spResume__t span { color:var(--baby-200); font-size:var(--t-small); font-family:var(--font-mono); overflow-wrap:anywhere; }
+.spResume__acts { display:flex; gap:var(--s-3); flex-wrap:wrap; }
+.btn--loud { min-height:56px; padding:0 var(--s-6); font-size:1.0625rem; display:inline-flex; align-items:center; gap:9px; }
+
+.spGrid { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:var(--s-8); align-items:start; }
+.spText { color:var(--white); font-size:1.0625rem; line-height:1.65; margin:0; max-width:68ch; }
+.spMedia { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s-3); }
+.spMedia figure { margin:0; border-radius:var(--r-md); overflow:hidden; aspect-ratio:4/3; background:var(--portal-sunken);
+  border:1px solid var(--portal-line); position:relative; }
+.spMedia img, .spMedia video { width:100%; height:100%; object-fit:cover; display:block; }
+.spJob { padding:var(--s-5) 0; border-bottom:1px solid var(--portal-line); }
+.spJob:first-of-type { padding-top:0; }
+.spJob:last-child { border-bottom:0; }
+.spJob h3 { margin:0 0 4px; color:var(--white); font-family:var(--font-display); font-size:1.1875rem; }
+.spJob__w { color:var(--baby-200); font-size:var(--t-small); font-weight:700; margin:0 0 3px; }
+.spJob__d { color:var(--baby-300); font-size:var(--t-label); font-family:var(--font-mono); margin:0 0 var(--s-3); }
+.spJob p:last-child { color:var(--baby-200); font-size:var(--t-small); line-height:1.6; margin:0; }
+.withheld { display:inline-block; background:var(--warm); color:var(--warm-ink); border-radius:var(--r-pill);
+  padding:3px 9px; font:900 11px/1.45 var(--font-body); letter-spacing:.06em; text-transform:uppercase; }
+
+.railCard { background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  padding:var(--s-6); margin-bottom:var(--s-5); }
+.railCard h2 { color:var(--white); font-size:1.125rem; margin:0 0 var(--s-4); }
+.skills { display:flex; flex-wrap:wrap; gap:8px; }
+.skills span { background:rgba(255,255,255,.08); color:var(--white); border:1px solid var(--portal-line);
+  border-radius:var(--r-pill); padding:6px 13px; font-size:var(--t-small); }
+.spList { margin:0; padding-left:20px; }
+.spList li { color:var(--white); font-size:var(--t-small); line-height:1.55; margin-bottom:var(--s-3); }
+.spList li:last-child { margin-bottom:0; }
+.kv { display:flex; justify-content:space-between; gap:var(--s-4); padding:var(--s-3) 0;
+  border-bottom:1px solid var(--portal-line); font-size:var(--t-small); }
+.kv:last-child { border-bottom:0; }
+.kv dt { color:var(--baby-200); margin:0; }
+.kv dd { color:var(--white); margin:0; font-weight:700; text-align:right; }
+
+/* Resume viewer — paper on the page, so it reads as the document itself. */
+.rsDlg { border:0; padding:0; border-radius:var(--r-lg); width:min(760px, calc(100vw - 32px));
+  max-height:calc(100vh - 48px); background:var(--white); color:var(--navy-900); box-shadow:var(--e-3); }
+.rsDlg::backdrop { background:rgba(11,37,69,.72); }
+.rsDlg__bar { display:flex; justify-content:space-between; align-items:center; gap:var(--s-4);
+  padding:var(--s-4) var(--s-6); border-bottom:1px solid var(--depth-02); background:var(--depth-01);
+  position:sticky; top:0; }
+.rsDlg__bar span { font:600 var(--t-label)/1.3 var(--font-mono); color:var(--text-muted); overflow-wrap:anywhere; }
+.rsDlg__bar .btn--secondary { color:var(--navy-900); border-color:var(--navy-500); }
+.rsDlg__x { background:none; border:0; font-size:28px; line-height:1; cursor:pointer; color:var(--navy-900);
+  width:44px; height:44px; }
+.rsDoc { padding:var(--s-7) var(--s-8) var(--s-8); }
+.rsDoc h2 { margin:0 0 2px; font-size:1.75rem; color:var(--navy-900); }
+.rsDoc .rsSub { margin:0 0 var(--s-2); color:var(--text-muted); }
+.rsDoc .rsC { margin:0 0 var(--s-6); font-size:var(--t-small); color:var(--blue-700); }
+.rsDoc h3 { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--blue-700); margin:var(--s-6) 0 var(--s-3); padding-bottom:6px; border-bottom:1px solid var(--depth-02); }
+.rsDoc p, .rsDoc li { font-size:var(--t-small); line-height:1.6; color:var(--navy-900); margin:0 0 var(--s-2); }
+.rsDoc .rsJob { margin-bottom:var(--s-4); }
+.rsDoc .rsJob b { display:block; }
+.rsDoc .rsJob i { color:var(--text-muted); font-style:normal; font-size:var(--t-label); font-family:var(--font-mono); }
+
+@media (max-width:1040px){ .spGrid { grid-template-columns:1fr; gap:var(--s-7); } }
+@media (max-width:760px){
+  .spHead { grid-template-columns:auto minmax(0,1fr); padding:var(--s-6) var(--s-5); gap:var(--s-5); }
+  .spAv { width:72px; height:72px; font-size:1.5rem; }
+  .spHead h1 { font-size:1.625rem; }
+  .spActs { grid-column:1 / -1; flex-direction:row; }
+  .spActs .btn { flex:1 1 0; }
+  .spResume { padding:var(--s-5); }
+  .spResume__acts { width:100%; }
+  .spResume__acts .btn { flex:1 1 0; justify-content:center; }
+  .spMedia { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .rsDoc { padding:var(--s-6) var(--s-5); }
+}
+@media (max-width:420px){ .spHead { grid-template-columns:minmax(0,1fr); } .spActs { flex-wrap:wrap; } .spActs .btn { white-space:normal; min-width:0; } }
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<div id="nav" data-nav="employer"></div>
+
+<main id="main">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
+    <p style="font-size:var(--t-small);margin:0 0 var(--s-5)">
+      <a id="backLink" href="talent-search.html" style="color:var(--baby-200);text-decoration:none;display:inline-flex;align-items:center;min-height:44px">&larr; <span id="backLbl" style="margin-left:6px">Find candidates</span></a>
+    </p>
+
+    <div id="profile" hidden>
+      <div class="spHead">
+        <div class="spAv" id="pAv"></div>
+        <div style="min-width:0">
+          <h1 id="pName"></h1>
+          <p class="spRole" id="pRole"></p>
+          <div class="spFacts" id="pFacts"></div>
+          <div class="spContact" id="pContact"></div>
+        </div>
+        <div class="spActs">
+          <a class="btn btn--primary" href="messages.html" id="pMsg">Message</a>
+          <button class="btn btn--secondary" type="button" id="pSave" onclick="toggleSave()" aria-pressed="false">Save</button>
+        </div>
+      </div>
+
+      <div class="spResume">
+        <div class="spResume__doc"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
+        <div class="spResume__t"><b>Resume</b><span id="pFile"></span></div>
+        <div class="spResume__acts">
+          <button class="btn btn--primary btn--loud" type="button" onclick="openResume()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Open resume</button>
+          <button class="btn btn--secondary btn--loud" type="button" onclick="dl()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+            Download</button>
+        </div>
+      </div>
+
+      <div class="spGrid">
+        <div>
+          <section class="pSection" id="secMedia">
+            <div class="pSection__head"><h2>Photos &amp; videos</h2></div>
+            <div class="spMedia" id="pMedia"></div>
+          </section>
+          <section class="pSection" id="secGoals">
+            <div class="pSection__head"><h2>Goals &amp; interests</h2></div>
+            <p class="spText" id="pGoals"></p>
+          </section>
+          <section class="pSection">
+            <div class="pSection__head"><h2>Experience</h2></div>
+            <div id="pExp"></div>
+          </section>
+        </div>
+        <aside>
+          <div class="railCard">
+            <h2>Key skills</h2>
+            <div class="skills" id="pSkills"></div>
+          </div>
+          <div class="railCard" id="secAch">
+            <h2>Achievements &amp; extras</h2>
+            <ul class="spList" id="pAch"></ul>
+          </div>
+          <div class="railCard">
+            <h2>Looking for</h2>
+            <dl style="margin:0" id="pKv"></dl>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div id="missing" class="empty" hidden style="max-width:620px;margin:var(--s-8) auto 0">
+      <h1 style="color:var(--white);font-size:1.5rem;margin:0 0 var(--s-3)">This profile isn&rsquo;t available</h1>
+      <p>The person may have switched their profile to quiet, or the link is out of date.</p>
+      <a class="btn btn--primary" href="talent-search.html">Back to Find candidates</a>
+    </div>
+  </div>
+</main>
+
+<dialog class="rsDlg" id="rsDlg" aria-labelledby="rsName">
+  <div class="rsDlg__bar">
+    <span id="rsFile"></span>
+    <div style="display:flex;gap:var(--s-3);align-items:center">
+      <button class="btn btn--secondary" type="button" onclick="dl()">Download</button>
+      <button class="rsDlg__x" type="button" onclick="closeResume()" aria-label="Close resume">&times;</button>
+    </div>
+  </div>
+  <div class="rsDoc" id="rsDoc"></div>
+</dialog>
+
+<footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine recruiting since 1982</span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script src="src/nav.js"></script>
+<script>
+var params = new URLSearchParams(location.search);
+var C = ES.candidate(params.get('id') || '');
+var I = {
+  pin: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>',
+  clock: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  home: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>',
+  mail: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  phone: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg>'
+};
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+function first(n){ return n.split(' ')[0]; }
+
+// Coming from the applicants list, the way back is the applicants list.
+if (params.get('from') === 'applicants') {
+  document.getElementById('backLink').href = 'applicants.html';
+  document.getElementById('backLbl').textContent = 'Applicants';
+}
+
+/* A job-board employer sees someone who chose "Open to everyone", or who
+   applied to one of their posts. A quiet profile is otherwise invisible. */
+var visible = C && (C.visibility === 'open' || C.applied);
+
+function employerLine(x){
+  if (x.current && C.visibility === 'quiet') return '<span class="withheld">Current employer withheld</span> &middot; ' + esc(x.location);
+  return esc(x.employer) + ' &middot; ' + esc(x.location);
+}
+
+function render(){
+  document.title = C.name + ' — ' + C.headline + ' | EquiStaff for employers';
+  document.getElementById('pAv').innerHTML = C.photo ? '<img src="' + C.photo + '" alt="">' : esc(C.initials);
+  document.getElementById('pName').textContent = C.name;
+  document.getElementById('pRole').textContent = C.headline;
+  document.getElementById('pFacts').innerHTML =
+    '<span>' + I.pin + esc(C.location) + '</span><span>' + I.clock + esc(C.availability) + '</span><span>' + I.home + esc(C.housing) + '</span>';
+  document.getElementById('pContact').innerHTML =
+    '<a href="mailto:' + esc(C.email) + '">' + I.mail + esc(C.email) + '</a>' +
+    '<a href="tel:' + C.phone.replace(/[^\d]/g, '') + '">' + I.phone + esc(C.phone) + '</a>';
+  document.getElementById('pMsg').textContent = 'Message ' + first(C.name);
+  document.getElementById('pFile').textContent = C.resume;
+  paintSave();
+
+  var m = C.media || [];
+  if (C.hasMedia && (m.length || C.video)) {
+    document.getElementById('pMedia').innerHTML =
+      (C.video ? '<figure><video controls muted playsinline preload="none" poster="' + C.video.poster + '" aria-label="Video from ' + esc(first(C.name)) + '"><source src="' + C.video.src + '" type="video/mp4"></video></figure>' : '') +
+      m.map(function(src){ return '<figure><img src="' + src + '" alt="Photo from ' + esc(first(C.name)) + '’s profile" loading="lazy"></figure>'; }).join('');
+  } else document.getElementById('secMedia').hidden = true;
+
+  if (C.goals) document.getElementById('pGoals').textContent = C.goals;
+  else document.getElementById('secGoals').hidden = true;
+
+  document.getElementById('pExp').innerHTML = C.experience.map(function(x){
+    return '<div class="spJob"><h3>' + esc(x.role) + '</h3><p class="spJob__w">' + employerLine(x) + '</p>' +
+      '<p class="spJob__d">' + esc(x.dates) + '</p><p>' + esc(x.summary) + '</p></div>';
+  }).join('');
+
+  document.getElementById('pSkills').innerHTML = C.skills.map(function(s){ return '<span>' + esc(s) + '</span>'; }).join('');
+  if (C.achievements && C.achievements.length)
+    document.getElementById('pAch').innerHTML = C.achievements.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('');
+  else document.getElementById('secAch').hidden = true;
+
+  document.getElementById('pKv').innerHTML = [
+    ['Role family', C.roleFamily],
+    ['Discipline', C.disciplines.length ? C.disciplines.join(', ') : 'Any'],
+    ['Available', C.availability.replace(/^Available /, '')],
+    ['Housing', C.housing]
+  ].map(function(r){ return '<div class="kv"><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd></div>'; }).join('');
+
+  document.getElementById('profile').hidden = false;
+}
+
+function paintSave(){
+  var b = document.getElementById('pSave'), on = !!C.savedByEmployer;
+  b.textContent = on ? 'Saved' : 'Save';
+  b.classList.toggle('btn--saved', on);
+  b.setAttribute('aria-pressed', on ? 'true' : 'false');
+}
+function toggleSave(){
+  ES.setCandidate(C.id, { savedByEmployer: !C.savedByEmployer });
+  C = ES.candidate(C.id);
+  ES.notify(C.savedByEmployer ? first(C.name) + ' saved to your candidates' : 'Removed from your saved candidates');
+  ES.flash(); paintSave();
+}
+function dl(){ if (ES.downloadResume(C)) ES.flash(); }
+
+function openResume(){
+  document.getElementById('rsFile').textContent = C.resume;
+  document.getElementById('rsDoc').innerHTML =
+    '<h2 id="rsName">' + esc(C.name) + '</h2><p class="rsSub">' + esc(C.headline) + ' &middot; ' + esc(C.location) + '</p>' +
+    '<p class="rsC">' + esc(C.email) + ' &middot; ' + esc(C.phone) + '</p>' +
+    (C.goals ? '<h3>Goals</h3><p>' + esc(C.goals) + '</p>' : '') +
+    '<h3>Experience</h3>' + C.experience.map(function(x){
+      var who = (x.current && C.visibility === 'quiet') ? 'Current employer withheld' : esc(x.employer);
+      return '<div class="rsJob"><b>' + esc(x.role) + ' &mdash; ' + who + ', ' + esc(x.location) + '</b><i>' + esc(x.dates) + '</i><p>' + esc(x.summary) + '</p></div>';
+    }).join('') +
+    '<h3>Skills</h3><p>' + C.skills.map(esc).join(' &middot; ') + '</p>' +
+    (C.achievements && C.achievements.length ? '<h3>Achievements &amp; extras</h3><ul style="padding-left:18px;margin:0">' + C.achievements.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>' : '');
+  var d = document.getElementById('rsDlg');
+  if (d.showModal) d.showModal(); else d.setAttribute('open', '');
+}
+function closeResume(){ var d = document.getElementById('rsDlg'); if (d.close) d.close(); else d.removeAttribute('open'); }
+document.getElementById('rsDlg').addEventListener('click', function(e){ if (e.target === this) closeResume(); });
+
+if (visible) render();
+else document.getElementById('missing').hidden = false;
+</script>
+
+<script src="src/revised.js"></script>
+<script>REVISED('31 Oct', [
+  "New screen: a job seeker's profile as a job-board employer sees it. Kaitlin flagged there was no view of this at all.",
+  "The resume is the loudest thing on the page — Open resume and Download sit directly under the name.",
+  "Email and phone are shown openly, because this person chose to be found. A quiet profile never opens here unless that person applied to one of your posts, and then their current employer stays withheld.",
+  "Then: photos and videos, goals and interests, experience (employer, location, role, dates), key skills, achievements and extras. No salary and no references — those belong to a managed search.",
+  "Message and Save are the two actions. Back goes to Find candidates, or to Applicants if that's where you came from."]);</script>
+<script src="src/chat.js"></script>
+</body>
+</html>

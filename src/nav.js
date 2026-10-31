@@ -45,6 +45,7 @@
       items: [
         ['employer.html', 'Your searches'],
         ['my-jobs.html', 'Job posts'],
+        ['talent-search.html', 'Find candidates'],
         ['billing.html', 'Billing'],
         ['company.html', 'Company'],
         ['messages.html', 'Messages']
@@ -63,6 +64,8 @@
   // really sub-views of it — a candidate profile is part of the shortlist.
   var ALIAS = {
     'candidate.html': 'employer.html',
+    'direct-hire-flow.html': 'employer.html',
+    'seeker-profile.html': 'talent-search.html',
     'applicants.html': 'my-jobs.html',
     'post-job.html': 'my-jobs.html',
     'resume.html': 'profile.html',
