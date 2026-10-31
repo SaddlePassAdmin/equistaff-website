@@ -175,6 +175,12 @@ body.has-chat > main:last-of-type { padding-bottom: 88px; }
 .chat--live { width: 100%; height: 100%; }
 .chat--live .chat__body {
   flex: 1 1 auto; min-height: 0; overflow-y: auto; align-content: start; overscroll-behavior: contain;
+  /* 31 Oct — every row as tall as its content. Without this, once the
+     conversation was long enough to scroll, the price card (overflow:hidden,
+     so its automatic minimum height is 0) collapsed to a 2px line: the
+     prices were in the page but not on screen. That was Kaitlin's "Pricing
+     first doesn't give pricing". */
+  grid-auto-rows: max-content;
 }
 .chat__who > div { flex: 1; min-width: 0; }
 .chat__x {
@@ -431,3 +437,23 @@ html:not(.es-review) .chat__demo,
 html:not(.es-review) .chat .tbc,
 html:not(.es-review) .chat .ruleTag,
 html:not(.es-review) .chat .liveNote { display: none !important; }
+
+/* ── 31 Oct — Evie on portal pages ────────────────────────────────────────
+   Evie is back on the signed-in portals (Kaitlin, V3 notes). There the
+   launcher drops its label and becomes a 52px round button, so it covers as
+   little of the working screen as possible (the full pill sat on Reject and
+   Shortlist). The 2px --baby-300 edge from 30 Oct keeps it above 3:1 on the
+   dark portal ground. The page still reserves room for it at the bottom
+   (body.has-chat > footer above). */
+.chat-portal .chatLaunch {
+  width: 52px; height: 52px; min-height: 0; padding: 0;
+  justify-content: center; border-radius: 50%;
+}
+.chat-portal .chatLaunch__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.chat-portal .chatLaunch__hs { width: 22px; height: 25px; }
+.chat-portal .evieDock__x { width: 22px; height: 22px; top: -7px; right: -7px; font-size: 13px; }
+/* On a phone, step aside while a page field has focus (chat.js adds the class). */
+@media (max-width: 620px) {
+  body.evie-tucked .evieDock { opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .15s, transform .15s; }
+}
+@media (max-width: 620px) and (prefers-reduced-motion: reduce) { body.evie-tucked .evieDock { transition: none; transform: none; } }
