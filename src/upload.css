@@ -1,0 +1,76 @@
+/* Upload, then check — namespaced .up- throughout. Built on the semantic
+   tokens so the same markup reads right on the light public pages and on
+   the deep portal pages. */
+.up [hidden] { display:none !important; }
+
+/* 1 · drop */
+.up__drop { position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--s-2);
+  border:2px dashed var(--border-strong); border-radius:var(--r-lg); background:var(--surface-sunken);
+  padding:var(--s-7) var(--s-5); cursor:pointer; color:var(--text-primary);
+  transition:border-color .15s var(--ease), background .15s var(--ease); }
+.up__drop:hover, .up__drop.is-over { border-color:var(--action-primary); background:var(--surface-tint); }
+.up__drop:focus-within { outline:3px solid var(--baby-300); outline-offset:2px; }
+.up__ico { color:var(--action-primary); margin-bottom:var(--s-2); }
+.up__big { font-size:1.125rem; color:var(--text-primary); }
+.up__or { font-size:var(--t-small); color:var(--text-muted); }
+.up__choose { pointer-events:none; margin:var(--s-1) 0 var(--s-2); }
+.up__fine { font-size:var(--t-label); color:var(--text-muted); }
+.up .up__input { position:absolute; left:0; top:0; width:1px; min-height:0; height:1px; padding:0; border:0; opacity:0; overflow:hidden; clip:rect(0 0 0 0); }
+.up__err { margin:var(--s-3) 0 0; font-size:var(--t-small); font-weight:700; color:var(--err-ink); }
+[data-mode="deep"] .up__err { color:#FFC9BF; }
+.up__alt { margin:var(--s-4) 0 0; text-align:center; }
+.up__link { background:none; border:0; padding:6px 4px; min-height:44px; cursor:pointer;
+  font:700 var(--t-small)/1.3 var(--font-body); color:var(--text-link); text-decoration:underline; text-underline-offset:3px; }
+.up__link:hover { color:var(--text-primary); }
+
+/* 2 · reading */
+.up__reading { display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--s-3);
+  border:1.5px solid var(--border-subtle); border-radius:var(--r-lg); background:var(--surface-sunken);
+  padding:var(--s-8) var(--s-5); color:var(--text-primary); }
+.up__reading b { font-size:1.125rem; }
+.up__file { font:500 var(--t-label)/1.3 var(--font-mono); color:var(--text-muted); word-break:break-all; }
+.up__spin { width:34px; height:34px; border-radius:50%; border:3px solid var(--border-subtle);
+  border-top-color:var(--action-primary); animation:upSpin .8s linear infinite; }
+.up__bar { width:min(260px, 80%); height:6px; border-radius:var(--r-pill); background:var(--border-subtle); overflow:hidden; margin-top:var(--s-2); }
+.up__bar i { display:block; height:100%; width:0; background:var(--action-primary); animation:upFill 1.5s var(--ease) forwards; }
+@keyframes upSpin { to { transform:rotate(360deg); } }
+@keyframes upFill { to { width:100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .up__spin { animation:none; border-top-color:var(--border-subtle); }
+  .up__bar i { animation:none; width:100%; }
+}
+
+/* 3 · review */
+.up__head { margin-bottom:var(--s-5); }
+.up__title { font-size:1.5rem; margin:0 0 var(--s-2); color:var(--text-primary); outline:0; }
+.up__lede { margin:0 0 var(--s-4); font-size:var(--t-small); color:var(--text-muted); max-width:52ch; }
+.up__chip { display:inline-flex; flex-wrap:wrap; align-items:center; gap:4px var(--s-2); margin:0;
+  background:var(--ok-bg); color:var(--ok-ink); border-radius:var(--r-md); padding:4px var(--s-2) 4px var(--s-4);
+  font-size:var(--t-small); font-weight:700; max-width:100%; }
+.up__chip > span { word-break:break-all; }
+.up__chip .up__link { color:var(--ok-ink); font-weight:400; min-height:36px; }
+.up__set { border:0; padding:0; margin:0 0 var(--s-6); min-width:0; }
+.up__set legend { padding:0; margin-bottom:var(--s-4); font:900 var(--t-label)/1 var(--font-body);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); }
+.up__job { border:1.5px solid var(--border-subtle); border-radius:var(--r-md); padding:var(--s-5) var(--s-5) 0; margin-bottom:var(--s-4); }
+.up__jobN { margin:0 0 var(--s-4); font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; text-transform:uppercase; color:var(--action-primary); }
+.up__hint { margin:0 0 var(--s-4); font-size:var(--t-small); color:var(--text-muted); }
+.up__skills { display:grid; gap:var(--s-2); }
+.up__skill { display:grid; grid-template-columns:auto 1fr; gap:2px var(--s-3); align-items:start; cursor:pointer;
+  border:1.5px solid var(--border-subtle); border-radius:var(--r-md); padding:var(--s-3) var(--s-4); min-height:44px; }
+.up__skill:hover { border-color:var(--action-primary); }
+.up__skill input { width:18px; height:18px; margin:2px 0 0; accent-color:var(--action-primary); grid-row:span 2; }
+.up__skillT { display:flex; flex-wrap:wrap; gap:4px var(--s-2); align-items:center; color:var(--text-primary); }
+.up__skillT b { font-size:var(--t-small); }
+.up__skillT em { font-style:normal; font:700 var(--t-label)/1 var(--font-body); padding:4px 8px; border-radius:var(--r-sm);
+  background:var(--surface-tint); color:var(--text-primary); }
+.up__heard { font-size:var(--t-label); color:var(--text-muted); }
+.up__skill:has(input:not(:checked)) .up__skillT b { text-decoration:line-through; opacity:.6; }
+.up__actions { margin-top:0; }
+
+/* Inside a .field (onboarding's resume field) the generic .field label /
+   .field input rules would otherwise win: labels go block, checkboxes go
+   full width. Re-assert the upload's own layout at higher specificity. */
+.up .up__drop { display:flex; margin:0; font-weight:400; font-size:inherit; }
+.up .up__skill { display:grid; margin:0; font-weight:400; font-size:inherit; }
+.up .up__skill input { width:18px; height:18px; min-height:0; padding:0; border:0; }
