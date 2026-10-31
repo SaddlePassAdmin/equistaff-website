@@ -60,7 +60,7 @@
       achievements: ['Cut barn injuries to zero over two show seasons', 'CDL-holder, tows a 6-horse gooseneck'],
       email: 'd.whitfield@example.com', phone: '(352) 555-0141', source: 'site', managed: true,
       stage: 'Interviewed', activity: act({ p: 10, r: 9, i: 3 }), contactReleased: false, claimed: true,
-      kaitlinSpoke: 'Spoke to Dana on 14 October · 40 minutes',
+      kaitlinSpoke: 'Spoke to Dana on 14 October',
       kaitlinTake: [
         'Dana has run a 24-horse show barn for six years without a turnover problem, which is rarer than it sounds. Her current owner calls her the reason the barn still has its staff.',
         'She is leaving because the barn is being sold, not because anything has gone wrong. She would like on-site housing and is open about it. She will ask about the show calendar early, and that is a good sign.'
@@ -86,7 +86,7 @@
       achievements: ['Rebuilt the footing on six rings without losing a show week'],
       email: 'm.reyes@example.com', phone: '(561) 555-0188', source: 'site', managed: true,
       stage: 'Reviewed', activity: act({ p: 8, r: 7 }), contactReleased: false, claimed: true,
-      kaitlinSpoke: 'Spoke to Marcus on 16 October · 35 minutes',
+      kaitlinSpoke: 'Spoke to Marcus on 16 October',
       kaitlinTake: [
         'Marcus is the strongest operator on this list and the least hands-on with horses day to day. If you want someone to run the place, he is the one. If you want someone in the aisle at 6am, he is not.',
         'He is employed and looking quietly, so his current venue stays unnamed until he agrees to an introduction.'
@@ -104,20 +104,20 @@
       goals: 'Relocating to Ocala to be nearer family. Wants a barn with a rehab or young-horse side.',
       experience: [
         { employer: 'Bluegrass Eventing', location: 'Lexington, KY', role: 'Barn Manager', dates: '2020 – now', current: true,
-          summary: 'Twelve-horse eventing yard with a rehab program. Runs layups, medication and turnout schedules.' },
+          summary: 'Twelve-horse eventing barn with a rehab program. Runs layups, medication and turnout schedules.' },
         { employer: 'Chestnut Hill Stables', location: 'Versailles, KY', role: 'Head Groom', dates: '2017 – 2020',
           summary: 'Groomed at Novice through Intermediate.' }
       ],
       achievements: ['Brought three horses back from tendon injuries to competition'],
       email: 's.odell@example.com', phone: '(859) 555-0119', source: 'site', managed: true,
       stage: 'Presented', activity: act({ p: 6 }), contactReleased: false, claimed: true,
-      kaitlinSpoke: 'Spoke to Sarah on 20 October · 30 minutes',
+      kaitlinSpoke: 'Spoke to Sarah on 20 October',
       kaitlinTake: [
         'Smaller barn than yours, but the rehab work is the real thing. She is the most careful horsewoman on this list.',
         'The move to Ocala is already decided, so the relocation is not a risk.'
       ],
       references: [
-        { who: 'Current yard owner', said: 'Confirmed dates. Sorry to lose her, supports the move.', when: '21 OCT' },
+        { who: 'Current barn owner', said: 'Confirmed dates. Sorry to lose her, supports the move.', when: '21 OCT' },
         { who: 'Treating vet', said: 'Described her layup records as the best kept in the county.', when: '22 OCT' }
       ] },
 
@@ -137,7 +137,7 @@
       achievements: ['Fifteen years with only two employers'],
       email: 't.brennan@example.com', phone: '(803) 555-0164', source: 'site', managed: true,
       stage: 'Offered', activity: act({ p: 11, r: 10, i: 7, i2: 2, o: 1 }), contactReleased: true, claimed: true,
-      kaitlinSpoke: 'Spoke to Tom on 12 October · 55 minutes',
+      kaitlinSpoke: 'Spoke to Tom on 12 October',
       kaitlinTake: [
         'The most experienced person on this shortlist, and the one most likely to stay ten years.',
         'He needs sixty days to hand over properly, and will not cut that short. I would take that as a good sign.'
@@ -155,13 +155,13 @@
       resume: 'Lena-Fischer-resume.pdf', hasMedia: false, media: [],
       goals: '',
       experience: [
-        { employer: 'Dressage yard', location: 'Ocala, FL', role: 'Assistant Barn Manager', dates: '2021 – now', current: true,
+        { employer: 'Dressage barn', location: 'Ocala, FL', role: 'Assistant Barn Manager', dates: '2021 – now', current: true,
           summary: 'Second in charge of a 16-horse FEI dressage barn.' }
       ],
       achievements: [],
       email: 'l.fischer@example.com', phone: '(352) 555-0177', source: 'added_by_recruiter', managed: true,
       stage: 'Presented', activity: act({ p: 2 }), contactReleased: false, claimed: false,
-      kaitlinSpoke: 'Spoke to Lena on 27 October · 25 minutes',
+      kaitlinSpoke: 'Spoke to Lena on 27 October',
       kaitlinTake: [
         'Lena came to me by referral, not through the site. She is ready for her first barn of her own and has FEI grooming behind her.',
         'She has been invited to set up her EquiStaff profile. Until she does, you are seeing my summary and her resume.'
@@ -375,7 +375,7 @@
       // and seeding it would mean "you already applied" on the job you just applied to.
       { id: 'a1', title: 'Estate Manager', org: 'Rolling Oaks Estate', where: 'Aiken, SC',
         managed: true, status: 'Shortlisted', when: 'applied 4 days ago', disclosed: true },
-      { id: 'a2', title: 'Facility Director', org: 'Eventing yard', where: 'Middleburg, VA',
+      { id: 'a2', title: 'Facility Director', org: 'Eventing farm', where: 'Middleburg, VA',
         managed: true, status: 'Being reviewed', when: 'applied 5 days ago', disclosed: false },
       { id: 'a3', title: 'Head Groom', org: 'Clearwater Sport Horses', where: 'Lexington, KY',
         managed: false, status: 'Sent to barn', when: 'applied 1 week ago', disclosed: true }
