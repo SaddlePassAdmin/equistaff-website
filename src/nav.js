@@ -48,7 +48,7 @@
         ['talent-search.html', 'Find candidates'],
         ['billing.html', 'Billing'],
         ['company.html', 'Company'],
-        ['messages.html', 'Messages']
+        ['messages.html?as=employer', 'Messages']
       ],
       avatar: 'GO', avatarTitle: 'Golden Ocala Equestrian',
       cta: [['post-job.html', 'Post a job', true]]
@@ -75,14 +75,32 @@
     'blog-post.html': 'blog.html'
   };
 
+  // The prototype has no real sign-in, so the last portal visited stands in
+  // for "who is signed in". A signed-in job seeker browsing the public pages
+  // doesn't need the hiring links (Kaitlin, V3 feedback).
+  var ROLE_KEY = 'equistaff.prototype.role';
+  function role(v) {
+    try {
+      if (v) w.sessionStorage.setItem(ROLE_KEY, v);
+      return w.sessionStorage.getItem(ROLE_KEY);
+    } catch (e) { return null; }
+  }
+  var SEEKER_PUBLIC = {
+    portal: false,
+    logo: NAVS.public.logo,
+    items: [['jobs.html', 'Find work'], ['about.html', 'About'], ['contact.html', 'Contact']],
+    cta: [['profile.html', 'My profile', true]]
+  };
+
   function render(mount, key) {
-    var n = NAVS[key];
+    if (key === 'seeker' || key === 'employer') role(key);
+    var n = (key === 'public' && role() === 'seeker') ? SEEKER_PUBLIC : NAVS[key];
     if (!n) return;
     var cur = here();
     var me = ALIAS[cur] || cur;
 
     var links = n.items.map(function (it) {
-      var on = (it[0] === me);
+      var on = (it[0].split('?')[0] === me);
       return '<a href="' + it[0] + '"' + (on ? ' aria-current="page"' : '') + '>' + it[1] + '</a>';
     }).join('');
 
@@ -108,7 +126,7 @@
             '<path class="hdr__menuOpen" d="M4 7h16M4 12h16M4 17h16"/><path class="hdr__menuClose" d="M6 6l12 12M18 6L6 18"/></svg>' +
           '<span>Menu</span></button>';
       var panelLinks = all.map(function (it) {
-        var on = (it[0] === me);
+        var on = (it[0].split('?')[0] === me);
         return '<a href="' + it[0] + '"' + (on ? ' aria-current="page"' : '') + '>' + it[1] + '</a>';
       }).join('');
       menu += '<div class="hdr__panel" id="hdrPanel" hidden><nav aria-label="Menu">' + panelLinks + '</nav></div>';
