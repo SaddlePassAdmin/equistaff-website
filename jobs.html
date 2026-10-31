@@ -137,7 +137,7 @@
                 <span class="tag tag--neutral">24 horses</span>
               </div>
             </div>
-            <div class="row__right"><span class="row__age">3 days ago</span><a class="btn btn--primary" href="job-detail.html">View role</a></div>
+            <div class="row__right"><span class="row__age">3 days ago</span><a class="btn btn--primary" href="job-detail.html?role=barn-manager">View role</a></div>
           </article>
 
           <article class="row row--managed">
@@ -153,7 +153,7 @@
                 <span class="tag tag--neutral">Relocation supported</span>
               </div>
             </div>
-            <div class="row__right"><span class="row__age">1 day ago</span><a class="btn btn--primary" href="job-detail.html">View role</a></div>
+            <div class="row__right"><span class="row__age">1 day ago</span><a class="btn btn--primary" href="job-detail.html?role=equestrian-director">View role</a></div>
           </article>
 
           <article class="row">
@@ -168,7 +168,7 @@
                 <span class="tag tag--neutral">Travel 40–60%</span>
               </div>
             </div>
-            <div class="row__right"><span class="row__age">5 days ago</span><a class="btn btn--secondary" href="job-detail.html">View role</a></div>
+            <div class="row__right"><span class="row__age">5 days ago</span><a class="btn btn--secondary" href="job-detail.html?role=national-sales-director">View role</a></div>
           </article>
 
           <article class="row">
@@ -182,7 +182,7 @@
                 <span class="tag tag--neutral">Dressage</span>
               </div>
             </div>
-            <div class="row__right"><span class="row__age">6 days ago</span><a class="btn btn--secondary" href="job-detail.html">View role</a></div>
+            <div class="row__right"><span class="row__age">6 days ago</span><a class="btn btn--secondary" href="job-detail.html?role=head-groom">View role</a></div>
           </article>
 
           <article class="row row--managed">
@@ -196,7 +196,7 @@
                 <span class="tag tag--neutral">60+ horses</span>
               </div>
             </div>
-            <div class="row__right"><span class="row__age">1 week ago</span><a class="btn btn--primary" href="job-detail.html">View role</a></div>
+            <div class="row__right"><span class="row__age">1 week ago</span><a class="btn btn--primary" href="job-detail.html?role=facility-director">View role</a></div>
           </article>
 
           <article class="row">
@@ -210,7 +210,7 @@
                 <span class="tag tag--neutral">Eventing</span>
               </div>
             </div>
-            <div class="row__right"><span class="row__age">1 week ago</span><a class="btn btn--secondary" href="job-detail.html">View role</a></div>
+            <div class="row__right"><span class="row__age">1 week ago</span><a class="btn btn--secondary" href="job-detail.html?role=working-student">View role</a></div>
           </article>
 
         </div>
@@ -229,8 +229,8 @@
         <p class="ftr__meta">Equine recruiting since 1982 · online since 2000<br>Ocala, Florida</p>
         <p class="ftr__meta" style="color:var(--warm)">Find your next stride.</p>
       </div>
-      <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="signup.html">Create a profile</a><a href="settings.html">Job alerts</a><a href="about.html">Advice</a></div>
-      <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="index.html#process">How recruiting works</a><a href="pricing.html">Guarantee</a></div>
+      <div><h4>For job seekers</h4><a href="jobs.html">Browse roles</a><a href="signup.html">Create a profile</a><a href="settings.html">Job alerts</a><a href="blog.html">Advice</a></div>
+      <div><h4>For employers</h4><a href="request-talent.html">Request talent</a><a href="post-job.html">Post a job</a><a href="index.html#process">How recruiting works</a><a href="pricing.html">Pricing</a></div>
       <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Advice</a><a href="chatbot.html">Ask Evie</a><a href="privacy.html">Privacy</a></div>
     </div>
     <div class="ftr__bar">
@@ -250,6 +250,8 @@
 
 <script src="src/revised.js"></script>
 <script>REVISED('31 Oct', [
+  "Footer: Advice goes to the blog like every other page, and \"Guarantee\" is labelled Pricing — it only ever led to the general pricing page.",
+  "Each View role button now goes to that role’s own page, rather than all six landing on Barn Manager.",
   "Facility Director listing: \"Eventing yard\" is now \"Eventing farm\".",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
