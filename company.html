@@ -43,6 +43,15 @@
 .coHidden { background:var(--warm); color:var(--warm-ink); border-radius:var(--r-sm);
   padding:3px 8px; font:900 10px/1.5 var(--font-body); letter-spacing:.06em; text-transform:uppercase; }
 @media (max-width:1040px){ .co{grid-template-columns:1fr} .coPrev{position:static} }
+/* 31 Oct — direct-hire clients (?type=direct) don't fill a profile in. */
+.coDirect { background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  padding:var(--s-7); max-width:640px; }
+.coDirect h2 { color:#fff; font-size:1.375rem; margin:0 0 var(--s-3); }
+.coDirect p { color:var(--baby-200); margin:0 0 var(--s-5); }
+.coDirect__who { display:flex; gap:var(--s-4); align-items:center; margin-bottom:var(--s-5); }
+.coDirect__who img { width:52px; height:52px; border-radius:50%; object-fit:cover; flex:0 0 auto; }
+.coDirect__who b { color:#fff; display:block; }
+.coDirect__who span { color:var(--text-muted); font-size:var(--t-small); }
 </style>
 </head>
 <body class="portal">
@@ -53,6 +62,22 @@
 <main id="main">
   <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
     <p class="eyebrow" style="color:var(--warm)">Company profile</p>
+    <div id="direct" hidden>
+      <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Your company</h1>
+      <div class="coDirect">
+        <h2>Your recruiter handles how your company is presented &mdash; no profile needed.</h2>
+        <p>Kaitlin writes how your company comes across on every search she runs for you, and talks it through with you first.</p>
+        <div class="coDirect__who">
+          <img src="img/kaitlin.jpg" alt="">
+          <div><b>Kaitlin Veltkamp</b><span>Your recruiter</span></div>
+        </div>
+        <div class="ob__actions" style="justify-content:flex-start">
+          <a class="btn btn--onDark btn--lg" href="messages.html?as=employer">Message your recruiter</a>
+          <a class="btn btn--secondary btn--lg" href="employer.html">Back to your searches</a>
+        </div>
+      </div>
+    </div>
+    <div id="board">
     <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">What candidates see</h1>
     <p style="color:var(--baby-200);max-width:62ch;margin:0 0 var(--s-6)">
       This appears on every job you post yourself. On a managed search, the identifying half is held back until
@@ -128,16 +153,16 @@
         <div>
           <p class="coLabel">On a managed search, before contact</p>
           <div class="coCard">
-            <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
             <h4 style="color:#4A6580;font-style:italic;font-weight:400">Your business, unnamed</h4>
             <p id="pMeta2" style="margin-top:var(--s-3)">Equine nutrition — feed and supplements · Lexington, KY</p>
             <p id="pAbout2">Thirty-eight people across formulation, sales…</p>
             <p style="font-size:var(--t-small);font-style:italic;color:#4A6580;border-top:1px solid #CFE4F3;padding-top:var(--s-3);margin-top:var(--s-3)">
-              Your name, website and logo are held back, quietly — no badge announcing it. Everything that helps someone picture the job still shows.
+              Your name, website, logo and photos are held back, quietly — no badge announcing it. Everything that helps someone picture the job still shows.
             </p>
           </div>
         </div>
       </aside>
+    </div>
     </div>
   </div>
 </main>
@@ -151,6 +176,10 @@
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script>
+if (new URLSearchParams(location.search).get('type') === 'direct') {
+  document.getElementById('direct').hidden = false;
+  document.getElementById('board').hidden = true;
+}
 function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
 function draw(){
   var meta = [v('disc'), v('horses') ? v('horses') + ' horses' : '', v('loc')].filter(Boolean).join(' · ');
@@ -169,7 +198,9 @@ draw();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "Direct-hire clients (company.html?type=direct) see \"Your recruiter handles how your company is presented — no profile needed\" instead of the form, with a way to message Kaitlin. Job-board employers see the profile form as before.",
+  "The managed-search preview no longer shows a photo, matching the job page: no photos on recruiter-managed listings.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","\"See all jobs\" added to the employer card.", "On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes under the logo and the preview are 15px instead of 13px.", "The worked example is now a commercial employer — an equine nutrition business, 38 people.", "\"Discipline\" is \"Industry or discipline\"; horses is optional; \"Staff\" is \"Team size\".", "The preview now shows what a candidate actually sees — unnamed, with no badge.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>

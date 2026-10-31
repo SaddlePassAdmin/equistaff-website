@@ -63,7 +63,10 @@
 
 /* Kaitlin's offer, per EM-2 in the handoff doc */
 .pjOffer { background:rgba(249,244,237,.12); border:1px solid var(--warm);
-  border-radius:var(--r-md); padding:var(--s-5); margin-top:var(--s-6); }
+  border-radius:var(--r-md); padding:var(--s-5); margin:0 0 var(--s-5); }
+/* 31 Oct: the offer sits top right, above the preview (Kaitlin). */
+.pjOffer__row { display:flex; gap:var(--s-4); align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.pjOffer__row p { margin:0; flex:1 1 220px; }
 .pjOffer img { width:42px; height:42px; border-radius:50%; object-fit:cover; }
 .pjOffer__top { display:flex; gap:var(--s-4); align-items:center; margin-bottom:var(--s-3); }
 .pjOffer b { color:#fff; font-size:var(--t-small); }
@@ -108,8 +111,8 @@
             </div>
           </div>
           <div class="form__row">
-            <div class="field"><label for="payMin">Pay from</label><input id="payMin" oninput="draw()" placeholder="55,000"></div>
-            <div class="field"><label for="payMax">Pay to</label><input id="payMax" oninput="draw()" placeholder="68,000"></div>
+            <div class="field"><label for="payMin">Pay from</label><input id="payMin" inputmode="decimal" oninput="fmtPay(this);draw()" placeholder="55,000"></div>
+            <div class="field"><label for="payMax">Pay to</label><input id="payMax" inputmode="decimal" oninput="fmtPay(this);draw()" placeholder="68,000"></div>
           </div>
           <div class="field"><label for="payUnit">Per</label>
             <select id="payUnit" onchange="draw()"><option>year</option><option>hour</option><option>week</option><option>month</option></select>
@@ -118,7 +121,10 @@
         </div>
 
         <div class="pjGroup">
-          <h3>The yard</h3>
+          <h3>The barn</h3>
+          <div class="field"><label for="prog">About your program</label>
+            <textarea id="prog" rows="3" oninput="draw()" placeholder="Who you are, the horses and the competition calendar, how long your team tends to stay"></textarea>
+            <small>Shown first on the job page, under About the employer.</small></div>
           <div class="form__row">
             <div class="field"><label for="disc">Discipline</label>
               <input id="disc" list="discs" oninput="draw()" placeholder="Hunter / jumper">
@@ -127,12 +133,13 @@
             <div class="field"><label for="horses">Horses</label><input id="horses" oninput="draw()" placeholder="24"></div>
           </div>
           <div class="form__row">
-            <div class="field"><label for="staff">Staff on the yard</label><input id="staff" oninput="draw()" placeholder="4"></div>
+            <div class="field"><label for="staff">Staff at the barn</label><input id="staff" oninput="draw()" placeholder="4"></div>
             <div class="field"><label for="days">Days off</label><input id="days" oninput="draw()" placeholder="Two, rotating"></div>
           </div>
           <div class="field"><label for="housing">Housing</label>
             <select id="housing" onchange="draw()">
-              <option>Not specified</option><option>On-site housing included</option>
+              <option>Not specified</option><option>Onsite housing provided &mdash; private</option>
+              <option>Onsite housing provided &mdash; shared</option>
               <option>Housing allowance</option><option>No housing</option><option>Negotiable</option><option>Not applicable</option>
             </select>
             <small>Second only to pay. Candidates filter on it.</small>
@@ -149,7 +156,10 @@
           <div class="field"><label for="qual">Qualities you want</label>
             <textarea id="qual" rows="2" oninput="draw()" placeholder="Someone who communicates early rather than after the fact"></textarea></div>
           <div class="form__row">
-            <div class="field"><label for="start">Start date</label><input id="start" oninput="draw()" placeholder="Flexible, ideally November"></div>
+            <div class="field"><label for="start">Start date</label>
+              <!-- Same four timings job seekers choose from when they apply and on
+                   their profile (Available now / 30 days / 60 days / Flexible). -->
+              <select id="start" onchange="draw()"><option>Not specified</option><option>Now</option><option>Within 30 days</option><option>Within 60 days</option><option>Flexible</option></select></div>
             <div class="field"><label for="intl">Open to international applicants</label>
               <select id="intl" onchange="draw()"><option>Not specified</option><option>Yes</option><option>No</option><option>Case by case</option></select>
               <small>Lets the assistant answer visa questions for this role.</small>
@@ -162,17 +172,19 @@
           <a class="btn btn--secondary" href="my-jobs.html">Save as draft</a>
         </div>
 
+      </section>
+
+      <section class="pjPrev">
         <div class="pjOffer">
           <div class="pjOffer__top">
             <img src="img/kaitlin.jpg" alt="">
             <div><b>Want Kaitlin to write it for you?</b></div>
           </div>
-          <p>She writes the advert, runs it, and refreshes it if it goes quiet. Priced per role.</p>
-          <a class="btn btn--secondary" href="request-talent.html">Ask Kaitlin to write it</a>
+          <div class="pjOffer__row">
+            <p>She writes the advert, runs it, and refreshes it if it goes quiet. Priced per role.</p>
+            <a class="btn btn--primary" href="request-talent.html">Ask Kaitlin to write it</a>
+          </div>
         </div>
-      </section>
-
-      <section class="pjPrev">
         <div class="pjCard" id="card"></div>
         <div class="pjPrevBar">
           <span class="pill pill--review" id="prevState">Draft &middot; not live</span>
@@ -193,6 +205,20 @@
 <script src="src/nav.js"></script>
 <script>
 function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
+/* 31 Oct: commas go in as you type (55000 -> 55,000), keeping the caret
+   where it was. Cents are kept for hourly rates. */
+function fmtPay(el){
+  var raw = el.value, caret = el.selectionStart || raw.length;
+  var digitsBefore = raw.slice(0, caret).replace(/[^\d.]/g, '').length;
+  var clean = raw.replace(/[^\d.]/g, ''), dot = clean.indexOf('.');
+  var whole = (dot > -1 ? clean.slice(0, dot) : clean).replace(/^0+(?=\d)/, '');
+  var frac = dot > -1 ? '.' + clean.slice(dot + 1).replace(/\./g, '').slice(0, 2) : '';
+  var out = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + frac;
+  el.value = out;
+  var pos = 0, seen = 0;
+  while (pos < out.length && seen < digitsBefore) { if (/[\d.]/.test(out[pos])) seen++; pos++; }
+  try { el.setSelectionRange(pos, pos); } catch (e) {}
+}
 function esc(s){ return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
 function payLine(){
@@ -222,11 +248,11 @@ function draw(){
   if(!v('payMin')) tip.textContent='Add a pay range. It is worth more than everything else here combined.';
   else if(v('housing')==='Not specified') tip.textContent='Say something about housing — candidates filter on it.';
   else if(!v('duties')) tip.textContent='Add the main duties, so people can tell if the job is theirs.';
-  else if(s<80) tip.textContent='Good. The yard details are what turn a browse into an application.';
+  else if(s<80) tip.textContent='Good. The barn details are what turn a browse into an application.';
   else tip.textContent='This is a complete post. Ready to publish.';
 
   var tags='';
-  if(v('housing')==='On-site housing included'||v('housing')==='Housing allowance') tags+='<span class="tag tag--housing">Housing</span>';
+  if(/^Onsite housing|^Housing allowance/.test(v('housing'))) tags+='<span class="tag tag--housing">Housing</span>';
   if(v('type')) tags+='<span class="tag tag--neutral">'+esc(v('type'))+'</span>';
   if(v('horses')) tags+='<span class="tag tag--neutral">'+esc(v('horses'))+' horses</span>';
   if(v('disc')) tags+='<span class="tag tag--neutral">'+esc(v('disc'))+'</span>';
@@ -237,7 +263,7 @@ function draw(){
   facts += fact('Staff', v('staff'));
   facts += fact('Days off', v('days'));
   facts += fact('Housing', v('housing')!=='Not specified' ? v('housing') : '');
-  facts += fact('Start', v('start'));
+  facts += fact('Start', v('start')!=='Not specified' ? v('start') : '');
   facts += fact('International', v('intl')!=='Not specified' ? v('intl') : '');
 
   var h = '<h3>'+(v('title') ? esc(v('title')) : '<span class="pjEmpty">Your job title</span>')+'</h3>'
@@ -247,10 +273,11 @@ function draw(){
         + (tags ? '<div class="pjTags">'+tags+'</div>' : '')
         + (facts ? '<div class="pjFacts">'+facts+'</div>' : '');
 
+  if(v('prog'))   h += '<h4>About the employer</h4><p class="body">'+esc(v('prog'))+'</p>';
   if(v('duties')) h += '<h4>What you&rsquo;d be doing</h4><p class="body">'+esc(v('duties'))+'</p>';
   if(v('day'))    h += '<h4>A day in the life</h4><p class="body">'+esc(v('day'))+'</p>';
   if(v('qual'))   h += '<h4>What they&rsquo;re looking for</h4><p class="body">'+esc(v('qual'))+'</p>';
-  if(!v('duties') && !v('day') && !v('qual'))
+  if(!v('prog') && !v('duties') && !v('day') && !v('qual'))
     h += '<p class="body pjEmpty">The description appears here as you write it.</p>';
 
   document.getElementById('card').innerHTML = h;
@@ -265,7 +292,13 @@ draw();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "\"Want Kaitlin to write it for you?\" moved to the top right, above the preview.",
+  "Pay fields put the commas in as you type.",
+  "Start date is a choice of Now, Within 30 days, Within 60 days or Flexible, matching what job seekers pick when they apply.",
+  "Housing: \"Onsite housing provided\" is split into Private and Shared.",
+  "New \"About your program\" box. It shows first in the preview, under About the employer, as on the job page.",
+  "\"The yard\" is now \"The barn\".",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The notes under the form are 15px on a phone instead of 13px.", "Empty-state preview text darkened from 2.17:1 to 5.47:1.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/otherfield.js"></script>

@@ -47,13 +47,17 @@
 .msBar button{background:none;border:0;color:var(--baby-200);cursor:pointer;font:600 var(--t-label)/1 var(--font-body);
   text-decoration:underline;padding:6px}
 .msBar button:hover{color:#fff}
-.msPane{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);display:flex;flex-direction:column;min-height:60vh}
+/* 31 Oct — the thread scrolls like any messaging app: newest at the bottom,
+   older messages above it, and it opens scrolled to the latest. */
+.msPane{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--r-lg);display:flex;flex-direction:column;height:min(72vh,680px);min-height:420px}
 .msHead{padding:var(--s-5) var(--s-6);border-bottom:1px solid var(--portal-line);display:flex;gap:var(--s-4);align-items:center}
 .msHead b{color:#fff}.msHead span{color:var(--text-muted);font-size:var(--t-label);display:block}
-.msBody{padding:var(--s-6);display:grid;gap:var(--s-4);flex:1}
+.msBody{padding:var(--s-6);display:flex;flex-direction:column;gap:var(--s-4);flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.msBody > :first-child{margin-top:auto}
+.bubDay{align-self:center;font:700 10px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--baby-300)}
 .bub{max-width:76%;padding:12px 16px;border-radius:14px;font-size:var(--t-small);line-height:1.55}
-.bub--them{background:var(--portal-ground,#102F52);color:#fff;border-bottom-left-radius:4px}
-.bub--me{background:var(--baby-200);color:var(--navy-900);margin-left:auto;border-bottom-right-radius:4px;font-weight:600}
+.bub--them{background:var(--portal-ground,#102F52);color:#fff;border-bottom-left-radius:4px;align-self:flex-start}
+.bub--me{background:var(--baby-200);color:var(--navy-900);align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
 .bubTime{font-size:10px;font-family:var(--font-mono);color:var(--baby-300);margin-top:4px;display:block}
 .msFoot{border-top:1px solid var(--portal-line);padding:var(--s-4) var(--s-6);display:flex;gap:10px;align-items:center}
 .msFoot input{flex:1;background:var(--portal-sunken);border:1.5px solid var(--portal-edge);border-radius:var(--r-pill);color:#fff;padding:12px 18px;font:inherit;font-size:var(--t-small);min-height:46px}
@@ -65,6 +69,23 @@
 <body class="portal">
 <a class="skip" href="#main">Skip to content</a>
 <div id="nav" data-nav="seeker"></div>
+<script>
+/* 31 Oct — the employer nav links here too. ?as=employer (or arriving from an
+   employer page) shows the employer inbox and nav; seekers are unchanged.
+   Set before nav.js runs, which reads data-nav. */
+var AS = (function(){
+  var q = new URLSearchParams(location.search).get('as');
+  var EMP = ['employer.html','my-jobs.html','billing.html','company.html','post-job.html','applicants.html','candidate.html'];
+  var SEEK = ['profile.html','applications.html','saved.html','settings.html','jobs.html','job-detail.html','resume.html'];
+  var ref = ''; try { ref = new URL(document.referrer).pathname.split('/').pop(); } catch (e) {}
+  var v = q === 'employer' || q === 'seeker' ? q
+        : EMP.indexOf(ref) > -1 ? 'employer'
+        : SEEK.indexOf(ref) > -1 ? 'seeker' : null;
+  try { if (v) sessionStorage.setItem('equistaff.msgAs', v); else v = sessionStorage.getItem('equistaff.msgAs'); } catch (e) {}
+  return v === 'employer' ? 'employer' : 'seeker';
+})();
+if (AS === 'employer') document.getElementById('nav').setAttribute('data-nav', 'employer');
+</script>
 <main id="main">
   <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
     <h1 style="color:#fff;margin:0 0 var(--s-6);font-size:2rem">Messages</h1>
@@ -77,8 +98,8 @@
         <div class="msTabs" role="group" aria-label="Filter messages">
           <button aria-pressed="true"  onclick="tab('all',this)">All</button>
           <button aria-pressed="false" onclick="tab('unread',this)">Unread<span class="msCount" id="unreadN">0</span></button>
-          <button aria-pressed="false" onclick="tab('team',this)">Kaitlin</button>
-          <button aria-pressed="false" onclick="tab('barn',this)">Employers</button>
+          <button aria-pressed="false" onclick="tab('team',this)">Recruiting Team</button>
+          <button aria-pressed="false" onclick="tab('barn',this)" id="otherTab">Employers</button>
         </div>
         <div id="list"></div>
       </div>
@@ -94,9 +115,29 @@
   </div>
 </main>
 <script>
-var T = [
- { id:'t1', kind:'team', who:'Kaitlin Veltkamp', sub:'Owner, EquiStaff', img:'img/kaitlin.jpg', unread:true,
-   msgs:[['them','Dana — good news. Golden Ocala want to meet you about the barn manager role. Are you free Thursday morning?','Mon 9:12'],
+var T = AS === 'employer' ? [
+ { id:'e1', kind:'team', who:'Recruiting Team', sub:'Kaitlin Veltkamp · Barn Manager search', img:'img/kaitlin.jpg', unread:true,
+   msgs:[['day','Last week'],
+         ['them','Thanks for the brief on the barn manager role. I have a few people in mind already and I am calling references this week.','Tue 10:04'],
+         ['me','Great. Housing is the one-bed over the office, if that helps anyone decide.','Tue 11:20'],
+         ['them','It does. Two of them asked about exactly that.','Tue 11:42'],
+         ['day','This week'],
+         ['them','Your shortlist is ready to review in Your searches. Every reference has been checked by phone.','Mon 9:02'],
+         ['them','Let me know who you would like to meet and I will set it up.','Mon 9:03']]},
+ { id:'e2', kind:'barn', who:'Ruby Calloway', sub:'Applied to Part-time Groom · job board', img:'img/people/ruby.jpg', unread:false,
+   msgs:[['them','Hi, I saw the part-time groom post. Are weekend mornings part of it?','Thu 18:10'],
+         ['me','Saturdays, yes. Sundays are covered. Happy to talk it through.','Fri 08:45']]},
+ { id:'e3', kind:'team', who:'EquiStaff', sub:'Automatic · job post', img:'', unread:false,
+   msgs:[['them','Your Part-time Groom post has had 203 views and 2 applicants. Want Kaitlin to take a look at the wording?','Wed 07:00']]}
+] : [
+ { id:'t1', kind:'team', who:'Recruiting Team', sub:'Kaitlin Veltkamp · Owner, EquiStaff', img:'img/kaitlin.jpg', unread:true,
+   msgs:[['day','Last week'],
+         ['them','Hi Dana, thanks for applying for the barn manager role. I have your resume and I am calling your references this week.','Wed 10:15'],
+         ['me','Thank you. Best time to reach my last manager is after 2pm.','Wed 12:40'],
+         ['them','Noted, I will call her then.','Wed 12:52'],
+         ['them','Both references came back glowing. I have put you forward.','Fri 16:05'],
+         ['day','This week'],
+         ['them','Dana — good news. Golden Ocala want to meet you about the barn manager role. Are you free Thursday morning?','Mon 9:12'],
          ['them','I\u2019ve sent them your references already, so this is just a conversation, not an interview in the scary sense.','Mon 9:13']]},
  { id:'t2', kind:'barn', who:'Clearwater Sport Horses', sub:'Head Groom · you applied 1 week ago', img:'', unread:false,
    msgs:[['them','Thanks for applying. We\u2019re working through applications this week and will come back to you either way.','Thu 14:02'],
@@ -111,7 +152,7 @@ function paintList(){
   var rows = T.filter(function(t){ return VIEW==='all' ? true : VIEW==='unread' ? t.unread : t.kind===VIEW; });
   document.getElementById('list').innerHTML = rows.map(function(t){
     var av = t.img ? '<span class="msAv"><img src="'+t.img+'" alt=""></span>' : '<span class="msAv">'+initials(t.who)+'</span>';
-    var last = t.msgs[t.msgs.length-1];
+    var last = t.msgs.filter(function(m){ return m[0] !== 'day'; }).slice(-1)[0];
     var cls = 'msItem ' + (t.unread ? 'msItem--unread' : 'msItem--read');
     var from = t.kind === 'team' ? ' <span style="font:700 10px/1 var(--font-body);letter-spacing:.07em;'
              + 'text-transform:uppercase;color:var(--warm)">· EquiStaff</span>' : '';
@@ -132,17 +173,20 @@ function paintPane(){
   var t = T.find(function(x){return x.id===CUR;});
   var av = t.img ? '<span class="msAv"><img src="'+t.img+'" alt=""></span>' : '<span class="msAv">'+initials(t.who)+'</span>';
   document.getElementById('pHead').innerHTML = av + '<div><b>'+esc(t.who)+'</b><span>'+esc(t.sub)+'</span></div>';
-  document.getElementById('pBody').innerHTML = t.msgs.map(function(m){
+  var body = document.getElementById('pBody');
+  body.innerHTML = t.msgs.map(function(m){
+    if (m[0] === 'day') return '<p class="bubDay">'+esc(m[1])+'</p>';
     return '<div class="bub bub--'+(m[0]==='me'?'me':'them')+'">'+esc(m[1])+'<span class="bubTime">'+m[2]+'</span></div>';
   }).join('');
+  body.scrollTop = body.scrollHeight;  // open on the newest message
 }
+if (AS === 'employer') { document.getElementById('otherTab').textContent = 'Candidates'; }
 function open_(id){ CUR=id; var t=T.find(function(x){return x.id===id;}); t.unread=false; paintList(); paintPane(); }
 function tab(v,b){ VIEW=v; document.querySelectorAll('.msTabs button').forEach(function(x){x.setAttribute('aria-pressed','false');}); b.setAttribute('aria-pressed','true'); paintList(); }
 function send(){
   var i=document.getElementById('say'), v=i.value.trim(); if(!v) return;
   T.find(function(x){return x.id===CUR;}).msgs.push(['me',v,'Just now']);
   i.value=''; paintList(); paintPane();
-  document.getElementById('pBody').scrollTop = 99999;
 }
 paintList(); paintPane();
 </script>
@@ -163,7 +207,10 @@ function markAllRead() {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "The \"Kaitlin\" filter and thread are now \"Recruiting Team\".",
+  "Threads scroll like normal messaging: newest at the bottom, older messages above, and it opens on the latest.",
+  "Employers get their own inbox (from the employer pages, or ?as=employer): the employer nav, the recruiting team about their search, and candidates in place of employers. Job seekers see the same inbox as before.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The reply box and Send button fit on smaller phones, message previews are 15px, and \"Mark all as read\" is easier to tap.", "Unread is no longer an 8px dot. Unread rows get a left accent, a brighter ground and a bolder name.", "New Unread filter with a live count, plus Mark all as read.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>

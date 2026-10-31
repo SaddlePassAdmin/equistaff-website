@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Request a call | EquiStaff</title>
-<meta name="description" content="Fifteen minutes with Kaitlin — whether you are hiring or looking.">
+<meta name="description" content="An hour with Kaitlin — whether you are hiring or looking.">
 <link rel="canonical" href="https://www.equistaff.com/book.html">
 <meta property="og:type" content="website"><meta property="og:site_name" content="EquiStaff">
 <meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
@@ -46,7 +46,7 @@
 
   <div id="pick">
     <p class="eyebrow">Request a call</p>
-    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Fifteen minutes with Kaitlin</h1>
+    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">An hour with Kaitlin</h1>
     <p style="color:var(--text-muted);max-width:54ch;margin:0">She keeps mornings free for new conversations. Which one are you?</p>
     <div class="bkPick">
       <a class="bkCard" href="#" onclick="event.preventDefault();who('employer')">
@@ -59,7 +59,7 @@
   <div id="slots" hidden>
     <p class="eyebrow" id="slotsKind">Request a call</p>
     <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">Tell her when suits you</h1>
-    <p style="color:var(--text-muted);margin:0" id="slotsNote">Fifteen minutes. She confirms by the end of the next working day.</p>
+    <p style="color:var(--text-muted);margin:0" id="slotsNote">An hour-long call. She reviews your note, then emails you to book a time.</p>
     <div class="bkWho">
       <img src="img/kaitlin.jpg" alt="">
       <div><b style="display:block;font-family:var(--font-display);font-size:1.125rem">Kaitlin Veltkamp</b>
@@ -131,8 +131,8 @@ function who(k){
   KIND=k;
   document.getElementById('slotsKind').textContent = k==='employer' ? 'Hiring' : 'Looking for work';
   document.getElementById('slotsNote').textContent = k==='employer'
-    ? 'Bring the role if you have it — she can usually tell you on the call whether a listing would be enough.'
-    : 'Nothing to prepare. She will ask what you want next and what you are avoiding.';
+    ? 'An hour-long call. Bring the role if you have it — she reviews your note, then emails you to book a time.'
+    : 'An hour-long call, nothing to prepare. She reviews your note, then emails you to book a time.';
   show('slots');
 }
 function done(){
@@ -140,8 +140,8 @@ function done(){
   var how  = document.getElementById('bkHow').value;
   document.getElementById('doneLine').textContent = when
     ? 'Kaitlin has your availability — ' + when.replace(/\s+/g,' ') +
-      ' — and will confirm a time by ' + how.toLowerCase() + ' before the end of the next working day.'
-    : 'Kaitlin will be in touch by ' + how.toLowerCase() + ' before the end of the next working day to find a time.';
+      ' — and will review your note, then email you to book an hour-long call (' + how.toLowerCase() + ').'
+    : 'Kaitlin will review your note, then email you to book an hour-long call (' + how.toLowerCase() + ').';
   show('done');
 }
 function back(){ show('pick'); }
@@ -149,7 +149,9 @@ function back(){ show('pick'); }
 <script src="src/icons.js"></script>
 <script src="src/chat.js"></script>
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "The call is an hour, not fifteen minutes: heading, page description and the note under it all say so.",
+  "Kaitlin reviews your note, then emails you to book a time. The page no longer promises she will confirm by the end of the next working day.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
   "Ask Evie added to the footer, so hiding the floating button never loses her.",
