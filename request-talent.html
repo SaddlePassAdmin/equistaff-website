@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css"><link rel="stylesheet" href="src/screens.css"><link rel="stylesheet" href="src/upload.css">
 <style>
 /* REQUEST TALENT — the front half of the recruiter-managed flow.
    Field order follows EM-Q1 to EM-Q8 in the chatbot engineering handoff, so
@@ -33,6 +33,12 @@
 .proofRow svg { flex:0 0 auto; margin-top:2px; }
 .proofRow b { display:block; font-size:var(--t-small); }
 .proofRow span { font-size:var(--t-small); color:var(--text-muted); }
+/* 1 Nov: upload a job description first, then check what we read. */
+#rtUp { margin-top:var(--s-5); }
+.rtFrom { display:flex; gap:var(--s-3); align-items:flex-start; background:var(--ok-bg); color:var(--ok-ink);
+  border-radius:var(--r-md); padding:var(--s-3) var(--s-4); font-size:var(--t-small); margin:var(--s-5) 0 0; }
+.rtFrom svg { flex:0 0 auto; margin-top:2px; }
+.rtFrom b { word-break:break-all; }
 </style>
 </head>
 <body class="has-chat">
@@ -63,9 +69,17 @@
 
         <!-- STEP 1 · EM-Q1 to EM-Q4 -->
         <div id="s1">
-          <h2 style="font-size:1.5rem">What are you hiring for?</h2>
-          <p style="color:var(--text-muted);font-size:var(--t-small)">Four questions. You can be rough on the pay &mdash; a range is enough to start.</p>
+          <div id="rtIntro">
+            <h2 style="font-size:1.5rem">What are you hiring for?</h2>
+            <p id="rtLedeUp" style="color:var(--text-muted);font-size:var(--t-small)">Have a job description? Upload it and we&rsquo;ll fill in this form for you.</p>
+            <p id="rtLede" hidden style="color:var(--text-muted);font-size:var(--t-small)">Four questions. You can be rough on the pay &mdash; a range is enough to start.</p>
+          </div>
 
+          <!-- 1 Nov: upload first (src/upload.js), the form behind it. -->
+          <div id="rtUp"></div>
+
+          <div id="rtFields" hidden>
+          <p class="rtFrom" id="fromFile" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Filled in from <b id="fromName"></b>. Check the rest, then carry on.</span></p>
           <div class="field" style="margin-top:var(--s-5)">
             <label for="barn">Barn or business name <span style="color:var(--err-ink)">*</span></label>
             <input id="barn" required placeholder="Golden Ocala Equestrian">
@@ -112,6 +126,7 @@
 
           <div class="ob__actions">
             <button class="btn btn--primary btn--lg" type="button" onclick="go(2)">Next</button>
+          </div>
           </div>
         </div>
 
@@ -229,6 +244,7 @@
 
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+<script src="src/upload.js"></script>
 <script>
 function go(n){
   [1,2,3,4].forEach(function(i){ document.getElementById('s'+i).hidden = (i!==n); });
@@ -258,10 +274,35 @@ function send(){
     'Your request for ' + r + ' is in. Kaitlin reviews it herself, then emails you to book an hour-long call.';
   go(4);
 }
+function openForm(){
+  document.getElementById('rtUp').hidden = true;
+  document.getElementById('rtFields').hidden = false;
+  document.getElementById('rtLedeUp').hidden = true;
+  document.getElementById('rtLede').hidden = false;
+  document.getElementById('rtIntro').hidden = false;
+}
+ESUpload.mount('rtUp', {
+  kind: 'job',
+  manual: 'or fill it in yourself',
+  onManual: openForm,
+  onStage: function(st){ document.getElementById('rtIntro').hidden = (st === 'review'); },
+  onDone: function(j){
+    var duties = j.duties + (j.benefits ? '\n\nBenefits: ' + j.benefits : '');
+    var set = { role:j.title, loc:j.location, pay:j.pay, duties:duties, qualities:j.requirements };
+    Object.keys(set).forEach(function(id){ if (set[id]) document.getElementById(id).value = set[id]; });
+    document.getElementById('fromName').textContent = j.file;
+    document.getElementById('fromFile').hidden = false;
+    openForm();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+});
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "Step 1 opens with \"Upload a job description\": choose a PDF or Word file and we read it, then show \"Check what we pulled\" (title, location, pay, duties, requirements, benefits), all editable.",
+  "\"Looks right, continue\" fills in the form: role, location, pay and duties on step 1, and the requirements under \"What qualities matter most\" on step 3.",
+  "\"Or fill it in yourself\" opens the four questions, as before.",
   "The roles list is labelled as examples, not Kaitlin's full list.",
   "Housing now starts on \"Not applicable\".",
   "\"How many staff?\" is now \"How big is your company?\"",

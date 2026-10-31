@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css"><link rel="stylesheet" href="src/roles.css"><link rel="stylesheet" href="src/upload.css">
 <style>
 /* POST A JOB — the complete-posting field list from the chatbot engineering
    handoff, in the order an employer can actually answer it. The preview is
@@ -72,6 +72,14 @@
 .pjOffer b { color:#fff; font-size:var(--t-small); }
 .pjOffer p { color:var(--baby-200); font-size:var(--t-small); margin:0 0 var(--s-4); }
 
+/* 1 Nov: upload a job description first; the form waits behind it. */
+.pj [hidden] { display:none !important; }
+.pjUpIntro h2 { margin-bottom:var(--s-2); }
+.pjFrom { display:flex; gap:var(--s-3); align-items:flex-start; background:var(--ok-bg); color:var(--ok-ink);
+  border-radius:var(--r-md); padding:var(--s-3) var(--s-4); font-size:var(--t-small); margin:0 0 var(--s-5); }
+.pjFrom svg { flex:0 0 auto; margin-top:2px; }
+.pjFrom b { word-break:break-all; }
+
 @media (max-width:1040px){ .pj{grid-template-columns:1fr} .pjPrev,.pjMeter{position:static} }
 </style>
 </head>
@@ -92,6 +100,23 @@
     <div class="pj">
       <section class="pjForm">
 
+        <!-- 1 Nov: Facility or Business. Five fields change name and the
+             housing question becomes travel. -->
+        <div id="roleKind"></div>
+
+        <!-- 1 Nov: upload first (Kaitlin). We read it, they check it,
+             then the normal form opens already filled in. -->
+        <div id="pjUp">
+          <div class="pjUpIntro" id="pjUpIntro">
+            <h2>Have a job description already?</h2>
+            <p class="pjLede">Upload it and we&rsquo;ll fill in this form for you. You can change anything before it goes live.</p>
+          </div>
+          <div id="upHost"></div>
+        </div>
+
+        <div id="pjBody" hidden>
+        <p class="pjFrom" id="fromFile" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Filled in from <b id="fromName"></b>. Add the details it didn&rsquo;t cover.</span></p>
+
         <div class="pjMeter">
           <div class="pjMeter__top"><b>Post completeness</b><span id="pcNum">0%</span></div>
           <div class="pjMeter__bar"><div class="pjMeter__fill" id="pcFill"></div></div>
@@ -103,6 +128,7 @@
           <div class="field"><label for="title">Job title</label>
             <input id="title" list="roles" oninput="draw()" placeholder="Barn Manager">
             <datalist id="roles"><option>Groom</option><option>Barn manager</option><option>Assistant trainer</option><option>Trainer</option><option>Exercise rider</option><option>Working student</option><option>Night watch</option><option>Foreman</option><option>Breeding manager</option><option>Vet technician</option><option>Farrier</option><option>Instructor</option></datalist>
+            <datalist id="rolesBiz"><option>Territory sales manager</option><option>Regional sales manager</option><option>Account manager</option><option>Sales representative</option><option>Marketing manager</option><option>Brand manager</option><option>Social media manager</option><option>Customer service</option><option>Office manager</option><option>Product specialist</option><option>Business development manager</option></datalist>
           </div>
           <div class="form__row">
             <div class="field"><label for="loc">Location</label><input id="loc" oninput="draw()" placeholder="Ocala, FL"></div>
@@ -121,28 +147,25 @@
         </div>
 
         <div class="pjGroup">
-          <h3>The barn</h3>
-          <div class="field"><label for="prog">About your program</label>
+          <h3 id="gBarn">The barn</h3>
+          <div class="field"><label for="prog" id="lProg">About your program</label>
             <textarea id="prog" rows="3" oninput="draw()" placeholder="Who you are, the horses and the competition calendar, how long your team tends to stay"></textarea>
-            <small>Shown first on the job page, under About the employer.</small></div>
+            <small id="hProg">Shown first on the job page, under About the employer.</small></div>
           <div class="form__row">
-            <div class="field"><label for="disc">Discipline</label>
+            <div class="field"><label for="disc" id="lDisc">Discipline</label>
               <input id="disc" list="discs" oninput="draw()" placeholder="Hunter / jumper">
               <datalist id="discs"><option>Hunter</option><option>Show Jumping</option><option>Dressage</option><option>3-Day Eventing</option><option>Equitation</option><option>Western Pleasure</option><option>Reining</option><option>Barrel Racing</option><option>Thoroughbred Industry</option><option>Breeding</option><option>Polo</option><option>General Horse Care</option></datalist>
+              <datalist id="industries"><option>Pharmaceutical sales</option><option>Feed &amp; nutrition</option><option>Tack &amp; equipment</option><option>Insurance</option><option>Marketing</option><option>Technology</option><option>Veterinary</option><option>Other</option></datalist>
             </div>
-            <div class="field"><label for="horses">Horses</label><input id="horses" oninput="draw()" placeholder="24"></div>
+            <div class="field"><label for="horses" id="lHorses">Horses</label><input id="horses" oninput="draw()" placeholder="24"></div>
           </div>
           <div class="form__row">
-            <div class="field"><label for="staff">Staff at the barn</label><input id="staff" oninput="draw()" placeholder="4"></div>
-            <div class="field"><label for="days">Days off</label><input id="days" oninput="draw()" placeholder="Two, rotating"></div>
+            <div class="field"><label for="staff" id="lStaff">Staff on the barn</label><input id="staff" oninput="draw()" placeholder="4"></div>
+            <div class="field"><label for="days" id="lDays">Days off</label><input id="days" oninput="draw()" placeholder="Two, rotating"></div>
           </div>
-          <div class="field"><label for="housing">Housing</label>
-            <select id="housing" onchange="draw()">
-              <option>Not specified</option><option>Onsite housing provided &mdash; private</option>
-              <option>Onsite housing provided &mdash; shared</option>
-              <option>Housing allowance</option><option>No housing</option><option>Negotiable</option><option>Not applicable</option>
-            </select>
-            <small>Second only to pay. Candidates filter on it.</small>
+          <div class="field"><label for="housing" id="lHousing">Housing</label>
+            <select id="housing" onchange="draw()"></select>
+            <small id="hHousing">Second only to pay. Candidates filter on it.</small>
           </div>
         </div>
 
@@ -155,6 +178,8 @@
             <small>Optional, and the thing candidates say they most want and least often get.</small></div>
           <div class="field"><label for="qual">Qualities you want</label>
             <textarea id="qual" rows="2" oninput="draw()" placeholder="Someone who communicates early rather than after the fact"></textarea></div>
+          <div class="field"><label for="bens">Benefits</label>
+            <textarea id="bens" rows="2" oninput="draw()" placeholder="Days off, show travel, health cover, a vehicle"></textarea></div>
           <div class="form__row">
             <div class="field"><label for="start">Start date</label>
               <!-- Same four timings job seekers choose from when they apply and on
@@ -170,6 +195,7 @@
         <div class="ob__actions">
           <button class="btn btn--onDark btn--lg" type="button" onclick="publish()">Publish to the board</button>
           <a class="btn btn--secondary" href="my-jobs.html">Save as draft</a>
+        </div>
         </div>
 
       </section>
@@ -203,6 +229,8 @@
 
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+<script src="src/roles.js"></script>
+<script src="src/upload.js"></script>
 <script>
 function v(id){ var e=document.getElementById(id); return e ? e.value.trim() : ''; }
 /* 31 Oct: commas go in as you type (55000 -> 55,000), keeping the caret
@@ -229,6 +257,42 @@ function payLine(){
 }
 
 /* The facts that drive completeness are the ones the audit found missing. */
+/* 1 Nov: Facility or Business. Same inputs, renamed, and each kind keeps
+   its own answers so flipping the toggle never loses what was typed. */
+var MODE = 'facility';
+var KIND = {
+  facility: { group:'The barn', prog:'About your program', progPh:'Who you are, the horses and the competition calendar, how long your team tends to stay',
+    disc:'Discipline', discPh:'Hunter / jumper', discList:'discs', horses:'Horses', horsesPh:'24',
+    staff:'Staff on the barn', staffPh:'4', days:'Days off', daysPh:'Two, rotating',
+    housing:'Housing', housingHint:'Second only to pay. Candidates filter on it.', options: ROLES.HOUSING,
+    titles:'roles', titlePh:'Barn Manager' },
+  business: { group:'The company', prog:'About your company', progPh:'What you make or sell, who your customers are, how the team is set up',
+    disc:'Industry focus', discPh:'Feed & nutrition', discList:'industries', horses:'Company size', horsesPh:'40 people',
+    staff:'Direct reports', staffPh:'3', days:'Work schedule', daysPh:'Monday to Friday, some weekend shows',
+    housing:'Travel requirements', housingHint:'How much of the job is on the road. Candidates filter on it.', options: ROLES.TRAVEL,
+    titles:'rolesBiz', titlePh:'Territory Sales Manager' }
+};
+var SWAP = ['prog','disc','horses','staff','days','housing'];
+var KEPT = { facility:{}, business:{} };
+function setMode(m){
+  KEPT[MODE] = {}; SWAP.forEach(function(id){ KEPT[MODE][id] = document.getElementById(id).value; });
+  MODE = m === 'business' ? 'business' : 'facility';
+  var k = KIND[MODE];
+  function lab(id, t){ document.getElementById(id).textContent = t; }
+  lab('gBarn', k.group); lab('lProg', k.prog); lab('lDisc', k.disc); lab('lHorses', k.horses);
+  lab('lStaff', k.staff); lab('lDays', k.days); lab('lHousing', k.housing); lab('hHousing', k.housingHint);
+  lab('hProg', 'Shown first on the job page, under ' + (MODE==='business' ? 'About the company.' : 'About the employer.'));
+  var ph = { prog:k.progPh, disc:k.discPh, horses:k.horsesPh, staff:k.staffPh, days:k.daysPh, title:k.titlePh };
+  Object.keys(ph).forEach(function(id){ document.getElementById(id).placeholder = ph[id]; });
+  document.getElementById('disc').setAttribute('list', k.discList);
+  document.getElementById('title').setAttribute('list', k.titles);
+  var sel = document.getElementById('housing');
+  sel.innerHTML = '<option value="">Choose one</option>' + k.options.map(function(o){ return '<option>'+esc(o)+'</option>'; }).join('');
+  var back = KEPT[MODE];
+  SWAP.forEach(function(id){ document.getElementById(id).value = back[id] || ''; });
+  draw();
+}
+
 var WEIGHTS = [['title',18],['loc',12],['payMin',18],['duties',14],['housing',10],
                ['disc',8],['horses',6],['days',5],['start',5],['day',4]];
 function score(){
@@ -246,23 +310,30 @@ function draw(){
   document.getElementById('pcFill').style.width = s+'%';
   var tip=document.getElementById('pcTip');
   if(!v('payMin')) tip.textContent='Add a pay range. It is worth more than everything else here combined.';
-  else if(v('housing')==='Not specified') tip.textContent='Say something about housing — candidates filter on it.';
+  else if(!v('housing')) tip.textContent = MODE==='business' ? 'Say how much travel there is — candidates filter on it.' : 'Say something about housing — candidates filter on it.';
   else if(!v('duties')) tip.textContent='Add the main duties, so people can tell if the job is theirs.';
-  else if(s<80) tip.textContent='Good. The barn details are what turn a browse into an application.';
+  else if(s<80) tip.textContent = MODE==='business' ? 'Good. The company details are what turn a browse into an application.' : 'Good. The barn details are what turn a browse into an application.';
   else tip.textContent='This is a complete post. Ready to publish.';
 
+  var biz = MODE==='business', k = KIND[MODE];
   var tags='';
-  if(/^Onsite housing|^Housing allowance/.test(v('housing'))) tags+='<span class="tag tag--housing">Housing</span>';
+  if(!biz && /^(Private|Shared|Off-site help)$/.test(v('housing'))) tags+='<span class="tag tag--housing">Housing</span>';
   if(v('type')) tags+='<span class="tag tag--neutral">'+esc(v('type'))+'</span>';
-  if(v('horses')) tags+='<span class="tag tag--neutral">'+esc(v('horses'))+' horses</span>';
+  if(v('horses')) tags+='<span class="tag tag--neutral">'+esc(v('horses'))+(biz?'':' horses')+'</span>';
   if(v('disc')) tags+='<span class="tag tag--neutral">'+esc(v('disc'))+'</span>';
+  if(biz && v('housing') && v('housing')!=='None') tags+='<span class="tag tag--neutral">Travel: '+esc(v('housing'))+'</span>';
 
   var facts='';
   function fact(l,val){ return val ? '<div class="pjFact"><b>'+l+'</b><span>'+esc(val)+'</span></div>' : ''; }
-  facts += fact('Horses', v('horses') && (v('horses')+(v('disc')?' · '+v('disc'):'')));
-  facts += fact('Staff', v('staff'));
-  facts += fact('Days off', v('days'));
-  facts += fact('Housing', v('housing')!=='Not specified' ? v('housing') : '');
+  if (biz) {
+    facts += fact('Industry', v('disc'));
+    facts += fact('Company size', v('horses'));
+  } else {
+    facts += fact('Horses', v('horses') && (v('horses')+(v('disc')?' · '+v('disc'):'')));
+  }
+  facts += fact(biz ? 'Direct reports' : 'Staff', v('staff'));
+  facts += fact(k.days, v('days'));
+  facts += fact(biz ? 'Travel' : 'Housing', v('housing'));
   facts += fact('Start', v('start')!=='Not specified' ? v('start') : '');
   facts += fact('International', v('intl')!=='Not specified' ? v('intl') : '');
 
@@ -273,11 +344,12 @@ function draw(){
         + (tags ? '<div class="pjTags">'+tags+'</div>' : '')
         + (facts ? '<div class="pjFacts">'+facts+'</div>' : '');
 
-  if(v('prog'))   h += '<h4>About the employer</h4><p class="body">'+esc(v('prog'))+'</p>';
+  if(v('prog'))   h += '<h4>'+(biz?'About the company':'About the employer')+'</h4><p class="body">'+esc(v('prog'))+'</p>';
   if(v('duties')) h += '<h4>What you&rsquo;d be doing</h4><p class="body">'+esc(v('duties'))+'</p>';
   if(v('day'))    h += '<h4>A day in the life</h4><p class="body">'+esc(v('day'))+'</p>';
   if(v('qual'))   h += '<h4>What they&rsquo;re looking for</h4><p class="body">'+esc(v('qual'))+'</p>';
-  if(!v('prog') && !v('duties') && !v('day') && !v('qual'))
+  if(v('bens'))   h += '<h4>Benefits</h4><p class="body">'+esc(v('bens'))+'</p>';
+  if(!v('prog') && !v('duties') && !v('day') && !v('qual') && !v('bens'))
     h += '<p class="body pjEmpty">The description appears here as you write it.</p>';
 
   document.getElementById('card').innerHTML = h;
@@ -288,11 +360,40 @@ function publish(){
   ES.addPost({ title: v('title'), where: v('loc'), pay: payLine().replace(/<[^>]+>/g,'').trim() });
   location.href = 'my-jobs.html';
 }
-draw();
+
+function openForm(){
+  document.getElementById('pjUp').hidden = true;
+  document.getElementById('pjBody').hidden = false;
+}
+ROLES.mountToggle('roleKind', MODE, setMode);
+ESUpload.mount('upHost', {
+  kind: 'job',
+  mode: function(){ return MODE; },
+  manual: 'or fill it in yourself',
+  onManual: openForm,
+  onStage: function(st){ document.getElementById('pjUpIntro').hidden = (st === 'review'); },
+  onDone: function(j){
+    var pay = ESUpload.splitPay(j.pay);
+    var set = { title:j.title, loc:j.location, payMin:pay.min, payMax:pay.max, duties:j.duties, qual:j.requirements, bens:j.benefits };
+    Object.keys(set).forEach(function(id){ if (set[id]) document.getElementById(id).value = set[id]; });
+    if (pay.unit) document.getElementById('payUnit').value = pay.unit;
+    document.getElementById('fromName').textContent = j.file;
+    document.getElementById('fromFile').hidden = false;
+    openForm(); draw();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+});
+setMode(MODE);
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "New toggle at the top: Equine Facility Roles or Equine Business Roles. The preview follows it.",
+  "Business roles rename five fields: Discipline is Industry focus, Horses is Company size, Staff on the barn is Direct reports, Days off is Work schedule, and Housing is Travel requirements (None, Occasional, 25% or less, 50% or less, 75% or less, 76%+). \"The barn\" becomes \"The company\".",
+  "Housing for facility roles is now Not applicable, Private, Shared or Off-site help. \"Staff at the barn\" is now \"Staff on the barn\".",
+  "The first thing you see is \"Have a job description already?\" Upload a PDF or Word file and we read it, then show \"Check what we pulled\": title, location, pay, duties, requirements and benefits, all editable. \"Looks right, continue\" opens the form already filled in.",
+  "\"Or fill it in yourself\" opens the empty form, as before.",
+  "New Benefits box, shown on the preview.",
   "\"Want Kaitlin to write it for you?\" moved to the top right, above the preview.",
   "Pay fields put the commas in as you type.",
   "Start date is a choice of Now, Within 30 days, Within 60 days or Flexible, matching what job seekers pick when they apply.",

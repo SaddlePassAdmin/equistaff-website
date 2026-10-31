@@ -17,10 +17,16 @@
 <link rel="stylesheet" href="src/tokens.css">
 <link rel="stylesheet" href="src/styles.css">
 <link rel="stylesheet" href="src/screens.css">
+<link rel="stylesheet" href="src/upload.css">
 <style>
 /* 31 Oct: .btn and .pick set their own display, which beats the hidden
    attribute. Hidden means hidden on this page. */
 #main [hidden] { display:none !important; }
+/* 1 Nov: upload, then check what we read, inside the resume field. */
+.cvUp { margin-top:var(--s-4); }
+.cvUp .up__title { font-size:1.25rem; }
+.cvUp:has(.up__head) { border:1.5px solid var(--border-subtle); border-radius:var(--r-lg); padding:var(--s-5); }
+@media (max-width:680px){ .cvUp:has(.up__head) { padding:var(--s-4); } }
 </style>
 </head>
 <body>
@@ -80,14 +86,15 @@
               <label>Your resume</label>
               <div id="cvHave" hidden style="border:1px solid var(--ok-ink);background:var(--ok-bg);border-radius:var(--r-md);padding:var(--s-4) var(--s-5)">
                 <b style="color:var(--ok-ink)">Resume on file</b>
-                <span style="display:block;font-size:var(--t-small);color:var(--text-muted);margin-top:2px">Built with our resume builder. <a href="resume.html?return=onboarding.html" onclick="keepDraft()" style="color:var(--text-link)">Edit it</a></span>
+                <span style="display:block;font-size:var(--t-small);color:var(--text-muted);margin-top:2px"><span id="cvHow">Built with our resume builder.</span> <a href="resume.html?return=onboarding.html" onclick="keepDraft()" style="color:var(--text-link)">Edit it</a></span>
               </div>
               <div id="cvNeed" class="pick">
                 <label><input type="radio" name="cv" value="build" checked onchange="cvPick()"><span><b>Build one with us</b><span>A few questions about your last jobs. We write it up and bring you straight back here.</span></span></label>
-                <label><input type="radio" name="cv" value="upload" onchange="cvPick()"><span><b>Upload my resume</b><span>PDF or Word, up to 10MB.</span></span></label>
+                <label><input type="radio" name="cv" value="upload" onchange="cvPick()"><span><b>Upload my resume</b><span>PDF or Word, up to 10MB. We read it for you, so there&rsquo;s nothing to retype.</span></span></label>
               </div>
-              <a class="btn btn--secondary" id="cvBuild" href="resume.html?return=onboarding.html" onclick="keepDraft()" style="margin-top:var(--s-3)">Build my resume</a>
-              <input id="cvFile" type="file" accept=".pdf,.doc,.docx" hidden style="margin-top:var(--s-3)" onchange="cvErr(false)">
+              <a class="btn btn--secondary" id="cvBuild" href="resume.html?return=onboarding.html&amp;start=build" onclick="keepDraft()" style="margin-top:var(--s-3)">Build my resume</a>
+              <!-- 1 Nov: upload, then "Check what we pulled" (src/upload.js). -->
+              <div id="cvUp" class="cvUp" hidden></div>
               <small id="cvErr" hidden style="color:var(--err-ink);font-weight:700">A resume is needed to apply. Build one with us or upload yours.</small>
             </div>
             <div class="field"><label for="r1">Most recent job</label><input id="r1" placeholder="Groom · Live Oak Stables · 2024–now"><small>Role, barn, roughly when. Rough is fine.</small></div>
@@ -239,6 +246,8 @@ function goTo(n){
 </script>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+<script src="src/skills.js"></script>
+<script src="src/upload.js"></script>
 <script>
 /* 31 Oct: an account is part of applying now (Kaitlin's call), and a resume
    is required. Leaving for the resume builder keeps what was typed here in
@@ -270,22 +279,51 @@ function makeAccount(){
 function cvPick(){
   var up = document.querySelector('input[name="cv"][value="upload"]').checked;
   document.getElementById('cvBuild').hidden = up;
-  document.getElementById('cvFile').hidden = !up;
+  document.getElementById('cvUp').hidden = !up;
   cvErr(false);
 }
 function cvErr(on){ document.getElementById('cvErr').hidden = !on; }
 function hasResume(){
-  if (ES.resume()) return true;
-  var f = document.getElementById('cvFile');
-  return !!(f && f.files && f.files.length);
+  return !!ES.resume();
 }
 function paintResume(){
-  var have = !!ES.resume();
+  var r = ES.resume(), have = !!r;
   document.getElementById('cvHave').hidden = !have;
   document.getElementById('cvNeed').hidden = have;
   document.getElementById('cvBuild').hidden = have;
-  document.getElementById('cvFile').hidden = true;
+  document.getElementById('cvUp').hidden = true;
+  if (r && r.file) document.getElementById('cvHow').textContent = 'Read from ' + r.file + ' and checked by you.';
 }
+
+/* 1 Nov: "Upload my resume" reads the file and shows what we pulled,
+   pre-filled with what was typed on step 1. Continuing saves it as the
+   resume on file and fills in the two most recent jobs below. */
+ESUpload.mount('cvUp', {
+  kind: 'resume',
+  skillsNote: 'You can add more on your profile.',
+  sample: function(kind, mode){
+    var r = JSON.parse(JSON.stringify(ESUpload.SAMPLES.resume.facility));
+    var name = (fval('fn') + ' ' + fval('ln')).trim();
+    if (name) r.name = name;
+    if (fval('em')) r.email = fval('em');
+    if (fval('ph')) r.phone = fval('ph');
+    if (fval('lo')) r.location = fval('lo');
+    return r;
+  },
+  onDone: function(r){
+    ES.setResume({ file: r.file, name: r.name, phone: r.phone, email: r.email, location: r.location,
+      experience: r.history.map(function(j){
+        return { role: j.role, yard: [j.employer, j.location].filter(Boolean).join(', '), years: j.dates, did: j.did };
+      }),
+      skills: r.skills, roleKind: 'facility' });
+    ['r1','r2'].forEach(function(id, i){
+      var j = r.history[i], e = document.getElementById(id);
+      if (j && e && !e.value) e.value = [j.role, j.employer, j.dates].filter(Boolean).join(' · ');
+    });
+    paintResume();
+    document.getElementById('cvField').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+});
 function sendApplication(){
   if (!hasResume()) {
     cvErr(true);
@@ -318,7 +356,10 @@ function urg(on) {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "\"Upload my resume\" now opens a drop zone. Choose a PDF or Word file and we read it, then show \"Check what we pulled\": your name, phone, email, location, work history and the skills we recognized, each one editable.",
+  "\"Looks right, continue\" puts the resume on file and fills in your two most recent jobs.",
+  "\"Build my resume\" goes straight to the builder's questions, skipping its upload step.",
   "An account is now part of applying, not an optional extra afterwards: step 1 asks you to choose a password. (This reverses the 29 Oct \"account after applying\" change, at Kaitlin's request.)",
   "Phone and location are required alongside name and email.",
   "A resume is required. No resume? \"Build my resume\" takes you to the builder, which brings you straight back here with everything you typed still filled in. You can't send without one.",

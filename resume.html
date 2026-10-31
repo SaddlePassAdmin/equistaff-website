@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css"><link rel="stylesheet" href="src/skillpicker.css">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css"><link rel="stylesheet" href="src/skillpicker.css"><link rel="stylesheet" href="src/roles.css"><link rel="stylesheet" href="src/upload.css">
 <style>
 /* RESUME BUILDER — audit finding #21/#57: the live site demands a resume up front
    and links out to Indeed to get one. Most grooms and riders have never written one.
@@ -89,6 +89,22 @@
 .paperNote { font-size:var(--t-label); color:var(--baby-300); margin:var(--s-4) 0 0; }
 @media (max-width:680px){ .paperNote { font-size:var(--t-small); } }
 
+/* 1 Nov: disciplines (or industries) with a level each, then skills. */
+.rb [hidden] { display:none !important; }
+/* Upcoming step numbers were pale blue on pale blue on this deep page. */
+.rb .stepdot:not(.stepdot--on):not(.stepdot--done) .stepdot__n { color:var(--navy-900); }
+.rbQ { color:#fff; font-size:1.0625rem; margin:0 0 var(--s-2); }
+.rbQ + .rb__lede { margin-bottom:var(--s-4); }
+.rbPart { margin-bottom:var(--s-7); }
+.rbFrom { display:flex; gap:var(--s-3); align-items:flex-start; background:var(--ok-bg); color:var(--ok-ink);
+  border-radius:var(--r-md); padding:var(--s-3) var(--s-4); font-size:var(--t-small); margin:0 0 var(--s-5); }
+.rbFrom svg { flex:0 0 auto; margin-top:2px; }
+.rbFrom b { word-break:break-all; }
+.paper__lv { display:grid; gap:6px; margin:0; padding:0; list-style:none; }
+.paper__lv li { font-size:var(--t-small); color:var(--navy-900); }
+.paper__lv b { font-weight:900; }
+.paper__lv span { color:var(--text-muted); }
+
 @media (max-width:1040px){
   .rb { grid-template-columns:1fr; }
   .rbDoc { position:static; }
@@ -128,16 +144,33 @@
       <!-- ============ THE QUESTIONS ============ -->
       <section class="rb__form">
 
+        <!-- 1 Nov: Kaitlin places two kinds of people. The toggle decides
+             whether step 3 asks for disciplines or industries, and which
+             of her skills are offered. -->
+        <div id="roleKind"></div>
+
         <div class="steps" style="margin-bottom:var(--s-6)">
-          <div class="stepdot stepdot--on" data-step="1"><span class="stepdot__n">1</span><span class="stepdot__l">Where you've worked</span></div>
+          <div class="stepdot stepdot--on" data-step="1"><span class="stepdot__n">1</span><span class="stepdot__l">Start</span></div>
           <span class="stepbar"></span>
-          <div class="stepdot" data-step="2"><span class="stepdot__n">2</span><span class="stepdot__l">What you can do</span></div>
+          <div class="stepdot" data-step="2"><span class="stepdot__n">2</span><span class="stepdot__l">Your jobs</span></div>
           <span class="stepbar"></span>
-          <div class="stepdot" data-step="3"><span class="stepdot__n">3</span><span class="stepdot__l">Finish</span></div>
+          <div class="stepdot" data-step="3"><span class="stepdot__n">3</span><span class="stepdot__l">Your skills</span></div>
+          <span class="stepbar"></span>
+          <div class="stepdot" data-step="4"><span class="stepdot__n">4</span><span class="stepdot__l">Finish</span></div>
         </div>
 
-        <!-- STEP 1 -->
+        <!-- STEP 1 · upload first (1 Nov). No resume? Build from scratch. -->
         <div id="s1">
+          <div id="upIntro">
+            <h2>Have a resume already?</h2>
+            <p class="rb__lede">Upload it and we&rsquo;ll fill in the next steps for you. No resume? That&rsquo;s fine &mdash; we&rsquo;ll build one together.</p>
+          </div>
+          <div id="upHost"></div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="s2" hidden>
+          <p class="rbFrom" id="fromFile" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Filled in from <b id="fromName"></b>. Add anything it missed.</span></p>
           <h2>Where have you worked?</h2>
           <p class="rb__lede">Start with the most recent. If you don't remember exact dates, roughly is fine &mdash; nobody is checking the months.</p>
 
@@ -159,16 +192,26 @@
           <button type="button" class="rb__add" onclick="addYard()">+ Add another employer</button>
 
           <div class="ob__actions">
-            <button class="btn btn--onDark btn--lg" type="button" onclick="go(2)">Next</button>
+            <button class="btn btn--onDark btn--lg" type="button" onclick="go(3)">Next</button>
+            <button class="btn btn--secondary" type="button" onclick="go(1)">Back</button>
             <a class="ob__skip" href="profile.html" style="color:var(--baby-200)">Save and come back later</a>
           </div>
         </div>
 
-        <!-- STEP 2 -->
-        <div id="s2" hidden>
+        <!-- STEP 3 -->
+        <div id="s3" hidden>
           <h2>What are you good at?</h2>
-          <p class="rb__lede">Tick anything you've genuinely done. This is what the recruiting team searches on, so it matters more than it looks.</p>
+          <p class="rb__lede">This is what the recruiting team searches on, so it matters more than it looks.</p>
 
+          <div class="rbPart">
+            <h3 class="rbQ" id="discQ">Which disciplines have you worked in?</h3>
+            <p class="rb__lede" id="discHint">Pick every one that applies, then say how experienced you are in each.</p>
+            <div class="chips" id="discs"></div>
+            <div class="lvls" id="lvls"></div>
+          </div>
+
+          <h3 class="rbQ" id="skillQ">Your skills</h3>
+          <p class="rb__lede">Tick anything you&rsquo;ve genuinely done.</p>
           <div id="skills"></div>
 
           <div class="field" style="margin-top:var(--s-6)">
@@ -177,13 +220,13 @@
           </div>
 
           <div class="ob__actions">
-            <button class="btn btn--onDark btn--lg" type="button" onclick="go(3)">Next</button>
-            <button class="btn btn--secondary" type="button" onclick="go(1)">Back</button>
+            <button class="btn btn--onDark btn--lg" type="button" onclick="go(4)">Next</button>
+            <button class="btn btn--secondary" type="button" onclick="go(2)">Back</button>
           </div>
         </div>
 
-        <!-- STEP 3 -->
-        <div id="s3" hidden>
+        <!-- STEP 4 -->
+        <div id="s4" hidden>
           <h2>That's it.</h2>
           <p class="rb__lede">Here's what we've made. Change anything you want &mdash; it updates as you type.</p>
 
@@ -213,7 +256,7 @@
 
           <div class="ob__actions">
             <button class="btn btn--onDark btn--lg" type="button" id="saveBtn" onclick="saveResume()">Save to my profile</button>
-            <button class="btn btn--secondary" type="button" onclick="go(2)">Back</button>
+            <button class="btn btn--secondary" type="button" onclick="go(3)">Back</button>
           </div>
         </div>
       </section>
@@ -240,6 +283,8 @@
 
 <script src="src/skills.js"></script>
 <script src="src/skillpicker.js"></script>
+<script src="src/roles.js"></script>
+<script src="src/upload.js"></script>
 <script>
 // Seeded with one real-looking entry so the page never opens empty — an empty
 // builder is the thing that makes people leave.
@@ -249,8 +294,21 @@ var YARDS = [
 ];
 /* 23 Oct — replaced our 16 invented skills with Kaitlin's real list of 186,
    grouped in src/skills.js. The picker handles the volume; see skillpicker.js. */
-var PICKED = ["Barn Manager (Medium Program)","Grooming (Intermediate)","Braiding (Hunters)",
-  "IM Medications","Records Keeping"];
+/* 1 Nov: picks are kept per kind of role, so flipping the toggle and back
+   loses nothing. PICKED always points at the current kind's list. */
+var MODE = 'facility';
+var PICKS = {
+  facility: ["Barn Manager (Medium Program)","Grooming (Intermediate)","Braiding (Hunters)",
+    "IM Medications","Records Keeping"],
+  business: ["B2B Sales","Account Management","Equine Sales","Tradeshow"]
+};
+var PICKED = PICKS.facility;
+/* Disciplines (Facility) or industries (Business), each with a level.
+   Kaitlin's example: a beginner at dressage, world-class at show jumping. */
+var AREAS = {
+  facility: [{ name:"Show jumping", level:"World-class" }, { name:"Dressage", level:"Beginner" }],
+  business: [{ name:"Feed & nutrition", level:"Advanced" }]
+};
 
 function esc(s){ return (s||"").replace(/[&<>"]/g, function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
@@ -280,7 +338,53 @@ function setY(i,k,v){ YARDS[i][k]=v; draw(); }
 function addYard(){ YARDS.push({role:"",yard:"",years:"",did:""}); yardsUI(); draw(); }
 function delYard(i){ YARDS.splice(i,1); yardsUI(); draw(); }
 function skillsUI(){
-  mountSkillPicker("skills", PICKED, function(){ draw(); });
+  var host = document.getElementById("skills");
+  host.innerHTML = "";
+  window.SKILLS = ROLES.skillsFor(MODE);
+  PICKED = PICKS[MODE];
+  mountSkillPicker(host, PICKED, function(){ draw(); });
+}
+function areaList(){ return MODE === 'business' ? ROLES.INDUSTRIES : ROLES.DISCIPLINES; }
+function areaIdx(name){ for (var i=0;i<AREAS[MODE].length;i++) if (AREAS[MODE][i].name===name) return i; return -1; }
+function areasUI(){
+  var biz = MODE === 'business';
+  document.getElementById("discQ").textContent = biz ? "Industry focus" : "Which disciplines have you worked in?";
+  document.getElementById("discHint").textContent = biz
+    ? "Which parts of the horse industry have you worked in? Pick every one that applies, then say how experienced you are in each."
+    : "Pick every one that applies, then say how experienced you are in each.";
+  document.getElementById("skillQ").textContent = biz ? "Your business skills" : "Your skills";
+  var host = document.getElementById("discs");
+  host.setAttribute("role", "group");
+  host.setAttribute("aria-labelledby", "discQ");
+  host.innerHTML = areaList().map(function(a, i){
+    return '<label><input type="checkbox" data-i="'+i+'"'+(areaIdx(a)>-1?' checked':'')+'><span>'+esc(a)+'</span></label>';
+  }).join("");
+  host.querySelectorAll("input").forEach(function(cb){
+    cb.addEventListener("change", function(){
+      var name = areaList()[+cb.dataset.i], at = areaIdx(name);
+      if (cb.checked && at < 0) AREAS[MODE].push({ name:name, level:"" });
+      if (!cb.checked && at > -1) AREAS[MODE].splice(at, 1);
+      levelsUI(); draw();
+    });
+  });
+  levelsUI();
+}
+function levelsUI(){
+  var host = document.getElementById("lvls");
+  host.innerHTML = AREAS[MODE].map(function(a, i){
+    return '<fieldset class="lvl"><legend>'+esc(a.name)+'</legend><div class="lvl__opts">'
+      + ROLES.LEVELS.map(function(l){
+          return '<label><input type="radio" name="lvl'+i+'" value="'+l+'" data-i="'+i+'"'+(a.level===l?' checked':'')+'><span>'+l+'</span></label>';
+        }).join("")
+      + '</div></fieldset>';
+  }).join("");
+  host.querySelectorAll("input").forEach(function(r){
+    r.addEventListener("change", function(){ AREAS[MODE][+r.dataset.i].level = r.value; draw(); });
+  });
+}
+function setMode(m){
+  MODE = m === 'business' ? 'business' : 'facility';
+  areasUI(); skillsUI(); draw();
 }
 function toggle(s,on){ var i=PICKED.indexOf(s); if(on&&i<0)PICKED.push(s); if(!on&&i>-1)PICKED.splice(i,1); draw(); }
 
@@ -312,6 +416,12 @@ function draw(){
   });
   if(!any) p += '<p class="paper__empty">Your roles will appear here as you add them.</p>';
 
+  var areas = AREAS[MODE].filter(function(a){ return a.name; });
+  if(areas.length){
+    p += '<h4>'+(MODE==='business' ? 'Industry focus' : 'Disciplines')+'</h4><ul class="paper__lv">'
+      + areas.map(function(a){ return '<li><b>'+esc(a.name)+'</b>'+(a.level?' <span>&middot; '+esc(a.level)+'</span>':'')+'</li>'; }).join("")
+      + '</ul>';
+  }
   if(PICKED.length){
     p += '<h4>Key skills</h4><div class="paper__skills">'
       + PICKED.map(function(s){ return '<span>'+esc(s)+'</span>'; }).join("")
@@ -323,7 +433,7 @@ function draw(){
 }
 
 function go(n){
-  [1,2,3].forEach(function(i){ document.getElementById("s"+i).hidden = (i!==n); });
+  [1,2,3,4].forEach(function(i){ document.getElementById("s"+i).hidden = (i!==n); });
   document.querySelectorAll(".stepdot").forEach(function(d){
     var s = +d.dataset.step;
     d.classList.toggle("stepdot--on", s===n);
@@ -341,7 +451,31 @@ function mailIt(){
   document.getElementById("dlnote").textContent = "Sent. Your resume is on its way to " + who + ".";
 }
 
-yardsUI(); skillsUI(); draw();
+ROLES.mountToggle("roleKind", MODE, setMode);
+
+/* 1 Nov: upload first. What we read fills steps 2 and 3, and the person
+   checks it before carrying on. "Build it from scratch" skips straight on. */
+ESUpload.mount("upHost", {
+  kind: "resume",
+  mode: function(){ return MODE; },
+  manual: "No resume? Build it from scratch",
+  skillsNote: "You can add more on step 3.",
+  onManual: function(){ go(2); },
+  onStage: function(st){ document.getElementById("upIntro").hidden = (st === "review"); },
+  onDone: function(r){
+    var set = { who:r.name, rPh:r.phone, rEm:r.email, rLo:r.location };
+    Object.keys(set).forEach(function(id){ if (set[id]) document.getElementById(id).value = set[id]; });
+    if (r.history.length) YARDS = r.history.map(function(j){
+      return { role:j.role, yard:[j.employer, j.location].filter(Boolean).join(", "), years:j.dates, did:j.did };
+    });
+    r.skills.forEach(function(s){ if (PICKED.indexOf(s) < 0) PICKED.push(s); });
+    document.getElementById("fromName").textContent = r.file;
+    document.getElementById("fromFile").hidden = false;
+    yardsUI(); skillsUI(); draw(); go(2);
+  }
+});
+
+yardsUI(); setMode(MODE);
 </script>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
@@ -356,6 +490,16 @@ if (!/^[a-z-]+\.html$/.test(RETURN)) RETURN = '';
   Object.keys(map).forEach(function(id){ if (map[id]) document.getElementById(id).value = map[id]; });
   var r = ES.resume && ES.resume();
   if (r && r.objectives) document.getElementById('obj').value = r.objectives;
+  if (r && r.roleKind) {
+    if (r.areas) AREAS[r.roleKind] = r.areas.slice();
+    if (r.skills) PICKS[r.roleKind] = r.skills.slice();
+    if (r.experience && r.experience.length) { YARDS = r.experience.slice(); yardsUI(); }
+    var t = document.querySelector('#roleKind input[value="'+r.roleKind+'"]');
+    if (t) t.checked = true;
+    setMode(r.roleKind);
+  }
+  // Building from scratch (or editing a resume already saved) skips the upload.
+  if (new URLSearchParams(location.search).get('start') === 'build' || r) go(2);
   if (RETURN) {
     var b = document.getElementById('backToApp');
     b.href = RETURN; b.hidden = false;
@@ -366,6 +510,7 @@ if (!/^[a-z-]+\.html$/.test(RETURN)) RETURN = '';
 function saveResume(){
   ES.setResume({ name: val('who'), phone: val('rPh'), email: val('rEm'), location: val('rLo'),
     objectives: val('obj'), experience: YARDS.slice(), skills: PICKED.slice(),
+    roleKind: MODE, areas: AREAS[MODE].slice(),
     extras: val('extra'), availability: val('avail'), where: val('where') });
   ES.setProfile({ phone: val('rPh') || (ES.profile().phone || '') });
   location.href = RETURN || 'profile.html';
@@ -373,7 +518,12 @@ function saveResume(){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "New toggle at the top: Equine Facility Roles or Equine Business Roles. It changes what step 3 asks and which skills are offered.",
+  "Facility roles pick their disciplines first, then skills. Business roles pick an industry focus instead (pharmaceutical sales, feed & nutrition, tack & equipment, insurance, marketing, technology, veterinary, other), then business skills.",
+  "Each discipline or industry gets its own level: Beginner, Intermediate, Advanced or World-class. The resume shows them as \"Dressage · Beginner\", \"Show jumping · World-class\".",
+  "Step 1 is now \"Have a resume already?\" Upload it, and we read it and show \"Check what we pulled\": your details, work history and the skills we recognized, all editable. \"Looks right, continue\" fills in the rest of the builder.",
+  "No resume? \"Build it from scratch\" goes straight to the questions, as before.",
   "Name, phone, email and location are filled in from your profile when we have them.",
   "New Objectives box, shown first on the finished resume.",
   "Each job asks for \"Employer name and location\" instead of \"Where was it, and where are they?\"",
