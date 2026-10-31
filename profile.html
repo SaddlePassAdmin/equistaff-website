@@ -50,7 +50,7 @@
           <a href="#f-contact"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Contact details</a>
           <a href="#f-history"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Work history</a>
           <a href="#f-disc"><span class="todo__box todo__box--done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Disciplines</a>
-          <a href="#f-refs"><span class="todo__box"></span>Add two references</a>
+          <a href="#f-goals"><span class="todo__box"></span>Goals and interests</a>
           <a href="#f-avail"><span class="todo__box"></span>Set your availability</a>
           <a href="#f-housing"><span class="todo__box"></span>Housing preference</a>
         </div>
@@ -90,11 +90,10 @@
             <small>Or <a href="resume.html">let us build it from a few questions</a>.</small>
           </div>
 
-          <div class="field" id="f-refs">
-            <label for="p-r1">References</label>
-            <input id="p-r1" placeholder="Name, yard, and the best number for them">
-            <input id="p-r2" placeholder="A second one" style="margin-top:var(--s-3)">
-            <small>We call them, never email. Two is enough.</small>
+          <div class="field" id="f-goals">
+            <label for="p-g">Goals and interests</label>
+            <textarea id="p-g" rows="3" placeholder="Where you want to be in a few years, the horses or programs you want to work with, what you want to learn next"></textarea>
+            <small>Helps the recruiting team put you forward for the right roles.</small>
           </div>
 
           <div class="field" id="f-housing">
@@ -149,8 +148,8 @@
           </div>
 
           <div class="field" id="f-avail"><label for="p-a">Availability</label>
-            <select id="p-a"><option>Available now</option><option selected>Available in 30 days</option><option>Looking quietly — not urgent</option></select>
-            <small>“Looking quietly” hides your profile from all employer searches.</small>
+            <select id="p-a"><option>Available now</option><option selected>Available in 30 days</option><option>Available in 60 days</option><option>Flexible &mdash; happy to wait for the right role</option></select>
+            <small>Who can see your profile is in <a href="settings.html#privacy">Settings</a>: looking quietly, or open to everyone.</small>
           </div>
           <div class="ob__actions"><button class="btn btn--primary" type="button" onclick="saveProfile()">Save changes</button><span class="ob__skip" id="savedAt">Last saved 2 days ago</span></div>
         </div>
@@ -205,6 +204,7 @@
   if (c) c.textContent = 'View all ' + list.length + ' \u2192';
 
   var pr = ES.profile();
+  var gl = document.getElementById('p-g'); if (gl && pr.goals) gl.value = pr.goals;
   document.getElementById('pcPct').textContent = pr.strength + '%';
   document.getElementById('pcBar').style.width = pr.strength + '%';
   document.querySelectorAll('.avatar').forEach(function(a){ a.textContent = pr.initials; });
@@ -236,7 +236,10 @@
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "New \"Goals and interests\" box, and it's on the profile checklist in place of references.",
+  "References removed.",
+  "Availability uses the same four options as applying and the resume builder. \"Looking quietly\" moved to Settings, where it now means recruiter-only visibility.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",
   "Desired salary range as a range, not a figure, with a Negotiable tick and a $200,000+ band at the top. Only the recruiter sees it.",
@@ -247,6 +250,7 @@
 <script>
 /* 29 Oct: Save changes used to do nothing. */
 function saveProfile(){
+  if (window.ES && ES.setProfile) ES.setProfile({ goals: (document.getElementById('p-g') || {}).value || '' });
   document.getElementById('savedAt').textContent = 'Saved just now';
   if (window.ES && ES.notify) ES.notify('Profile saved');
 }

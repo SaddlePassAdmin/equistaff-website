@@ -55,13 +55,17 @@
 .avStack__pile img { width:100%; height:100%; object-fit:cover; display:block; }
 .avStack p { margin:0; font-size:var(--t-small); color:var(--text-muted); }
 /* share — she asked for it next to the job reference */
-.jdShare { display:inline-flex; align-items:center; gap:6px; background:none; border:0; cursor:pointer;
-  color:var(--baby-200); font:600 var(--t-small)/1 var(--font-body); padding:6px 8px; border-radius:var(--r-pill); }
-.jdShare:hover { background:rgba(255,255,255,.1); color:#fff; }
-.jdShare.done { color:var(--warm); }
-  border:1px solid var(--portal-edge); color:#fff; border-radius:var(--r-pill); padding:9px 15px;
-  font:600 var(--t-small)/1 var(--font-body); text-decoration:none; cursor:pointer; }
-.jdPay { font-family:var(--font-mono); font-size:1.625rem; font-weight:600; letter-spacing:-.01em; color:#fff; margin:var(--s-5) 0 0; }
+.jdShare { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; margin-top:var(--s-3); }
+.jdShare.done { color:var(--ok-ink); border-color:var(--ok-ink); }
+/* 31 Oct — board listings (?listing=board) name the employer and can be
+   messaged directly; recruiter-managed ones cannot. */
+body:not(.is-board) .only-board { display:none !important; }
+body.is-board .only-managed { display:none !important; }
+.jdMsg { display:flex; flex-direction:column; gap:var(--s-3); margin-top:var(--s-4); }
+.jdMsg .btn { width:100%; }
+/* 31 Oct: two orphan declarations sat here and silently swallowed the
+   .jdPay rule below, so the salary never got its size. */
+.jdPay { font-family:var(--font-mono); font-size:clamp(1.75rem,3.6vw,2.5rem); font-weight:600; letter-spacing:-.01em; color:#fff; margin:var(--s-5) 0 0; }
 .jdBody { background:var(--depth-01); padding:var(--s-8) 0 var(--s-9); }
 .jdList { margin:0 0 var(--s-6); padding-left:20px; }
 .jdList li { margin-bottom:8px; }
@@ -116,24 +120,19 @@
   <section class="jdHero">
     <div class="wrap">
       <p class="jdCrumb"><a href="jobs.html">← All roles</a> · Barn &amp; facility management · Ocala, FL</p>
-      <span class="tag tag--managed" style="background:var(--baby-200);color:var(--navy-900)">Recruiter-managed by EquiStaff</span>
+      <span class="tag tag--managed only-managed" style="background:var(--baby-200);color:var(--navy-900)">Recruiter-managed by EquiStaff</span>
       <h1 style="margin-top:var(--s-4)">Barn Manager</h1>
       <p class="jdOrg">
-        <span class="jdOrg__desc">24-horse hunter/jumper barn · Ocala, Florida</span>
+        <span class="jdOrg__desc only-managed">24-horse hunter/jumper barn · Ocala, Florida</span>
+        <span class="jdOrg__desc only-board">Bridlewood Farm · Ocala, Florida</span>
       </p>
-      <p class="jdOrg__why">We introduce you to the employer once your application is in. That is how a managed search works.</p>
-      <p class="jdPay">$55,000 – $68,000 <span style="color:var(--baby-300);font-size:1rem">· housing included</span></p>
+      <p class="jdOrg__why only-managed">We introduce you to the employer once your application is in. That is how a managed search works.</p>
+      <p class="jdPay">$55,000 – $68,000 <span style="color:var(--baby-300);font-size:1rem;display:inline-block">· housing included</span></p>
       <div class="jdMeta">
         <span class="jdMeta__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Full time</span>
         <span class="jdMeta__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg> 24 horses · hunter/jumper</span>
         <span class="jdMeta__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BDE3FF" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg> Listing verified 3 Oct</span>
         <span class="jdMeta__item" style="font-family:var(--font-mono)">REF 10480 · posted 3 days ago</span>
-        <button class="jdShare" type="button" id="shareBtn" onclick="shareRole()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-            <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/>
-          </svg><span>Share this role</span></button>
       </div>
 
     </div>
@@ -142,6 +141,21 @@
   <section class="jdBody cut-top">
     <div class="wrap jdLayout">
       <article class="jdMain">
+        <h2>About the employer</h2>
+        <!-- No photos on recruiter-managed listings (Kaitlin, 31 Oct): the barn
+             stays unnamed, so a picture would only be a stand-in. -->
+        <figure class="jdEmp only-board">
+          <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
+        </figure>
+        <p>Twenty-four stalls, two arenas, a covered round pen and direct hack access, ten minutes from the World Equestrian Center. The owner has had the same vet and farrier for eleven years, which tells you most of what you need to know about how the place is run.</p>
+        <p>Established barn, competing most weekends through the winter season. Small permanent team, long tenures. The last barn manager was there six years and left to run her own program.</p>
+        <div class="jdFacts">
+          <div><div class="jdFact__l">Type</div><div class="jdFact__v">Private competition barn</div></div>
+          <div><div class="jdFact__l">Discipline</div><div class="jdFact__v">Hunter / jumper</div></div>
+          <div><div class="jdFact__l">Area</div><div class="jdFact__v">Ocala, FL</div></div>
+          <div><div class="jdFact__l">Team size</div><div class="jdFact__v">5 including you</div></div>
+        </div>
+
         <h2>Job description</h2>
         <p>A 24-horse hunter/jumper operation ten minutes from the World Equestrian Center is looking for a barn manager to run its day-to-day. You'd be leading a team of four — two grooms, a working student and a part-time rider — and reporting directly to the owner.</p>
         <p>This is a role for someone who has done it before. The horses are competing most weekends through the winter season, so the barn runs to a schedule and the owner wants someone who can hold it without being asked twice.</p>
@@ -165,27 +179,13 @@
           <li>Being the point of contact for the owner's trainer and the vet</li>
         </ul>
 
-        <h2>Requirements</h2>
+        <h2>Job requirements</h2>
         <ul>
           <li>Three or more years managing a barn of a comparable size</li>
           <li>Comfortable handling young and competition horses</li>
           <li>Someone who communicates early rather than after the fact</li>
           <li>Clean driving licence; towing experience is a plus, not a requirement</li>
         </ul>
-
-        <h2>About the facility</h2>
-        <figure class="jdEmp">
-          <img src="img/aisle.jpg" alt="A barn aisle with stalls either side">
-          <figcaption>Representative of the yard, not the barn itself. Their own photos come with the introduction.</figcaption>
-        </figure>
-        <p>Twenty-four stalls, two arenas, a covered round pen and direct hack access, ten minutes from the World Equestrian Center. The owner has had the same vet and farrier for eleven years, which tells you most of what you need to know about how the place is run.</p>
-        <p>Established yard, competing most weekends through the winter season. Small permanent team, long tenures. The last barn manager was there six years and left to run her own program.</p>
-        <div class="jdFacts">
-          <div><div class="jdFact__l">Type</div><div class="jdFact__v">Private competition barn</div></div>
-          <div><div class="jdFact__l">Discipline</div><div class="jdFact__v">Hunter / jumper</div></div>
-          <div><div class="jdFact__l">Area</div><div class="jdFact__v">Ocala, FL</div></div>
-          <div><div class="jdFact__l">Team size</div><div class="jdFact__v">5 including you</div></div>
-        </div>
 
         <h2>Benefits</h2>
         <ul class="jdList">
@@ -211,13 +211,24 @@
         <div class="jdApply">
           <p class="eyebrow">Apply</p>
           <h3 style="font-size:1.375rem;margin-bottom:var(--s-3)">One short form.</h3>
-          <p style="font-size:var(--t-small);color:var(--text-muted)">No account needed to get started, and no resume required &mdash; <a href="resume.html" style="color:var(--text-link)">we can build you one</a>.</p>
+          <p style="font-size:var(--t-small);color:var(--text-muted)">You'll set up a free account as you go. No resume yet? <a href="resume.html" style="color:var(--text-link)">We can build you one</a>.</p>
           <a class="btn btn--primary btn--lg" href="onboarding.html" style="width:100%;margin-top:var(--s-4)">Apply for this role</a>
           <button class="btn btn--secondary" type="button" id="saveBtn" style="width:100%;margin-top:var(--s-3)" onclick="toggleSave()">Save for later</button>
+          <button class="btn btn--secondary jdShare" type="button" id="shareBtn" onclick="shareRole()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/>
+            </svg><span>Share this role</span></button>
 
-          <div class="jdWho">
+          <div class="jdMsg">
+            <a class="btn btn--primary only-board" href="messages.html">Message the employer</a>
+            <a class="btn btn--secondary" href="messages.html">Message the recruiting team</a>
+          </div>
+
+          <div class="jdWho only-managed">
             <img src="img/kaitlin.jpg" alt="">
-            <p><b>Kaitlin Veltkamp</b>Your contact on this role. Forty-four years placing equine staff.</p>
+            <p><b>Kaitlin Veltkamp</b>Your contact on this role. Placing equine staff since 1982.</p>
           </div>
 
           <div class="avStack">
@@ -230,7 +241,7 @@
             <p>9 people have applied this week.</p>
           </div>
 
-          <div class="jdRec">
+          <div class="jdRec only-managed">
             <p style="font:900 var(--t-label)/1 var(--font-body);letter-spacing:.1em;color:var(--warm);margin:0 0 var(--s-3)">RECRUITER-MANAGED</p>
             <p>This search is run by Kaitlin's team, not the barn directly. Your application comes to us first — we check it, then put you forward.</p>
           </div>
@@ -241,7 +252,7 @@
             <ul>
               <li>We spoke to this barn before the role went live.</li>
               <li>The pay range is the real one — we don't post "competitive".</li>
-              <li>You'll hear back either way, usually within 2–3 days.</li>
+              <li>You'll hear back either way.</li>
             </ul>
           </div>
         </div>
@@ -253,15 +264,15 @@
     <div class="wrap">
       <div class="sec-head"><p class="eyebrow" style="color:var(--navy-900)">Similar roles</p><h2>Others you might want</h2></div>
       <div class="board__grid">
-        <article class="job"><h3 class="job__title">Facility Director</h3><p class="job__org">Eventing yard · Middleburg, VA</p><p class="job__pay">$78,000 – $92,000</p>
+        <article class="job"><h3 class="job__title">Facility Director</h3><p class="job__org">Eventing farm · Middleburg, VA</p><p class="job__pay">$78,000 – $92,000</p>
           <div class="job__tags"><span class="tag tag--managed">Recruiter-managed</span></div>
           <div class="job__foot"><a class="job__link" href="job-detail.html">View role →</a><span class="job__age">1 week ago</span></div></article>
         <article class="job"><h3 class="job__title">Head Groom</h3><p class="job__org">Clearwater Sport Horses · Lexington, KY</p><p class="job__pay">$38,000 – $46,000</p>
           <div class="job__tags"><span class="tag tag--housing">Housing</span><span class="tag tag--neutral">Dressage</span></div>
-          <div class="job__foot"><a class="job__link" href="job-detail.html">View role →</a><span class="job__age">6 days ago</span></div></article>
+          <div class="job__foot"><a class="job__link" href="job-detail.html?listing=board">View role →</a><span class="job__age">6 days ago</span></div></article>
         <article class="job"><h3 class="job__title">Assistant Trainer</h3><p class="job__org">Bridlewood Farm · Wellington, FL</p><p class="job__pay">$42,000 – $52,000</p>
           <div class="job__tags"><span class="tag tag--neutral">Hunter / Jumper</span></div>
-          <div class="job__foot"><a class="job__link" href="job-detail.html">View role →</a><span class="job__age">5 days ago</span></div></article>
+          <div class="job__foot"><a class="job__link" href="job-detail.html?listing=board">View role →</a><span class="job__age">5 days ago</span></div></article>
       </div>
     </div>
   </section>
@@ -289,8 +300,10 @@
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script>
-var JOB = { title:'Barn Manager', org:'24-horse hunter/jumper barn', where:'Ocala, FL',
-            pay:'$55,000 – $68,000', managed:true };
+var BOARD = new URLSearchParams(location.search).get('listing') === 'board';
+if (BOARD) document.body.classList.add('is-board');
+var JOB = { title:'Barn Manager', org: BOARD ? 'Bridlewood Farm' : '24-horse hunter/jumper barn', where:'Ocala, FL',
+            pay:'$55,000 – $68,000', managed:!BOARD };
 function paintSave(){
   document.getElementById('saveBtn').textContent = ES.isSaved(JOB.title) ? 'Saved \u2713' : 'Save for later';
 }
@@ -329,7 +342,14 @@ function shareRole() {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('30 Oct', [
+<script>REVISED('31 Oct', [
+  "Sections now run in Kaitlin's order: About the employer, Job description, Main duties, Job requirements, Benefits. The International applicants fact stays.",
+  "Share this role is a full-width button directly under Apply and Save for later, instead of a small link in the header.",
+  "The salary is much bigger. (A stray CSS fragment had been silently cancelling its size rule.)",
+  "No photo on recruiter-managed listings like this one. A job-board listing (open with ?listing=board) still shows the employer's photo.",
+  "Message the recruiting team is always there. On a job-board listing, Message the employer sits front and centre above it.",
+  "Kaitlin's line says \"since 1982\" instead of a year count. The apply box says you'll set up a free account as you go, and the trust list no longer promises a reply within 2–3 days.",
+  "\"Yard\" is now \"barn\" or \"farm\".",
   "New fact: International applicants, with 'EquiStaff can't sponsor visas', so the answer to Kaitlin's most common question is on every post.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.",

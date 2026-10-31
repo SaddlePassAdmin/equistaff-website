@@ -57,7 +57,7 @@
             <div class="field"><label for="em">Email</label><input id="em" type="email" value="d.whitfield@example.com"></div>
           </div>
           <div class="form__row">
-            <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" placeholder="Optional"></div>
+            <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" required autocomplete="tel" placeholder="(352) 555-0147"></div>
             <div class="field"><label for="lc">Location</label><input id="lc" value="Ocala, FL"></div>
           </div>
           <div class="field"><label for="pw">Password</label>
@@ -68,8 +68,8 @@
 
         <div class="stCard" id="alerts">
           <h2>Job alerts</h2>
-          <p>We only send these if you ask. Nothing here is on by default.</p>
-          <label class="sw"><span><b>New roles that match me</b><span>Barn manager and assistant trainer roles within 50 miles of Ocala.</span></span><input type="checkbox" checked></label>
+          <p>Job alerts are based on your saved searches and your profile.</p>
+          <label class="sw"><span><b>New roles that match me</b><span>An email when a role matching your saved searches or profile goes live.</span></span><input type="checkbox" checked></label>
           <label class="sw"><span><b>Weekly summary</b><span>One email on Monday with everything new, instead of one per role.</span></span><input type="checkbox" checked></label>
           <label class="sw"><span><b>Application updates</b><span>When an employer views your application or the status changes.</span></span><input type="checkbox" checked></label>
           <label class="sw"><span><b>News from EquiStaff</b><span>Occasional. Advice, hiring trends, nothing often.</span></span><input type="checkbox"></label>
@@ -78,9 +78,10 @@
         <div class="stCard" id="privacy">
           <h2>Who can see you</h2>
           <p>Most people looking for work already have a job. These settings exist for that.</p>
-          <label class="sw"><span><b>Looking quietly</b><span>Hides your profile from all employer searches, not just your current employer and from anyone at their barn.</span></span><input type="checkbox" checked></label>
-          <label class="sw"><span><b>Let the recruiting team find me</b><span>Kaitlin can put you forward for roles that never get posted. This is how most placements start.</span></span><input type="checkbox" checked></label>
-          <label class="sw"><span><b>Show my profile to employers I apply to</b><span>Off means they see only your application. Employers you have not applied to never see your profile either way.</span></span><input type="checkbox" checked></label>
+          <!-- 31 Oct: exactly two choices (Kaitlin). The same question is asked at
+               the end of applying, and both read and write ES.profile().visibility. -->
+          <label class="sw"><span><b>Looking quietly</b><span>Only the recruiting team sees your profile. It is hidden from every employer search.</span></span><input type="radio" name="vis" value="quiet" onchange="setVis(this.value)"></label>
+          <label class="sw"><span><b>Open to everyone</b><span>Your profile is public on the job board, so any employer browsing can find you.</span></span><input type="radio" name="vis" value="public" onchange="setVis(this.value)"></label>
           <p style="color:var(--baby-200);font-size:var(--t-small);margin:var(--s-5) 0 0;border-left:2px solid var(--portal-edge);padding-left:var(--s-4)">
             Feedback an employer gives about you goes to the recruiting team only. It is never shown to you and is not kept on your profile.</p>
         </div>
@@ -109,8 +110,7 @@
           </label>
 
           <p style="font-size:var(--t-small);color:var(--baby-200);margin:var(--s-5) 0 0">
-            Urgency expires after 30 days so the flag keeps meaning something. We will ask whether to renew it.
-            <a href="billing.html" style="color:var(--baby-200)">Manage Featured Jobseeker</a>.</p>
+            Urgency expires after 30 days so the flag keeps meaning something. We will ask whether to renew it.</p>
         </div>
 
         <div class="stCard danger" id="close">
@@ -136,6 +136,7 @@
   </div>
 </main>
 <script>
+function setVis(v){ ES.setProfile({ visibility: v }); ES.notify(v === 'quiet' ? 'Looking quietly — only the recruiting team can see you' : 'Your profile is open to everyone'); }
 function saved(b){ b.textContent='Saved'; setTimeout(function(){b.textContent='Save changes';},1800); ES.notify('Settings saved'); }
 function confirmIt(k){
   var p=document.getElementById('confirmLine'); p.hidden=false;
@@ -150,10 +151,21 @@ function confirmIt(k){
 </footer>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+<script>
+(function(){
+  var pr = ES.profile(), v = pr.visibility === 'public' ? 'public' : 'quiet';
+  var r = document.querySelector('input[name="vis"][value="' + v + '"]'); if (r) r.checked = true;
+  if (pr.phone) document.getElementById('ph').value = pr.phone;
+})();
+</script>
 
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "Phone is no longer optional.",
+  "Who can see you is exactly two choices: Looking quietly (recruiting team only) or Open to everyone (public profile). \"Let the recruiting team find me\" and \"Show my profile to employers I apply to\" are gone.",
+  "Featured Jobseeker no longer links to the employer billing page.",
+  "Job alerts say they're based on your saved searches and your profile.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "Setting descriptions are 15px on a phone instead of 13px.", "Small print lifted from baby-300 to baby-200 — 3.49:1 on the brightened portal, now 4.69:1.", "Hard delete removed. An account can be put to sleep, and we keep the record.", "New Urgently looking controls — two switches, because telling the recruiting team and badging your photo are different decisions.", "\"Looking quietly\" corrected — it hides you from every employer search.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
