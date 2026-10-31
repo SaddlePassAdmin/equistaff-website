@@ -56,6 +56,7 @@
 /* 29 Oct: the paper used to be sticky on its own, so on scroll it slid over
    its own Download / Email buttons. The paper, buttons and note now stick
    together as one column. */
+#backToApp[hidden] { display:none; }
 .rbDoc { position:sticky; top:96px; align-self:start; }
 
 /* THE PAPER — the resume itself, light on the dark portal ground */
@@ -113,6 +114,7 @@
   <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
 
     <div style="margin-bottom:var(--s-6)">
+      <a id="backToApp" hidden href="onboarding.html" class="btn btn--secondary" style="margin-bottom:var(--s-5)">&larr; Back to your application</a>
       <p class="eyebrow" style="color:var(--warm)">Resume builder</p>
       <h1 style="color:#fff;margin:0 0 var(--s-3);font-size:2rem">You don't need a resume to start.</h1>
       <p style="color:var(--baby-200);max-width:60ch;margin:0">
@@ -139,9 +141,17 @@
           <h2>Where have you worked?</h2>
           <p class="rb__lede">Start with the most recent. If you don't remember exact dates, roughly is fine &mdash; nobody is checking the months.</p>
 
+          <div class="form__row">
+            <div class="field"><label for="who">Your name</label><input id="who" value="Dana Whitfield" oninput="draw()" autocomplete="name"></div>
+            <div class="field"><label for="rPh">Phone</label><input id="rPh" type="tel" oninput="draw()" autocomplete="tel" placeholder="(352) 555-0147"></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="rEm">Email</label><input id="rEm" type="email" value="d.whitfield@example.com" oninput="draw()" autocomplete="email"></div>
+            <div class="field"><label for="rLo">Location</label><input id="rLo" value="Ocala, FL" oninput="draw()"></div>
+          </div>
           <div class="field" style="margin-bottom:var(--s-5)">
-            <label for="who">Your name</label>
-            <input id="who" value="Dana Whitfield" oninput="draw()">
+            <label for="obj">Objectives</label>
+            <textarea id="obj" rows="3" oninput="draw()" placeholder="The kind of role you want next, and what you want to get better at"></textarea>
           </div>
 
           <div id="yards"></div>
@@ -162,7 +172,7 @@
           <div id="skills"></div>
 
           <div class="field" style="margin-top:var(--s-6)">
-            <label for="extra">Anything else worth knowing?</label>
+            <label for="extra">Achievements &amp; extras</label>
             <textarea id="extra" rows="3" oninput="draw()" placeholder="Qualifications, towing, foaling, clipping, rehab, languages&hellip;"></textarea>
           </div>
 
@@ -183,7 +193,7 @@
               <option>Available now</option>
               <option selected>Available in 30 days</option>
               <option>Available in 60 days</option>
-              <option>Not looking right now, just browsing</option>
+              <option>Flexible &mdash; happy to wait for the right role</option>
             </select>
           </div>
 
@@ -202,7 +212,7 @@
           </div>
 
           <div class="ob__actions">
-            <a class="btn btn--onDark btn--lg" href="profile.html">Save to my profile</a>
+            <button class="btn btn--onDark btn--lg" type="button" id="saveBtn" onclick="saveResume()">Save to my profile</button>
             <button class="btn btn--secondary" type="button" onclick="go(2)">Back</button>
           </div>
         </div>
@@ -254,8 +264,8 @@ function yardsUI(){
       +  '</div>'
       +  '<div class="field"><label>What was your job?</label>'
       +  '<input value="'+esc(y.role)+'" oninput="setY('+i+',\'role\',this.value)" placeholder="Groom, rider, barn manager, sales director&hellip;"></div>'
-      +  '<div class="field"><label>Where was it, and where are they?</label>'
-      +  '<input value="'+esc(y.yard)+'" oninput="setY('+i+',\'yard\',this.value)" placeholder="You can describe it instead of naming it"></div>'
+      +  '<div class="field"><label>Employer name and location</label>'
+      +  '<input value="'+esc(y.yard)+'" oninput="setY('+i+',\'yard\',this.value)" placeholder="Bridlewood Farm, Wellington FL"></div>'
       +  '<div class="field"><label>Roughly when?</label>'
       +  '<input value="'+esc(y.years)+'" oninput="setY('+i+',\'years\',this.value)" placeholder="2021 — now"></div>'
       +  '<div class="field" style="margin-bottom:0"><label>What did you actually do there?</label>'
@@ -281,8 +291,13 @@ function draw(){
   var top  = YARDS[0] || {};
   var p = '<h2 class="paper__name">'+esc(name)+'</h2>'
         + '<p class="paper__role">'+esc(top.role||"Equine professional")+'</p>'
+        + '<p class="paper__meta">'+[val("rLo"),val("rPh"),val("rEm")].filter(function(x){return x.trim();}).map(esc).join(' &middot; ')+'</p>'
         + '<p class="paper__meta">'+esc(val("where")||"Ocala, FL")+' &middot; '+esc(val("avail")||"Available now")+'</p>'
         + '<hr class="paper__rule">';
+
+  var ob = val("obj").trim();
+  p += '<h4>Objectives</h4>' + (ob ? '<p class="pJob__d">'+esc(ob)+'</p>'
+       : '<p class="paper__empty">What you want next will appear here.</p>');
 
   p += '<h4>Experience</h4>';
   var any = false;
@@ -298,14 +313,12 @@ function draw(){
   if(!any) p += '<p class="paper__empty">Your roles will appear here as you add them.</p>';
 
   if(PICKED.length){
-    p += '<h4>What I can do</h4><div class="paper__skills">'
+    p += '<h4>Key skills</h4><div class="paper__skills">'
       + PICKED.map(function(s){ return '<span>'+esc(s)+'</span>'; }).join("")
       + '</div>';
   }
   var ex = val("extra").trim();
-  if(ex) p += '<h4>Also worth knowing</h4><p class="pJob__d">'+esc(ex)+'</p>';
-
-  p += '<h4>References</h4><p class="pJob__d">Checked by phone by EquiStaff and available on request.</p>';
+  if(ex) p += '<h4>Achievements &amp; extras</h4><p class="pJob__d">'+esc(ex)+'</p>';
   document.getElementById("paper").innerHTML = p;
 }
 
@@ -332,9 +345,42 @@ yardsUI(); skillsUI(); draw();
 </script>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+<script>
+/* 31 Oct: contact details come from the profile when we have them, and a
+   ?return= page (the application) gets a way back. */
+var RETURN = (new URLSearchParams(location.search).get('return') || '');
+if (!/^[a-z-]+\.html$/.test(RETURN)) RETURN = '';
+(function(){
+  var pr = (window.ES && ES.profile) ? ES.profile() : {};
+  var map = { who: pr.name, rPh: pr.phone, rEm: pr.email, rLo: pr.location };
+  Object.keys(map).forEach(function(id){ if (map[id]) document.getElementById(id).value = map[id]; });
+  var r = ES.resume && ES.resume();
+  if (r && r.objectives) document.getElementById('obj').value = r.objectives;
+  if (RETURN) {
+    var b = document.getElementById('backToApp');
+    b.href = RETURN; b.hidden = false;
+    document.getElementById('saveBtn').textContent = 'Save and back to your application';
+  }
+  draw();
+})();
+function saveResume(){
+  ES.setResume({ name: val('who'), phone: val('rPh'), email: val('rEm'), location: val('rLo'),
+    objectives: val('obj'), experience: YARDS.slice(), skills: PICKED.slice(),
+    extras: val('extra'), availability: val('avail'), where: val('where') });
+  ES.setProfile({ phone: val('rPh') || (ES.profile().phone || '') });
+  location.href = RETURN || 'profile.html';
+}
+</script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "Name, phone, email and location are filled in from your profile when we have them.",
+  "New Objectives box, shown first on the finished resume.",
+  "Each job asks for \"Employer name and location\" instead of \"Where was it, and where are they?\"",
+  "References removed from the finished resume.",
+  "The finished resume's sections are Objectives, Experience, Key skills, and Achievements & extras.",
+  "Coming from an application? A \"Back to your application\" button sits at the top, and saving takes you straight back to it.",
+  "Save to my profile now actually saves the resume.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "\"Save and come back later\" is easier to tap, and the note under the preview is 15px on a phone.", "\"Yard\" replaced with \"employer\" throughout — the flow assumed everyone works at a barn.", "Kaitlin's real list of 186 skills, replacing the 16 we had invented.", "Grouped into 14 sections with search, because 186 checkboxes is a reading task, not a choice.", "US spellings throughout — braiding, feed programs, longeing.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>
