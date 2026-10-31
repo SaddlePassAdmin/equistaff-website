@@ -390,6 +390,8 @@
     ratings: {},
     notices: [],
     candidates: CANDIDATES,
+    // 1 Nov — interview availability a client sends for a search, by search id.
+    availability: {},
     // The recruiter-managed search the shortlist belongs to. "applied" is how
     // many people Kaitlin considered for it, whichever way they came in.
     search: { id: 's-10480', title: 'Barn Manager', ref: '10480', opened: '18 September', applied: 27 }
@@ -417,6 +419,60 @@
   var db = load();
   function commit() { save(db); }
   function uid(p) { return p + Math.random().toString(36).slice(2, 8); }
+
+  /* Styles for the availability sheet (1 Nov). Tokens only; namespaced
+     .avl so they cannot collide with a page's own classes. */
+  var AVL_CSS = ''
+  + '.avl-open{overflow:hidden}'
+  + '.avl{border:1px solid var(--baby-300);padding:0;border-radius:var(--r-lg);width:min(860px,calc(100vw - 32px));'
+  + 'max-height:calc(100vh - 48px);background:var(--portal-ground);color:var(--white);box-shadow:var(--e-3);overflow:hidden}'
+  + '.avl[open]{display:flex;flex-direction:column}'
+  + '.avl::backdrop{background:rgba(11,37,69,.72)}'
+  + '.avl__bar{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-4);padding:var(--s-5) var(--s-6);'
+  + 'border-bottom:1px solid var(--portal-line);background:var(--portal-sunken)}'
+  + '.avl__bar h2{margin:0 0 4px;color:var(--white);font-size:1.375rem}'
+  + '.avl__bar p{margin:0;color:var(--baby-200);font-size:var(--t-small)}'
+  + '.avl__x{background:none;border:0;color:var(--white);font-size:28px;line-height:1;cursor:pointer;width:44px;height:44px;flex:0 0 auto;border-radius:var(--r-sm)}'
+  + '.avl__x:focus-visible,.avl__slot:focus-visible,.avl__fmt:focus-within{outline:2px solid var(--baby-200);outline-offset:2px}'
+  + '.avl__body{overflow:auto;padding:var(--s-5) var(--s-6);flex:1 1 auto}'
+  + '.avl__set{border:0;margin:0 0 var(--s-6);padding:0;min-width:0}'
+  + '.avl__set legend,.avl__noteF label{display:block;padding:0;color:var(--white);font-weight:700;font-size:1rem;margin:0 0 var(--s-3)}'
+  + '.avl__set small{color:var(--baby-200);font-weight:400;font-size:var(--t-small)}'
+  + '.avl__hint{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);margin:0 0 var(--s-4);font-size:var(--t-label);color:var(--baby-200);font-family:var(--font-mono)}'
+  + '.avl__hint b{color:var(--white);font-family:var(--font-body)}'
+  + '.avl__weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:var(--s-5)}'
+  + '.avl__wk h3{margin:0 0 var(--s-2);font:700 var(--t-label)/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--baby-300)}'
+  + '.avl__day{display:grid;grid-template-columns:92px repeat(3,minmax(0,1fr));gap:var(--s-2);align-items:center;padding:4px 0}'
+  + '.avl__dl{font-size:var(--t-small);font-weight:700;color:var(--white)}'
+  + '.avl__slot{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:0 6px;border-radius:var(--r-sm);'
+  + 'border:1.5px solid var(--portal-edge);background:transparent;color:var(--baby-200);font:700 var(--t-label)/1.1 var(--font-body);cursor:pointer;min-width:0}'
+  + '.avl__slot:hover{border-color:var(--baby-200);color:var(--white)}'
+  + '.avl__slot[aria-pressed="true"]{background:var(--baby-200);border-color:var(--baby-200);color:var(--navy-900)}'
+  + '.avl__tick{display:none;flex:0 0 auto}'
+  + '.avl__slot[aria-pressed="true"] .avl__tick,.avl__fmt input:checked ~ .avl__tick{display:block}'
+  + '.avl__fmts{display:flex;flex-wrap:wrap;gap:var(--s-3)}'
+  + '.avl__fmt{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 var(--s-4);border-radius:var(--r-pill);'
+  + 'border:1.5px solid var(--portal-edge);color:var(--baby-200);font-weight:700;font-size:var(--t-small);cursor:pointer}'
+  + '.avl__fmt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}'
+  + '.avl__fmt:has(input:checked){background:var(--baby-200);border-color:var(--baby-200);color:var(--navy-900)}'
+  + '.avl__noteF{margin-bottom:0}'
+  + '.avl__noteF textarea{width:100%;padding:12px 14px;border-radius:var(--r-md);border:1.5px solid var(--portal-edge);background:var(--portal-sunken);'
+  + 'color:var(--white);font:400 var(--t-small)/1.5 var(--font-body);resize:vertical;min-height:84px}'
+  + '.avl__noteF textarea::placeholder{color:var(--baby-300)}'
+  + '.avl__noteF textarea:focus{outline:2px solid var(--baby-200);outline-offset:1px}'
+  + '.avl__foot{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);flex-wrap:wrap;padding:var(--s-4) var(--s-6);'
+  + 'border-top:1px solid var(--portal-line);background:var(--portal-sunken)}'
+  + '.avl__msg{margin:0;font-size:var(--t-small);color:var(--baby-200)}'
+  + '.avl__msg.is-bad{color:var(--warm);font-weight:700}'
+  + '.avl__acts{display:flex;gap:var(--s-3);margin-left:auto}'
+  + '@media (max-width:600px){'
+  + '.avl{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0}'
+  + '.avl__bar,.avl__body,.avl__foot{padding-left:var(--s-4);padding-right:var(--s-4)}'
+  + '.avl__weeks{grid-template-columns:minmax(0,1fr)}'
+  + '.avl__day{grid-template-columns:76px repeat(3,minmax(0,1fr));gap:6px}'
+  + '.avl__dl b{display:block}.avl__dl{line-height:1.25}'
+  + '.avl__acts{width:100%}.avl__acts .btn{flex:1 1 0;padding:0 var(--s-3)}'
+  + '}';
 
   var ES = {
     all: function () { return db; },
@@ -543,6 +599,196 @@
       }
       return null;
     },
+    /* 1 Nov — days in the current status. Kaitlin asked for every person on
+       the shortlist to show their status and how long they have been in it
+       ("Presented · 6 days"); more than three days in any status is flagged.
+       Hired and Passed are finished, so they are never flagged. The shortlist
+       and the candidate page both read this, so they always agree. */
+    STAGE_LABEL: { Presented: 'Presented', Reviewed: 'Reviewed', Interviewed: 'Interviewed',
+                   Offered: 'Offered', Hired: 'Hired', Passed: 'Passed' },
+    daysInStage: function (c) {
+      var a = c.activity || {}, stage = c.stage || 'Presented';
+      var step = { Presented: 'presented', Reviewed: 'reviewed', Offered: 'offer', Hired: 'hired' }[stage] || null;
+      if (stage === 'Interviewed') step = a.interview2 ? 'interview2' : 'interview';
+      var date = step ? a[step] : null;
+      if (!date && stage !== 'Hired' && stage !== 'Passed') {
+        // No date for the status itself: fall back to the latest step taken.
+        var i = ES.idle(c); if (i) { step = i.step; date = a[i.step]; }
+      }
+      var days = ES.daysSince(date), done = stage === 'Hired' || stage === 'Passed';
+      var label = ES.STAGE_LABEL[stage] || stage;
+      var span = days == null ? '' : days === 0 ? 'today' : days + (days === 1 ? ' day' : ' days');
+      return {
+        stage: stage, label: label, step: step, date: date || null, days: days,
+        late: !done && days != null && days > 3,
+        text: label + (span ? ' · ' + span : ''),
+        long: days == null ? label : days === 0 ? label + ' today' : span + ' since ' + label.toLowerCase()
+      };
+    },
+    /* Everyone on the managed shortlist who has sat more than three days. */
+    waiting: function () {
+      return ES.managedCandidates().filter(function (c) { return ES.daysInStage(c).late; });
+    },
+
+    /* ---------- interview availability (1 Nov) ----------
+       Next to "Request a call", a client can hand the recruiting team the
+       windows they could interview in, so interviews get lined up without
+       a round of emails. Saved per search. */
+    availability: function (searchId) { return (db.availability || {})[searchId || db.search.id] || null; },
+    setAvailability: function (searchId, data) {
+      db.availability = db.availability || {};
+      data.at = Date.now();
+      db.availability[searchId || db.search.id] = data;
+      commit(); return data;
+    },
+    AVAIL_PARTS: [['morning', 'Morning', '8am–12pm'], ['afternoon', 'Afternoon', '12–4pm'], ['evening', 'Evening', '4–7pm']],
+    AVAIL_FORMATS: [['onsite', 'On-site visit'], ['video', 'Video call'], ['phone', 'Phone']],
+    /* The next ten weekdays from tomorrow: two working weeks. */
+    availDays: function () {
+      var out = [], d = new Date(); d.setHours(12, 0, 0, 0);
+      while (out.length < 10) {
+        d.setDate(d.getDate() + 1);
+        if (d.getDay() === 0 || d.getDay() === 6) continue;
+        var m = d.getMonth() + 1, dd = d.getDate();
+        out.push(d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (dd < 10 ? '0' : '') + dd);
+      }
+      return out;
+    },
+    dayName: function (iso, long) {
+      var p = iso.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2]);
+      var D = long ? ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return D[d.getDay()] + ' ' + d.getDate() + ' ' + M[d.getMonth()];
+    },
+    /* Saved availability as display rows: [['Mon 2 Nov', 'morning, afternoon'], …]. */
+    availRows: function (av) {
+      if (!av) return [];
+      var by = {};
+      (av.slots || []).forEach(function (s) { (by[s.date] = by[s.date] || []).push(s.part); });
+      return Object.keys(by).sort().map(function (date) {
+        var parts = ES.AVAIL_PARTS.filter(function (p) { return by[date].indexOf(p[0]) > -1; })
+          .map(function (p) { return p[1].toLowerCase(); });
+        return [ES.dayName(date), parts.join(', ')];
+      });
+    },
+    availFormats: function (av) {
+      return ES.AVAIL_FORMATS.filter(function (f) { return av && (av.formats || []).indexOf(f[0]) > -1; })
+        .map(function (f) { return f[1]; });
+    },
+
+    /* The availability sheet. One dialog for every screen that offers it, so
+       the employer page and the candidate page cannot drift apart. Built on
+       first use; opts: { title, sub, onSaved(data) }. */
+    openAvailability: function (opts) {
+      opts = opts || {};
+      var doc = w.document, S = db.search, saved = ES.availability(S.id);
+      if (!doc.getElementById('avlCss')) {
+        var css = doc.createElement('style'); css.id = 'avlCss';
+        css.textContent = AVL_CSS; doc.head.appendChild(css);
+      }
+      var dlg = doc.getElementById('avlDlg');
+      if (dlg) dlg.remove();
+      dlg = doc.createElement('dialog');
+      dlg.id = 'avlDlg'; dlg.className = 'avl';
+      dlg.setAttribute('aria-labelledby', 'avlH'); dlg.setAttribute('aria-describedby', 'avlSub');
+      var picked = {};
+      (saved && saved.slots || []).forEach(function (s) { picked[s.date + '|' + s.part] = true; });
+      var fmts = (saved && saved.formats) || [];
+      var days = ES.availDays(), weeks = [], cur = null;
+      days.forEach(function (iso) {
+        var p = iso.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2]);
+        if (!cur || d.getDay() === 1) { cur = { start: iso, days: [] }; weeks.push(cur); }
+        cur.days.push(iso);
+      });
+      var tick = '<svg class="avl__tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+      var e = function (s) { return String(s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); };
+      dlg.innerHTML =
+        '<div class="avl__bar"><div><h2 id="avlH">' + e(opts.title || 'Provide interview availability') + '</h2>' +
+          '<p id="avlSub">' + e(opts.sub || (S.title + ' · pick every window that could work. The recruiting team lines up interviews around them.')) + '</p></div>' +
+          '<button type="button" class="avl__x" data-avl="close" aria-label="Close">&times;</button></div>' +
+        '<div class="avl__body">' +
+          '<fieldset class="avl__set"><legend>When could you interview?</legend>' +
+            '<p class="avl__hint">' + ES.AVAIL_PARTS.map(function (p) { return '<span><b>' + p[1] + '</b> ' + p[2] + '</span>'; }).join('') + '</p>' +
+            '<div class="avl__weeks">' + weeks.map(function (wk, wi) {
+              return '<div class="avl__wk"><h3 id="avlW' + wi + '">Week of ' + e(ES.dayName(wk.start).replace(/^\w+ /, '')) + '</h3>' +
+                '<div class="avl__rows" role="group" aria-labelledby="avlW' + wi + '">' + wk.days.map(function (iso) {
+                  var dn = ES.dayName(iso);
+                  return '<div class="avl__day"><span class="avl__dl"><b>' + e(dn.split(' ')[0]) + '</b> ' + e(dn.split(' ').slice(1).join(' ')) + '</span>' + ES.AVAIL_PARTS.map(function (p) {
+                    var on = !!picked[iso + '|' + p[0]];
+                    return '<button type="button" class="avl__slot" data-slot="' + iso + '|' + p[0] + '" aria-pressed="' + on + '" aria-label="' +
+                      e(ES.dayName(iso, true) + ', ' + p[1].toLowerCase() + ' ' + p[2]) + '">' + tick + '<span>' + p[1] + '</span></button>';
+                  }).join('') + '</div>';
+                }).join('') + '</div></div>';
+            }).join('') + '</div>' +
+          '</fieldset>' +
+          '<fieldset class="avl__set"><legend>How would you like to meet? <small>Pick any that work</small></legend>' +
+            '<div class="avl__fmts">' + ES.AVAIL_FORMATS.map(function (f) {
+              return '<label class="avl__fmt"><input type="checkbox" value="' + f[0] + '"' + (fmts.indexOf(f[0]) > -1 ? ' checked' : '') + '>' + tick + '<span>' + f[1] + '</span></label>';
+            }).join('') + '</div>' +
+          '</fieldset>' +
+          '<div class="avl__set avl__noteF"><label for="avlNote">Anything the team should know? <small>(optional)</small></label>' +
+            '<textarea id="avlNote" rows="3" placeholder="Best to come before evening feed. Ask for me at the main barn office.">' + e((saved && saved.note) || '') + '</textarea></div>' +
+        '</div>' +
+        '<div class="avl__foot"><p class="avl__msg" id="avlMsg" role="status"></p>' +
+          '<div class="avl__acts"><button type="button" class="btn btn--secondary" data-avl="close">Cancel</button>' +
+          '<button type="button" class="btn btn--primary" data-avl="send">Send to EquiStaff</button></div></div>';
+      doc.body.appendChild(dlg);
+
+      var opener = doc.activeElement, msg = dlg.querySelector('#avlMsg'), tried = false;
+      function count() { return dlg.querySelectorAll('.avl__slot[aria-pressed="true"]').length; }
+      function chosenFormats() { return [].map.call(dlg.querySelectorAll('.avl__fmt input:checked'), function (i) { return i.value; }); }
+      function status() {
+        var n = count(), f = chosenFormats().length, bad = '';
+        if (!n) bad = 'Pick at least one time window.';
+        else if (!f) bad = 'Pick how you’d like to meet.';
+        msg.className = 'avl__msg' + (bad && tried ? ' is-bad' : '');
+        msg.textContent = bad && tried ? bad : n ? n + (n === 1 ? ' window' : ' windows') + ' picked' : 'Pick every window that could work.';
+        return !bad;
+      }
+      function close() { if (dlg.open) dlg.close(); }
+      dlg.addEventListener('click', function (ev) {
+        var t = ev.target.closest('[data-avl],[data-slot]');
+        if (ev.target === dlg) { close(); return; }
+        if (!t) return;
+        if (t.hasAttribute('data-slot')) { t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); status(); return; }
+        var a = t.getAttribute('data-avl');
+        if (a === 'close') close();
+        if (a === 'send') {
+          tried = true;
+          if (!status()) { (count() ? dlg.querySelector('.avl__fmt input') : dlg.querySelector('.avl__slot')).focus(); return; }
+          var slots = [].map.call(dlg.querySelectorAll('.avl__slot[aria-pressed="true"]'), function (b) {
+            var p = b.getAttribute('data-slot').split('|'); return { date: p[0], part: p[1] };
+          });
+          var data = ES.setAvailability(S.id, { slots: slots, formats: chosenFormats(),
+            note: dlg.querySelector('#avlNote').value.trim(), candidateId: opts.candidateId || null });
+          close();
+          ES.notify('Sent. The recruiting team will line up interviews and confirm by email.');
+          ES.flash();
+          if (opts.onSaved) opts.onSaved(data);
+        }
+      });
+      dlg.addEventListener('change', function () { status(); });
+      // Keep Tab inside the sheet; Escape is the dialog's own cancel.
+      dlg.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'Tab') return;
+        var f = [].filter.call(dlg.querySelectorAll('button, input, textarea, [href]'), function (x) { return !x.disabled && x.offsetParent !== null; });
+        if (!f.length) return;
+        var i = f.indexOf(doc.activeElement);
+        if (ev.shiftKey && (i <= 0)) { ev.preventDefault(); f[f.length - 1].focus(); }
+        else if (!ev.shiftKey && i === f.length - 1) { ev.preventDefault(); f[0].focus(); }
+      });
+      dlg.addEventListener('close', function () {
+        doc.documentElement.classList.remove('avl-open');
+        if (opener && opener.focus && doc.contains(opener)) opener.focus();
+      });
+      status();
+      doc.documentElement.classList.add('avl-open');
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+      var firstOn = dlg.querySelector('.avl__slot[aria-pressed="true"]') || dlg.querySelector('.avl__slot');
+      if (firstOn) firstOn.focus();
+      return dlg;
+    },
+
     /* A client's decision on a presented candidate. Feedback is required
        on the screen; the rating stays optional. */
     decide: function (id, action, stars, note) {

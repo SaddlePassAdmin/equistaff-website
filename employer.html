@@ -60,12 +60,52 @@
 .shortlist .cand { padding:0; }
 .cand h4 a { color:inherit; text-decoration:none; }
 .cand h4 a:hover { text-decoration:underline; }
-.cand__idle { margin-top:6px !important; font:700 var(--t-label)/1.3 var(--font-mono) !important; color:var(--baby-300) !important; }
-.cand__idle.is-late { display:inline-block; background:var(--err-bg); color:var(--err-ink) !important; border-radius:var(--r-pill); padding:4px 10px; }
 .cand--late { border-color:var(--err-bg); box-shadow:inset 3px 0 0 0 var(--err-bg); }
 .howLink { margin:var(--s-4) 0 0; font-size:var(--t-small); }
 .howLink a { color:var(--baby-200); font-weight:700; }
 @media (max-width:680px){ .mTiles { gap:var(--s-3); } .mTile { padding:var(--s-3); } .mTile b { font-size:1.5rem; } .mTile span { font-size:var(--t-label); } }
+
+/* 1 Nov — days in status on every pill, and interview availability. */
+.recBar__acts { display:flex; gap:var(--s-3); margin-left:auto; flex-wrap:wrap; justify-content:flex-end; }
+.recBar__acts .btn { white-space:nowrap; }
+.recBar .btn--secondary { color:var(--white); }
+@media (max-width:680px){ .recBar__acts { width:100%; margin-left:0; } .recBar__acts .btn { flex:1 1 100%; } }
+.pill--late { background:var(--err-bg); color:var(--err-ink); display:inline-flex; align-items:center; gap:6px; }
+.pill--late svg { flex:0 0 auto; }
+.cand__need { display:inline-flex !important; align-items:center; gap:6px; margin-top:8px !important;
+  font:700 var(--t-label)/1.3 var(--font-body) !important; color:var(--white) !important; }
+.cand__need::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--err-bg); flex:0 0 auto; }
+.slTools { display:flex; justify-content:space-between; align-items:center; gap:var(--s-4); flex-wrap:wrap;
+  margin:0 0 var(--s-4); padding:var(--s-3) var(--s-3) var(--s-3) var(--s-5); border-radius:var(--r-md);
+  background:var(--portal-sunken); border:1px solid var(--portal-line); }
+.slTools.is-late { border-color:var(--err-bg); box-shadow:inset 3px 0 0 0 var(--err-bg); }
+.slWait { margin:0; display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; color:var(--white); font-weight:700; font-size:var(--t-small); }
+.slWait svg { color:var(--err-bg); flex:0 0 auto; }
+.slWait.is-clear { color:var(--baby-200); font-weight:400; }
+.slWait.is-clear svg { color:var(--baby-200); }
+.slBtn { background:none; border:1.5px solid var(--portal-edge); color:var(--white); border-radius:var(--r-pill);
+  font:700 var(--t-label)/1 var(--font-body); padding:0 var(--s-4); min-height:40px; cursor:pointer; }
+.slBtn:hover { border-color:var(--baby-200); }
+.slBtn[aria-pressed="true"] { background:var(--baby-200); border-color:var(--baby-200); color:var(--navy-900); }
+.slBtn:focus-visible, .slSort select:focus-visible { outline:2px solid var(--baby-200); outline-offset:2px; }
+.slSort { display:flex; gap:var(--s-2); align-items:center; font-size:var(--t-small); color:var(--baby-200); }
+.slSort select { min-height:40px; border-radius:var(--r-sm); border:1.5px solid var(--portal-edge); background:var(--portal-ground);
+  color:var(--white); font:700 var(--t-small)/1 var(--font-body); padding:0 var(--s-3); }
+.slEmpty { color:var(--baby-200); font-size:var(--t-small); margin:0; padding:var(--s-5); border:1px dashed var(--portal-line); border-radius:var(--r-md); }
+.avSum { margin-top:var(--s-5); padding:var(--s-4) var(--s-5); border-radius:var(--r-md); background:var(--portal-sunken);
+  border:1px solid var(--portal-line); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--s-3) var(--s-5); align-items:start; }
+.avSum[hidden] { display:none; }
+.avSum h4 { margin:0 0 var(--s-2); color:var(--white); font-size:1rem; display:flex; gap:var(--s-3); align-items:center; flex-wrap:wrap; }
+.avSum h4 .pill { font-size:var(--t-label); }
+.avSum ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:var(--s-2); }
+.avSum li { background:rgba(255,255,255,.08); border:1px solid var(--portal-line); border-radius:var(--r-pill); padding:6px 12px;
+  font-size:var(--t-label); color:var(--white); }
+.avSum li b { font-weight:700; }
+.avSum li span { color:var(--baby-200); }
+.avSum p { margin:var(--s-3) 0 0; font-size:var(--t-small); color:var(--baby-200); }
+.avSum p b { color:var(--white); }
+.avSum .btn { min-height:40px; padding:0 var(--s-5); color:var(--white); }
+@media (max-width:680px){ .avSum { grid-template-columns:1fr; } .avSum .btn { width:100%; } .slTools { padding:var(--s-3) var(--s-4); } .slSort { width:100%; } .slSort select { flex:1 1 auto; } }
 </style>
 </head>
 <body class="portal">
@@ -99,13 +139,26 @@
       <div class="recBar">
         <img src="img/kaitlin.jpg" alt="">
         <p><b>Kaitlin has a shortlist ready for you.</b> Everyone on it is phone-referenced. Open each person, then tell her what you think &mdash; she uses your feedback to shape what comes next.</p>
-        <a class="btn btn--primary" href="book.html" style="margin-left:auto;white-space:nowrap">Request a call</a>
+        <div class="recBar__acts">
+          <button class="btn btn--secondary" type="button" id="avBtn" onclick="openAvail()">Provide interview availability</button>
+          <a class="btn btn--primary" href="book.html">Request a call</a>
+        </div>
       </div>
+      <div class="avSum" id="avSum" hidden></div>
       <p class="howLink"><a href="direct-hire-flow.html">How a direct-hire search works &rarr;</a></p>
     </div>
 
     <section class="pSection">
       <div class="pSection__head"><h2>Your shortlist</h2><a href="#" onclick="event.preventDefault();dlShortlist()">Download the shortlist &rarr;</a></div>
+      <div class="slTools" id="slTools">
+        <p class="slWait" id="slWait"></p>
+        <label class="slSort">Sort
+          <select id="slSort" onchange="paintShortlist()">
+            <option value="stage">Shortlist order</option>
+            <option value="wait">Longest waiting first</option>
+          </select>
+        </label>
+      </div>
       <div class="shortlist" id="shortlist"></div>
     </section>
 
@@ -166,19 +219,73 @@ function paintSearch(){
   var pill = document.getElementById('sPill');
   pill.textContent = far >= 3 ? 'Offer out' : far >= 2 ? 'Interviewing' : 'Shortlist ready';
 
+  paintShortlist();
+  paintAvail();
+}
+
+var WARN = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>';
+var onlyWaiting = false;
+/* 1 Nov — every pill carries the days in that status (ES.daysInStage, shared
+   with the candidate page). Over three days it turns red, gains an icon and
+   a "Needs a decision" line, so it never relies on colour alone. */
+function paintShortlist(){
+  var list = ES.managedCandidates().slice(), waiting = ES.waiting();
+  var sort = document.getElementById('slSort').value;
+  if (sort === 'wait') {
+    var rank = function(c){ var d = ES.daysInStage(c); return (c.stage === 'Hired' || c.stage === 'Passed') ? -1 : (d.days == null ? 0 : d.days); };
+    list.sort(function(a, b){ return rank(b) - rank(a); });
+  }
+  if (onlyWaiting && !waiting.length) onlyWaiting = false;
+  if (onlyWaiting) list = list.filter(function(c){ return ES.daysInStage(c).late; });
+
+  var n = waiting.length, w = document.getElementById('slWait');
+  document.getElementById('slTools').classList.toggle('is-late', n > 0);
+  if (n) {
+    w.className = 'slWait';
+    w.innerHTML = WARN.replace(/13/g, '18') + '<span>' + n + (n === 1 ? ' candidate' : ' candidates') + ' waiting more than 3 days</span>' +
+      '<button type="button" class="slBtn" aria-pressed="' + onlyWaiting + '" aria-controls="shortlist" onclick="toggleWaiting()">' +
+      (onlyWaiting ? 'Show everyone' : 'Show only ' + (n === 1 ? 'them' : 'these ' + n)) + '</button>';
+  } else {
+    w.className = 'slWait is-clear';
+    w.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Nobody waiting more than 3 days</span>';
+  }
+
   document.getElementById('shortlist').innerHTML = list.map(function(c){
-    var st = STAGE[c.stage] || STAGE.Presented, idle = ES.idle(c);
+    var st = STAGE[c.stage] || STAGE.Presented, d = ES.daysInStage(c);
     var href = 'candidate.html?id=' + encodeURIComponent(c.id);
-    var exp = c.experience && c.experience[0];
     var line = c.headline + ' · ' + c.location + ' · ' + c.availability.toLowerCase();
-    return '<div class="cand' + (idle && idle.flag ? ' cand--late' : '') + '"><div class="cand__row">' +
+    var pill = d.late
+      ? '<span class="pill pill--late">' + WARN + '<span>' + esc(d.text) + '</span></span>'
+      : '<span class="pill ' + st[1] + '">' + esc(d.text) + '</span>';
+    return '<div class="cand' + (d.late ? ' cand--late' : '') + '"><div class="cand__row">' +
       '<div class="cand__av">' + (c.photo ? '<img src="' + c.photo + '" alt="">' : esc(c.initials)) + '</div>' +
       '<div><h4><a href="' + href + '">' + esc(c.name) + '</a></h4><p>' + esc(line) + '</p>' +
-        (idle ? '<p class="cand__idle' + (idle.flag ? ' is-late' : '') + '">' + esc(idle.text) + '</p>' : '') + '</div>' +
-      '<div class="cand__acts"><span class="pill ' + st[1] + '">' + st[0] + '</span>' +
-        '<a class="btn btn--primary" href="' + href + '">View</a></div>' +
+        (d.late ? '<p class="cand__need">Needs a decision · ' + esc(d.long) + '</p>' : '') + '</div>' +
+      '<div class="cand__acts">' + pill +
+        '<a class="btn btn--primary" href="' + href + '" aria-label="View ' + esc(c.name) + '">View</a></div>' +
     '</div></div>';
   }).join('');
+}
+function toggleWaiting(){
+  onlyWaiting = !onlyWaiting;
+  paintShortlist();
+  var b = document.querySelector('#slWait .slBtn'); if (b) b.focus();
+}
+
+/* ---------- interview availability (1 Nov) ---------- */
+function openAvail(){ ES.openAvailability({ onSaved: paintAvail }); }
+function paintAvail(){
+  var av = ES.availability(), box = document.getElementById('avSum'), btn = document.getElementById('avBtn');
+  if (!av) { box.hidden = true; btn.textContent = 'Provide interview availability'; return; }
+  var rows = ES.availRows(av), f = ES.availFormats(av);
+  var sent = new Date(av.at), MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  box.innerHTML = '<div><h4>Your interview availability <span class="pill pill--shortlist">Sent ' + sent.getDate() + ' ' + MON[sent.getMonth()] + '</span></h4>' +
+    '<ul>' + rows.map(function(r){ return '<li><b>' + esc(r[0]) + '</b> <span>' + esc(r[1]) + '</span></li>'; }).join('') + '</ul>' +
+    (f.length ? '<p><b>Format:</b> ' + esc(f.join(' · ')) + '</p>' : '') +
+    (av.note ? '<p><b>Your note:</b> ' + esc(av.note) + '</p>' : '') + '</div>' +
+    '<button class="btn btn--secondary" type="button" onclick="openAvail()" aria-label="Edit your interview availability">Edit</button>';
+  box.hidden = false;
+  btn.textContent = 'Update interview availability';
 }
 paintSearch();
 
@@ -186,7 +293,7 @@ function dlShortlist(){
   var S = ES.search();
   var txt = ['EQUISTAFF — SHORTLIST', S.title + ' · REF ' + S.ref + ' · Golden Ocala Equestrian', '']
     .concat(ES.managedCandidates().map(function(c){
-      return c.name + ' — ' + c.headline + ' — ' + c.location + ' — ' + c.availability.toLowerCase() + ' — ' + ((STAGE[c.stage] || STAGE.Presented)[0]).toLowerCase();
+      return c.name + ' — ' + c.headline + ' — ' + c.location + ' — ' + c.availability.toLowerCase() + ' — ' + ES.daysInStage(c).text.toLowerCase();
     }))
     .concat(['', 'Every reference checked by phone. Notes held by EquiStaff and available on request.']).join('\n');
   if (ES.download('Barn-Manager-shortlist.txt', txt)) ES.flash();
@@ -194,7 +301,11 @@ function dlShortlist(){
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "Every status on the shortlist now shows how long the person has been in it — “Presented · 6 days”, “Interviewed · 3 days”. More than three days in any status and the pill turns red, gets a warning mark, and the row says “Needs a decision”. Hired is never flagged.",
+  "Above the shortlist: how many people are waiting more than three days, with a button to show only them. A Sort menu adds “Longest waiting first”.",
+  "The candidate page counts days the same way, so the shortlist and each person's page always agree.",
+  "New “Provide interview availability” next to Request a call. It opens a sheet with the next two working weeks — morning, afternoon or evening on each day, pick as many as work — plus how you'd like to meet (on-site visit, video call or phone) and an optional note. Send to EquiStaff, and what you sent shows on the search card with an Edit button.",
   "The search track now follows the candidates: Presented → Reviewed → Interviewed → Offered → Hired. It sits wherever the furthest person on the shortlist has reached.",
   "Three numbers on the search: candidates applied, presented to you, and interviewed.",
   "Every “four” and “of 4” is gone — the note now reads “Kaitlin has a shortlist ready for you.” The page never promises a number.",
