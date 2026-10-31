@@ -269,6 +269,18 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
   border: 1px solid #C9D6E2; border-radius: var(--r-sm);
   font: inherit; font-size: 1rem; background: #fff; color: var(--navy-900);
 }
+.field select {
+  /* 31 Oct (Brittany): the browser's own arrow sat almost on the right edge.
+     Our own chevron, 16px in, with room so long options never run under it. */
+  -webkit-appearance: none; appearance: none; padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230B2545' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; background-size: 12px 8px;
+}
+/* The portal's dark fields reset the background, so they get a light chevron. */
+html[data-mode="deep"] .field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23BDE3FF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; background-size: 12px 8px;
+}
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: 3px solid rgba(0,122,184,.28); border-color: var(--blue-600);
 }
@@ -286,6 +298,8 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 .ftr a { color: var(--baby-200); text-decoration: none; font-size: var(--t-small); }
 .ftr__bar a { display: inline; margin: 0; }
 .ftr__bar > span { white-space: nowrap; }
+/* 31 Oct: at 390px "Built by Saddle Pass Technology" ran off the screen. */
+@media (max-width: 680px) { .ftr__bar > span { white-space: normal; } }
 /* 29 Oct — a quiet maker's mark. Saddle Pass builds equine technology, and
    the footer of a site we built is where that belongs. */
 .ftr__by { opacity: .72; }
@@ -412,6 +426,22 @@ p  { margin: 0 0 var(--s-4); max-width: 68ch; }
 }
 .ftr > .wrap { position: relative; z-index: 1; }
 @media (max-width: 900px) { .ftr__horses { width: 300px; opacity: .40; right: 8px; bottom: 6px; } }
+/* 31 Oct (Brittany): "either omit the horse graphic completely or move it over
+   to see more of it". It sat behind the link columns and the copyright line,
+   and the Evie button covered its legs. It now sits in its own space under
+   the brand column, whole, with nothing on top of it. On a phone it follows
+   the tagline. The original <img> stays in the markup but is hidden. */
+.ftr__horses { display: none; }
+.ftr__grid > div:first-child { position: relative; padding-bottom: 200px; }
+.ftr__grid > div:first-child::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 300px; height: 194px;
+  background: url("../assets/horses-blue-ondark.svg") no-repeat left bottom / contain;
+  opacity: .45; pointer-events: none;
+}
+@media (max-width: 680px) {
+  .ftr__grid > div:first-child { padding-bottom: 170px; }
+  .ftr__grid > div:first-child::after { width: 240px; height: 155px; }
+}
 
 /* ---------- Header at phone widths ----------
    Both header actions were wrapping onto two lines at 390. */
