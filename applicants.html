@@ -37,6 +37,7 @@
 .unvetted p { margin:0; font-size:var(--t-small); color:var(--baby-200); flex:1 1 300px; }
 .unvetted b { color:#fff; }
 @media (max-width:760px){ .apRow{grid-template-columns:1fr} }
+.apRow p.apWhen { margin-top:5px; font:600 var(--t-label)/1.3 var(--font-mono); color:var(--baby-300); }
 </style>
 </head>
 <body class="portal">
@@ -72,7 +73,7 @@
       <button class="apFilter" aria-pressed="false" onclick="filt('New',this)">New 4</button>
       <button class="apFilter" aria-pressed="false" onclick="filt('Shortlisted',this)">Shortlisted 2</button>
       <button class="apFilter" aria-pressed="false" onclick="filt('Contacted',this)">Contacted 1</button>
-      <button class="apFilter" aria-pressed="false" onclick="filt('Not for this',this)">Not for this 2</button>
+      <button class="apFilter" aria-pressed="false" onclick="filt('Rejected',this)">Rejected 2</button>
     </div>
 
     <div id="list"></div>
@@ -88,31 +89,40 @@
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script>
-var PEOPLE = [
-  { id:'ap1', n:'Imogen Clarke',  i:'IC', img:'img/people/imogen.jpg', m:'4 years · inside sales, equine retail · available now',            s:'New' },
-  { id:'ap2', n:'Tomas Vieira',   i:'TV', img:'img/people/tomas.jpg', m:'7 years · territory sales, feed and supplements · Ocala',                        s:'New' },
-  { id:'ap3', n:'Ruby Nakamura',  i:'RN', img:'img/people/ruby.jpg', m:'2 years · marketing coordinator, tack brand · needs relocation',                        s:'New' },
-  { id:'ap4', n:'Hallie Brandt',  i:'HB', img:'img/people/hallie.jpg', m:'9 years · account management, veterinary supply · Aiken',                 s:'New' },
-  { id:'ap5', n:'Pete Donnelly',  i:'PD', img:'img/people/pete.jpg', m:'12 years · regional sales director, animal health · Lexington',              s:'Shortlisted' },
-  { id:'ap6', n:'Sofia Marchetti',i:'SM', img:'img/people/sofia.jpg', m:'5 years · customer success, equestrian software · drives',                       s:'Shortlisted' },
-  { id:'ap7', n:'Dale Whitcomb',  i:'DW', img:'img/people/dale.jpg', m:'6 years · barn manager moving to the commercial side · spoke Tuesday',                  s:'Contacted' },
-  { id:'ap8', n:'Mara Ellison',   i:'ME', img:'img/people/mara.jpg', m:'Strong B2B record, no equine background · career changer',                                s:'Not for this' },
-  { id:'ap9', n:'Chris Udall',    i:'CU', img:'img/people/chris.jpg', m:'Applied to 3 of your posts · wants field sales, not inside',   s:'Not for this' }
-];
+/* 31 Oct — applicants now come from the shared candidate records, so View
+   opens the same profile a job-board employer sees in Find candidates. The
+   one-line summaries below are this post's own notes on each person. */
+var NOTES = {
+  'c-imogen': '4 years · inside sales, equine retail · available now',
+  'c-tomas':  '7 years · territory sales, feed and supplements · Ocala',
+  'c-ruby':   '2 years · marketing coordinator, tack brand · needs relocation',
+  'c-hallie': '9 years · account management, veterinary supply · Aiken',
+  'c-pete':   '12 years · regional sales director, animal health · Lexington',
+  'c-sofia':  '5 years · customer success, equestrian software · drives',
+  'c-dale':   '6 years · barn manager moving to the commercial side · spoke Tuesday',
+  'c-mara':   'Strong B2B record, no equine background · career changer',
+  'c-chris':  'Applied to 3 of your posts · wants field sales, not inside'
+};
+var PEOPLE = ES.candidates().filter(function(c){ return c.applied; }).map(function(c){
+  return { id:c.id, n:c.name, i:c.initials, img:c.photo, m:NOTES[c.id] || (c.headline + ' · ' + c.location),
+           s:c.appStatus || 'New', applied:c.applied };
+});
+var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function appliedOn(iso){ var p = iso.split('-'); return 'Applied ' + (+p[2]) + ' ' + MON[+p[1] - 1]; }
 var VIEW = 'all';
 
 function pill(s){
   var c = s === 'Shortlisted' ? 'pill--shortlist' : s === 'Contacted' ? 'pill--sent'
-        : s === 'Not for this' ? 'pill--sent' : 'pill--review';
+        : s === 'Rejected' ? 'pill--sent' : 'pill--review';
   return '<span class="pill ' + c + '">' + s + '</span>';
 }
 function row(p){
-  var cls = 'apRow' + (p.s === 'New' ? ' apRow--new' : p.s === 'Not for this' ? ' apRow--out' : '');
+  var cls = 'apRow' + (p.s === 'New' ? ' apRow--new' : p.s === 'Rejected' ? ' apRow--out' : '');
   return '<div class="' + cls + '">'
     + (p.img ? '<div class="apAv"><img src="'+p.img+'" alt=""></div>' : '<div class="apAv">'+p.i+'</div>')
-    + '<div><h4>' + p.n + '</h4><p>' + p.m + '</p></div>'
+    + '<div><h4>' + p.n + '</h4><p>' + p.m + '</p><p class="apWhen">' + appliedOn(p.applied) + '</p></div>'
     + '<div class="apActs">' + pill(p.s)
-    + '<a class="btn btn--primary" href="candidate.html">View</a>'
+    + '<a class="btn btn--primary" href="seeker-profile.html?id=' + p.id + '&amp;from=applicants">View</a>'
     + '<button class="btn btn--secondary" type="button" onclick="mark(\'' + p.id + '\')">'
     + (p.s === 'Shortlisted' ? 'Unshortlist' : 'Shortlist') + '</button>'
     + '</div></div>';
@@ -138,7 +148,10 @@ paint();
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('29 Oct', [
+<script>REVISED('31 Oct', [
+  "“Not for this” is now “Rejected”, on the filter and on the rows.",
+  "Every row shows the date the person applied.",
+  "View opens the job-board profile for that person (the same one Find candidates opens), with Back returning here.",
   "Hovering a card no longer lifts it. The job cards, the start-page tour cards, the 404 card and the job rows all shifted on hover and carried their text with them. They now respond with a shadow and a border instead, so nothing moves. Swept all 35 screens: no hover moves text anywhere.",
   "Pressing a button no longer nudges it. Every button dipped 1px on press and took its own label down with it; the press now shows as a shade change instead, so nothing moves under your finger. Swept all 35 screens — 80 button states were doing it.","On a phone, the portal tabs now sit inside the header as a swipeable row, with a fade on the right to show there's more. Before, they hung below the header over the page.", "Text no longer touches the screen edge on a phone — there's a 20px margin on both sides.", "The post is now a Regional Sales Manager role, so an employer outside the barn world sees themselves.", "Applicants have commercial backgrounds — territory sales, account management, customer success.", "Applicant photos on every row.", "Portal brightened — lighter, bluer, three surface levels instead of two."]);</script>
 <script src="src/chat.js"></script>

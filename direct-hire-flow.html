@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-mode="deep">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How direct hire works | EquiStaff</title>
+<meta name="description" content="How a recruiter-managed, direct-hire search works: what the recruiting team does, and what the client sees, step by step.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/tokens.css"><link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/screens.css">
+<style>
+/* HOW A DIRECT-HIRE SEARCH WORKS — Kaitlin, 31 Oct: "How do they exist, and
+   how do I share information with them? Not all leads come through the
+   site." One page, six steps, and for each one the two sides of the same
+   moment: what the recruiting team does in the admin portal, and what the
+   client sees in theirs. Client steps link to the real screens. */
+.dhIntro { max-width:70ch; color:var(--baby-200); font-size:1.0625rem; line-height:1.6; margin:var(--s-3) 0 0; }
+.dhKey { display:grid; grid-template-columns:64px minmax(0,1fr) minmax(0,1fr); gap:var(--s-5);
+  margin:var(--s-7) 0 var(--s-4); padding:0 var(--s-6); }
+.dhKey span { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; text-transform:uppercase; }
+.dhKey .a { color:var(--warm); } .dhKey .c { color:var(--baby-200); }
+
+.dhSteps { list-style:none; margin:0; padding:0; position:relative; }
+.dhStep { display:grid; grid-template-columns:64px minmax(0,1fr) minmax(0,1fr); gap:var(--s-5);
+  background:var(--surface-raised); border:1px solid var(--border-subtle); border-radius:var(--r-lg);
+  padding:var(--s-6); margin-bottom:var(--s-5); position:relative; }
+/* The connector between steps: a short spine from one number to the next. */
+.dhStep + .dhStep::before { content:""; position:absolute; left:calc(var(--s-6) + 21px); top:calc(var(--s-5) * -1 - 1px);
+  width:3px; height:var(--s-5); background:var(--baby-300); pointer-events:none; }
+.dhN { width:46px; height:46px; border-radius:50%; background:var(--baby-200); color:var(--navy-900);
+  display:grid; place-items:center; font:600 1.125rem/1 var(--font-mono); }
+.dhStep h2 { grid-column:2 / -1; margin:0; color:var(--white); font-size:1.375rem; align-self:center; }
+.dhCol { border-radius:var(--r-md); padding:var(--s-5); }
+.dhCol--admin { grid-column:2; background:var(--portal-sunken); border:1px dashed var(--portal-edge); }
+.dhCol--client { grid-column:3; background:var(--portal-ground); border:1px solid var(--baby-300); }
+.dhCol__k { display:flex; justify-content:space-between; align-items:center; gap:var(--s-3); flex-wrap:wrap; margin:0 0 var(--s-3); }
+.dhCol__k b { font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; text-transform:uppercase; }
+.dhCol--admin .dhCol__k b { color:var(--warm); }
+.dhCol--client .dhCol__k b { color:var(--baby-200); }
+.dhTag { display:inline-block; background:var(--warm); color:var(--warm-ink); border-radius:var(--r-pill);
+  padding:4px 9px; font:900 10px/1.2 var(--font-body); letter-spacing:.07em; text-transform:uppercase; }
+.dhCol p, .dhCol li { color:var(--white); font-size:var(--t-small); line-height:1.6; margin:0 0 var(--s-3); }
+.dhCol p:last-child, .dhCol li:last-child { margin-bottom:0; }
+.dhCol ul { margin:0; padding-left:18px; }
+.dhOr { display:grid; gap:var(--s-3); }
+.dhOr > div { background:rgba(255,255,255,.06); border:1px solid var(--portal-line); border-radius:var(--r-sm); padding:var(--s-3) var(--s-4); }
+.dhOr b { display:block; color:var(--white); font-size:var(--t-small); margin-bottom:2px; }
+.dhOr span { color:var(--baby-200); font-size:var(--t-small); line-height:1.5; display:block; }
+.dhOrSep { text-align:center; font:900 var(--t-label)/1 var(--font-body); letter-spacing:.1em; color:var(--warm); }
+.dhLink { display:inline-flex; align-items:center; gap:6px; margin-top:var(--s-4); min-height:44px;
+  color:var(--navy-900); background:var(--baby-200); border-radius:var(--r-pill); padding:0 var(--s-5);
+  font:700 var(--t-small)/1 var(--font-body); text-decoration:none; }
+.dhLink:hover { background:var(--baby-300); }
+.dhLink + .dhLink { margin-left:var(--s-2); }
+.dhRed { display:inline-block; background:var(--err-bg); color:var(--err-ink); border-radius:var(--r-pill);
+  padding:2px 9px; font:700 var(--t-label)/1.5 var(--font-mono); }
+.dhLoop { display:flex; gap:var(--s-5); align-items:center; flex-wrap:wrap; margin-top:var(--s-7);
+  background:rgba(189,227,255,.10); border:1px solid var(--baby-300); border-radius:var(--r-lg); padding:var(--s-5) var(--s-6); }
+.dhLoop img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
+.dhLoop p { margin:0; flex:1 1 320px; color:var(--baby-200); font-size:var(--t-small); }
+.dhLoop b { color:var(--white); }
+
+@media (max-width:900px){
+  .dhKey { display:none; }
+  .dhStep { grid-template-columns:46px minmax(0,1fr); padding:var(--s-5); gap:var(--s-4); }
+  .dhStep h2 { grid-column:2; font-size:1.1875rem; }
+  .dhCol--admin, .dhCol--client { grid-column:1 / -1; }
+  .dhStep + .dhStep::before { left:calc(var(--s-5) + 21px); }
+  .dhLink + .dhLink { margin-left:0; }
+  .dhLinks { display:flex; flex-wrap:wrap; gap:var(--s-2); }
+}
+</style>
+</head>
+<body class="portal">
+<a class="skip" href="#main">Skip to content</a>
+<div id="nav" data-nav="employer"></div>
+
+<main id="main">
+  <div class="wrap" style="padding-block:var(--s-7) var(--s-9)">
+    <p style="font-size:var(--t-small);margin:0 0 var(--s-5)">
+      <a href="employer.html" style="color:var(--baby-200);text-decoration:none;display:inline-flex;align-items:center;min-height:44px">&larr;&nbsp;Your searches</a>
+    </p>
+    <p class="eyebrow" style="color:var(--warm)">Recruiter-managed search</p>
+    <h1 style="color:var(--white);margin:0;font-size:2rem">How a direct-hire search works</h1>
+    <p class="dhIntro">Every client and every candidate can come from the site <em>or</em> from outside it &mdash; a phone call, an email, a referral. Each step below shows both sides of the same moment: what the recruiting team does, and what the client sees.</p>
+
+    <div class="dhKey" aria-hidden="true"><span></span><span class="a">Recruiting team does (admin)</span><span class="c">Client sees</span></div>
+
+    <ol class="dhSteps">
+      <li class="dhStep">
+        <span class="dhN" aria-hidden="true">1</span>
+        <h2>Add the client</h2>
+        <div class="dhCol dhCol--admin">
+          <div class="dhCol__k"><b>Recruiting team does</b><span class="dhTag">Designed in the admin portal (next)</span></div>
+          <div class="dhOr">
+            <div><b>From a site inquiry</b><span>A Request talent form or the assistant creates the client record. The recruiter checks it and opens it.</span></div>
+            <p class="dhOrSep">OR</p>
+            <div><b>Added by hand</b><span>For leads that come by phone, email or referral: the recruiter types in the business, contact name and email.</span></div>
+          </div>
+        </div>
+        <div class="dhCol dhCol--client">
+          <div class="dhCol__k"><b>Client sees</b></div>
+          <p>An email invite from EquiStaff: &ldquo;Your recruiter has set up your account.&rdquo; One link to set a password &mdash; no sign-up form, because the recruiter already has their details.</p>
+          <div class="dhLinks"><a class="dhLink" href="signin.html">Sign in &rarr;</a></div>
+        </div>
+      </li>
+
+      <li class="dhStep">
+        <span class="dhN" aria-hidden="true">2</span>
+        <h2>Open the search</h2>
+        <div class="dhCol dhCol--admin">
+          <div class="dhCol__k"><b>Recruiting team does</b><span class="dhTag">Designed in the admin portal (next)</span></div>
+          <p>Enters the role from the briefing call, or uploads the client&rsquo;s job description. If the client sent the role through the site, it is already filled in.</p>
+        </div>
+        <div class="dhCol dhCol--client">
+          <div class="dhCol__k"><b>Client sees</b></div>
+          <p>The search appears on <b>Your searches</b>, with a progress track and their recruiter&rsquo;s note. Clients who start on the site send the role over themselves.</p>
+          <div class="dhLinks"><a class="dhLink" href="request-talent.html">Request talent &rarr;</a><a class="dhLink" href="employer.html">Your searches &rarr;</a></div>
+        </div>
+      </li>
+
+      <li class="dhStep">
+        <span class="dhN" aria-hidden="true">3</span>
+        <h2>Present candidates</h2>
+        <div class="dhCol dhCol--admin">
+          <div class="dhCol__k"><b>Recruiting team does</b><span class="dhTag">Designed in the admin portal (next)</span></div>
+          <div class="dhOr">
+            <div><b>Pick someone already on EquiStaff</b><span>Search seekers, add them to the shortlist, write the EquiStaff feedback and log the reference checks.</span></div>
+            <p class="dhOrSep">OR</p>
+            <div><b>Add a candidate from a resume</b><span>Upload the resume and write the summary. The candidate gets an invite to claim their profile. Until they do, the client sees only the recruiter&rsquo;s summary and the resume.</span></div>
+          </div>
+        </div>
+        <div class="dhCol dhCol--client">
+          <div class="dhCol__k"><b>Client sees</b></div>
+          <p>A new person on the shortlist, marked <b>Presented</b> with the date. Contact details stay hidden until the placement is settled.</p>
+          <div class="dhLinks"><a class="dhLink" href="employer.html">The shortlist &rarr;</a></div>
+        </div>
+      </li>
+
+      <li class="dhStep">
+        <span class="dhN" aria-hidden="true">4</span>
+        <h2>Client reviews</h2>
+        <div class="dhCol dhCol--admin">
+          <div class="dhCol__k"><b>Recruiting team does</b><span class="dhTag">Designed in the admin portal (next)</span></div>
+          <p>Gets the client&rsquo;s rating and written feedback on each person as it is sent, and uses it to adjust who comes next.</p>
+        </div>
+        <div class="dhCol dhCol--client">
+          <div class="dhCol__k"><b>Client sees</b></div>
+          <p>Opens each candidate: resume first, then EquiStaff&rsquo;s feedback, experience, skills and references. Rates them if they like, and writes feedback &mdash; required before they can decide.</p>
+          <div class="dhLinks"><a class="dhLink" href="candidate.html">A candidate &rarr;</a></div>
+        </div>
+      </li>
+
+      <li class="dhStep">
+        <span class="dhN" aria-hidden="true">5</span>
+        <h2>Interview, offer, hired</h2>
+        <div class="dhCol dhCol--admin">
+          <div class="dhCol__k"><b>Recruiting team does</b><span class="dhTag">Designed in the admin portal (next)</span></div>
+          <p>Sees every date as it is logged, and marks the hire. Releases contact details once the placement is settled.</p>
+        </div>
+        <div class="dhCol dhCol--client">
+          <div class="dhCol__k"><b>Client sees</b></div>
+          <p>Moves people to interview, second interview and offer; each step is dated on the candidate&rsquo;s Activity. A step that sits more than three days with nothing after it turns red: <span class="dhRed">6 days since presented</span></p>
+          <div class="dhLinks"><a class="dhLink" href="candidate.html?id=c-sarah">See a flagged candidate &rarr;</a></div>
+        </div>
+      </li>
+
+      <li class="dhStep">
+        <span class="dhN" aria-hidden="true">6</span>
+        <h2>Status flows back to the recruiter</h2>
+        <div class="dhCol dhCol--admin">
+          <div class="dhCol__k"><b>Recruiting team does</b><span class="dhTag">Designed in the admin portal (next)</span></div>
+          <p>Every client decision, rating, note and date lands on the recruiter&rsquo;s admin dashboard, so they can see which searches are moving and which have stalled &mdash; without chasing anyone by email.</p>
+        </div>
+        <div class="dhCol dhCol--client">
+          <div class="dhCol__k"><b>Client sees</b></div>
+          <p>Nothing extra to do. Their shortlist shows each person&rsquo;s status, and the search track moves from Presented through to Hired.</p>
+          <div class="dhLinks"><a class="dhLink" href="employer.html">Your searches &rarr;</a></div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="dhLoop">
+      <img src="img/kaitlin.jpg" alt="">
+      <p><b>Questions about a search?</b> Your recruiter is one message away, whichever step you&rsquo;re on.</p>
+      <a class="btn btn--primary" href="messages.html">Message EquiStaff</a>
+    </div>
+  </div>
+</main>
+
+<footer class="ftr" style="background:var(--portal-sunken);border-top:1px solid var(--portal-line)">
+  <div class="wrap"><div class="ftr__bar" style="border:0;margin:0;padding:0">
+    <span>&copy; 2026 EquiStaff &middot; Equine recruiting since 1982</span><span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; Accessibility</span>
+  </div></div>
+</footer>
+
+<script src="src/state.js"></script>
+<script src="src/nav.js"></script>
+<script src="src/revised.js"></script>
+<script>REVISED('31 Oct', [
+  "New screen: how a direct-hire search works, answering Kaitlin's question — how do these clients exist, and how does she share information with them when not every lead comes through the site?",
+  "Six steps. Each shows both sides: what the recruiting team does in the admin portal, and what the client sees. Client steps link to the real screens.",
+  "Clients can be added from a site inquiry or by hand (phone, email, referral) and get an email invite to set a password.",
+  "Candidates can be picked from EquiStaff or added from an uploaded resume; they get an invite to claim their profile, and until then the client sees only the summary and the resume.",
+  "The admin side is tagged as the next thing to design."]);</script>
+<script src="src/chat.js"></script>
+</body>
+</html>
