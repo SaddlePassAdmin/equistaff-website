@@ -100,6 +100,9 @@
      .chat-portal) so it takes up as little of the working screen as
      possible. The dismiss control still works everywhere. */
   var IS_PORTAL = d.body.classList.contains('portal');
+  // chatbot.html opts out: the page is Evie, so a floating button to reach
+  // her is redundant and it sits on top of the footer's own Ask Evie link.
+  var OPTED_OUT = d.body.hasAttribute('data-no-launcher');
   if (IS_PORTAL) d.body.classList.add('chat-portal');
   var HIDE_KEY  = 'equistaff.evie.hidden';
   function dismissed() {
@@ -107,7 +110,7 @@
   }
 
   var launch = d.querySelector('.chatLaunch:not([data-specimen])'); // the spec page shows a static specimen
-  if (dismissed()) {
+  if (OPTED_OUT || dismissed()) {
     if (launch && launch.parentNode) launch.parentNode.removeChild(launch);
     d.body.classList.remove('has-chat');
     return;                      // nothing else on this page needs the widget
