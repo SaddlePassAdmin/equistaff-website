@@ -69,7 +69,7 @@
     { title: 'Show Manager', family: 'Show Facility Staff', org: 'International show jumping team', where: 'Wellington, FL', state: 'FL', pay: '$70,000 – $85,000', housing: 'Included', discipline: 'Show Jumping', type: 'Full time', managed: true },
     { title: 'Assistant Trainer', family: 'Riders, Trainers & Instructors', org: 'Bridlewood Farm', where: 'Wellington, FL', state: 'FL', pay: '$42,000 – $52,000', housing: null, horses: '18', discipline: 'Hunter / Jumper', type: 'Full time', managed: false },
     { title: 'Head Groom', family: 'Grooms & Barn Staff', org: 'Clearwater Sport Horses', where: 'Lexington, KY', state: 'KY', pay: '$38,000 – $46,000', housing: 'Available', discipline: 'Dressage', type: 'Full time', managed: false },
-    { title: 'Facility Director', family: 'Executive', org: 'Eventing yard, 60+ horses', where: 'Middleburg, VA', state: 'VA', pay: '$78,000 – $92,000', housing: null, horses: '60+', discipline: 'Eventing', type: 'Full time', managed: true },
+    { title: 'Facility Director', family: 'Executive', org: 'Eventing farm, 60+ horses', where: 'Middleburg, VA', state: 'VA', pay: '$78,000 – $92,000', housing: null, horses: '60+', discipline: 'Eventing', type: 'Full time', managed: true },
     { title: 'Working Student', family: 'Riders, Trainers & Instructors', org: 'Live Oak Stables', where: 'Ocala, FL', state: 'FL', pay: 'Stipend', housing: 'Housing and board included', discipline: 'Eventing', type: 'Seasonal', managed: false }
   ];
   var PRICES = [ // pricing.html, Kaitlin's list
@@ -465,7 +465,7 @@
   function profileHelp() {
     if (pageRole === 'seeker' || persona === 'seeker') {
       var p = ES ? ES.profile() : { strength: 70 };
-      bot('Your profile is at <span class="liveFig">' + (p.strength || 70) + '%</span>. Still missing: <b>two references</b>, <b>your availability</b> and <b>your housing preference</b>. Complete profiles are seen first by the recruiting team.',
+      bot('Your profile is at <span class="liveFig">' + (p.strength || 70) + '%</span>. Still missing: <b>your goals and interests</b>, <b>your availability</b> and <b>your housing preference</b>. Complete profiles are seen first by the recruiting team.',
         [['Open my profile', function () { location.href = 'profile.html'; }], ['I don’t have a resume', resumeHelp], ['Back to the start', hello]]);
     } else {
       bot('A free profile is how the recruiting team finds you. It takes about 3 minutes.', [['Create my profile', function () { location.href = 'signup.html'; }], ['I don’t have a resume', resumeHelp]]);
