@@ -14,7 +14,21 @@ before building it.
 | Design | Carrington Smurl, Brittany Capps (Saddle Pass) |
 | Client | Kaitlin Snyder, EquiStaff (reviews with Kelly) |
 | Timeline | Client design notes closed 2 Nov · admin portal design in progress (target 1 Dec) · site testing ~23 Nov → 1 Dec |
-| Last updated | 2 November 2026 |
+| Last updated | 2 November 2026 (build notes added after Kaitlin's review) |
+
+**V1 build notes — read these first.** The prototype still shows some things Kaitlin has deferred. Build V1 like this:
+
+1. **Don't build for V1** (prototype shows them; Kaitlin deferred): the home **state map** (build the state *list*),
+   the résumé **Facility/Business switch** (V2), **skill levels per discipline** (later), **auto-recognised skills** (V2).
+2. **Do build for V1:** the post-a-job **Facility/Business switch**, **job-description upload**, and the
+   **days-in-stage pills** on the shortlist.
+3. **Interview availability** is a **plain text box** for the client's available windows — not the slot picker the prototype shows.
+4. **Job search filters by `?state=`** — the home page state links land on `/jobs?state=XX`. The prototype doesn't
+   filter (known prototype bug); production must, with an empty state.
+5. From Kaitlin's notes: **phone** on the main sign-up screen · a new seeker's **first step after sign-in is a résumé
+   upload** · **remove the employer-feedback disclaimer** in seeker settings · **direct-hire clients get no candidate
+   search unless they also hold a job-board plan** · talent search **drops the Role family filter** (seekers never set one).
+6. **The prototype has bugs. Build from the designs and these rules, not from the prototype's JavaScript.**
 
 **Precedence when sources disagree:** this file → `docs/chatbot-spec.md` (chat only) → the prototype's code
 → `src/tokens.css` → Figma. Figma is captured *from* the prototype, so the prototype wins on detail.
@@ -59,8 +73,8 @@ Change a row's status only through a PR that design signs off.
 
 | Prototype page | PROD route | Status | Notes |
 |---|---|---|---|
-| `index.html` | `/` | Build · open | Final landing. "Find work by state" is an interactive map (`src/usmap.js`) — client says **Later**; launch with the state list it replaces? (§7) Hero video and all photos are placeholders |
-| `jobs.html` | `/jobs` | Build | Search filters by role and place; no-match state exists |
+| `index.html` | `/` | Build | Final landing. "Find work by state" = the **state list** linking to `/jobs?state=XX`; the interactive map (`src/usmap.js`) is **Later**. Hero video and all photos are placeholders |
+| `jobs.html` | `/jobs` | Build | Search filters by role and place; no-match state exists. **Must filter by `?state=`** (prototype doesn't) |
 | `job-detail.html` | `/jobs/[slug]` | Build | Rendered from `src/jobs.js` by `?role=<slug>`. Order: About the employer → Job description → Main duties → Requirements → Benefits. Managed roles: no employer name, no photo (R1). Share under Apply / Save. JobPosting JSON-LD |
 | `pricing.html` | `/pricing` | Build | Comparison (Job board / Advertising package / Direct hire) at the top, each jumps to its details. Prices are content (§4) |
 | `about.html`, `contact.html` | `/about`, `/contact` | Build | Contact submits to the lead inbox |
@@ -84,18 +98,18 @@ Change a row's status only through a PR that design signs off.
 
 | Prototype page | PROD route | Status | Notes |
 |---|---|---|---|
-| `onboarding.html` | `/jobs/[slug]/apply` | Build | **Account first** (step 1 creates it) and **a resume is required** — no resume routes to the builder and back. Ends with "add my profile to the public job board?" yes = Open to everyone, no = Looking quietly |
+| `onboarding.html` | `/jobs/[slug]/apply` | Build | **New seekers: first step after sign-in is a résumé upload.** **Account first** (step 1 creates it) and **a resume is required** — no resume routes to the builder and back. Ends with "add my profile to the public job board?" yes = Open to everyone, no = Looking quietly |
 | `profile.html` | `/profile` | Build | Goals and interests. No references for seekers |
-| `resume.html` | `/resume` | Build · open | Upload-and-review or build. Sections: Objectives / Experience / Key skills / Achievements & extras. Name, phone, email, location pre-fill. Facility/Business toggle + skill **levels** per discipline are built but client says **Later** (§7) |
+| `resume.html` | `/resume` | Build · open | Upload-and-review or build. Sections: Objectives / Experience / Key skills / Achievements & extras. Name, phone, email, location pre-fill. Facility/Business toggle and skill **levels** per discipline are in the prototype but **not V1** |
 | `applications.html`, `saved.html` | `/applications`, `/saved` | Build | Managed employers stay unnamed until contact (R1) |
 | `messages.html` | `/messages` | Build | Thread is "Recruiting Team", never a person's name. Scrolls like any chat |
-| `settings.html` | `/settings` | Build · open | Phone required. Visibility: **Looking quietly** (recruiting team only) or **Open to everyone** |
+| `settings.html` | `/settings` | Build | Phone required. Visibility: **Looking quietly** (recruiting team only) or **Open to everyone**. Remove the employer-feedback disclaimer |
 
 ### Employer — hiring through the recruiting team (direct hire)
 
 | Prototype page | PROD route | Status | Notes |
 |---|---|---|---|
-| `employer.html` | `/employer` | Build · open | Metrics: applied / presented / interviewed. Each shortlisted candidate shows stage + days in stage; **over 3 days turns red**. "Request a call" + "Provide interview availability" — client wants **a plain text box** in V1, not the slot picker that's built (§7) |
+| `employer.html` | `/employer` | Build · open | Metrics: applied / presented / interviewed. Each shortlisted candidate shows stage + days in stage; **over 3 days turns red**. "Request a call" + "Provide interview availability" = **a plain text box** in V1 (the prototype's slot picker is not V1) |
 | `candidate.html` | `/employer/candidates/[id]` | Build | Open/Download résumé first, then the recruiting team's feedback. Decision rail on the right: horseshoe rating optional, **written feedback required**. Activity dates (presented / interview / 2nd interview / offer). References at the bottom. Employer notes go to the recruiting team, never the candidate |
 | `direct-hire-flow.html` | — (explainer) | Read it | Six steps, admin side next to client side: clients added by hand, candidates added from a résumé and invited to claim a profile. Defines what the admin portal must do (§6) |
 
@@ -106,7 +120,7 @@ Change a row's status only through a PR that design signs off.
 | `post-job.html` | `/employer/post-job` | Build | Upload a job description first (parsed). **Facility/Business toggle — client says implement now**: Business swaps Discipline→Industry focus, Horses→Company size, Staff→Direct reports, Days off→Work schedule, Housing→Travel requirements. Housing splits Private / Shared. Pay fields auto-format commas. "Have the recruiting team write it" sits above the preview ($500) |
 | `my-jobs.html` | `/employer/jobs` | Build | Close and reopen posts |
 | `applicants.html` | `/employer/jobs/[id]/applicants` | Build | Date applied in the list. "Rejected", not "Not for this" |
-| `talent-search.html` | `/employer/talent` | Build · open | Search seekers who chose Open to everyone. Role-family filter has no matching seeker field yet (§7). Direct-hire clients get **no** search unless they also hold a job-board subscription |
+| `talent-search.html` | `/employer/talent` | Build | Search seekers who chose Open to everyone. **Drop the Role family filter.** Direct-hire clients get **no** search unless they also hold a job-board plan |
 | `seeker-profile.html` | `/employer/talent/[id]` | Build | Résumé first, photos/videos under it, contact details in the header (no redaction — employers have paid) |
 | `billing.html` | `/employer/billing` | Build · open | Stripe — see §6. Needs declined-card and past-due states (§3) |
 | `company.html` | `/employer/company` | Build | Job-board clients fill it. Direct-hire clients have a reduced view (`?type=direct`) and it never appears on managed listings |
@@ -121,7 +135,7 @@ Change a row's status only through a PR that design signs off.
 
 | Area | Status |
 |---|---|
-| **Admin portal V1** | Design in progress (Carrington, target 1 Dec). Kelly and Nick review before it's final. See §6 for scope |
+| **Admin portal V1** | Being designed now as static, light-theme Figma screens on the **💻 Admin Portal** page; Kaitlin reviews Friday, then Kelly and Nick. Don't build ahead of sign-off. See §6 |
 | Role-family SEO landing pages | After launch |
 
 ---
@@ -232,21 +246,17 @@ customers and webhooks move to the new platform before billing is built; no new 
 
 | # | Decision | Blocks | Who |
 |---|---|---|---|
-| 1 | Built but client says **later**: state map, résumé Facility/Business toggle, skill levels per discipline. Hide for launch or ship? | index, résumé | Carrington |
-| 2 | Interview availability: replace the slot picker with a plain text box for V1 | employer portal | Carrington (client asked) |
-| 3 | Talent-search role-family filter: add role family to the seeker flow, or drop the filter | talent search, seeker profile | Carrington + Kaitlin |
-| 4 | Prompt for a résumé as the first step after sign-up (today it's required at apply) | onboarding | Kaitlin |
-| 5 | 90-day replacement guarantee: keep it on pricing and home? | pricing, index | Kaitlin |
-| 6 | Featured Jobseeker: price and what it includes | pricing, settings | Kaitlin |
-| 7 | Job alerts: built from saved searches (no save-search exists yet) or from the profile? | settings, jobs | Kaitlin |
-| 8 | Where the one-line summary under each applicant comes from | applicants | Kaitlin |
-| 9 | Job source of truth: SmartSearch sync, admin-posted jobs, or both | jobs API, admin | Uraiz + Kaitlin |
-| 10 | Stripe migration (§6) and legacy field map | billing, migration | Uraiz |
-| 11 | Hosting owner, staging environment for testing, CI | testing window | Uraiz + Carrington |
-| 12 | Booking: one MS Bookings link today; confirm email-to-book for everything else, and the inbox address | book, chat hand-off | Kaitlin |
-| 13 | Real photography and hero video (all current images are placeholders, `img/CREDITS.md`) | launch | Kaitlin |
-| 14 | Privacy policy and terms legal review | launch | Carrington |
-| 15 | Chat open questions | chat | `docs/chatbot-spec.md` §9 |
+| 1 | 90-day replacement guarantee: keep it on pricing and home? | pricing, index | Kaitlin |
+| 2 | Featured Jobseeker: price and what it includes | pricing, settings | Kaitlin |
+| 3 | Job alerts: built from saved searches (no save-search exists yet) or from the profile? | settings, jobs | Kaitlin |
+| 4 | Where the one-line summary under each applicant comes from | applicants | Kaitlin |
+| 5 | Job source of truth: SmartSearch sync, admin-posted jobs, or both | jobs API, admin | Uraiz + Kaitlin |
+| 6 | Stripe migration (§6) and legacy field map | billing, migration | Uraiz |
+| 7 | Hosting owner, staging environment for testing, CI | testing window | Uraiz + Carrington |
+| 8 | Booking: one MS Bookings link today; confirm email-to-book for everything else, and the inbox address | book, chat hand-off | Kaitlin |
+| 9 | Real photography and hero video (all current images are placeholders, `img/CREDITS.md`) | launch | Kaitlin |
+| 10 | Privacy policy and terms legal review | launch | Carrington |
+| 11 | Chat open questions | chat | `docs/chatbot-spec.md` §9 |
 
 Small copy leftovers in the prototype (fix in PROD, don't copy): `src/jobs.js` still says "yard" / "lorry" in three
 roles; `src/state.js` notice "Request sent to Kaitlin" should name the team.
