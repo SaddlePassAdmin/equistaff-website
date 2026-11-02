@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direct hire · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.btn > svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.btn { white-space: nowrap; }
+</style>
+</head>
+<body class="adm" data-page="searches">
+<main id="aPage">
+  <div class="aHead">
+    <div>
+      <h1>Direct hire</h1>
+      <p>Every search the recruiting team is running for a client. A red pill means the client hasn't answered in more than 3 days.</p>
+    </div>
+    <div class="aHead__acts"><a class="btn btn--primary" href="search-new.html" data-i="plus">New search</a></div>
+  </div>
+
+  <section class="aCard">
+    <div class="aBar">
+      <button class="aFilter" aria-pressed="true">Active <em>6</em></button>
+      <button class="aFilter" aria-pressed="false">Waiting on client <em>2</em></button>
+      <button class="aFilter" aria-pressed="false">Placed <em>14</em></button>
+      <button class="aFilter" aria-pressed="false">Closed <em>9</em></button>
+      <div class="aBar__right">
+        <select class="aSelect" aria-label="Sort"><option>Longest waiting first</option><option>Newest first</option><option>Client A–Z</option></select>
+      </div>
+    </div>
+    <div class="aTableWrap">
+    <table class="aTable">
+      <thead><tr><th>Role and client</th><th>Came in</th><th>Opened</th><th>Presented</th><th>Interviewing</th><th>Furthest stage</th><th>Client reply</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="aWho"><span class="aAv">LO</span><div><a href="search.html"><b>Barn Manager</b></a><small>Live Oak Stables · Ocala, FL</small></div></div></td>
+          <td class="muted">Site</td>
+          <td class="num">12 Oct</td>
+          <td class="num">3</td>
+          <td class="num">1</td>
+          <td><span class="aPill aPill--info aPill--plain">Interviewing</span></td>
+          <td><span class="aPill aPill--err">Waiting 5 days</span></td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="search.html">Open</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><span class="aAv">BH</span><div><a href="search.html"><b>Head Rider</b></a><small>Briar Hill Eventing · Aiken, SC</small></div></div></td>
+          <td class="muted">By hand</td>
+          <td class="num">16 Oct</td>
+          <td class="num">2</td>
+          <td class="num">0</td>
+          <td><span class="aPill aPill--info aPill--plain">Reviewed</span></td>
+          <td><span class="aPill aPill--err">Waiting 4 days</span></td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="search.html">Open</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><span class="aAv">HD</span><div><a href="search.html"><b>Assistant Trainer</b></a><small>Hartwell Dressage · Wellington, FL</small></div></div></td>
+          <td class="muted">Site</td>
+          <td class="num">5 Oct</td>
+          <td class="num">4</td>
+          <td class="num">2</td>
+          <td><span class="aPill aPill--ok aPill--plain">Offer made</span></td>
+          <td><span class="aPill aPill--ok">1 day</span></td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="search.html">Open</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><span class="aAv">MS</span><div><a href="search.html"><b>Show Groom</b></a><small>Magnolia Show Stables · Lexington, KY</small></div></div></td>
+          <td class="muted">Site</td>
+          <td class="num">26 Oct</td>
+          <td class="num">1</td>
+          <td class="num">0</td>
+          <td><span class="aPill aPill--info aPill--plain">Presented</span></td>
+          <td><span class="aPill aPill--warn">2 days</span></td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="search.html">Open</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><span class="aAv">SV</span><div><a href="search.html"><b>Farm Manager</b></a><small>Silver Vale Farm · Middleburg, VA</small></div></div></td>
+          <td class="muted">By hand</td>
+          <td class="num">29 Oct</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td><span class="aPill aPill--mute aPill--plain">Searching</span></td>
+          <td><span class="muted">—</span></td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="search.html">Open</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><span class="aAv">CR</span><div><a href="search.html"><b>Polo Groom</b></a><small>Cedar Run Polo · Lexington, KY</small></div></div></td>
+          <td class="muted">Site</td>
+          <td class="num">2 Nov</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td><span class="aPill aPill--mute aPill--plain">Searching</span></td>
+          <td><span class="aPill aPill--info">New</span></td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="search.html">Open</a></div></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="aFoot">Showing 6 active searches</div>
+  </section>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

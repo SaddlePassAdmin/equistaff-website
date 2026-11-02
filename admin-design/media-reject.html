@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reject photo · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.aCard__head a[data-i]{display:inline-flex;gap:6px;align-items:center}
+.nw{white-space:nowrap}.muted{color:var(--text-muted)}.small{font-size:var(--t-label)}
+.aTableWrap{overflow-x:auto;position:relative}.aGrid{grid-template-columns:minmax(0,1fr)}.aGrid.aGrid--main{grid-template-columns:minmax(0,1fr) 360px}
+.aGrid.aGrid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.aGrid.aGrid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.aDl dd{min-width:0;overflow-wrap:anywhere}.stack{display:grid;gap:var(--s-2)}.stack .btn{width:100%}
+body{position:relative}.aScrim{position:absolute;inset:0 0 auto 0;min-height:100%;place-items:start center;padding:140px 0 80px}
+.field input[type=checkbox],.field input[type=radio],.radio input{width:auto;min-height:0;padding:0}.field label.radio,.field label.chk{display:flex;font-weight:400}.field label.radio b{font-weight:700}
+.aModal .field{margin-bottom:var(--s-4)}
+.radio{display:flex;gap:var(--s-3);align-items:flex-start;padding:12px 14px;border:1px solid #C9D6E2;border-radius:var(--r-sm);margin-bottom:var(--s-2)}
+.radio input{margin-top:4px;accent-color:var(--blue-600)}.radio b{display:block}.radio small{color:var(--text-muted);font-size:var(--t-label)}
+.radio.on{border-color:var(--blue-600);background:var(--depth-01)}.radio .num{margin-left:auto;font-family:var(--font-mono);font-weight:700;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.aFind--sm{flex:0 0 260px}.aFind--sm input{min-height:38px;padding-left:14px}
+@media (max-width:860px){.aGrid.aGrid--main,.aGrid.aGrid--2,.aGrid.aGrid--3{grid-template-columns:minmax(0,1fr)}.aDl{grid-template-columns:1fr;gap:2px}.aDl dd{margin-bottom:8px}.aHead__acts{margin-left:0}.aFind--sm{flex:1 1 100%}.aBar__right{margin-left:0;width:100%;flex-wrap:wrap}.aScrim{padding:80px 12px 0}}
+.barTop{padding:0 0 var(--s-4);border:0}.mGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--s-4)}
+.mCard{overflow:hidden}.mCard__img{position:relative;aspect-ratio:4/3;background:var(--surface-tint)}.mCard__img img{width:100%;height:100%;object-fit:cover;display:block}
+.mPlay{position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(11,37,69,.78);color:#fff;border-radius:var(--r-pill);padding:6px 10px;font:700 12px/1 var(--font-mono)}
+.mPlay svg{width:14px!important;height:14px!important}
+.mCard__body{padding:var(--s-4)}.mCard__body p{margin:6px 0 var(--s-3) 48px}.mCard__acts{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)}
+.rChip{border:1px solid #C9D6E2;border-radius:var(--r-pill);padding:8px 14px;font:700 var(--t-small)/1 var(--font-body);background:#fff}
+.rChip.on{background:var(--navy-900);border-color:var(--navy-900);color:#fff}.rPrev{display:flex;gap:var(--s-3);align-items:center;margin-bottom:var(--s-4)}.rPrev img{width:96px;height:72px;object-fit:cover;border-radius:var(--r-sm)}</style>
+</head>
+<body class="adm" data-page="media">
+<main id="aPage">
+<div class="aHead"><div><h1>Photos &amp; videos</h1><p>New uploads stay hidden until you approve them.</p></div>
+<div class="aHead__acts"><a class="btn btn--secondary btn--sm" href="#">Approve all 5</a></div></div>
+<div class="aBar barTop"><button class="aFilter" type="button" aria-pressed="true">Waiting <em>5</em></button><button class="aFilter" type="button" aria-pressed="false">Job seekers <em>3</em></button><button class="aFilter" type="button" aria-pressed="false">Employers <em>2</em></button><button class="aFilter" type="button" aria-pressed="false">Rejected <em>9</em></button></div>
+<div class="mGrid"><article class="aCard mCard"><div class="mCard__img"><img src="../img/barn-manager.jpg" alt=""></div>
+<div class="mCard__body"><div class="aWho"><img src="../img/people/dana.jpg" alt=""><div><b>Dana Whitfield</b><small>Job seeker · profile photo</small></div></div><p class="muted small">Today, 8:41am</p>
+<div class="mCard__acts"><a class="btn btn--primary btn--sm" href="#" data-i="check">Approve</a><a class="btn btn--secondary btn--sm" href="media-reject.html" data-i="x">Reject</a></div></div></article><article class="aCard mCard"><div class="mCard__img"><img src="../img/groom.jpg" alt=""></div>
+<div class="mCard__body"><div class="aWho"><img src="../img/people/marcus.jpg" alt=""><div><b>Marcus Bell</b><small>Job seeker · gallery</small></div></div><p class="muted small">Today, 7:15am</p>
+<div class="mCard__acts"><a class="btn btn--primary btn--sm" href="#" data-i="check">Approve</a><a class="btn btn--secondary btn--sm" href="media-reject.html" data-i="x">Reject</a></div></div></article><article class="aCard mCard"><div class="mCard__img"><img src="../img/aisle.jpg" alt=""></div>
+<div class="mCard__body"><div class="aWho"><span class="aAv">WC</span><div><b>Willow Creek Farm</b><small>Employer · barn photo</small></div></div><p class="muted small">Yesterday</p>
+<div class="mCard__acts"><a class="btn btn--primary btn--sm" href="#" data-i="check">Approve</a><a class="btn btn--secondary btn--sm" href="media-reject.html" data-i="x">Reject</a></div></div></article><article class="aCard mCard"><div class="mCard__img"><img src="../img/trainer.jpg" alt=""><span class="mPlay" data-i="arrow">0:48</span></div>
+<div class="mCard__body"><div class="aWho"><img src="../img/people/hallie.jpg" alt=""><div><b>Hallie Moss</b><small>Job seeker · riding video, 0:48</small></div></div><p class="muted small">Yesterday</p>
+<div class="mCard__acts"><a class="btn btn--primary btn--sm" href="#" data-i="check">Approve</a><a class="btn btn--secondary btn--sm" href="media-reject.html" data-i="x">Reject</a></div></div></article><article class="aCard mCard"><div class="mCard__img"><img src="../img/tack.jpg" alt=""></div>
+<div class="mCard__body"><div class="aWho"><span class="aAv">CR</span><div><b>Cedar Run Polo</b><small>Employer · barn photo</small></div></div><p class="muted small">1 Nov</p>
+<div class="mCard__acts"><a class="btn btn--primary btn--sm" href="#" data-i="check">Approve</a><a class="btn btn--secondary btn--sm" href="media-reject.html" data-i="x">Reject</a></div></div></article></div><div class="aScrim"><div class="aModal" role="dialog" aria-modal="true" aria-labelledby="mt">
+<div class="aModal__head"><h2 id="mt">Reject this photo?</h2><p>Marcus Bell gets an email with your reason, so they can upload a better one.</p></div>
+<div class="aModal__body">
+<div class="rPrev"><img src="../img/groom.jpg" alt=""><div><b>Marcus Bell</b><br><span class="muted small">Job seeker · gallery · today</span></div></div>
+<div class="field"><label>Reason</label><div class="chips"><span class="rChip on">Blurry or too dark</span><span class="rChip">Not of the person or their work</span><span class="rChip">Shows contact details</span><span class="rChip">Not suitable</span><span class="rChip">Other</span></div></div>
+<div class="field"><label for="note">Note to Marcus (optional)</label><textarea id="note" rows="3">Lovely horse! The photo is a little dark. Could you upload one taken in daylight?</textarea><small>Sent from the EquiStaff Recruiting Team</small></div>
+</div>
+<div class="aModal__foot"><a class="btn btn--secondary btn--sm" href="media.html">Cancel</a><a class="btn btn--primary btn--sm" href="media.html">Reject and email</a></div>
+</div></div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm" data-page="dashboard">
+<main id="aPage">
+  <div class="aHead">
+    <div>
+      <h1>Good morning</h1>
+      <p>Monday 2 November · Here's what needs you today.</p>
+    </div>
+    <div class="aHead__acts">
+      <select class="aSelect" aria-label="Date range"><option>Last 7 days</option><option>Last 30 days</option><option>This month</option></select>
+    </div>
+  </div>
+
+  <h2 class="aEyebrow">Needs you today</h2>
+  <div class="aTiles">
+    <a class="aTile aTile--act" href="jobs.html"><span>Jobs waiting for approval</span><b>7</b><small>Oldest waiting 2 days</small><svg class="aTile__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="aTile aTile--act" href="media.html"><span>Photos &amp; videos to check</span><b>5</b><small>From 4 accounts</small><svg class="aTile__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="aTile aTile--act" href="leads.html"><span>New leads</span><b>4</b><small>3 Request talent · 1 from Evie</small><svg class="aTile__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="aTile aTile--act" href="searches.html"><span>Direct-hire candidates waiting</span><b>2</b><small>No client reply in 3+ days</small><svg class="aTile__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <h2 class="aEyebrow">This week</h2>
+  <div class="aTiles">
+    <a class="aTile" href="seekers.html"><span>New job seekers</span><b>47</b><small>+12 on the week before</small></a>
+    <a class="aTile" href="employers.html"><span>Signed up, not subscribed</span><b>9</b><small>Employers to follow up</small></a>
+    <a class="aTile" href="jobs.html"><span>New job postings</span><b>11</b><small>4 live · 7 waiting</small></a>
+    <a class="aTile" href="subscriptions.html"><span>Active subscriptions</span><b>31</b><small>2 renew this week</small></a>
+  </div>
+
+  <div class="aGrid aGrid--2">
+    <section class="aCard">
+      <div class="aCard__head"><h2>Jobs waiting for approval</h2><a href="jobs.html">See all 7</a></div>
+      <ul class="aList">
+        <li><div class="aWho"><span class="aAv">WC</span><div><b>Head Groom</b><small>Willow Creek Farm · Wellington, FL</small></div></div><span class="aList__meta"><span class="aPill aPill--warn">2 days</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></span></li>
+        <li><div class="aWho"><span class="aAv">BH</span><div><b>Working Student</b><small>Briar Hill Eventing · Aiken, SC</small></div></div><span class="aList__meta"><span class="aPill aPill--warn">1 day</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></span></li>
+        <li><div class="aWho"><span class="aAv">CR</span><div><b>Polo Groom</b><small>Cedar Run Polo · Lexington, KY</small></div></div><span class="aList__meta"><span class="aPill aPill--info">Today</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></span></li>
+        <li><div class="aWho"><span class="aAv">HD</span><div><b>Assistant Trainer</b><small>Hartwell Dressage · Ocala, FL</small></div></div><span class="aList__meta"><span class="aPill aPill--info">Today</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></span></li>
+      </ul>
+    </section>
+
+    <section class="aCard">
+      <div class="aCard__head"><h2>Signed up, not subscribed</h2><a href="employers.html">See all 9</a></div>
+      <ul class="aList">
+        <li><div class="aWho"><span class="aAv">MS</span><div><b>Magnolia Show Stables</b><small>Signed up 28 Oct · last seen yesterday</small></div></div><span class="aList__meta"><a class="btn btn--secondary btn--sm" href="employer.html">Follow up</a></span></li>
+        <li><div class="aWho"><span class="aAv">SP</span><div><b>Stonegate Performance Horses</b><small>Signed up 26 Oct · last seen 26 Oct</small></div></div><span class="aList__meta"><a class="btn btn--secondary btn--sm" href="employer.html">Follow up</a></span></li>
+        <li><div class="aWho"><span class="aAv">RV</span><div><b>River Valley Equine Clinic</b><small>Signed up 21 Oct · last seen 30 Oct</small></div></div><span class="aList__meta"><a class="btn btn--secondary btn--sm" href="employer.html">Follow up</a></span></li>
+        <li><div class="aWho"><span class="aAv">TH</span><div><b>Thistle Hill Hunters</b><small>Signed up 19 Oct · never posted</small></div></div><span class="aList__meta"><a class="btn btn--secondary btn--sm" href="employer.html">Follow up</a></span></li>
+      </ul>
+    </section>
+
+    <section class="aCard">
+      <div class="aCard__head"><h2>New job seekers</h2><a href="seekers.html">See all 47</a></div>
+      <ul class="aList">
+        <li><div class="aWho"><img src="../img/people/dana.jpg" alt=""><div><b>Dana Whitfield</b><small>Barn Manager · Ocala, FL</small></div></div><span class="aList__meta"><span class="aPill aPill--ok">Resume done</span>Today</span></li>
+        <li><div class="aWho"><img src="../img/people/marcus.jpg" alt=""><div><b>Marcus Bell</b><small>Show Groom · Wellington, FL</small></div></div><span class="aList__meta"><span class="aPill aPill--ok">Resume done</span>Today</span></li>
+        <li><div class="aWho"><img src="../img/people/imogen.jpg" alt=""><div><b>Imogen Hart</b><small>Working Student · Aiken, SC</small></div></div><span class="aList__meta"><span class="aPill aPill--warn">No resume yet</span>Yesterday</span></li>
+        <li><div class="aWho"><img src="../img/people/lena.jpg" alt=""><div><b>Lena Ortiz</b><small>Exercise Rider · Lexington, KY</small></div></div><span class="aList__meta"><span class="aPill aPill--mute">Email not confirmed</span>Yesterday</span></li>
+      </ul>
+    </section>
+
+    <section class="aCard">
+      <div class="aCard__head"><h2>Direct-hire searches</h2><a href="searches.html">All 6 searches</a></div>
+      <ul class="aList">
+        <li><div class="aWho"><span class="aAv">LO</span><div><b>Barn Manager · Live Oak Stables</b><small>3 presented · 1 interviewing</small></div></div><span class="aList__meta"><span class="aPill aPill--err">Waiting 5 days</span><a class="btn btn--secondary btn--sm" href="search.html">Open</a></span></li>
+        <li><div class="aWho"><span class="aAv">BH</span><div><b>Head Rider · Briar Hill Eventing</b><small>2 presented · client reviewed both</small></div></div><span class="aList__meta"><span class="aPill aPill--err">Waiting 4 days</span><a class="btn btn--secondary btn--sm" href="search.html">Open</a></span></li>
+        <li><div class="aWho"><span class="aAv">HD</span><div><b>Assistant Trainer · Hartwell Dressage</b><small>Offer made 30 Oct</small></div></div><span class="aList__meta"><span class="aPill aPill--ok">Moving</span><a class="btn btn--secondary btn--sm" href="search.html">Open</a></span></li>
+        <li><div class="aWho"><span class="aAv">CR</span><div><b>Polo Groom · Cedar Run Polo</b><small>Opened today · no candidates yet</small></div></div><span class="aList__meta"><span class="aPill aPill--info">New</span><a class="btn btn--secondary btn--sm" href="search.html">Open</a></span></li>
+      </ul>
+    </section>
+  </div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

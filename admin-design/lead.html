@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cedar Run Polo · Lead · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.btn > svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.btn { white-space: nowrap; }
+
+.lDl { grid-template-columns: 80px minmax(0, 1fr); }
+.lMail { margin-top: var(--s-4); }
+.lMark { display: grid; gap: var(--s-3); }
+.lMark label { display: flex; gap: var(--s-3); align-items: flex-start; padding: var(--s-3); border: 1px solid var(--border-subtle); border-radius: var(--r-sm); cursor: pointer; }
+.lMark input { flex: 0 0 auto; margin-top: 3px; accent-color: var(--blue-600); width: 18px; height: 18px; }
+.lMark b { display: block; font-size: var(--t-small); }
+.lMark small { color: var(--text-muted); font-size: var(--t-label); line-height: 1.45; display: block; }
+.field textarea { width: 100%; }
+</style>
+</head>
+<body class="adm" data-page="leads">
+<main id="aPage">
+  <p class="aCrumb"><a href="leads.html">← Leads</a></p>
+  <div class="aHead">
+    <div>
+      <h1>Cedar Run Polo</h1>
+      <p>Polo Groom · Lexington, KY · <span class="aPill aPill--warn">New</span> · came in through Request talent today at 9:12</p>
+    </div>
+    <div class="aHead__acts">
+      <a class="btn btn--primary" href="search-new.html" data-i="star">Convert to direct-hire search</a>
+    </div>
+  </div>
+  <div class="aGrid aGrid--main">
+    <div class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>The role</h2></div>
+        <div class="aCard__body">
+          <dl class="aDl">
+            <dt>Role</dt><dd>Polo Groom</dd>
+            <dt>Location</dt><dd>Lexington, KY · winters in Aiken, SC</dd>
+            <dt>Main duties</dt><dd>Daily care for a string of 14 polo ponies; tacking up and cooling out on game days; travel with the string to Aiken for the winter season.</dd>
+            <dt>A day in the life</dt><dd>Feed at 6, turnout and exercise sets through the morning, stick-and-ball in the afternoon, night check.</dd>
+            <dt>Who they want</dt><dd>Calm, quick, used to a high horse-to-groom ratio. Polo experience preferred, not essential.</dd>
+            <dt>Pay</dt><dd class="num">$38,000–$42,000</dd>
+            <dt>Housing</dt><dd>Private · apartment over the barn</dd>
+            <dt>Program</dt><dd>Polo · 3 staff</dd>
+            <dt>How soon</dt><dd><span class="aPill aPill--err aPill--plain">As soon as possible</span></dd>
+          </dl>
+        </div>
+      </section>
+      <section class="aCard">
+        <div class="aCard__head"><h2>Recruiting team notes</h2></div>
+        <div class="aCard__body">
+          <div class="field" style="margin:0"><label for="ln" class="sr-only">Notes</label><textarea id="ln" rows="3" placeholder="Anything from your call or email with them. Only the recruiting team sees this."></textarea></div>
+        </div>
+      </section>
+    </div>
+    <aside class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Contact</h2></div>
+        <div class="aCard__body">
+          <dl class="aDl lDl">
+            <dt>Name</dt><dd>Mark Ellison</dd>
+            <dt>Email</dt><dd>mark@cedarrunpolo.example</dd>
+            <dt>Phone</dt><dd>(859) 555-0119</dd>
+            <dt>Account</dt><dd>None yet</dd>
+          </dl>
+          <a class="btn btn--secondary btn--sm lMail" href="#" data-i="mail">Email Mark</a>
+        </div>
+      </section>
+      <section class="aCard">
+        <div class="aCard__head"><h2>Mark this lead</h2></div>
+        <div class="aCard__body lMark">
+          <label><input type="radio" name="lm"><span><b>Full service</b><small>The recruiting team runs the search. Converting does this for you.</small></span></label>
+          <label><input type="radio" name="lm"><span><b>Job board</b><small>They'll post the job themselves. We send them the plans.</small></span></label>
+          <label><input type="radio" name="lm"><span><b>Closed</b><small>Not a fit, or they went another way.</small></span></label>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

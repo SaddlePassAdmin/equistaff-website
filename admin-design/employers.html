@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Employers · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.btn--sm[data-i]{padding:0 var(--s-4)}.nw{white-space:nowrap!important}.aTable td:first-child{min-width:280px}.aTable td .aPill{margin-top:6px}.aTableWrap{overflow-x:auto;position:relative}.aTable td{white-space:normal}.aWho small{word-break:break-word}.aFind--sm{flex:0 0 260px}.aFind--sm input{min-height:38px;padding-left:14px}
+.upNote{margin:var(--s-3) var(--s-4)}.isUp td:first-child{box-shadow:inset 3px 0 0 var(--warn-ink)}
+@media (max-width:860px){.aFind--sm{flex:1 1 100%}.aBar__right{margin-left:0;width:100%}}</style>
+</head>
+<body class="adm" data-page="employers">
+<main id="aPage">
+<div class="aHead"><div><h1>Employers</h1><p>Everyone who has signed up to hire, from job-board subscribers to direct-hire clients.</p></div>
+<div class="aHead__acts"><a class="btn btn--secondary btn--sm" href="#">Export list</a><a class="btn btn--primary btn--sm" href="#" data-i="plus">Add direct-hire client</a></div></div>
+<section class="aCard">
+<div class="aBar">
+<button class="aFilter" type="button" aria-pressed="true">All <em>142</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Subscribed <em>31</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Signed up, not subscribed <em>9</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Direct-hire clients <em>6</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Deactivated <em>14</em></button>
+<div class="aBar__right"><label class="aFind aFind--sm"><input type="search" placeholder="Company, name or email" aria-label="Search employers"></label>
+<select class="aSelect" aria-label="Sort"><option>Newest first</option><option>Last login</option><option>Company A–Z</option></select></div>
+</div>
+<div class="aNote aNote--warn upNote" data-i="info"><div><b>9 employers signed up but never subscribed.</b> They're pinned to the top. "Follow up" opens their record with a ready-to-send email.</div></div>
+<div class="aTableWrap"><table class="aTable">
+<thead><tr><th>Company &amp; contact</th><th>Plan &amp; status</th><th>Open jobs</th><th>Created</th><th>Last login</th><th>Email ok</th><th><span class="sr-only">Actions</span></th></tr></thead>
+<tbody><tr class="isUp"><td><div class="aWho"><span class="aAv">MS</span><div><b><a href="employer.html">Magnolia Show Stables</a></b><small>Claire Benton · claire@magnoliashow.example</small></div></div></td>
+<td><div class="nw">None</div><span class="aPill aPill--warn">Signed up, not subscribed</span></td><td class="num">0</td><td class="muted nw">28 Oct</td><td class="nw">Yesterday</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="employer.html">Follow up</a></div></td></tr><tr class="isUp"><td><div class="aWho"><span class="aAv">SP</span><div><b><a href="employer.html">Stonegate Performance Horses</a></b><small>Rob Akers · rob@stonegateph.example</small></div></div></td>
+<td><div class="nw">None</div><span class="aPill aPill--warn">Signed up, not subscribed</span></td><td class="num">0</td><td class="muted nw">26 Oct</td><td class="nw">26 Oct</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="employer.html">Follow up</a></div></td></tr><tr class="isUp"><td><div class="aWho"><span class="aAv">RV</span><div><b><a href="employer.html">River Valley Equine Clinic</a></b><small>Dr. Anne Pryce · anne@rivervalleyvet.example</small></div></div></td>
+<td><div class="nw">None</div><span class="aPill aPill--warn">Signed up, not subscribed</span></td><td class="num">0</td><td class="muted nw">21 Oct</td><td class="nw">30 Oct</td>
+<td><span class="aPill aPill--warn aPill--plain">No</span> <button class="btn btn--quiet btn--sm" type="button">Resend</button></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="employer.html">Follow up</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">WC</span><div><b><a href="employer.html">Willow Creek Farm</a></b><small>Jess Moreau · jess@willowcreek.example</small></div></div></td>
+<td><div class="nw">Job board · 3 months</div><span class="aPill aPill--ok">Subscribed</span></td><td class="num">2</td><td class="muted nw">14 Mar 2025</td><td class="nw">Today</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="employer.html">Open</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">BH</span><div><b><a href="employer.html">Briar Hill Eventing</a></b><small>Tom Kessler · tom@briarhill.example</small></div></div></td>
+<td><div class="nw">Job board · 1 year</div><span class="aPill aPill--ok">Subscribed</span></td><td class="num">3</td><td class="muted nw">2 Jan 2024</td><td class="nw">Today</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="employer.html">Open</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">LO</span><div><b><a href="employer.html">Live Oak Stables</a></b><small>Maria Delgado · maria@liveoak.example</small></div></div></td>
+<td><div class="nw">Direct hire</div><span class="aPill aPill--info">Direct-hire client</span></td><td class="num">1</td><td class="muted nw">9 Sep</td><td class="nw">30 Oct</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="employer.html">Open</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">HD</span><div><b><a href="employer.html">Hartwell Dressage</a></b><small>Nina Hartwell · nina@hartwell.example</small></div></div></td>
+<td><div class="nw">Direct hire + Job board</div><span class="aPill aPill--info">Direct-hire client</span></td><td class="num">2</td><td class="muted nw">18 Aug 2025</td><td class="nw">1 Nov</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="employer.html">Open</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">CR</span><div><b><a href="employer.html">Cedar Run Polo</a></b><small>Sam Ruiz · sam@cedarrun.example</small></div></div></td>
+<td><div class="nw">Job board · 1 month, featured</div><span class="aPill aPill--ok">Subscribed</span></td><td class="num">1</td><td class="muted nw">30 Oct</td><td class="nw">Today</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="employer.html">Open</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">GA</span><div><b><a href="employer.html">Greenacre Hunter Barn</a></b><small>Lou Parks · lou@greenacre.example</small></div></div></td>
+<td><div class="nw">Job board · 1 month</div><span class="aPill aPill--mute">Deactivated</span></td><td class="num">0</td><td class="muted nw">3 Jun 2024</td><td class="nw">12 Feb</td>
+<td><span class="aPill aPill--ok aPill--plain">Yes</span></td>
+<td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="employer.html">Open</a></div></td></tr></tbody></table></div>
+<div class="aFoot">Showing 1–9 of 142 <div class="aPager"><span aria-current="page">1</span><span>2</span><span>3</span><span>…</span><span>16</span></div></div>
+</section>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

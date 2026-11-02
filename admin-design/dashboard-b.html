@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today (direction B) · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+  .tdGrid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s-5); align-items: start; }
+  .tdRow { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto auto; gap: var(--s-4); align-items: center; padding: 14px var(--s-5); border-bottom: 1px solid var(--border-subtle); }
+  .tdRow:last-child { border-bottom: 0; }
+  .tdType { display: inline-flex; align-items: center; gap: 8px; font: 700 var(--t-label)/1.2 var(--font-body); color: var(--navy-700); }
+  .tdType svg { width: 16px; height: 16px; color: var(--navy-500); flex: 0 0 auto; }
+  .tdRow b { display: block; font-size: var(--t-small); }
+  .tdRow small { display: block; color: var(--text-muted); font-size: var(--t-label); }
+  .tdRow .btn { justify-self: end; }
+  .tdDone { display: flex; gap: var(--s-3); align-items: center; padding: var(--s-4) var(--s-5); color: var(--text-muted); font-size: var(--t-small); background: var(--surface-sunken); border-top: 1px solid var(--border-subtle); }
+  .tdNum { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding: 14px var(--s-5); border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: var(--text-primary); }
+  .tdNum:last-child { border-bottom: 0; }
+  .tdNum span { font-weight: 700; font-size: var(--t-small); }
+  .tdNum small { display: block; color: var(--text-muted); font-size: var(--t-label); font-weight: 400; }
+  .tdNum b { font: 700 1.625rem/1 var(--font-mono); }
+  .tdNum:hover { background: var(--depth-01); }
+  @media (max-width: 860px) {
+    .tdGrid { grid-template-columns: 1fr; }
+    .tdRow { grid-template-columns: minmax(0, 1fr) auto; }
+    .tdRow .tdType { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body class="adm" data-page="dashboard">
+<main id="aPage">
+  <div class="aHead">
+    <div>
+      <h1>Today</h1>
+      <p>Monday 2 November · 12 things to do, oldest first.</p>
+    </div>
+    <div class="aHead__acts">
+      <select class="aSelect" aria-label="Show"><option>Everything</option><option>Jobs</option><option>Photos &amp; videos</option><option>Leads</option><option>Direct hire</option><option>Follow-ups</option></select>
+    </div>
+  </div>
+
+  <div class="tdGrid">
+    <section class="aCard">
+      <div class="aBar">
+        <button class="aFilter" aria-pressed="true">All <em>12</em></button>
+        <button class="aFilter" aria-pressed="false">Approve <em>5</em></button>
+        <button class="aFilter" aria-pressed="false">Leads <em>3</em></button>
+        <button class="aFilter" aria-pressed="false">Direct hire <em>2</em></button>
+        <button class="aFilter" aria-pressed="false">Follow up <em>2</em></button>
+      </div>
+      <div class="tdRow"><span class="tdType" data-i="star">Direct hire</span><div><b>Live Oak Stables hasn't replied about Dana Whitfield</b><small>Barn Manager search · presented 28 Oct</small></div><span class="aPill aPill--err">5 days</span><a class="btn btn--primary btn--sm" href="search.html">Open search</a></div>
+      <div class="tdRow"><span class="tdType" data-i="barn">Follow up</span><div><b>Thistle Hill Hunters signed up but never subscribed</b><small>Signed up 19 Oct · never posted a job</small></div><span class="aPill aPill--err">14 days</span><a class="btn btn--primary btn--sm" href="employer.html">Follow up</a></div>
+      <div class="tdRow"><span class="tdType" data-i="star">Direct hire</span><div><b>Briar Hill Eventing reviewed 2 candidates, no decision yet</b><small>Head Rider search · reviewed 29 Oct</small></div><span class="aPill aPill--err">4 days</span><a class="btn btn--primary btn--sm" href="search.html">Open search</a></div>
+      <div class="tdRow"><span class="tdType" data-i="brief">Approve job</span><div><b>Head Groom · Willow Creek Farm</b><small>Wellington, FL · posted by Sarah Coyle</small></div><span class="aPill aPill--warn">2 days</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></div>
+      <div class="tdRow"><span class="tdType" data-i="image">Check photo</span><div><b>3 barn photos from Magnolia Show Stables</b><small>For their company profile</small></div><span class="aPill aPill--warn">2 days</span><a class="btn btn--primary btn--sm" href="media.html">Check</a></div>
+      <div class="tdRow"><span class="tdType" data-i="inbox">New lead</span><div><b>Request talent: Farm Manager, Aiken SC</b><small>Pinehurst Hunt Club · wants a full search</small></div><span class="aPill aPill--warn">1 day</span><a class="btn btn--primary btn--sm" href="leads.html">Open lead</a></div>
+      <div class="tdRow"><span class="tdType" data-i="brief">Approve job</span><div><b>Working Student · Briar Hill Eventing</b><small>Aiken, SC · posted by Tom Avery</small></div><span class="aPill aPill--warn">1 day</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></div>
+      <div class="tdRow"><span class="tdType" data-i="image">Check video</span><div><b>Riding video from Marcus Bell</b><small>Job seeker profile · 1 min 12 sec</small></div><span class="aPill aPill--info">Today</span><a class="btn btn--primary btn--sm" href="media.html">Check</a></div>
+      <div class="tdRow"><span class="tdType" data-i="inbox">New lead</span><div><b>Evie chat: hiring two grooms for the winter circuit</b><small>Stonegate Performance Horses · left a message</small></div><span class="aPill aPill--info">Today</span><a class="btn btn--primary btn--sm" href="leads.html">Open lead</a></div>
+      <div class="tdRow"><span class="tdType" data-i="brief">Approve job</span><div><b>Polo Groom · Cedar Run Polo</b><small>Lexington, KY · posted by Ana Ruiz</small></div><span class="aPill aPill--info">Today</span><a class="btn btn--primary btn--sm" href="jobs.html">Review</a></div>
+      <div class="tdDone"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Done items drop off this list. 2 more below the fold.</div>
+    </section>
+
+    <aside class="aCard" aria-label="This week">
+      <div class="aCard__head"><h2>This week</h2></div>
+      <a class="tdNum" href="seekers.html"><span>New job seekers<small>+12 on the week before</small></span><b>47</b></a>
+      <a class="tdNum" href="employers.html"><span>Signed up, not subscribed<small>Employers to follow up</small></span><b>9</b></a>
+      <a class="tdNum" href="jobs.html"><span>New job postings<small>4 live · 7 waiting</small></span><b>11</b></a>
+      <a class="tdNum" href="subscriptions.html"><span>Active subscriptions<small>2 renew this week</small></span><b>31</b></a>
+    </aside>
+  </div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

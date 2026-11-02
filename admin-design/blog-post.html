@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit post · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.btn > svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.btn { white-space: nowrap; }
+
+.field input, .field textarea { width: 100%; }
+.bEditor { border: 1px solid #C9D6E2; border-radius: var(--r-sm); overflow: hidden; }
+.bTools { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; background: var(--surface-sunken); border-bottom: 1px solid var(--border-subtle); }
+.bTools button { height: 32px; border: 0; background: transparent; border-radius: var(--r-sm); font: 700 var(--t-small)/1 var(--font-body); color: var(--text-primary); padding: 0 10px; cursor: pointer; }
+.bText { padding: var(--s-4) var(--s-5); min-height: 320px; line-height: 1.65; }
+.bText h3 { font: 700 1.25rem/1.3 var(--font-display); margin: var(--s-4) 0 var(--s-2); }
+.bText p { margin: 0 0 var(--s-3); }
+.bCover { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-sm); display: block; }
+.bCoverActs { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
+.bDl { grid-template-columns: 96px minmax(0, 1fr); }
+.bNote { margin-top: var(--s-4); }
+</style>
+</head>
+<body class="adm" data-page="blog">
+<main id="aPage">
+  <p class="aCrumb"><a href="blog.html">← Blog</a></p>
+  <div class="aHead">
+    <div>
+      <h1>Housing in a job offer: the questions to ask</h1>
+      <p><span class="aPill aPill--warn">Draft</span> · last saved 2 minutes ago</p>
+    </div>
+    <div class="aHead__acts">
+      <a class="btn btn--quiet" href="#" data-i="ext">Preview</a>
+      <a class="btn btn--secondary" href="#">Save draft</a>
+      <a class="btn btn--primary" href="#">Publish</a>
+    </div>
+  </div>
+  <div class="aGrid aGrid--main">
+    <section class="aCard">
+      <div class="aCard__body">
+        <div class="field"><label for="bt">Title</label><input id="bt" value="Housing in a job offer: the questions to ask"></div>
+        <div class="field">
+          <label for="bb">Post</label>
+          <div class="bEditor">
+            <div class="bTools" role="toolbar" aria-label="Formatting">
+              <button type="button">Heading</button><button type="button"><b>B</b></button><button type="button"><i>I</i></button><button type="button">• List</button><button type="button">Link</button><button type="button">Image</button>
+            </div>
+            <div id="bb" class="bText" contenteditable="true" role="textbox" aria-multiline="true">
+              <p>Most equine jobs come with somewhere to live, and the housing can matter as much as the pay. Before you say yes, ask these questions.</p>
+              <h3>Is it private or shared?</h3>
+              <p>A room in a shared house is very different from your own apartment over the barn. Ask who else lives there and whether the barn's night checks happen from it.</p>
+              <h3>What's included?</h3>
+              <p>Utilities, internet and laundry are often included, but not always. Ask for it in writing with the offer.</p>
+              <h3>Can anyone come with you?</h3>
+              <p>If a partner, a dog or a horse of your own is coming too, say so early.</p>
+            </div>
+          </div>
+        </div>
+        <div class="field" style="margin:0"><label for="be">Short summary</label><textarea id="be" rows="2">Private or shared, what's included, and who can come with you: what to ask about housing before you accept an equine job.</textarea><small>Shown on the Advice page and when the post is shared.</small></div>
+      </div>
+    </section>
+    <aside class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Cover image</h2></div>
+        <div class="aCard__body">
+          <img class="bCover" src="../img/barn-manager.jpg" alt="">
+          <div class="bCoverActs"><a class="btn btn--secondary btn--sm" href="#" data-i="upload">Replace</a><a class="btn btn--quiet btn--sm" href="#">Remove</a></div>
+        </div>
+      </section>
+      <section class="aCard">
+        <div class="aCard__head"><h2>Publishing</h2></div>
+        <div class="aCard__body">
+          <dl class="aDl bDl">
+            <dt>Status</dt><dd>Draft</dd>
+            <dt>Author</dt><dd>EquiStaff Recruiting Team</dd>
+            <dt>Web address</dt><dd>/blog/housing-in-a-job-offer</dd>
+          </dl>
+          <div class="aNote bNote" data-i="info"><span>Publishing puts this on the site's Advice page straight away. You can unpublish it at any time.</span></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>
