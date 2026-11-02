@@ -33,6 +33,24 @@ When the code and this file disagree, ask design: one of them is out of date.
 
 ## 1. Screens and status
 
+### The designs
+
+Figma → EquiStaff → **Dev Ready**. 60 screens captured from this build on 2 Nov, in nine
+journey sections A–I. Each section opens with a PRD — purpose, users, the rules, what done
+looks like. Each screen is captioned with its prototype filename, so a frame maps straight to
+a row in the tables below.
+
+Not every screen is a separate file. A filename with a `?` is one page driven by a query
+parameter: `job-detail.html?role=…` renders all six listings from `src/jobs.js`;
+`candidate.html?id=` and `seeker-profile.html?id=` select a person;
+`messages.html?as=employer` switches side; `company.html?type=direct` and
+`verify.html?state=expired` switch state. Section H holds Evie's twelve live states, each
+reachable on the build with `?chatdemo=`.
+
+**These are mock-ups of the design, not a spec of built behaviour.** Kaitlin approves the
+Figma; a row here goes to **Build** only after she has.
+
+
 **Status:** **Build** — settled, build it · **Build · open** — build it; the open item (§7) may change a
 detail · **Later** — designed, but the client wants it after launch · **Not designed** — needs design first.
 Change a row's status only through a PR that design signs off.
