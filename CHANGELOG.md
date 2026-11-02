@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Final logo from Brittany (Figma, 30 Oct): "staff" set in Larken, upright, replacing the italic. Light and dark versions; every page picks it up automatically.
 - Chat assistant, per Kaitlin's FigJam note ("no foothold in the true estate market"): the sample Estate Manager job is now a Show Manager role with an international show jumping team, and "Private estate" in the discipline list is now "Private Country Club" from her list.
 - Pricing matches Kaitlin's list everywhere (landing, pricing, billing, chat, prototype menu): $50 / 1 month / 3 posts · $140 / 3 months / 3 posts · $460 / 1 year / 5 posts.
 - Visas (Kaitlin's FigJam ask): every job post now shows "International applicants" with "EquiStaff can't sponsor visas"; Evie's answer about a specific job says the same. The chat no longer asks employers for a horse count (dropped 26 Oct).
