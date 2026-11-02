@@ -17,6 +17,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="src/tokens.css">
 <link rel="stylesheet" href="src/styles.css"><link rel="stylesheet" href="src/chat.css">
+<style>
+/* FIND WORK BY STATE — interactive map, 1 Nov (Kaitlin: "can we make this an
+   interactive map instead?? I don't love the way it looks presently").
+   Page-scoped on purpose. The chip list is the source of the counts and the
+   whole UI on a phone; src/usmap.js draws the map from it. */
+.usm { --usm-0: var(--depth-02); --usm-1: var(--baby-200); --usm-2: var(--baby-300);
+  --usm-3: var(--depth-04); --usm-4: var(--blue-600); --usm-5: var(--navy-700);
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s-7); align-items: start; }
+[data-b="0"] { --f: var(--usm-0); } [data-b="1"] { --f: var(--usm-1); } [data-b="2"] { --f: var(--usm-2); }
+[data-b="3"] { --f: var(--usm-3); } [data-b="4"] { --f: var(--usm-4); } [data-b="5"] { --f: var(--usm-5); }
+.usm__map { position: relative; min-width: 0; }
+.usm__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.usm__st { cursor: pointer; outline: none; }
+.usm__st path, .usm__box { fill: var(--f); stroke: var(--white); stroke-width: 1; vector-effect: non-scaling-stroke;
+  stroke-linejoin: round; transition: fill .15s var(--ease); }
+.usm__box { stroke: var(--border-subtle); }
+.usm__st:hover path, .usm__st:hover .usm__box { filter: brightness(.94); }
+.usm__lead { stroke: var(--border-strong); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: .45; }
+.usm__boxt, .usm__n { font: 700 12px/1 var(--font-body); text-anchor: middle; fill: var(--navy-900);
+  pointer-events: none; letter-spacing: .02em; }
+.usm__n { font: 600 13px/1 var(--font-mono); }
+.usm__st[data-b="4"] .usm__boxt, .usm__st[data-b="5"] .usm__boxt, .usm__n[data-b="4"], .usm__n[data-b="5"] { fill: var(--white); }
+.usm__halo, .usm__ring { fill: none; pointer-events: none; visibility: hidden; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.usm__halo { stroke: var(--white); stroke-width: 6; }
+.usm__ring { stroke: var(--navy-900); stroke-width: 2.5; }
+.usm__svg.has-hl .usm__halo, .usm__svg.has-hl .usm__ring { visibility: visible; }
+.usm__tip { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; white-space: nowrap;
+  background: var(--navy-900); color: var(--white); border-radius: var(--r-sm); box-shadow: var(--e-2);
+  padding: 8px 12px; font: 400 var(--t-small)/1.2 var(--font-body); opacity: 0; transition: opacity .12s var(--ease); }
+.usm__tip b { font-weight: 700; }
+.usm__tip.is-on { opacity: 1; }
+.usm__lt { font: 900 var(--t-label)/1.2 var(--font-body); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); margin: 0 0 var(--s-3); }
+.usm__legend { margin-bottom: var(--s-6); }
+.usm__scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; list-style: none; margin: 0; padding: 0; }
+.usm__scale li { font: 600 var(--t-label)/1 var(--font-mono); color: var(--text-primary); }
+.usm__scale i, .usm__none i { display: block; height: 12px; border-radius: 3px; background: var(--f); margin-bottom: 6px; }
+.usm__scale li:first-child i { border-radius: 6px 3px 3px 6px; }
+.usm__scale li:last-child i { border-radius: 3px 6px 6px 3px; }
+.usm__none { display: flex; align-items: center; gap: var(--s-2); margin: var(--s-3) 0 0;
+  font-size: var(--t-small); color: var(--text-muted); }
+.usm__none i { width: 24px; margin: 0; flex: 0 0 auto; }
+.usm__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; margin: 0 0 var(--s-4); padding: 0; }
+.usm__chips li { margin: 0; }
+.stc { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 36px; padding: 0 6px 0 12px;
+  border: 1px solid var(--border-subtle); border-radius: var(--r-pill); background: var(--white);
+  font-size: var(--t-small); font-weight: 600; color: var(--text-primary); text-decoration: none;
+  transition: border-color .15s var(--ease), background .15s var(--ease); }
+.stc b { font: 600 var(--t-label)/1 var(--font-mono); color: var(--blue-700); background: var(--depth-02);
+  border-radius: var(--r-pill); padding: 5px 8px; font-variant-numeric: tabular-nums; }
+.stc:hover { border-color: var(--blue-600); background: var(--depth-01); }
+.stc:focus-visible, .usm__all:focus-visible { outline: 3px solid var(--blue-600); outline-offset: 2px; }
+.usm__all { font-size: var(--t-small); font-weight: 700; color: var(--text-link); }
+@media (max-width: 1040px) {
+  .usm { grid-template-columns: 1fr; gap: var(--s-6); }
+  .usm__side { display: grid; grid-template-columns: 260px 1fr; column-gap: var(--s-7); }
+  .usm__legend { grid-row: span 3; margin: 0; }
+}
+/* Phone: the list is the interface; the map follows, scaled to fit. */
+@media (max-width: 680px) {
+  .usm__side { order: -1; display: block; }
+  .usm__legend { display: none; }
+  .usm__chips { display: grid; grid-template-columns: 1fr 1fr; }
+  .stc { display: flex; justify-content: space-between; min-height: 44px; }
+  .usm__tip, .usm__n, .usm__lead, .usm__box, .usm__boxt { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .usm__st path, .usm__tip, .stc { transition: none; } }
+</style>
 </head>
 <body class="has-chat">
 <a class="skip" href="#main">Skip to content</a>
@@ -300,57 +368,41 @@
           <h3>Find work by state</h3>
           <p>We place in all fifty. The numbers show where roles are open right now.</p>
         </div>
-        <div class="states__grid">
-          <a class="st" href="jobs.html?state=AL"><span>Alabama</span></a>
-          <a class="st" href="jobs.html?state=AK"><span>Alaska</span></a>
-          <a class="st st--open" href="jobs.html?state=AZ"><span>Arizona</span><span class="st__n">6</span></a>
-          <a class="st" href="jobs.html?state=AR"><span>Arkansas</span></a>
-          <a class="st st--open" href="jobs.html?state=CA"><span>California</span><span class="st__n">17</span></a>
-          <a class="st st--open" href="jobs.html?state=CO"><span>Colorado</span><span class="st__n">7</span></a>
-          <a class="st" href="jobs.html?state=CT"><span>Connecticut</span></a>
-          <a class="st" href="jobs.html?state=DE"><span>Delaware</span></a>
-          <a class="st st--open" href="jobs.html?state=FL"><span>Florida</span><span class="st__n">38</span></a>
-          <a class="st st--open" href="jobs.html?state=GA"><span>Georgia</span><span class="st__n">4</span></a>
-          <a class="st" href="jobs.html?state=HI"><span>Hawaii</span></a>
-          <a class="st" href="jobs.html?state=ID"><span>Idaho</span></a>
-          <a class="st st--open" href="jobs.html?state=IL"><span>Illinois</span><span class="st__n">3</span></a>
-          <a class="st" href="jobs.html?state=IN"><span>Indiana</span></a>
-          <a class="st" href="jobs.html?state=IA"><span>Iowa</span></a>
-          <a class="st" href="jobs.html?state=KS"><span>Kansas</span></a>
-          <a class="st st--open" href="jobs.html?state=KY"><span>Kentucky</span><span class="st__n">24</span></a>
-          <a class="st" href="jobs.html?state=LA"><span>Louisiana</span></a>
-          <a class="st" href="jobs.html?state=ME"><span>Maine</span></a>
-          <a class="st st--open" href="jobs.html?state=MD"><span>Maryland</span><span class="st__n">5</span></a>
-          <a class="st" href="jobs.html?state=MA"><span>Massachusetts</span></a>
-          <a class="st st--open" href="jobs.html?state=MI"><span>Michigan</span><span class="st__n">2</span></a>
-          <a class="st" href="jobs.html?state=MN"><span>Minnesota</span></a>
-          <a class="st" href="jobs.html?state=MS"><span>Mississippi</span></a>
-          <a class="st" href="jobs.html?state=MO"><span>Missouri</span></a>
-          <a class="st" href="jobs.html?state=MT"><span>Montana</span></a>
-          <a class="st" href="jobs.html?state=NE"><span>Nebraska</span></a>
-          <a class="st" href="jobs.html?state=NV"><span>Nevada</span></a>
-          <a class="st" href="jobs.html?state=NH"><span>New Hampshire</span></a>
-          <a class="st st--open" href="jobs.html?state=NJ"><span>New Jersey</span><span class="st__n">5</span></a>
-          <a class="st" href="jobs.html?state=NM"><span>New Mexico</span></a>
-          <a class="st st--open" href="jobs.html?state=NY"><span>New York</span><span class="st__n">9</span></a>
-          <a class="st st--open" href="jobs.html?state=NC"><span>North Carolina</span><span class="st__n">6</span></a>
-          <a class="st" href="jobs.html?state=ND"><span>North Dakota</span></a>
-          <a class="st st--open" href="jobs.html?state=OH"><span>Ohio</span><span class="st__n">2</span></a>
-          <a class="st st--open" href="jobs.html?state=OK"><span>Oklahoma</span><span class="st__n">3</span></a>
-          <a class="st" href="jobs.html?state=OR"><span>Oregon</span></a>
-          <a class="st st--open" href="jobs.html?state=PA"><span>Pennsylvania</span><span class="st__n">8</span></a>
-          <a class="st" href="jobs.html?state=RI"><span>Rhode Island</span></a>
-          <a class="st st--open" href="jobs.html?state=SC"><span>South Carolina</span><span class="st__n">11</span></a>
-          <a class="st" href="jobs.html?state=SD"><span>South Dakota</span></a>
-          <a class="st st--open" href="jobs.html?state=TN"><span>Tennessee</span><span class="st__n">4</span></a>
-          <a class="st st--open" href="jobs.html?state=TX"><span>Texas</span><span class="st__n">19</span></a>
-          <a class="st" href="jobs.html?state=UT"><span>Utah</span></a>
-          <a class="st" href="jobs.html?state=VT"><span>Vermont</span></a>
-          <a class="st st--open" href="jobs.html?state=VA"><span>Virginia</span><span class="st__n">12</span></a>
-          <a class="st st--open" href="jobs.html?state=WA"><span>Washington</span><span class="st__n">3</span></a>
-          <a class="st" href="jobs.html?state=WV"><span>West Virginia</span></a>
-          <a class="st" href="jobs.html?state=WI"><span>Wisconsin</span></a>
-          <a class="st" href="jobs.html?state=WY"><span>Wyoming</span></a>
+        <div class="usm">
+          <div class="usm__map" data-usmap></div>
+          <div class="usm__side">
+            <div class="usm__legend" aria-hidden="true">
+              <p class="usm__lt">Open roles</p>
+              <ul class="usm__scale">
+                <li><i data-b="1"></i>1&ndash;3</li><li><i data-b="2"></i>4&ndash;6</li><li><i data-b="3"></i>7&ndash;11</li><li><i data-b="4"></i>12&ndash;19</li><li><i data-b="5"></i>20+</li>
+              </ul>
+              <p class="usm__none"><i data-b="0"></i>No open roles right now</p>
+            </div>
+            <h4 class="usm__lt" id="usm-top">Where roles are open</h4>
+            <ul class="usm__chips" aria-labelledby="usm-top">
+            <li><a class="stc" href="jobs.html?state=FL" data-st="FL" data-n="38"><span>Florida</span><b>38</b></a></li>
+            <li><a class="stc" href="jobs.html?state=KY" data-st="KY" data-n="24"><span>Kentucky</span><b>24</b></a></li>
+            <li><a class="stc" href="jobs.html?state=TX" data-st="TX" data-n="19"><span>Texas</span><b>19</b></a></li>
+            <li><a class="stc" href="jobs.html?state=CA" data-st="CA" data-n="17"><span>California</span><b>17</b></a></li>
+            <li><a class="stc" href="jobs.html?state=VA" data-st="VA" data-n="12"><span>Virginia</span><b>12</b></a></li>
+            <li><a class="stc" href="jobs.html?state=SC" data-st="SC" data-n="11"><span>South Carolina</span><b>11</b></a></li>
+            <li><a class="stc" href="jobs.html?state=NY" data-st="NY" data-n="9"><span>New York</span><b>9</b></a></li>
+            <li><a class="stc" href="jobs.html?state=PA" data-st="PA" data-n="8"><span>Pennsylvania</span><b>8</b></a></li>
+            <li><a class="stc" href="jobs.html?state=CO" data-st="CO" data-n="7"><span>Colorado</span><b>7</b></a></li>
+            <li><a class="stc" href="jobs.html?state=AZ" data-st="AZ" data-n="6"><span>Arizona</span><b>6</b></a></li>
+            <li><a class="stc" href="jobs.html?state=NC" data-st="NC" data-n="6"><span>North Carolina</span><b>6</b></a></li>
+            <li><a class="stc" href="jobs.html?state=MD" data-st="MD" data-n="5"><span>Maryland</span><b>5</b></a></li>
+            <li><a class="stc" href="jobs.html?state=NJ" data-st="NJ" data-n="5"><span>New Jersey</span><b>5</b></a></li>
+            <li><a class="stc" href="jobs.html?state=GA" data-st="GA" data-n="4"><span>Georgia</span><b>4</b></a></li>
+            <li><a class="stc" href="jobs.html?state=TN" data-st="TN" data-n="4"><span>Tennessee</span><b>4</b></a></li>
+            <li><a class="stc" href="jobs.html?state=IL" data-st="IL" data-n="3"><span>Illinois</span><b>3</b></a></li>
+            <li><a class="stc" href="jobs.html?state=OK" data-st="OK" data-n="3"><span>Oklahoma</span><b>3</b></a></li>
+            <li><a class="stc" href="jobs.html?state=WA" data-st="WA" data-n="3"><span>Washington</span><b>3</b></a></li>
+            <li><a class="stc" href="jobs.html?state=MI" data-st="MI" data-n="2"><span>Michigan</span><b>2</b></a></li>
+            <li><a class="stc" href="jobs.html?state=OH" data-st="OH" data-n="2"><span>Ohio</span><b>2</b></a></li>
+            </ul>
+            <a class="usm__all" href="jobs.html">Browse every open role</a>
+          </div>
         </div>
       </div>
     </div>
@@ -469,9 +521,13 @@
 </a>
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
+<script src="src/usmap-data.js"></script>
+<script src="src/usmap.js"></script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "Find work by state is now an interactive map (Kaitlin). States with open roles are shaded blue, deeper where there are more; hover or tab to a state to see its count, and click it to open that state's jobs. The small north-east states have labelled boxes beside the coast so they are easy to hit.",
+  "The states with open roles are also listed beside the map with their counts. On a phone that list comes first and the map sits underneath, sized to the screen.",
   "No fixed number of candidates anywhere on the page. Kaitlin sends one to ten depending on the role, so the step, the search description and the testimonial no longer say four.",
   "Recruiter-managed search reads \"Quoted per role\" instead of $1,000 to start.",
   "After the request form: Kaitlin reviews it and emails you to book an hour-long call (no same-day promise).",
