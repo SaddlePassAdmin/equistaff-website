@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Engineering handoff rewritten for Uraiz (`HANDOFF.md`, `docs/chatbot-spec.md`): current screens, prices, rules, data, Stripe and admin direction, Kaitlin's decisions and open questions. Replaces the 29 Oct draft (#15).
 - Advertising package reads $500 everywhere (home, Post a job, Evie's price card); pricing no longer says seekers can apply without an account.
 - V3 leftovers from Kaitlin's doc: sign-up asks for a phone number (required); seekers are no longer asked for references (verify page, Evie's profile nudge); landing-b no longer promises four candidates; "farm" not "yard" in Evie's sample jobs.
 - Brittany's notes: the footer horse moves to its own space under the brand column so nothing covers it; dropdowns get a chevron set 16px in from the edge (light and dark); the footer credit line wraps on phones instead of running off-screen.
