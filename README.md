@@ -3,6 +3,9 @@
 Front-end for the EquiStaff website and job board rebuild.
 Built by **Saddle Pass Inc.** for **EquiStaff** (Ocala, Florida).
 
+> **Engineering: start with [`HANDOFF.md`](HANDOFF.md)** — screens and status, business rules, data,
+> integrations and open decisions. The chat assistant's spec is [`docs/chatbot-spec.md`](docs/chatbot-spec.md).
+
 ---
 
 ## Status
