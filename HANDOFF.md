@@ -135,7 +135,7 @@ Change a row's status only through a PR that design signs off.
 
 | Area | Status |
 |---|---|
-| **Admin portal V1** | Being designed now as static, light-theme Figma screens on the **💻 Admin Portal** page; Kaitlin reviews Friday, then Kelly and Nick. Don't build ahead of sign-off. See §6 |
+| **Admin portal V1** | **Design in progress.** Static, light-theme design prototype (27 screens, fake data) at [`admin/`](https://saddlepassadmin.github.io/equistaff-website/admin/dashboard.html) — not linked from `start.html`. Kaitlin reviews it Friday, then Kelly and Nick; Figma screens follow on the **💻 Admin Portal** page. **Don't build ahead of sign-off.** See §6 |
 | Role-family SEO landing pages | After launch |
 
 ---
@@ -233,7 +233,7 @@ a recapture email asks people to complete their profiles. Field map is an open i
 **Stripe.** Stripe currently gets its data from the old site (Kaitlin flagged this). Scope how subscriptions,
 customers and webhooks move to the new platform before billing is built; no new prices are needed beyond §4.
 
-**Admin portal V1** (design in progress — don't build ahead of it). Kaitlin's direction from the admin SOW:
+**Admin portal V1** (design in progress at `admin/` — don't build ahead of sign-off). Kaitlin's direction from the admin SOW:
 - **Highest priority:** direct-hire candidate presentation and search management (add clients and candidates by
   hand, present candidates, move stages) — `direct-hire-flow.html` shows the client side of each step.
 - Employers who signed up but haven't subscribed.
