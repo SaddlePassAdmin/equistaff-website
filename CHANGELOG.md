@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- HANDOFF.md: admin row points at the admin design prototype (`admin/`, #55), still design in progress.
 - Admin V1 design prototype at admin/ (light theme, 27 screens, fake data). Clickable: buttons route to the other admin screens and to the matching EquiStaff pages. Not linked from start.html until Kaitlin's Friday review.
 - HANDOFF.md: V1 build notes from Kaitlin's review (what not to build yet, plain-text interview availability, state filter, sign-up and settings changes, admin review Friday); four open decisions resolved.
 - Figma Dev Ready rebuilt from the live build (2 Nov): 60 screens in nine journey sections A–I, each opening with its own PRD, each screen captioned with its filename, revision date and latest change. Includes Evie's twelve live widget states (`?chatdemo=`) and both sides of the confidentiality rule (B2 managed vs B8 direct). Captures are 2x; pages taller than ~4,000px are split into labelled tiles because Figma will not render a single image above that. Three screens were missing and are now in: the employer inbox (`messages.html?as=employer`), a second shortlisted candidate (`candidate.html?id=`), and the seeker profile — which had been captured without an `?id` and was an empty shell.
