@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jobs · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.aCard__head a[data-i]{display:inline-flex;gap:6px;align-items:center}
+.nw{white-space:nowrap}.muted{color:var(--text-muted)}.small{font-size:var(--t-label)}
+.aTableWrap{overflow-x:auto;position:relative}.aGrid{grid-template-columns:minmax(0,1fr)}.aGrid.aGrid--main{grid-template-columns:minmax(0,1fr) 360px}
+.aGrid.aGrid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.aGrid.aGrid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.aDl dd{min-width:0;overflow-wrap:anywhere}.stack{display:grid;gap:var(--s-2)}.stack .btn{width:100%}
+body{position:relative}.aScrim{position:absolute;inset:0 0 auto 0;min-height:100%;place-items:start center;padding:140px 0 80px}
+.field input[type=checkbox],.field input[type=radio],.radio input{width:auto;min-height:0;padding:0}.field label.radio,.field label.chk{display:flex;font-weight:400}.field label.radio b{font-weight:700}
+.aModal .field{margin-bottom:var(--s-4)}
+.radio{display:flex;gap:var(--s-3);align-items:flex-start;padding:12px 14px;border:1px solid #C9D6E2;border-radius:var(--r-sm);margin-bottom:var(--s-2)}
+.radio input{margin-top:4px;accent-color:var(--blue-600)}.radio b{display:block}.radio small{color:var(--text-muted);font-size:var(--t-label)}
+.radio.on{border-color:var(--blue-600);background:var(--depth-01)}.radio .num{margin-left:auto;font-family:var(--font-mono);font-weight:700;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.aFind--sm{flex:0 0 260px}.aFind--sm input{min-height:38px;padding-left:14px}
+@media (max-width:860px){.aGrid.aGrid--main,.aGrid.aGrid--2,.aGrid.aGrid--3{grid-template-columns:minmax(0,1fr)}.aDl{grid-template-columns:1fr;gap:2px}.aDl dd{margin-bottom:8px}.aHead__acts{margin-left:0}.aFind--sm{flex:1 1 100%}.aBar__right{margin-left:0;width:100%;flex-wrap:wrap}.aScrim{padding:80px 12px 0}}
+.liveCard{margin-top:var(--s-5)}</style>
+</head>
+<body class="adm" data-page="jobs">
+<main id="aPage">
+<div class="aHead"><div><h1>Jobs</h1><p>New posts wait here until you approve them. Nothing goes live on the job board without a yes.</p></div>
+<div class="aHead__acts"><a class="btn btn--primary btn--sm" href="#" data-i="plus">Post a job for a client</a></div></div>
+<section class="aCard">
+<div class="aBar">
+<button class="aFilter" type="button" aria-pressed="true">Waiting for approval <em>7</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Live <em>214</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Sent back <em>2</em></button>
+<button class="aFilter" type="button" aria-pressed="false">Closed <em>1,186</em></button>
+<button class="aFilter" type="button" aria-pressed="false">All</button>
+<div class="aBar__right"><label class="aFind aFind--sm"><input type="search" placeholder="Role, company or place" aria-label="Search jobs"></label>
+<select class="aSelect" aria-label="Sort"><option>Waiting longest</option><option>Newest</option></select></div></div>
+<div class="aTableWrap"><table class="aTable">
+<thead><tr><th>Role</th><th>Type</th><th>Posted</th><th>Waiting</th><th><span class="sr-only">Actions</span></th></tr></thead>
+<tbody><tr><td><div class="aWho"><span class="aAv">WC</span><div><b><a href="job.html">Head Groom</a></b><small>Willow Creek Farm · Wellington, FL</small></div></div></td><td><span class="aTag">Self-posted</span></td><td class="nw">31 Oct</td>
+<td><span class="aPill aPill--warn">Waiting 2 days</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">BH</span><div><b><a href="job.html">Working Student</a></b><small>Briar Hill Eventing · Aiken, SC</small></div></div></td><td><span class="aTag">Self-posted</span></td><td class="nw">1 Nov</td>
+<td><span class="aPill aPill--warn">Waiting 1 day</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">CR</span><div><b><a href="job.html">Polo Groom</a></b><small>Cedar Run Polo · Lexington, KY</small></div></div></td><td><span class="aTag">Self-posted</span></td><td class="nw">Today</td>
+<td><span class="aPill aPill--info">New today</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">HD</span><div><b><a href="job.html">Assistant Trainer</a></b><small>Hartwell Dressage · Ocala, FL</small></div></div></td><td><span class="aTag aTag--admin">Advertising package</span></td><td class="nw">Today</td>
+<td><span class="aPill aPill--info">New today</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">SF</span><div><b><a href="job.html">Show Groom</a></b><small>Sandhill Farm · Southern Pines, NC</small></div></div></td><td><span class="aTag">Self-posted</span></td><td class="nw">Today</td>
+<td><span class="aPill aPill--info">New today</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">TH</span><div><b><a href="job.html">Farm Manager</a></b><small>Thistle Hill Hunters · Middleburg, VA</small></div></div></td><td><span class="aTag">Self-posted</span></td><td class="nw">Today</td>
+<td><span class="aPill aPill--info">New today</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">RV</span><div><b><a href="job.html">Vet Technician</a></b><small>River Valley Equine Clinic · Lexington, KY</small></div></div></td><td><span class="aTag">Self-posted</span></td><td class="nw">Today</td>
+<td><span class="aPill aPill--info">New today</span></td>
+<td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a><a class="btn btn--secondary btn--sm" href="#" data-i="check">Approve</a></div></td></tr></tbody></table></div>
+<div class="aFoot">7 waiting · oldest first <div class="aPager"><span aria-current="page">1</span></div></div>
+</section>
+<section class="aCard liveCard"><div class="aCard__head"><h2>Recently live or closed</h2><a href="#">See all live</a></div>
+<div class="aTableWrap"><table class="aTable"><thead><tr><th>Role</th><th>Status</th><th>Posted</th><th>Applicants</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>
+<tr><td><div class="aWho"><span class="aAv">WC</span><div><b>Show Groom</b><small>Willow Creek Farm · Wellington, FL</small></div></div></td><td><span class="aPill aPill--ok">Live</span></td><td class="nw">12 Oct</td><td class="nw">14</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">Close</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">WC</span><div><b>Exercise Rider</b><small>Willow Creek Farm · Wellington, FL</small></div></div></td><td><span class="aPill aPill--ok">Live</span></td><td class="nw">3 Oct</td><td class="nw">9</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">Close</a></div></td></tr><tr><td><div class="aWho"><span class="aAv">WC</span><div><b>Working Student</b><small>Willow Creek Farm · Wellington, FL</small></div></div></td><td><span class="aPill aPill--mute">Closed</span></td><td class="nw">2 Aug</td><td class="nw">22</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Repost</a></div></td></tr>
+</tbody></table></div></section>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

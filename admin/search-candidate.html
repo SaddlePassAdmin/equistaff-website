@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dana Whitfield · Live Oak Stables · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.btn > svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.btn { white-space: nowrap; }
+
+.scHead img { width: 64px; height: 64px; }
+.scHead h1 { font: 700 2rem/1.15 var(--font-display); margin: 0; }
+.scHead p { margin: 6px 0 0; color: var(--text-muted); }
+.scHint { margin-left: auto; font-size: var(--t-label); }
+.scEditor { border: 1px solid #C9D6E2; border-radius: var(--r-sm); overflow: hidden; }
+.scTools { display: flex; gap: 4px; padding: 6px; background: var(--surface-sunken); border-bottom: 1px solid var(--border-subtle); }
+.scTools button { min-width: 36px; height: 32px; border: 0; background: transparent; border-radius: var(--r-sm); font: 700 var(--t-small)/1 var(--font-body); color: var(--text-primary); cursor: pointer; padding: 0 10px; }
+.scTools button:hover { background: var(--surface-tint); }
+.scText { padding: var(--s-4); min-height: 200px; font-size: 1rem; line-height: 1.65; }
+.scText p { margin: 0 0 var(--s-3); }
+.scText p:last-child { margin: 0; }
+.scSaved { font-size: var(--t-label); margin: var(--s-3) 0 0; }
+.scTrack { list-style: none; margin: 0 0 var(--s-5); padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
+.scTrack li { position: relative; padding-top: 22px; font-size: var(--t-small); }
+.scTrack li::before { content: ""; position: absolute; top: 5px; left: 0; right: 0; height: 3px; background: var(--border-subtle); pointer-events: none; }
+.scTrack li::after { content: ""; position: absolute; top: 0; left: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--surface-raised); border: 2px solid #C9D6E2; pointer-events: none; }
+.scTrack li.done::before { background: var(--blue-600); }
+.scTrack li.done::after { background: var(--blue-600); border-color: var(--blue-600); }
+.scTrack li.cur::after { background: var(--err-bg); border-color: var(--err-ink); }
+.scTrack b { display: block; }
+.scTrack span { font-size: var(--t-label); color: var(--text-muted); }
+.scTrack li.cur span { color: var(--err-ink); font-weight: 700; }
+.scRow .field { margin-bottom: 0; }
+.scFb { display: flex; align-items: center; gap: var(--s-3); font-size: var(--t-label); }
+.swShoes { display: inline-flex; gap: 2px; }
+.swShoes i { width: 18px; height: 20px; color: #C9D6E2; display: inline-block; }
+.swShoes i.on { color: var(--warm-ink); }
+.swShoes svg { width: 18px; height: 20px; display: block; }
+.scQuote { margin: var(--s-3) 0 0; padding: var(--s-3) var(--s-4); border-left: 3px solid var(--baby-300); background: var(--depth-01); font-style: italic; font-size: var(--t-small); }
+.scQuote--note { border-left-color: var(--warm-ink); background: var(--warm); }
+.scNoteHd { margin: var(--s-4) 0 0; font-weight: 700; font-size: var(--t-small); }
+.scSw .aSwitch:first-child { padding-top: 0; }
+.scSmall { font-size: var(--t-label); font-weight: 700; margin: 0 0 6px; }
+.scDl { grid-template-columns: 96px minmax(0, 1fr); }
+.scSmall.muted { font-weight: 400; margin-top: var(--s-3); }
+.aSwitch small { display: block; line-height: 1.45; }
+@media (max-width: 860px) { .scTrack { grid-template-columns: 1fr; gap: var(--s-3); } .scTrack li::before { display: none; } .scHint { display: none; } .form__row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="adm" data-page="searches">
+<main id="aPage">
+  <p class="aCrumb"><a href="search.html">← Barn Manager · Live Oak Stables</a></p>
+  <div class="aHead">
+    <div class="aWho scHead">
+      <img src="../img/people/dana.jpg" alt="">
+      <div>
+        <h1>Dana Whitfield</h1>
+        <p>Barn Manager · 24-horse hunter/jumper barn, Ocala · <span class="aPill aPill--err">Interviewing · 5 days, no update</span></p>
+      </div>
+    </div>
+    <div class="aHead__acts">
+      <a class="btn btn--secondary" href="#" data-i="ext">See what the client sees</a>
+      <a class="btn btn--secondary" href="#" data-i="brief">Resume</a>
+      <a class="btn btn--primary" href="#" data-i="check">Save changes</a>
+    </div>
+  </div>
+
+  <div class="aGrid aGrid--main">
+    <div class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>EquiStaff feedback</h2><span class="muted scHint">The client reads this first, above the resume</span></div>
+        <div class="aCard__body">
+          <div class="scEditor">
+            <div class="scTools" role="toolbar" aria-label="Formatting">
+              <button type="button" aria-label="Bold"><b>B</b></button>
+              <button type="button" aria-label="Italic"><i>I</i></button>
+              <button type="button" aria-label="Bulleted list">• List</button>
+              <button type="button" aria-label="Link">Link</button>
+            </div>
+            <div class="scText" contenteditable="true" role="textbox" aria-multiline="true" aria-label="EquiStaff feedback">
+              <p>Dana has run Cypress Hill's 24-horse barn for four years, and it shows: she knows every horse's feed card by heart, books the farrier and vet weeks ahead, and the two grooms she trained both said she's the reason they stayed.</p>
+              <p>She's ready for a bigger operation and wants a barn that shows on the Florida circuit. Housing for herself only; no horses of her own.</p>
+              <p>The one thing to ask her about: she hasn't hired staff herself yet. She's keen to, and has a clear idea of how she'd do it.</p>
+            </div>
+          </div>
+          <p class="muted scSaved">Last saved 21 Oct · shown to Live Oak Stables since 20 Oct</p>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Stage and dates</h2><span class="muted scHint">Dates turn red for the client after 3 days</span></div>
+        <div class="aCard__body">
+          <ol class="scTrack">
+          <li class="done"><b>Presented</b><span>20 Oct</span></li>
+          <li class="done"><b>Reviewed</b><span>22 Oct</span></li>
+          <li class="done cur"><b>Interviewed</b><span>28 Oct</span></li>
+          <li class=""><b>Offered</b><span>Not yet</span></li>
+          <li class=""><b>Hired</b><span>Not yet</span></li>
+          </ol>
+          <div class="form__row scRow">
+            <div class="field"><label for="sc1">Move to</label><select id="sc1"><option>Interviewed</option><option>Second interview</option><option selected>Offered</option><option>Hired</option><option>Passed</option></select></div>
+            <div class="field"><label for="sc2">Date</label><input id="sc2" value="3 Nov 2026"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Client's feedback</h2><span class="muted scHint">Read only · the candidate never sees this</span></div>
+        <div class="aCard__body">
+          <div class="scFb"><span class="swShoes" aria-label="4 of 5 horseshoes"><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class=""><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i></span><span class="muted">Janet Moreau · 29 Oct</span></div>
+          <blockquote class="scQuote">"Strong on feed and farrier schedules. We'd like a second interview with our head trainer before we decide."</blockquote>
+          <p class="scNoteHd">Private note to the recruiting team</p>
+          <blockquote class="scQuote scQuote--note">"Can she start before the Winter Equestrian Festival?"</blockquote>
+        </div>
+      </section>
+    </div>
+
+    <aside class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Fee protection</h2></div>
+        <div class="aCard__body scSw">
+          <div class="aSwitch"><div><b>Release contact details</b><small>The client sees Dana's phone and email. Only once the placement is settled.</small></div><i class="on" role="switch" aria-checked="true"></i></div>
+          <div class="aSwitch"><div><b>Messaging on</b><small>Client and Dana can message each other on EquiStaff.</small></div><i class="on" role="switch" aria-checked="true"></i></div>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Skill tags</h2><a href="#">Edit</a></div>
+        <div class="aCard__body">
+          <p class="scSmall">From Dana's profile</p>
+          <p><span class="aTag">Feed &amp; nutrition</span><span class="aTag">Farrier scheduling</span><span class="aTag">Hunter/jumper</span><span class="aTag">Show prep</span></p>
+          <p class="scSmall">Added by the recruiting team</p>
+          <p><span class="aTag aTag--admin">Staff training</span><span class="aTag aTag--admin">Vet records</span><span class="aTag aTag--admin">+ Add tag</span></p>
+          <p class="muted scSmall">Admin tags help her show up in search. Seekers never see them.</p>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Candidate</h2></div>
+        <div class="aCard__body">
+          <dl class="aDl scDl">
+            <dt>Email</dt><dd>d.whitfield@example.com</dd>
+            <dt>Phone</dt><dd>(352) 555-0147</dd>
+            <dt>Visibility</dt><dd>Open to everyone</dd>
+            <dt>Profile</dt><dd>Claimed · on EquiStaff since 2 Oct</dd>
+            <dt>Salary hope</dt><dd>$52,000–$58,000 <span class="aPill aPill--mute aPill--plain">Admin only</span></dd>
+          </dl>
+        </div>
+      </section>
+    </aside>
+  </div>
+  <script src="../src/icons.js"></script>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

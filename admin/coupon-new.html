@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New coupon · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.aCard__head a[data-i]{display:inline-flex;gap:6px;align-items:center}
+.nw{white-space:nowrap}.muted{color:var(--text-muted)}.small{font-size:var(--t-label)}
+.aTableWrap{overflow-x:auto;position:relative}.aGrid{grid-template-columns:minmax(0,1fr)}.aGrid.aGrid--main{grid-template-columns:minmax(0,1fr) 360px}
+.aGrid.aGrid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.aGrid.aGrid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.aDl dd{min-width:0;overflow-wrap:anywhere}.stack{display:grid;gap:var(--s-2)}.stack .btn{width:100%}
+body{position:relative}.aScrim{position:absolute;inset:0 0 auto 0;min-height:100%;place-items:start center;padding:140px 0 80px}
+.field input[type=checkbox],.field input[type=radio],.radio input{width:auto;min-height:0;padding:0}.field label.radio,.field label.chk{display:flex;font-weight:400}.field label.radio b{font-weight:700}
+.aModal .field{margin-bottom:var(--s-4)}
+.radio{display:flex;gap:var(--s-3);align-items:flex-start;padding:12px 14px;border:1px solid #C9D6E2;border-radius:var(--r-sm);margin-bottom:var(--s-2)}
+.radio input{margin-top:4px;accent-color:var(--blue-600)}.radio b{display:block}.radio small{color:var(--text-muted);font-size:var(--t-label)}
+.radio.on{border-color:var(--blue-600);background:var(--depth-01)}.radio .num{margin-left:auto;font-family:var(--font-mono);font-weight:700;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.aFind--sm{flex:0 0 260px}.aFind--sm input{min-height:38px;padding-left:14px}
+@media (max-width:860px){.aGrid.aGrid--main,.aGrid.aGrid--2,.aGrid.aGrid--3{grid-template-columns:minmax(0,1fr)}.aDl{grid-template-columns:1fr;gap:2px}.aDl dd{margin-bottom:8px}.aHead__acts{margin-left:0}.aFind--sm{flex:1 1 100%}.aBar__right{margin-left:0;width:100%;flex-wrap:wrap}.aScrim{padding:80px 12px 0}}
+.code{white-space:nowrap;font:700 var(--t-small)/1 var(--font-mono);background:var(--surface-sunken);border:1px dashed var(--border-strong);border-radius:var(--r-sm);padding:6px 8px;display:inline-block}
+.sub{display:block;color:var(--text-muted);font-size:var(--t-label);margin-top:6px}
+.aTile{cursor:default}.aGrid--3>.aNote{align-self:start}.headFilters{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}.headFilters .aFilter{padding:6px 12px}
+.planList small{display:block;color:var(--text-muted);font-size:var(--t-label)}.planList .n{font:700 1.25rem/1 var(--font-mono);color:var(--text-primary)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3)}
+.seg{display:inline-flex;border:1px solid #C9D6E2;border-radius:var(--r-sm);overflow:hidden}.seg span{padding:10px 16px;font-weight:700;font-size:var(--t-small)}.seg span.on{background:var(--navy-900);color:#fff}
+.chk{display:flex;gap:8px;align-items:center;font-size:var(--t-small);margin:0 0 6px}.chk input{accent-color:var(--blue-600)}
+@media (max-width:860px){.two{grid-template-columns:1fr}}</style>
+</head>
+<body class="adm" data-page="subscriptions">
+<main id="aPage">
+<div class="aHead"><div><h1>Subscriptions &amp; coupons</h1><p>Change, cancel or discount a plan from an employer's record. Make coupons here.</p></div>
+<div class="aHead__acts"><a class="btn btn--secondary btn--sm" href="#" data-i="ext">Open Stripe</a><a class="btn btn--primary btn--sm" href="coupon-new.html" data-i="plus">New coupon</a></div></div>
+
+<div class="aTiles">
+<div class="aTile"><span>Active subscriptions</span><b>31</b><small>Across all job-board plans</small></div>
+<div class="aTile"><span>Renewing this week</span><b>2</b><small>Both on auto-renew</small></div>
+<div class="aTile"><span>Cancelling at period end</span><b>1</b><small>Greenacre Hunter Barn · 14 Nov</small></div>
+<div class="aTile"><span>Coupons in use</span><b>4</b><small>2 expire this month</small></div>
+</div>
+
+<div class="aGrid">
+<section class="aCard"><div class="aCard__head"><h2>Coupons</h2>
+<div class="headFilters"><button class="aFilter" type="button" aria-pressed="true">Active <em>4</em></button><button class="aFilter" type="button" aria-pressed="false">Scheduled <em>1</em></button><button class="aFilter" type="button" aria-pressed="false">Ended <em>12</em></button></div></div>
+<div class="aTableWrap"><table class="aTable">
+<thead><tr><th>Code</th><th>Discount</th><th>For</th><th>Valid</th><th>Used</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>
+<tr><td><span class="code">BARNWEEK20</span><small class="sub">Fall barn-week sale</small></td><td>20% off first payment</td><td>Everyone · all plans</td><td class="nw">1 – 30 Nov</td><td class="nw">6 of 50</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">End now</a></div></td></tr>
+<tr><td><span class="code">WILLOW-RENEW</span><small class="sub">Loyalty thank-you</small></td><td>$40 off</td><td><div class="aWho"><span class="aAv">WC</span><div><b>Willow Creek Farm</b><small>Only this employer</small></div></div></td><td class="nw">Until 14 Dec</td><td class="nw">0 of 1</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">End now</a></div></td></tr>
+<tr><td><span class="code">OCALA-WEC</span><small class="sub">Winter show season</small></td><td>15% off</td><td>Everyone · 3-month and 1-year plans</td><td class="nw">1 Nov – 31 Jan</td><td class="nw">3 of 100</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">End now</a></div></td></tr>
+<tr><td><span class="code">FIRSTPOST</span><small class="sub">New employers</small></td><td>$10 off</td><td>Everyone · 1-month plans</td><td class="nw">No end date</td><td class="nw">22 used</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">End now</a></div></td></tr>
+</tbody></table></div></section>
+
+<div class="aGrid aGrid--3">
+<section class="aCard"><div class="aCard__head"><h2>By plan</h2></div>
+<ul class="aList planList">
+<li><div><b>Job board · 1 month</b><small>$50 · 3 posts</small></div><span class="aList__meta n">9</span></li>
+<li><div><b>Job board · 1 month, featured</b><small>$69.99 · 3 posts + featured bar</small></div><span class="aList__meta n">3</span></li>
+<li><div><b>Job board · 3 months</b><small>$140 · 3 posts</small></div><span class="aList__meta n">12</span></li>
+<li><div><b>Job board · 1 year</b><small>$460 · 5 posts</small></div><span class="aList__meta n">7</span></li>
+</ul></section>
+<section class="aCard"><div class="aCard__head"><h2>Renewing this week</h2></div>
+<ul class="aList">
+<li><div class="aWho"><span class="aAv">BH</span><div><b><a href="employer.html">Briar Hill Eventing</a></b><small>1 year · $460 · Thu 5 Nov</small></div></div></li>
+<li><div class="aWho"><span class="aAv">CR</span><div><b><a href="employer.html">Cedar Run Polo</a></b><small>1 month, featured · $69.99 · Sat 7 Nov</small></div></div></li>
+</ul></section>
+<div class="aNote" data-i="info"><div><b>The full subscription list, invoices and refunds live in Stripe.</b> Plans are changed or cancelled from each employer's record. <a href="#">Open Stripe</a></div></div>
+</div>
+</div><div class="aScrim"><div class="aModal" role="dialog" aria-modal="true" aria-labelledby="mt">
+<div class="aModal__head"><h2 id="mt">New coupon</h2><p>Stripe applies it at checkout or to an existing plan.</p></div>
+<div class="aModal__body">
+<div class="two"><div class="field"><label for="cc">Code</label><input id="cc" value="SPRINGHIRE"><small>What employers type at checkout</small></div>
+<div class="field"><label for="cn">Name (only you see this)</label><input id="cn" value="Spring hiring push"></div></div>
+<div class="field"><label>Discount</label><div class="two"><div class="seg"><span class="on">% off</span><span>$ off</span></div><input aria-label="Amount" value="25"></div></div>
+<div class="field"><label>Applies to</label>
+<label class="chk"><input type="checkbox" checked> Job board · 1 month ($50)</label>
+<label class="chk"><input type="checkbox" checked> Job board · 1 month, featured ($69.99)</label>
+<label class="chk"><input type="checkbox" checked> Job board · 3 months ($140)</label>
+<label class="chk"><input type="checkbox"> Job board · 1 year ($460)</label></div>
+<div class="field"><label>Who can use it</label>
+<label class="radio on"><input type="radio" name="who" checked><div><b>Everyone</b><small>Any employer with the code</small></div></label>
+<label class="radio"><input type="radio" name="who"><div><b>One employer</b><small>Search for the company; nobody else can use it</small></div></label></div>
+<div class="two"><div class="field"><label for="s">Starts</label><input id="s" value="1 Mar 2027"></div><div class="field"><label for="e">Ends</label><input id="e" value="31 Mar 2027"></div></div>
+<div class="field"><label for="m">Max uses (optional)</label><input id="m" value="25"></div>
+</div>
+<div class="aModal__foot"><a class="btn btn--secondary btn--sm" href="subscriptions.html">Cancel</a><a class="btn btn--primary btn--sm" href="subscriptions.html">Create coupon</a></div>
+</div></div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Replace resume · Dana Whitfield · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+  .sdHero { display: flex; gap: var(--s-4); align-items: center; }
+  .sdHero img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; }
+  .sdHero h1 { font: 700 2rem/1.15 var(--font-display); margin: 0; }
+  .sdHero p { margin: 4px 0 0; color: var(--text-muted); }
+  .sdResume { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-4) var(--s-5); background: var(--surface-tint); border-radius: var(--r-md); }
+  .sdResume svg { width: 28px; height: 28px; color: var(--navy-700); flex: 0 0 auto; }
+  .sdResume b { display: block; }
+  .sdResume small { color: var(--text-muted); font-size: var(--t-label); }
+  .sdResume .btn { margin-left: auto; }
+  .sdH { font: 700 12px/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 var(--s-2); }
+  .sdP { margin: 0; font-size: var(--t-small); line-height: 1.6; }
+  .sdJob + .sdJob { margin-top: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--border-subtle); }
+  .sdJob b { display: block; }
+  .sdJob small { display: block; color: var(--text-muted); font: 500 var(--t-label)/1.4 var(--font-mono); margin: 2px 0 6px; }
+  .sdAdmin { border: 1px solid var(--warm-ink); background: linear-gradient(var(--warm), var(--warm)) top/100% 4px no-repeat, var(--surface-raised); }
+  .sdAdmin .aCard__head { border-bottom-color: rgba(122, 83, 18, .2); }
+  .sdAdmin .aCard__head span { margin-left: auto; display: inline-flex; gap: 6px; align-items: center; font: 700 var(--t-label)/1 var(--font-body); color: var(--warm-ink); }
+  .sdAdmin .aCard__head span svg { width: 14px; height: 14px; }
+  .sdSalary { font: 700 1.375rem/1.2 var(--font-mono); }
+  .sdTags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .sdTags .aTag { margin: 0; display: inline-flex; gap: 6px; align-items: center; }
+  .sdTags .aTag svg { width: 12px; height: 12px; }
+  .sdAdd { border: 1px dashed var(--warm-ink); color: var(--warm-ink); background: transparent; border-radius: var(--r-sm); padding: 5px 10px; font: 700 12px/1 var(--font-body); display: inline-flex; gap: 6px; align-items: center; }
+  .sdAdd svg { width: 12px; height: 12px; }
+  .sdNote { width: 100%; min-height: 96px; border: 1px solid #C9D6E2; border-radius: var(--r-sm); padding: 12px 14px; font: inherit; font-size: var(--t-small); resize: vertical; background: #fff; color: var(--text-primary); }
+  .sdNoteLog { list-style: none; margin: var(--s-3) 0 0; padding: 0; font-size: var(--t-small); }
+  .sdNoteLog li { padding: 10px 0; border-top: 1px solid var(--border-subtle); }
+  .sdNoteLog small { display: block; color: var(--text-muted); font-size: var(--t-label); margin-top: 2px; }
+  .sdRate { display: flex; gap: var(--s-3); align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--border-subtle); font-size: var(--t-small); }
+  .sdRate:first-of-type { border-top: 0; }
+  .sdShoes { display: inline-flex; gap: 2px; color: var(--navy-700); flex: 0 0 auto; margin-top: 2px; }
+  .sdShoes svg { width: 15px; height: 17px; }
+  .sdShoes .off { color: #C9D6E2; }
+  .sdRate small { display: block; color: var(--text-muted); font-size: var(--t-label); }
+  .aHead__acts .btn svg { width: 16px; height: 16px; }
+  .sdActs { display: grid; gap: var(--s-2); }
+  .sdActs .btn { justify-content: flex-start; width: 100%; }
+  .sdActs .btn svg { width: 18px; height: 18px; }
+  .sdVis { display: grid; gap: var(--s-2); font-size: var(--t-small); }
+  .sdVis label { display: flex; gap: var(--s-2); align-items: flex-start; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm); }
+  .sdVis label:has(input:checked) { border-color: var(--blue-600); background: var(--depth-01); }
+  .sdVis small { display: block; color: var(--text-muted); font-size: var(--t-label); }
+  .sdVis input { accent-color: var(--blue-600); margin-top: 3px; }
+  .rrDrop { display: grid; justify-items: center; gap: 6px; text-align: center; padding: var(--s-6) var(--s-4); border: 2px dashed var(--baby-300); border-radius: var(--r-md); background: var(--depth-01); font-size: var(--t-small); cursor: pointer; }
+  .rrDrop svg { width: 30px; height: 30px; color: var(--blue-600); }
+  .rrDrop span { color: var(--text-muted); }
+  .rrDrop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .rrTell { display: flex; gap: var(--s-2); align-items: center; margin-top: var(--s-4); font-size: var(--t-small); }
+  .rrTell input { width: 17px; height: 17px; accent-color: var(--blue-600); }
+  body.adm { position: relative; }
+  .aScrim { position: absolute; inset: 0; align-items: start; padding-top: 160px; }
+</style>
+</head>
+<body class="adm" data-page="seekers">
+<main id="aPage">
+  <p class="aCrumb"><a href="seekers.html">← Job seekers</a></p>
+  <div class="aHead">
+    <div class="sdHero">
+      <img src="../img/people/dana.jpg" alt="">
+      <div>
+        <h1>Dana Whitfield</h1>
+        <p>Barn Manager · Ocala, FL · available within 30 days</p>
+      </div>
+    </div>
+    <div class="aHead__acts">
+      <a class="btn btn--secondary btn--sm" href="#" data-i="ext">See their public profile</a>
+      <a class="btn btn--primary btn--sm" href="searches.html" data-i="star">Add to a direct-hire search</a>
+    </div>
+  </div>
+
+  <div class="aGrid aGrid--main">
+    <div class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Profile</h2><a href="#">What employers see</a></div>
+        <div class="aCard__body">
+          <div class="sdResume">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+            <div><b>Dana-Whitfield-Resume.pdf</b><small>Uploaded 14 Sep · 2 pages · built from the resume builder</small></div>
+            <a class="btn btn--primary btn--sm" href="#">Open resume</a>
+          </div>
+          <div class="aSect" style="margin-top:var(--s-5)">
+            <h3 class="sdH">Objectives</h3>
+            <p class="sdP">Run a busy show barn where the horses come first. I want a team I can train up, and a program that travels to Wellington for the winter circuit.</p>
+          </div>
+          <div class="aSect">
+            <h3 class="sdH">Goals and interests</h3>
+            <p class="sdP">Moving toward an assistant trainer role in hunter/jumpers over the next few years. Young horse development, show grooming, and keeping a calm barn.</p>
+          </div>
+          <div class="aSect">
+            <h3 class="sdH">Experience</h3>
+            <div class="sdJob"><b>Barn Manager</b><small>Cypress Lane Farm · Ocala, FL · 2021 – now</small><p class="sdP">Ran the day-to-day for 24 horses: turnout, feed, farrier and vet schedules. Managed two grooms and a working student.</p></div>
+            <div class="sdJob"><b>Head Groom</b><small>Brookside Show Stables · Wellington, FL · 2017 – 2021</small><p class="sdP">Prepared horses for A-rated shows, braided for the hunter ring, and drove the trailer on the Florida circuit.</p></div>
+          </div>
+          <div class="aSect">
+            <h3 class="sdH">Key skills</h3>
+            <span class="aTag">Barn Management</span><span class="aTag">Braiding</span><span class="aTag">Show Grooming</span><span class="aTag">Trailer Driving</span><span class="aTag">Hunter / Jumper</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="aCard sdAdmin">
+        <div class="aCard__head"><h2>Recruiting team only</h2><span data-i="lock">Never shown to Dana or employers</span></div>
+        <div class="aCard__body">
+          <div class="aGrid aGrid--2">
+            <div>
+              <h3 class="sdH">Desired salary</h3>
+              <p class="sdSalary">$52,000 – $60,000</p>
+              <p class="sdP" style="color:var(--text-muted)">Plus housing for one, and room for a dog.</p>
+            </div>
+            <div>
+              <h3 class="sdH">Admin skill tags</h3>
+              <div class="sdTags">
+                <span class="aTag aTag--admin">Great with young horses <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-label="Remove"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+                <span class="aTag aTag--admin">Strong communicator <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-label="Remove"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+                <button type="button" class="sdAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add tag</button>
+              </div>
+              <p class="sdP" style="color:var(--text-muted);margin-top:8px;font-size:var(--t-label)">Admin tags are searchable here. Employers never see them.</p>
+            </div>
+          </div>
+
+          <div class="aSect" style="margin-top:var(--s-5)">
+            <h3 class="sdH">Private notes</h3>
+            <textarea class="sdNote" aria-label="Add a private note" placeholder="Add a note for the recruiting team…"></textarea>
+            <ul class="sdNoteLog">
+              <li>Spoke on the phone. Wants to stay in Marion County, open to Wellington for the season. Very organised.<small>Recruiting Team · 16 Sep</small></li>
+              <li>Presented to Live Oak Stables for the Barn Manager search.<small>Recruiting Team · 28 Oct</small></li>
+            </ul>
+          </div>
+
+          <div class="aSect">
+            <h3 class="sdH">Ratings from employers</h3>
+            <div class="sdRate">
+              <span class="sdShoes" aria-label="4 out of 5"><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg><svg class="off"><use href="#i-horseshoe"/></svg></span>
+              <div>"Knew her stuff on the barn walk. Would want to see her with our young horses."<small>Live Oak Stables · Barn Manager search · 30 Oct</small></div>
+            </div>
+            <div class="sdRate">
+              <span class="sdShoes" aria-label="5 out of 5"><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg><svg><use href="#i-horseshoe"/></svg></span>
+              <div>"Great interview. Lost her to another offer last spring."<small>Hartwell Dressage · Head Groom search · 12 Apr</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Account</h2></div>
+        <div class="aCard__body">
+          <dl class="aDl">
+            <dt>Email</dt><dd>dana.w@example.com</dd>
+            <dt>Phone</dt><dd>(352) 555-0147</dd>
+            <dt>Created</dt><dd>14 Sep 2026</dd>
+            <dt>Last login</dt><dd>Today, 9:12 am</dd>
+            <dt>Email status</dt><dd><span class="aPill aPill--ok">Confirmed</span></dd>
+            <dt>Resume</dt><dd><span class="aPill aPill--ok">Complete</span></dd>
+            <dt>Applications</dt><dd>4 · last on 27 Oct</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Visibility</h2></div>
+        <div class="aCard__body">
+          <div class="sdVis">
+            <label><input type="radio" name="vis" checked><span><b>Open to everyone</b><small>Shows in the employer candidate search</small></span></label>
+            <label><input type="radio" name="vis"><span><b>Looking quietly</b><small>Only the recruiting team can find her</small></span></label>
+          </div>
+          <div class="aSwitch" style="margin-top:var(--s-3)"><div><b>Featured job seeker</b><small>Shown first in the employer search</small></div><i></i></div>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Support</h2></div>
+        <div class="aCard__body">
+          <div class="sdActs">
+            <a class="btn btn--secondary btn--sm" href="#" data-i="key">Send password reset</a>
+            <a class="btn btn--secondary btn--sm" href="#" data-i="mail">Resend confirmation email</a>
+            <a class="btn btn--secondary btn--sm" href="seeker-replace.html" data-i="upload">Replace resume</a>
+            <a class="btn btn--danger btn--sm" href="#" data-i="x">Deactivate account</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="aScrim" role="presentation">
+    <div class="aModal" role="dialog" aria-modal="true" aria-labelledby="rrTitle">
+      <div class="aModal__head">
+        <h2 id="rrTitle">Replace Dana's resume</h2>
+        <p>Use this when a job seeker emails you a newer resume. Their profile fields stay as they are.</p>
+      </div>
+      <div class="aModal__body">
+        <label class="rrDrop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>
+          <b>Drop the new resume here</b>
+          <span>or <u>choose a file</u> · PDF or Word, up to 10 MB</span>
+          <input type="file" aria-label="Choose a resume file">
+        </label>
+        <div class="aNote" style="margin-top:var(--s-4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>The current file, <b>Dana-Whitfield-Resume.pdf</b> (14 Sep), is kept in her resume history, so you can switch back.</span></div>
+        <label class="rrTell"><input type="checkbox" checked> Email Dana to let her know her resume was updated</label>
+      </div>
+      <div class="aModal__foot">
+        <a class="btn btn--secondary btn--sm" href="seeker.html">Cancel</a>
+        <button class="btn btn--primary btn--sm" type="button">Replace resume</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="../src/icons.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

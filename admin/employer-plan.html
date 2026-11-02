@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Change plan · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>.nw{white-space:nowrap}body{position:relative}.aScrim{position:absolute;inset:0;place-items:start center;padding-top:140px}[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.btn--sm[data-i]{padding:0 var(--s-4)}.nw{white-space:nowrap!important}.aTable td .aPill{margin-top:6px}.aTableWrap{overflow-x:auto;position:relative}.aGrid{grid-template-columns:minmax(0,1fr)}.aGrid.aGrid--main{grid-template-columns:minmax(0,1fr) 360px}.aDl dd{min-width:0;overflow-wrap:anywhere}
+@media (max-width:860px){.aGrid.aGrid--main{grid-template-columns:minmax(0,1fr)}.aDl{grid-template-columns:1fr;gap:2px}.aDl dd{margin-bottom:8px}.aHead__acts{margin-left:0}}
+.emHead .aAv{width:56px;height:56px;font-size:18px}.emHead h1{font:700 2rem/1.15 var(--font-display);margin:0}.emHead p{margin:4px 0 0;color:var(--text-muted)}
+.aHead__acts{align-items:center}
+.emTabs{display:flex;gap:var(--s-1);border-bottom:1px solid var(--border-subtle);margin-bottom:var(--s-5);overflow-x:auto}
+.emTabs a{padding:12px var(--s-4);font-weight:700;font-size:var(--t-small);text-decoration:none;color:var(--text-muted);border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.emTabs a[aria-current]{color:var(--text-primary);border-color:var(--action-primary)}
+.emTabs em{font-style:normal;font-family:var(--font-mono);font-size:12px;margin-left:4px}
+.planName{font-weight:700;margin:0}.planPrice{margin:2px 0 var(--s-4);color:var(--text-muted);font-size:var(--t-small)}.planPrice b{font-family:var(--font-mono);color:var(--text-primary)}
+.subNote{margin:var(--s-4) 0}.stack{display:grid;gap:var(--s-2)}.stack .btn{width:100%}
+.muted{color:var(--text-muted)}.small{font-size:var(--t-label)}.help{margin:var(--s-3) 0 0}
+.noteList li{padding:12px 0}.noteList small{display:block;color:var(--text-muted);font-size:var(--t-label);margin-top:2px}.noteList b{font-weight:400}
+.aCard__head span.muted{margin-left:auto}
+.radio{display:flex;gap:var(--s-3);align-items:flex-start;padding:12px 14px;border:1px solid #C9D6E2;border-radius:var(--r-sm);margin-bottom:var(--s-2)}
+.radio input{margin-top:4px;accent-color:var(--blue-600)}.radio b{display:block}.radio small{color:var(--text-muted);font-size:var(--t-label)}
+.radio.on{border-color:var(--blue-600);background:var(--depth-01)}.radio .num{margin-left:auto;font-family:var(--font-mono);font-weight:700;white-space:nowrap}
+.aModal .field{margin-bottom:var(--s-4)}</style>
+</head>
+<body class="adm" data-page="employers">
+<main id="aPage">
+<p class="aCrumb"><a href="employers.html">← Employers</a></p>
+<div class="aHead"><div class="aWho emHead"><span class="aAv">WC</span><div><h1>Willow Creek Farm</h1><p>Hunter/jumper barn · Wellington, FL · Customer since 14 Mar 2025</p></div></div>
+<div class="aHead__acts"><span class="aPill aPill--ok">Subscribed</span><span class="aPill aPill--info aPill--plain">Featured</span></div></div>
+<nav class="emTabs" aria-label="Employer sections"><a href="#" aria-current="page">Overview</a><a href="#">Jobs <em>4</em></a><a href="#">Messages <em>2</em></a><a href="#">Notes <em>3</em></a></nav>
+<div class="aGrid aGrid--main">
+<div class="aGrid">
+<section class="aCard"><div class="aCard__head"><h2>Company &amp; contact</h2><a href="#">Edit</a></div><div class="aCard__body">
+<dl class="aDl"><dt>Company</dt><dd>Willow Creek Farm</dd><dt>Type</dt><dd>Facility · Hunter/jumper · 32 horses</dd><dt>Contact</dt><dd>Jess Moreau, Barn Manager</dd>
+<dt>Email</dt><dd>jess@willowcreek.example <span class="aPill aPill--ok aPill--plain">Confirmed</span></dd><dt>Phone</dt><dd class="num">(561) 555-0182</dd>
+<dt>Location</dt><dd>Wellington, FL</dd><dt>Created</dt><dd class="num">14 Mar 2025</dd><dt>Last login</dt><dd class="num">Today, 9:12am</dd></dl></div></section>
+
+<section class="aCard"><div class="aCard__head"><h2>Jobs</h2><a href="jobs.html">All jobs</a></div>
+<div class="aTableWrap"><table class="aTable"><thead><tr><th>Role</th><th>Status</th><th>Posted</th><th>Applicants</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>
+<tr><td><b>Head Groom</b></td><td><span class="aPill aPill--warn">Waiting for approval</span></td><td class="nw">31 Oct</td><td class="num">—</td><td><div class="aRowActs"><a class="btn btn--primary btn--sm" href="job.html">Review</a></div></td></tr>
+<tr><td><b>Show Groom</b></td><td><span class="aPill aPill--ok">Live</span></td><td class="nw">12 Oct</td><td class="num">14</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">Close</a></div></td></tr>
+<tr><td><b>Exercise Rider</b></td><td><span class="aPill aPill--ok">Live</span></td><td class="nw">3 Oct</td><td class="num">9</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Edit</a><a class="btn btn--secondary btn--sm" href="#">Close</a></div></td></tr>
+<tr><td><b>Working Student</b></td><td><span class="aPill aPill--mute">Closed</span></td><td class="nw">2 Aug</td><td class="num">22</td><td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="#">Repost</a></div></td></tr>
+</tbody></table></div></section>
+
+<section class="aCard"><div class="aCard__head"><h2>Admin notes</h2><span class="muted small">Only the EquiStaff team sees these</span></div><div class="aCard__body">
+<div class="field"><label for="n">Add a note</label><textarea id="n" rows="2" placeholder="e.g. Called about upgrading to the yearly plan"></textarea></div>
+<ul class="aList noteList"><li><div><b>Asked about the Advertising package for the head groom role.</b><small>Recruiting Team · 30 Oct</small></div></li>
+<li><div><b>Renewed early, happy with applicant numbers.</b><small>Recruiting Team · 14 Sep</small></div></li></ul></div></section>
+</div>
+
+<aside class="aGrid">
+<section class="aCard"><div class="aCard__head"><h2>Subscription</h2><a href="#" data-i="ext">Open in Stripe</a></div><div class="aCard__body">
+<p class="planName">Job board · 3 months</p><p class="planPrice"><b>$140</b> every 3 months · 3 job posts</p>
+<dl class="aDl"><dt>Status</dt><dd><span class="aPill aPill--ok">Active</span></dd><dt>Renews</dt><dd class="num">14 Dec</dd><dt>Coupon</dt><dd>None</dd><dt>Posts used</dt><dd class="num">2 of 3</dd></dl>
+<div class="aNote subNote" data-i="lock"><div>Card details stay in Stripe. They are never shown or entered here.</div></div>
+<div class="stack"><a class="btn btn--secondary btn--sm" href="employer-plan.html">Change plan</a><a class="btn btn--secondary btn--sm" href="employer-plan.html">Apply a coupon</a><a class="btn btn--danger btn--sm" href="employer-cancel.html">Cancel subscription</a></div>
+</div></section>
+
+<section class="aCard"><div class="aCard__head"><h2>Visibility</h2></div><div class="aCard__body">
+<div class="aSwitch"><div><b>Featured employer</b><small>Shown in the featured bar on the job board</small></div><i class="on"></i></div>
+</div></section>
+
+<section class="aCard"><div class="aCard__head"><h2>Support</h2></div><div class="aCard__body"><div class="stack">
+<button class="btn btn--secondary btn--sm" type="button" data-i="key">Send password reset</button>
+<button class="btn btn--secondary btn--sm" type="button" data-i="mail">Resend email confirmation</button>
+<button class="btn btn--danger btn--sm" type="button">Deactivate account</button></div>
+<p class="muted small help">Deactivating hides their jobs and stops sign-in. It does not cancel the subscription.</p></div></section>
+</aside>
+</div><div class="aScrim"><div class="aModal" role="dialog" aria-modal="true" aria-labelledby="mt">
+<div class="aModal__head"><h2 id="mt">Change plan</h2><p>Willow Creek Farm is on Job board · 3 months. Stripe works out the difference.</p></div>
+<div class="aModal__body">
+<label class="radio"><input type="radio" name="p"><div><b>Job board · 1 month</b><small>3 job posts</small></div><span class="num">$50</span></label>
+<label class="radio"><input type="radio" name="p"><div><b>Job board · 1 month, featured</b><small>3 job posts · featured bar</small></div><span class="num">$69.99</span></label>
+<label class="radio"><input type="radio" name="p" checked disabled><div><b>Job board · 3 months</b><small>Current plan</small></div><span class="num">$140</span></label>
+<label class="radio on"><input type="radio" name="p" checked><div><b>Job board · 1 year</b><small>5 job posts · upgrade starts today, unused time is credited</small></div><span class="num">$460</span></label>
+<div class="field" style="margin-top:var(--s-4)"><label for="c">Coupon (optional)</label><input id="c" value="BARNWEEK20"><small>20% off the first payment · valid until 30 Nov</small></div>
+</div>
+<div class="aModal__foot"><a class="btn btn--secondary btn--sm" href="employer.html">Back</a><a class="btn btn--primary btn--sm" href="employer.html">Upgrade to 1 year</a></div>
+</div></div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

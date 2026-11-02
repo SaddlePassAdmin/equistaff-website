@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account & password · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+  .acForm { max-width: 520px; }
+  .acForm .field:last-of-type { margin-bottom: var(--s-4); }
+  .acRules { list-style: none; margin: 0 0 var(--s-5); padding: 0; font-size: var(--t-label); color: var(--text-muted); display: grid; gap: 4px; }
+  .acRules li { display: flex; gap: 8px; align-items: center; }
+  .acRules svg { width: 14px; height: 14px; color: var(--ok-ink); }
+  .acRules .no svg { color: #C9D6E2; }
+</style>
+</head>
+<body class="adm" data-page="account">
+<main id="aPage">
+<main id="aPage">
+  <div class="aHead">
+    <div>
+      <h1>Account &amp; password</h1>
+      <p>Your sign-in for the admin.</p>
+    </div>
+  </div>
+  <div class="aGrid aGrid--main">
+    <div class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Change password</h2></div>
+        <div class="aCard__body">
+          <form class="acForm" onsubmit="return false">
+            <div class="field"><label for="acCur">Current password</label><input id="acCur" type="password" autocomplete="current-password"></div>
+            <div class="field"><label for="acNew">New password</label><input id="acNew" type="password" autocomplete="new-password"></div>
+            <ul class="acRules">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>At least 12 characters</li>
+              <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Not one you've used here before</li>
+            </ul>
+            <div class="field"><label for="acConf">Confirm new password</label><input id="acConf" type="password" autocomplete="new-password"></div>
+            <button class="btn btn--primary" type="submit">Change password</button>
+          </form>
+        </div>
+      </section>
+      <section class="aCard">
+        <div class="aCard__head"><h2>Who can sign in</h2></div>
+        <ul class="aList">
+          <li><div class="aWho"><span class="aAv">ES</span><div><b>Recruiting Team</b><small>pro@equistaff.com · last signed in today, 8:40 am</small></div></div><span class="aList__meta"><span class="aPill aPill--info">Admin</span></span></li>
+        </ul>
+        <div class="aCard__body" style="padding-top:var(--s-4)">
+          <div class="aNote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>V1 has one admin sign-in. Separate sign-ins for each team member can come later if more people need access.</span></div>
+        </div>
+      </section>
+    </div>
+    <section class="aCard">
+      <div class="aCard__head"><h2>Your details</h2></div>
+      <div class="aCard__body">
+        <dl class="aDl">
+          <dt>Name</dt><dd>Recruiting Team</dd>
+          <dt>Email</dt><dd>pro@equistaff.com</dd>
+          <dt>Role</dt><dd>Admin</dd>
+          <dt>Password</dt><dd>Changed 12 Oct</dd>
+        </dl>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

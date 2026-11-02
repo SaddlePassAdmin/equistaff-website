@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+  .siWrap { min-height: 100vh; display: grid; place-items: center; padding: var(--s-6) var(--s-4); background: linear-gradient(180deg, var(--depth-02), var(--surface-sunken) 60%); }
+  .siCard { width: min(440px, 100%); background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--r-lg); box-shadow: var(--e-2); padding: var(--s-7) var(--s-6) var(--s-6); }
+  .siCard img { height: 40px; width: auto; display: block; margin: 0 auto var(--s-2); }
+  .siTag { text-align: center; font: 700 11px/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 var(--s-6); }
+  .siCard h1 { font: 700 1.625rem/1.2 var(--font-display); margin: 0 0 6px; text-align: center; }
+  .siCard > p { text-align: center; color: var(--text-muted); margin: 0 0 var(--s-5); font-size: var(--t-small); }
+  .siRow { display: flex; justify-content: space-between; align-items: center; margin: -8px 0 var(--s-5); font-size: var(--t-small); }
+  .siRow label { display: flex; gap: 8px; align-items: center; }
+  .siRow input { width: 17px; height: 17px; accent-color: var(--blue-600); }
+  .siRow a { font-weight: 700; text-decoration: none; }
+  .siCard .btn { width: 100%; }
+  .siFoot { text-align: center; color: var(--text-muted); font-size: var(--t-label); margin: var(--s-5) 0 0; }
+</style>
+</head>
+<body class="adm" data-page="signin" data-bare>
+<main id="aPage">
+<main id="aPage" class="siWrap">
+  <form class="siCard" onsubmit="return false">
+    <img src="../assets/logo-lockup-thick.svg" alt="EquiStaff">
+    <p class="siTag">Admin</p>
+    <h1>Sign in</h1>
+    <p>For the EquiStaff recruiting team.</p>
+    <div class="field"><label for="siEmail">Email</label><input id="siEmail" type="email" autocomplete="username" placeholder="you@equistaff.com"></div>
+    <div class="field"><label for="siPw">Password</label><input id="siPw" type="password" autocomplete="current-password"></div>
+    <div class="siRow"><label><input type="checkbox"> Keep me signed in</label><a href="#">Forgot password?</a></div>
+    <button class="btn btn--primary btn--lg" type="submit">Sign in</button>
+    <p class="siFoot">Not on the recruiting team? <a href="#">Go to equistaff.com</a></p>
+  </form>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

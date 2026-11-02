@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job seekers · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+  .skSearch { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto; gap: var(--s-3); margin-bottom: var(--s-5); }
+  .skSearch label { display: block; }
+  .skSearch span { display: block; font: 700 var(--t-label)/1 var(--font-body); color: var(--text-muted); margin-bottom: 6px; }
+  .skSearch input { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #C9D6E2; border-radius: var(--r-sm); font: inherit; font-size: var(--t-small); background: var(--surface-raised); color: var(--text-primary); }
+  .skSearch .btn { align-self: end; }
+  .skLayout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: var(--s-5); align-items: start; }
+  .skFilters { padding: var(--s-4) var(--s-5) var(--s-5); }
+  .skFilters h3 { font: 700 12px/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin: var(--s-5) 0 var(--s-2); }
+  .skFilters h3:first-child { margin-top: var(--s-2); }
+  .skFilters label { display: flex; gap: var(--s-2); align-items: center; padding: 5px 0; font-size: var(--t-small); }
+  .skFilters label em { margin-left: auto; font-style: normal; font: 500 12px/1 var(--font-mono); color: var(--text-muted); }
+  .skFilters input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--blue-600); }
+  .skChips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skChip { border: 1px solid #C9D6E2; border-radius: var(--r-pill); padding: 6px 11px; font: 700 12px/1 var(--font-body); background: var(--surface-raised); color: var(--text-primary); }
+  .skChip[aria-pressed="true"] { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+  .skFilters .aSelect { width: 100%; }
+  .skCount { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; margin-bottom: var(--s-3); font-size: var(--t-small); }
+  .skCount p { margin: 0; color: var(--text-muted); }
+  .skCount b { color: var(--text-primary); }
+  .skCount .aSelect { margin-left: auto; }
+  .skRow { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: var(--s-4); padding: var(--s-4) var(--s-5); border-bottom: 1px solid var(--border-subtle); align-items: start; }
+  .skRow:last-child { border-bottom: 0; }
+  .skRow img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+  .skRow h3 { margin: 0; font: 700 1.0625rem/1.3 var(--font-body); }
+  .skRow h3 a { color: var(--text-primary); text-decoration: none; }
+  .skRow p { margin: 2px 0 8px; font-size: var(--t-small); color: var(--text-muted); }
+  .skRow .skMeta { display: flex; gap: var(--s-2); flex-wrap: wrap; align-items: center; margin-top: 6px; font-size: var(--t-label); color: var(--text-muted); }
+  .skRow .skActs { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .skMark { background: var(--warn-bg); color: var(--warn-ink); border-radius: 3px; padding: 0 2px; }
+  @media (max-width: 860px) {
+    .skSearch, .skLayout { grid-template-columns: 1fr; }
+    .skRow { grid-template-columns: 44px minmax(0, 1fr); }
+    .skRow img { width: 44px; height: 44px; }
+    .skRow .skActs { grid-column: 2; flex-direction: row; align-items: center; }
+  }
+</style>
+</head>
+<body class="adm" data-page="seekers">
+<main id="aPage">
+  <div class="aHead">
+    <div>
+      <h1>Job seekers</h1>
+      <p>Everyone with an account, including people looking quietly.</p>
+    </div>
+    <div class="aHead__acts">
+      <a class="btn btn--secondary btn--sm" href="#">Export list</a>
+    </div>
+  </div>
+
+  <form class="skSearch" role="search" onsubmit="return false">
+    <label><span>Search objectives and bio</span><input type="search" value="show grooming, braiding" aria-label="Search objectives and bio"></label>
+    <label><span>Location</span><input type="search" placeholder="City or state, e.g. Ocala or FL" aria-label="Location"></label>
+    <button class="btn btn--primary" type="submit">Search</button>
+  </form>
+
+  <div class="skLayout">
+    <aside class="aCard skFilters" aria-label="Filters">
+      <h3>Role family</h3>
+      <label><input type="checkbox" checked> Grooms &amp; Barn Staff <em>412</em></label>
+      <label><input type="checkbox"> Riders / Trainers / Instructors <em>288</em></label>
+      <label><input type="checkbox"> Sales / Customer Service / Marketing <em>61</em></label>
+      <label><input type="checkbox"> Show Facility Staff <em>94</em></label>
+      <label><input type="checkbox"> Veterinary Staff <em>57</em></label>
+      <label><input type="checkbox"> Executive <em>23</em></label>
+
+      <h3>Discipline</h3>
+      <label><input type="checkbox" checked> Hunter / Jumper <em>301</em></label>
+      <label><input type="checkbox"> Dressage <em>176</em></label>
+      <label><input type="checkbox"> Eventing <em>142</em></label>
+      <label><input type="checkbox"> Racing / Thoroughbred <em>98</em></label>
+      <label><input type="checkbox"> Western <em>87</em></label>
+
+      <h3>Skill tags</h3>
+      <div class="skChips">
+        <button type="button" class="skChip" aria-pressed="true">Braiding</button>
+        <button type="button" class="skChip" aria-pressed="false">Clipping</button>
+        <button type="button" class="skChip" aria-pressed="false">Wrapping</button>
+        <button type="button" class="skChip" aria-pressed="false">Show Grooming</button>
+        <button type="button" class="skChip" aria-pressed="false">Lunging</button>
+        <button type="button" class="skChip" aria-pressed="false">Trailer Driving</button>
+        <button type="button" class="skChip" aria-pressed="false">Barn Management</button>
+        <button type="button" class="skChip" aria-pressed="false">Foaling</button>
+      </div>
+
+      <h3>Availability</h3>
+      <label><input type="checkbox"> Available now <em>203</em></label>
+      <label><input type="checkbox"> Within 30 days <em>164</em></label>
+      <label><input type="checkbox"> In 60 days or more <em>91</em></label>
+
+      <h3>Housing</h3>
+      <label><input type="checkbox"> Needs housing <em>238</em></label>
+
+      <h3>Visibility</h3>
+      <label><input type="checkbox" checked> Open to everyone <em>389</em></label>
+      <label><input type="checkbox" checked> Looking quietly <em>69</em></label>
+
+      <h3>Account</h3>
+      <label><input type="checkbox"> Email confirmed <em>431</em></label>
+      <label><input type="checkbox"> Resume complete <em>377</em></label>
+      <label><input type="checkbox"> Deactivated <em>12</em></label>
+
+      <h3>Created</h3>
+      <select class="aSelect" aria-label="Created"><option>Any time</option><option>Last 7 days</option><option>Last 30 days</option><option>Last 90 days</option></select>
+      <h3>Last login</h3>
+      <select class="aSelect" aria-label="Last login"><option>Any time</option><option>Within 30 days</option><option>Not in 90 days</option></select>
+    </aside>
+
+    <div>
+      <div class="skCount">
+        <p><b>58 job seekers</b> · includes people looking quietly, who never appear in the employer search</p>
+        <select class="aSelect" aria-label="Sort"><option>Best match</option><option>Newest first</option><option>Last login</option><option>Name A–Z</option></select>
+      </div>
+      <section class="aCard">
+        <article class="skRow">
+          <img src="../img/people/dana.jpg" alt="">
+          <div>
+            <h3><a href="seeker.html">Dana Whitfield</a></h3>
+            <p>Barn Manager · Ocala, FL · available within 30 days</p>
+            <span class="aTag">Barn Management</span><span class="aTag">Braiding</span><span class="aTag">Show Grooming</span><span class="aTag aTag--admin">Admin: great with young horses</span>
+            <div class="skMeta"><span class="aPill aPill--ok">Open to everyone</span><span>Created 14 Sep · last login today · bio matches <span class="skMark">show grooming</span></span></div>
+          </div>
+          <div class="skActs"><a class="btn btn--primary btn--sm" href="seeker.html">View</a><a class="btn btn--quiet btn--sm" href="#">Resume</a></div>
+        </article>
+        <article class="skRow">
+          <img src="../img/people/marcus.jpg" alt="">
+          <div>
+            <h3><a href="seeker.html">Marcus Bell</a></h3>
+            <p>Show Groom · Wellington, FL · available now</p>
+            <span class="aTag">Braiding</span><span class="aTag">Clipping</span><span class="aTag">Trailer Driving</span>
+            <div class="skMeta"><span class="aPill aPill--info">Looking quietly</span><span>Created today · last login today · objectives match <span class="skMark">braiding</span></span></div>
+          </div>
+          <div class="skActs"><a class="btn btn--primary btn--sm" href="seeker.html">View</a><a class="btn btn--quiet btn--sm" href="#">Resume</a></div>
+        </article>
+        <article class="skRow">
+          <img src="../img/people/hallie.jpg" alt="">
+          <div>
+            <h3><a href="seeker.html">Hallie Brooks</a></h3>
+            <p>Groom &amp; Exercise Rider · Lexington, KY · available now</p>
+            <span class="aTag">Braiding</span><span class="aTag">Wrapping</span><span class="aTag">Lunging</span>
+            <div class="skMeta"><span class="aPill aPill--ok">Open to everyone</span>Created 2 Oct · last login 30 Oct</div>
+          </div>
+          <div class="skActs"><a class="btn btn--primary btn--sm" href="seeker.html">View</a><a class="btn btn--quiet btn--sm" href="#">Resume</a></div>
+        </article>
+        <article class="skRow">
+          <img src="../img/people/imogen.jpg" alt="">
+          <div>
+            <h3><a href="seeker.html">Imogen Hart</a></h3>
+            <p>Working Student · Aiken, SC · available in 60 days or more</p>
+            <span class="aTag">Braiding</span><span class="aTag">Turnout</span>
+            <div class="skMeta"><span class="aPill aPill--ok">Open to everyone</span><span class="aPill aPill--warn">No resume yet</span>Created yesterday · last login yesterday</div>
+          </div>
+          <div class="skActs"><a class="btn btn--primary btn--sm" href="seeker.html">View</a></div>
+        </article>
+        <article class="skRow">
+          <img src="../img/people/chris.jpg" alt="">
+          <div>
+            <h3><a href="seeker.html">Chris Navarro</a></h3>
+            <p>Head Groom · Wellington, FL · available within 30 days</p>
+            <span class="aTag">Show Grooming</span><span class="aTag">Braiding</span><span class="aTag">Barn Management</span>
+            <div class="skMeta"><span class="aPill aPill--info">Looking quietly</span>Created 9 Aug · last login 3 Sep</div>
+          </div>
+          <div class="skActs"><a class="btn btn--primary btn--sm" href="seeker.html">View</a><a class="btn btn--quiet btn--sm" href="#">Resume</a></div>
+        </article>
+        <div class="aFoot">Showing 1–5 of 58<div class="aPager"><span aria-current="page">1</span><span>2</span><span>3</span><span>…</span><span>12</span></div></div>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

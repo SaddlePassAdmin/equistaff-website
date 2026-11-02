@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.btn > svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.btn { white-space: nowrap; }
+
+.bThumb { width: 64px !important; height: 44px !important; border-radius: var(--r-sm) !important; }
+.bWhen { white-space: nowrap; }
+</style>
+</head>
+<body class="adm" data-page="blog">
+<main id="aPage">
+  <div class="aHead">
+    <div>
+      <h1>Blog</h1>
+      <p>Posts go live on the site's Advice page as soon as you publish.</p>
+    </div>
+    <div class="aHead__acts"><a class="btn btn--primary" href="blog-post.html" data-i="plus">New post</a></div>
+  </div>
+  <section class="aCard">
+    <div class="aBar">
+      <button class="aFilter" aria-pressed="true">All <em>5</em></button>
+      <button class="aFilter" aria-pressed="false">Published <em>3</em></button>
+      <button class="aFilter" aria-pressed="false">Drafts <em>2</em></button>
+    </div>
+    <div class="aTableWrap">
+    <table class="aTable">
+      <thead><tr><th>Post</th><th>Status</th><th>Author</th><th>Updated</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="aWho"><img class="bThumb" src="../img/aisle.jpg" alt=""><div><a href="blog-post.html"><b>What a barn manager actually does all day</b></a></div></div></td>
+          <td><span class="aPill aPill--ok">Published</span></td>
+          <td class="muted">Recruiting Team</td>
+          <td class="muted bWhen">28 Oct</td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="blog-post.html">Edit</a><a class="btn btn--quiet btn--sm" href="#">View on site</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><img class="bThumb" src="../img/groom.jpg" alt=""><div><a href="blog-post.html"><b>Working student or groom? How to choose your first job</b></a></div></div></td>
+          <td><span class="aPill aPill--ok">Published</span></td>
+          <td class="muted">Recruiting Team</td>
+          <td class="muted bWhen">14 Oct</td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="blog-post.html">Edit</a><a class="btn btn--quiet btn--sm" href="#">View on site</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><img class="bThumb" src="../img/barn-manager.jpg" alt=""><div><a href="blog-post.html"><b>Housing in a job offer: the questions to ask</b></a></div></div></td>
+          <td><span class="aPill aPill--warn">Draft</span></td>
+          <td class="muted">Recruiting Team</td>
+          <td class="muted bWhen">Today</td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="blog-post.html">Edit</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><img class="bThumb" src="../img/trainer.jpg" alt=""><div><a href="blog-post.html"><b>Hiring for winter circuit season: start in October</b></a></div></div></td>
+          <td><span class="aPill aPill--ok">Published</span></td>
+          <td class="muted">Recruiting Team</td>
+          <td class="muted bWhen">2 Oct</td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="blog-post.html">Edit</a><a class="btn btn--quiet btn--sm" href="#">View on site</a></div></td>
+        </tr>
+        <tr>
+          <td><div class="aWho"><img class="bThumb" src="../img/tack.jpg" alt=""><div><a href="blog-post.html"><b>Five things that make an equine resume stand out</b></a></div></div></td>
+          <td><span class="aPill aPill--warn">Draft</span></td>
+          <td class="muted">Recruiting Team</td>
+          <td class="muted bWhen">30 Oct</td>
+          <td><div class="aRowActs"><a class="btn btn--secondary btn--sm" href="blog-post.html">Edit</a></div></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>
