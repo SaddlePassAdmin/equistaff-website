@@ -7,7 +7,7 @@ before building it.
 | | |
 |---|---|
 | Live prototype | https://saddlepassadmin.github.io/equistaff-website/start.html |
-| Every screen, in order (Figma) | EquiStaff Website file, page **✅ Dev Ready** — 9 sections A–I, a one-page spec (PRD) per section, 58 screens incl. 12 live chat states |
+| Every screen, in order (Figma) | [**✅ Dev Ready — all 60 screens on one sheet**](https://www.figma.com/design/cC1Nx8Ox10XfkcWlgviV9C/Equistaff-Website?node-id=580-7) (opens zoomed to fit). 9 sections A–I, a one-page spec (PRD) per section, incl. 12 live chat states |
 | Screen index | https://claude.ai/code/artifact/80356d71-ddbd-434a-b568-768d46a23612 |
 | Production repo | `SaddlePassAdmin/EquiStaff-PROD` (Next.js + FastAPI + Postgres) |
 | Engineering | Uraiz Ali |
