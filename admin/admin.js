@@ -80,7 +80,7 @@
       '<div class="aMain">' +
         '<header class="aTop">' +
           '<label class="aFind">' + icon('search') + '<input type="search" placeholder="Search people, companies, jobs or emails" aria-label="Search the admin"></label>' +
-          '<div class="aTop__right"><a class="aTop__link" href="#">' + icon('ext') + 'View site</a>' +
+          '<div class="aTop__right"><a class="aTop__link" href="../start.html">' + icon('ext') + 'View site</a>' +
           '<a class="aTop__link" href="signin.html">' + icon('out') + 'Sign out</a></div>' +
         '</header>' +
       '</div>';
@@ -92,5 +92,82 @@
       el.insertAdjacentHTML('afterbegin', icon(el.getAttribute('data-i')));
     });
   }
+
+  /* ---------- Click-through for the live prototype ----------
+     The screens are static designs; this makes them clickable. Links that
+     already point somewhere keep working. Placeholder links ("#") and plain
+     buttons are routed by their label: to another admin screen, to the
+     matching EquiStaff site page (so admin and site read as one product),
+     or to a short confirmation toast for actions like "Approve". */
+  var GO = [
+    [/^cancel subscription$/i, 'employer-cancel.html'],
+    [/^(change plan|apply a coupon)$/i, 'employer-plan.html'],
+    [/^new coupon$/i, 'coupon-new.html'],
+    [/^reject/i, 'media-reject.html'],
+    [/^replace resume$/i, 'seeker-replace.html'],
+    [/^add candidate$/i, 'search-add.html'],
+    [/^(new search|convert to (a )?direct-hire search)$/i, 'search-new.html'],
+    [/^(new post|write a post)$/i, 'blog-post.html'],
+    [/^sign in$/i, 'dashboard.html'],
+    [/^view site$/i, '../start.html'],
+    [/^(see their public profile|what employers see)$/i, '../seeker-profile.html?id=c-dana'],
+    [/^post a job for a client$/i, '../post-job.html'],
+    [/^view on site$/i, null],
+    [/client'?s view|as the client sees/i, '../candidate.html?id=c-dana']
+  ];
+  var BY_PAGE = { seekers: 'seeker.html', employers: 'employer.html', jobs: 'job.html', searches: 'search.html', leads: 'lead.html', blog: 'blog-post.html' };
+  var SAY = [
+    [/approve all/i, 'All approved. They’re live on the site.'],
+    [/approve/i, 'Approved. It’s live on the site.'],
+    [/password reset/i, 'Password reset email sent.'],
+    [/resend/i, 'Confirmation email sent again.'],
+    [/deactivate/i, 'Account deactivated. Their jobs are hidden.'],
+    [/stripe/i, 'Opens this customer in Stripe.'],
+    [/export/i, 'Exported as a spreadsheet.'],
+    [/resume/i, 'Opens the resume PDF.'],
+    [/^(save|publish|update)/i, 'Saved.'],
+    [/^mark|full service|job board|^closed?$/i, 'Lead updated.'],
+    [/^close$/i, 'Job closed.'],
+    [/^repost$/i, 'Job reposted.'],
+    [/end now/i, 'Coupon ended.'],
+    [/follow up/i, 'Opens an email to them.']
+  ];
+  function toast(msg) {
+    var old = document.querySelector('.esFlash'); if (old) old.remove();
+    var t = document.createElement('div'); t.className = 'esFlash'; t.setAttribute('role', 'status');
+    t.innerHTML = icon('check') + '<span>' + msg + '</span>';
+    document.body.appendChild(t);
+    setTimeout(function () { t.classList.add('esFlash--out'); setTimeout(function () { t.remove(); }, 600); }, 2200);
+  }
+  document.addEventListener('click', function (e) {
+    var sw = e.target.closest('.aSwitch i, [role="switch"]');
+    if (sw) { var on = !sw.classList.contains('on'); sw.classList.toggle('on', on); sw.setAttribute('aria-checked', on); return; }
+    var pill = e.target.closest('.aFilter');
+    if (pill && !pill.getAttribute('href')) {
+      [].forEach.call(pill.parentNode.querySelectorAll('.aFilter'), function (b) { b.setAttribute('aria-pressed', b === pill); });
+      return;
+    }
+    var el = e.target.closest('a, button');
+    if (!el || el.closest('form[data-real]')) return;
+    var href = el.getAttribute('href');
+    if (href && href !== '#') return;               // real link: let it go
+    if (el.type === 'submit' && !/sign in/i.test(el.textContent)) e.preventDefault();
+    if (el.closest('.aTabs, [role="tablist"]')) { e.preventDefault(); [].forEach.call(el.parentNode.parentNode.querySelectorAll('a, button'), function (x) { x.removeAttribute('aria-current'); x.setAttribute('aria-selected', 'false'); }); el.setAttribute('aria-current', 'page'); el.setAttribute('aria-selected', 'true'); return; }
+    var label = (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+\d+$/, '');
+    for (var i = 0; i < GO.length; i++) if (GO[i][0].test(label)) {
+      e.preventDefault();
+      var to = GO[i][1];
+      if (to === null) to = document.body.getAttribute('data-page') === 'jobs' ? '../job-detail.html' : '../blog-post.html';
+      location.href = to; return;
+    }
+    // A name or "View/Open/Edit/Review" inside a list row opens that record.
+    if (el.closest('tr, li, .aRow, article') && /^(view|open|edit|review|open lead|open search|check)?$/i.test(label) || (el.tagName === 'A' && el.closest('.aWho'))) {
+      var dest = BY_PAGE[document.body.getAttribute('data-page')];
+      if (/check/i.test(label)) dest = 'media.html';
+      if (dest && location.pathname.indexOf(dest) < 0) { e.preventDefault(); location.href = dest; return; }
+    }
+    for (var j = 0; j < SAY.length; j++) if (SAY[j][0].test(label)) { e.preventDefault(); toast(SAY[j][1]); return; }
+    if (href === '#') e.preventDefault();
+  });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
