@@ -70,6 +70,9 @@
   .dhLink + .dhLink { margin-left:0; }
   .dhLinks { display:flex; flex-wrap:wrap; gap:var(--s-2); }
 }
+
+/* Build-status tags are for reviewers only (?review=1), never the client view. */
+html:not(.es-review) .dhTag { display: none; }
 </style>
 </head>
 <body class="portal">
@@ -198,7 +201,9 @@
 <script src="src/state.js"></script>
 <script src="src/nav.js"></script>
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>if (window.ES_REVIEW) document.documentElement.classList.add('es-review');</script>
+<script>REVISED('1 Nov', [
+  "The 'Designed in the admin portal (next)' tags now show only in review mode, so clients never see build notes.",
   "New screen: how a direct-hire search works, answering Kaitlin's question — how do these clients exist, and how does she share information with them when not every lead comes through the site?",
   "Six steps. Each shows both sides: what the recruiting team does in the admin portal, and what the client sees. Client steps link to the real screens.",
   "Clients can be added from a site inquiry or by hand (phone, email, referral) and get an email invite to set a password.",

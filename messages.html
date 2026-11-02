@@ -116,7 +116,7 @@ if (AS === 'employer') document.getElementById('nav').setAttribute('data-nav', '
 </main>
 <script>
 var T = AS === 'employer' ? [
- { id:'e1', kind:'team', who:'Recruiting Team', sub:'Kaitlin Veltkamp · Barn Manager search', img:'img/kaitlin.jpg', unread:true,
+ { id:'e1', kind:'team', who:'Recruiting Team', sub:'EquiStaff · Barn Manager search', img:'img/kaitlin.jpg', unread:true,
    msgs:[['day','Last week'],
          ['them','Thanks for the brief on the barn manager role. I have a few people in mind already and I am calling references this week.','Tue 10:04'],
          ['me','Great. Housing is the one-bed over the office, if that helps anyone decide.','Tue 11:20'],
@@ -130,7 +130,7 @@ var T = AS === 'employer' ? [
  { id:'e3', kind:'team', who:'EquiStaff', sub:'Automatic · job post', img:'', unread:false,
    msgs:[['them','Your Part-time Groom post has had 203 views and 2 applicants. Want Kaitlin to take a look at the wording?','Wed 07:00']]}
 ] : [
- { id:'t1', kind:'team', who:'Recruiting Team', sub:'Kaitlin Veltkamp · Owner, EquiStaff', img:'img/kaitlin.jpg', unread:true,
+ { id:'t1', kind:'team', who:'Recruiting Team', sub:'EquiStaff recruiting', img:'img/kaitlin.jpg', unread:true,
    msgs:[['day','Last week'],
          ['them','Hi Dana, thanks for applying for the barn manager role. I have your resume and I am calling your references this week.','Wed 10:15'],
          ['me','Thank you. Best time to reach my last manager is after 2pm.','Wed 12:40'],
@@ -207,7 +207,8 @@ function markAllRead() {
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "Recruiting Team threads no longer carry Kaitlin's name underneath; they read EquiStaff.",
   "The \"Kaitlin\" filter and thread are now \"Recruiting Team\".",
   "Threads scroll like normal messaging: newest at the bottom, older messages above, and it opens on the latest.",
   "Employers get their own inbox (from the employer pages, or ?as=employer): the employer nav, the recruiting team about their search, and candidates in place of employers. Job seekers see the same inbox as before.",
