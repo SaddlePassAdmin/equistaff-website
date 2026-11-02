@@ -27,7 +27,7 @@
 .goals li { margin-bottom:5px; }
 </style>
 </head>
-<body>
+<body data-no-launcher>
 <a class="skip" href="#main">Skip to content</a>
 <div id="nav" data-nav="public"></div>
 
@@ -303,6 +303,7 @@
 <script src="src/nav.js"></script>
 <script src="src/revised.js"></script>
 <script>REVISED('31 Oct', [
+  "The floating Ask Evie button is off on this page — you are already on Evie's page, and it was sitting on top of the footer's own Ask Evie link. The specimen in the page stays.",
   "Before suggesting jobs, Evie now asks two quick questions: what kind of role (your role families) and where they want to work or whether they would move. She only shows roles that fit those answers, and if none do she says so and points to the job board.",
   "Typing “I need a job”, “I’m not hiring” or “No, I need a job” now goes to the job-seeker path, even part-way through the hiring questions. “Account manager jobs” is treated as a job search, not account help.",
   "“Post a job”, then “Pricing first”, now shows the price list. The cause: once a conversation was long enough to scroll, the price card squashed down to a thin line, so the prices were technically there but invisible. Fixed, and the chat now scrolls to the prices, with the next step (start a posting or request talent) underneath.",
