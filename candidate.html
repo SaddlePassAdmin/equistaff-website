@@ -139,6 +139,15 @@
   border-radius:var(--r-md); background:var(--err-bg); color:var(--err-ink); font:700 var(--t-small)/1.35 var(--font-body); }
 .attn svg { flex:0 0 auto; }
 .attn--ok { background:rgba(255,255,255,.08); color:var(--baby-200); font-weight:400; }
+/* 1 Nov — same days-in-status pill as the shortlist, and interview availability. */
+.pill--late { background:var(--err-bg); color:var(--err-ink); display:inline-flex; align-items:center; gap:6px; }
+.avBox { margin-top:var(--s-5); padding-top:var(--s-5); border-top:1px solid var(--portal-line); }
+.avBox p { margin:0 0 var(--s-3); font-size:var(--t-small); color:var(--baby-200); }
+.avBox p b { color:var(--white); }
+.avBox .btn { width:100%; color:var(--white); }
+.avBox ul { list-style:none; margin:0 0 var(--s-3); padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+.avBox li { background:rgba(255,255,255,.08); border:1px solid var(--portal-line); border-radius:var(--r-pill); padding:5px 10px; font-size:var(--t-label); color:var(--white); }
+.avBox li span { color:var(--baby-200); }
 
 .dq { margin:0 0 var(--s-2); color:var(--white); font-weight:700; font-size:var(--t-small); }
 .dq small { color:var(--baby-200); font-weight:400; }
@@ -321,6 +330,7 @@
           </div>
           <p class="ddone" id="ddone" hidden></p>
           <p class="dpriv" id="dpriv">Goes to EquiStaff only. The candidate never sees it.</p>
+          <div class="avBox" id="avBox"></div>
         </div>
       </aside>
     </div>
@@ -383,9 +393,11 @@ function employerLine(x){
 }
 
 function paintHead(){
-  var st = STAGE[C.stage] || STAGE.Presented;
+  // Same pill as the shortlist: status and days in it, red after three.
+  var st = STAGE[C.stage] || STAGE.Presented, d = ES.daysInStage(C);
   var s = document.getElementById('cStage');
-  s.textContent = st[0]; s.className = 'pill ' + st[1];
+  if (d.late) { s.className = 'pill pill--late'; s.innerHTML = I.warn.replace(/17/g, '13') + '<span>' + esc(d.text) + '</span>'; }
+  else { s.className = 'pill ' + st[1]; s.textContent = d.text; }
 }
 
 function paintContact(){
@@ -404,17 +416,20 @@ function paintContact(){
 }
 
 function paintActivity(){
-  var a = C.activity || {}, idle = ES.idle(C);
-  var rows = [['presented', 'Presented'], ['interview', 'Interview'], ['interview2', '2nd interview'], ['offer', 'Offer']];
+  // 1 Nov — reads ES.daysInStage, the same count the shortlist pills use.
+  var a = C.activity || {}, d = ES.daysInStage(C);
+  var idle = d.days == null ? null : { step: d.step, flag: d.late, text: d.days === 0 ? d.label + ' today' : d.long.charAt(0).toUpperCase() + d.long.slice(1) };
+  if (idle && d.late) idle.text = d.text;
+  var rows = [['presented', 'Presented'], ['reviewed', 'Reviewed'], ['interview', 'Interview'], ['interview2', '2nd interview'], ['offer', 'Offer']];
   document.getElementById('cAct').innerHTML = rows.map(function(r){
-    var late = idle && idle.flag && (idle.step === r[0] || (idle.step === 'reviewed' && r[0] === 'presented'));
+    var late = idle && idle.flag && idle.step === r[0];
     var cls = late ? 'is-late' : (a[r[0]] ? 'is-done' : '');
     return '<li class="' + cls + '"><span class="act__dot" aria-hidden="true"></span><span class="act__l">' + r[1] + '</span>' +
       '<span class="act__d">' + (a[r[0]] ? fmt(a[r[0]]) : 'Not yet') + '</span></li>';
   }).join('');
   var at = document.getElementById('cAttn');
   if (idle && idle.flag) {
-    at.className = 'attn'; at.innerHTML = I.warn + '<span>' + idle.text + '. Time for a next step.</span>'; at.hidden = false;
+    at.className = 'attn'; at.innerHTML = I.warn + '<span>' + esc(idle.text) + '. Needs a decision.</span>'; at.hidden = false;
   } else if (C.stage === 'Passed') {
     at.className = 'attn attn--ok'; at.innerHTML = '<span>You passed on ' + esc(first(C.name)) + '. EquiStaff has your feedback.</span>'; at.hidden = false;
   } else if (idle) {
@@ -475,7 +490,7 @@ function render(){
   document.getElementById('dpriv').textContent = 'Goes to EquiStaff only. ' + first(C.name) + ' never sees it.';
   var prev = ES.ratings()[C.id];
   if (prev && prev.stars) rate(prev.stars, true);
-  paintActivity(); gateActions();
+  paintActivity(); gateActions(); paintAvail();
 
   if (C.note) { document.getElementById('pnoteText').value = C.note; markHasNote(); }
   document.getElementById('page').hidden = false;
@@ -517,7 +532,34 @@ function decide(action){
   t.value = ''; gate();
   var d = document.getElementById('ddone');
   d.innerHTML = '<span class="pill pill--shortlist">' + said + ' &middot; sent to EquiStaff</span>'; d.hidden = false;
-  paintHead(); paintActivity(); gateActions();
+  paintHead(); paintActivity(); gateActions(); paintAvail(action === 'interview');
+}
+
+/* ---------- interview availability (1 Nov) ----------
+   On the Move-to-interview path: tell the recruiting team when you could
+   interview. Saved on the search, so it is the same set the shortlist shows. */
+function openAvail(){
+  ES.openAvailability({ candidateId: C.id,
+    sub: 'Interviewing ' + first(C.name) + ' for ' + ES.search().title + '. Pick every window that could work; the recruiting team lines up interviews around them.',
+    onSaved: function(){ paintAvail(); } });
+}
+function paintAvail(justMoved){
+  var box = document.getElementById('avBox');
+  if (C.stage === 'Passed' || C.stage === 'Hired') { box.hidden = true; return; }
+  var av = ES.availability(), rows = ES.availRows(av);
+  box.hidden = false;
+  if (!av) {
+    box.innerHTML = '<p>' + (justMoved ? '<b>Next: when could you interview ' + esc(first(C.name)) + '?</b> ' : '') +
+      'Send the recruiting team the windows that work and they&rsquo;ll line up the interview.</p>' +
+      '<button class="btn ' + (justMoved ? 'btn--primary' : 'btn--secondary') + '" type="button" onclick="openAvail()">Provide interview availability</button>';
+  } else {
+    var f = ES.availFormats(av);
+    box.innerHTML = '<p><b>Your interview availability</b> &middot; sent to EquiStaff</p>' +
+      '<ul>' + rows.map(function(r){ return '<li>' + esc(r[0]) + ' <span>' + esc(r[1]) + '</span></li>'; }).join('') + '</ul>' +
+      (f.length ? '<p>' + esc(f.join(' · ')) + '</p>' : '') +
+      '<button class="btn btn--secondary" type="button" onclick="openAvail()" aria-label="Edit your interview availability">Edit availability</button>';
+  }
+  if (justMoved) { var b = box.querySelector('.btn'); if (b) b.focus(); }
 }
 
 /* ---------- resume ---------- */
@@ -569,7 +611,10 @@ if (C) render(); else document.getElementById('missing').hidden = false;
 </script>
 
 <script src="src/revised.js"></script>
-<script>REVISED('31 Oct', [
+<script>REVISED('1 Nov', [
+  "The status pill next to the name now shows how long they've been in it — “Reviewed · 7 days” — worked out exactly the way the shortlist does, so the two pages always agree. Over three days it turns red with a warning mark.",
+  "Activity now lists Reviewed too, and the red note reads “Needs a decision” instead of “Time for a next step”.",
+  "New “Provide interview availability” under Your decision. Moving someone to interview prompts it straight away. It opens the same sheet as the shortlist page: pick morning, afternoon or evening across the next two working weeks, how you'd like to meet, and an optional note. Once sent, what you picked shows here with Edit availability.",
   "Reworked from Kaitlin's review. This is now what a direct-hire client sees for any candidate EquiStaff presents — each person on the shortlist opens their own page.",
   "The resume comes first: Open resume and Download sit directly under the name, as the loudest thing on the page.",
   "Then EquiStaff feedback (Kaitlin's take), experience, skills — and reference checks at the very bottom.",
