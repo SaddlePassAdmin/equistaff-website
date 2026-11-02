@@ -1,0 +1,34 @@
+/* Facility / Business toggle and per-discipline skill levels.
+   Namespaced .rk- (role kind) and .lvl-. Semantic tokens only, so it
+   works on light and deep pages alike. */
+
+/* segmented control */
+.rk { display:grid; grid-template-columns:1fr 1fr; gap:4px; padding:4px; margin:0 0 var(--s-6);
+  background:var(--surface-sunken); border:1px solid var(--border-subtle); border-radius:var(--r-md); }
+.rk__opt { position:relative; display:flex; cursor:pointer; border-radius:calc(var(--r-md) - 3px); min-height:56px; }
+.rk__opt input { position:absolute; opacity:0; width:1px; height:1px; }
+.rk__opt > span { flex:1; display:flex; flex-direction:column; justify-content:center; gap:3px;
+  padding:var(--s-3) var(--s-4); border-radius:inherit; border:1.5px solid transparent;
+  transition:background .15s var(--ease), border-color .15s var(--ease); }
+.rk__opt b { font-size:var(--t-small); color:var(--text-primary); line-height:1.25; }
+.rk__opt small { font-size:var(--t-label); color:var(--text-muted); line-height:1.3; }
+.rk__opt:hover > span { border-color:var(--border-strong); }
+.rk__opt input:checked + span { background:var(--action-primary); border-color:var(--action-primary); }
+.rk__opt input:checked + span b, .rk__opt input:checked + span small { color:var(--action-ink); }
+.rk__opt input:focus-visible + span { outline:3px solid var(--baby-300); outline-offset:2px; }
+@media (max-width:520px) { .rk__opt small { display:none; } .rk__opt b { font-size:var(--t-label); } }
+
+/* skill level for each discipline / industry */
+.lvls { display:grid; gap:var(--s-3); margin-top:var(--s-5); }
+.lvl { border:1.5px solid var(--border-subtle); border-radius:var(--r-md); padding:var(--s-4); margin:0; min-width:0; }
+.lvl legend { padding:0 var(--s-2); margin-left:calc(var(--s-2) * -1); font-weight:900; font-size:var(--t-small); color:var(--text-primary); }
+.lvl__opts { display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-top:var(--s-2); }
+.lvl__opts label { position:relative; display:flex; cursor:pointer; }
+.lvl__opts input { position:absolute; opacity:0; width:1px; height:1px; }
+.lvl__opts span { flex:1; display:flex; align-items:center; justify-content:center; text-align:center; min-height:44px;
+  padding:6px 4px; border:1.5px solid var(--border-strong); border-radius:var(--r-sm);
+  font:700 var(--t-label)/1.15 var(--font-body); color:var(--text-primary); }
+.lvl__opts label:hover span { border-color:var(--action-primary); }
+.lvl__opts input:checked + span { background:var(--action-primary); border-color:var(--action-primary); color:var(--action-ink); }
+.lvl__opts input:focus-visible + span { outline:3px solid var(--baby-300); outline-offset:2px; }
+@media (max-width:520px) { .lvl__opts { grid-template-columns:1fr 1fr; } }
