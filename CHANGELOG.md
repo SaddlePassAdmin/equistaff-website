@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Advertising package reads $500 everywhere (home, Post a job, Evie's price card); pricing no longer says seekers can apply without an account.
 - V3 leftovers from Kaitlin's doc: sign-up asks for a phone number (required); seekers are no longer asked for references (verify page, Evie's profile nudge); landing-b no longer promises four candidates; "farm" not "yard" in Evie's sample jobs.
 - Brittany's notes: the footer horse moves to its own space under the brand column so nothing covers it; dropdowns get a chevron set 16px in from the edge (light and dark); the footer credit line wraps on phones instead of running off-screen.
 - Final logo from Brittany (Figma, 30 Oct): "staff" set in Larken, upright, replacing the italic. Light and dark versions; every page picks it up automatically.

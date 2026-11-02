@@ -78,6 +78,7 @@
     ['Job board · 3 months', '3 job posts · unlimited searches', '$140'],
     ['Job board · 1 year', '5 job posts · unlimited searches', '$460']
   ];
+  var ADVERTISING = ['Advertising package', 'Kaitlin writes the job description and advertises it', '$500'];
   // 31 Oct: no money up front (Kaitlin doesn't always collect it), and the
   // percentage itself is never stated (R3).
   var DIRECT_HIRE = 'Direct hire is quoted per role, as a percentage of the first-year salary, due on your new hire’s first day.';
@@ -569,8 +570,8 @@
      show the prices, then the next step for where they came from. */
   function pricing(from) {
     var fromPost = from === 'post';
-    bot('Here’s what the job board costs:');
-    card('<div class="priceCard">' + PRICES.map(function (p) { return '<div class="priceRow"><div><b>' + p[0] + '</b><span>' + p[1] + '</span></div><span class="liveFig">' + p[2] + '</span></div>'; }).join('') +
+    bot('Here’s what it costs:');
+    card('<div class="priceCard">' + PRICES.concat([ADVERTISING]).map(function (p) { return '<div class="priceRow"><div><b>' + p[0] + '</b><span>' + p[1] + '</span></div><span class="liveFig">' + p[2] + '</span></div>'; }).join('') +
       '<div class="priceRow priceRow--dh"><div><b>Direct hire recruiting</b><span>' + DIRECT_HIRE + '</span></div></div></div>');
     var chips = fromPost
       ? [['Start a posting', function () { location.href = 'post-job.html'; }], ['Request talent instead', requestTalent], ['See full pricing', function () { location.href = 'pricing.html'; }]]
