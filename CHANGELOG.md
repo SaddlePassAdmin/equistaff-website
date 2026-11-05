@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Kaitlin's V2 review round logged (3 Nov, 60 comment threads on Figma Dev Ready: 49 from Kaitlin, 10 from Brittany). Triaged and mapped to the exact screen each pin sits on. 9 screens carry a clean approval and are badged DEV READY in Figma; 7 more have an approval alongside an open request; 16 have open requests only; 28 drew no comment either way. Also restored A2, A3 and A4 (the two alternate landings and the prototype menu), which had been lost from the Figma page during a layout rebuild — all 60 screens are present again.
 - HANDOFF.md: admin row points at the admin design prototype (`admin/`, #55), still design in progress.
 - Admin V1 design prototype at admin/ (light theme, 27 screens, fake data). Clickable: buttons route to the other admin screens and to the matching EquiStaff pages. Not linked from start.html until Kaitlin's Friday review.
 - HANDOFF.md: V1 build notes from Kaitlin's review (what not to build yet, plain-text interview availability, state filter, sign-up and settings changes, admin review Friday); four open decisions resolved.
