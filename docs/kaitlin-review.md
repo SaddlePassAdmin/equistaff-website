@@ -11,6 +11,9 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 
 ---
 
+### I · Trust, story and the small print — new 5 Nov
+- **Open** · _Kaitlin_ — Is it possible to get all of the current copywriting for the full site pulled into a document for review & revision?? Not time sensitive, but I've got to start working on this! _(Replied in Figma: yes, screen by screen in Figma order, flagging placeholder vs final.)_
+
 ### 📄 PRD — Evie, the assistant
 - **Approved** · _Kaitlin_ — Overall great! Very few notes - I think user experience is going to tell us a lot here too
 
@@ -138,7 +141,7 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 
 ---
 
-**Where it stands:** 17 approved · 3 shipped · 9 waiting on Kaitlin · 30 open.
+**Where it stands:** 17 approved · 3 shipped · 9 waiting on Kaitlin · 31 open.
 
 Nine screens carry a clean approval and are badged DEV READY in Figma. A screen is only badged when
 every note on it is an acknowledgement — a "Done" sitting beside an open request does not make a
