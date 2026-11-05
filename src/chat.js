@@ -74,7 +74,7 @@
   ];
   var PRICES = [ // pricing.html, Kaitlin's list
     ['Job board · 1 month', '3 job posts · unlimited searches', '$50'],
-    ['Job board · 1 month, featured', '3 job posts · featured bar', '$69.99'],
+    ['Job board · 1 month, featured', '3 job posts · featured bar', '$70'],
     ['Job board · 3 months', '3 job posts · unlimited searches', '$140'],
     ['Job board · 1 year', '5 job posts · unlimited searches', '$460']
   ];

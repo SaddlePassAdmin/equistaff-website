@@ -161,7 +161,7 @@
           </div>
           <div class="form__row">
             <div class="field"><label for="staff" id="lStaff">Staff on the barn</label><input id="staff" oninput="draw()" placeholder="4"></div>
-            <div class="field"><label for="days" id="lDays">Days off</label><input id="days" oninput="draw()" placeholder="Two, rotating"></div>
+            <div class="field"><label for="days" id="lDays">Days off per week</label><input id="days" oninput="draw()" placeholder="Two, rotating"></div>
           </div>
           <div class="field"><label for="housing" id="lHousing">Housing</label>
             <select id="housing" onchange="draw()"></select>
@@ -263,7 +263,7 @@ var MODE = 'facility';
 var KIND = {
   facility: { group:'The barn', prog:'About your program', progPh:'Who you are, the horses and the competition calendar, how long your team tends to stay',
     disc:'Discipline', discPh:'Hunter / jumper', discList:'discs', horses:'Horses', horsesPh:'24',
-    staff:'Staff on the barn', staffPh:'4', days:'Days off', daysPh:'Two, rotating',
+    staff:'Staff on the barn', staffPh:'4', days:'Days off per week', daysPh:'Two, rotating',
     housing:'Housing', housingHint:'Second only to pay. Candidates filter on it.', options: ROLES.HOUSING,
     titles:'roles', titlePh:'Barn Manager' },
   business: { group:'The company', prog:'About your company', progPh:'What you make or sell, who your customers are, how the team is set up',
