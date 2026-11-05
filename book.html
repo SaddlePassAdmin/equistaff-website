@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Request a call | EquiStaff</title>
-<meta name="description" content="An hour with Kaitlin — whether you are hiring or looking.">
+<meta name="description" content="A call with Kaitlin — an hour if you are hiring, 45 minutes if you are looking, 15 for a question.">
 <link rel="canonical" href="https://www.equistaff.com/book.html">
 <meta property="og:type" content="website"><meta property="og:site_name" content="EquiStaff">
 <meta property="og:image" content="https://www.equistaff.com/img/hero.jpg">
@@ -37,6 +37,7 @@
 .bkSelf { margin:var(--s-6) 0 0; padding-top:var(--s-5); border-top:1px solid var(--border-subtle);
   font-size:var(--t-small); color:var(--text-muted); }
 .bkSelf a { font-weight:700; color:var(--blue-700); }
+.bkMin{display:block;margin-top:8px;font-style:normal;font-weight:700;font-size:var(--t-label);letter-spacing:.06em;text-transform:uppercase;color:var(--blue-700)}
 </style>
 </head>
 <body class="has-chat">
@@ -46,13 +47,18 @@
 
   <div id="pick">
     <p class="eyebrow">Request a call</p>
-    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">An hour with Kaitlin</h1>
+    <h1 style="font-size:2rem;margin:var(--s-3) 0 var(--s-3)">A call with Kaitlin</h1>
     <p style="color:var(--text-muted);max-width:54ch;margin:0">She keeps mornings free for new conversations. Which one are you?</p>
     <div class="bkPick">
       <a class="bkCard" href="#" onclick="event.preventDefault();who('employer')">
-        <b>I&rsquo;m hiring</b><span>Talk through a role, what it would take to fill it, and what it would cost.</span></a>
+        <b>I&rsquo;m hiring</b><span>Talk through a role, what it would take to fill it, and what it would cost.
+        <em class="bkMin">An hour</em></span></a>
       <a class="bkCard" href="#" onclick="event.preventDefault();who('seeker')">
-        <b>I&rsquo;m looking for work</b><span>Talk about what you want next and what she has that you will not see on the board.</span></a>
+        <b>I&rsquo;m looking for work</b><span>Talk about what you want next and what she has that you will not see on the board.
+        <em class="bkMin">45 minutes</em></span></a>
+      <a class="bkCard" href="#" onclick="event.preventDefault();who('question')">
+        <b>I just have a question</b><span>Something quick about how EquiStaff works, or what it costs.
+        <em class="bkMin">15 minutes</em></span></a>
     </div>
   </div>
 
@@ -129,10 +135,16 @@ var KIND='';
 function show(id){ ['pick','slots','done'].forEach(function(k){ document.getElementById(k).hidden = (k!==id); }); window.scrollTo({top:0,behavior:'smooth'}); }
 function who(k){
   KIND=k;
-  document.getElementById('slotsKind').textContent = k==='employer' ? 'Hiring' : 'Looking for work';
-  document.getElementById('slotsNote').textContent = k==='employer'
-    ? 'An hour-long call. Bring the role if you have it — she reviews your note, then emails you to book a time.'
-    : 'An hour-long call, nothing to prepare. She reviews your note, then emails you to book a time.';
+  /* Kaitlin, 3 Nov — three call levels, not one length for everyone:
+     employer screen/onboarding 60, candidate screen 45, general question 15. */
+  var KIND_LABEL = { employer:'Hiring', seeker:'Looking for work', question:'A quick question' };
+  var NOTE = {
+    employer: 'An hour. Bring the role if you have it — she reviews your note, then emails you to book a time.',
+    seeker:   'Forty-five minutes, nothing to prepare. She reviews your note, then emails you to book a time.',
+    question: 'Fifteen minutes. She reviews your note, then emails you to book a time.'
+  };
+  document.getElementById('slotsKind').textContent = KIND_LABEL[k] || 'Request a call';
+  document.getElementById('slotsNote').textContent = NOTE[k] || NOTE.question;
   show('slots');
 }
 function done(){
