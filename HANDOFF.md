@@ -45,6 +45,21 @@ When the code and this file disagree, ask design: one of them is out of date.
 
 ---
 
+## 0. Which branch to build from
+
+`main` is your baseline. As of **6 November 2026** it is frozen for site design — the
+screens on it are the ones Kaitlin reviewed and the ones in the Figma Dev Ready page.
+Build from `main` and it will not move under you.
+
+Further site design lands on **`design-2026-11-06`**, not on main. When a batch there is
+settled, Carrington decides when it comes across. Until then, anything on that branch is
+still being argued about and is not yours to build.
+
+The live preview at saddlepassadmin.github.io serves `main`, so what you see there and what
+you build from are the same thing.
+
+---
+
 ## 1. Screens and status
 
 ### The designs
