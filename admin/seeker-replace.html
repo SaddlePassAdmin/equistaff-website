@@ -25,22 +25,22 @@
   .sdP { margin: 0; font-size: var(--t-small); line-height: 1.6; }
   .sdJob + .sdJob { margin-top: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--border-subtle); }
   .sdJob b { display: block; }
-  .sdJob small { display: block; color: var(--text-muted); font: 500 var(--t-label)/1.4 var(--font-mono); margin: 2px 0 6px; }
+  .sdJob small { display: block; color: var(--text-muted); font: 500 var(--t-label)/1.4 var(--font-mono); margin: 2px 0 var(--s-1); }
   .sdAdmin { border: 1px solid var(--warm-ink); background: linear-gradient(var(--warm), var(--warm)) top/100% 4px no-repeat, var(--surface-raised); }
   .sdAdmin .aCard__head { border-bottom-color: rgba(122, 83, 18, .2); }
-  .sdAdmin .aCard__head span { margin-left: auto; display: inline-flex; gap: 6px; align-items: center; font: 700 var(--t-label)/1 var(--font-body); color: var(--warm-ink); }
+  .sdAdmin .aCard__head span { margin-left: auto; display: inline-flex; gap: var(--s-1); align-items: center; font: 700 var(--t-label)/1 var(--font-body); color: var(--warm-ink); }
   .sdAdmin .aCard__head span svg { width: 14px; height: 14px; }
   .sdSalary { font: 700 1.375rem/1.2 var(--font-mono); }
-  .sdTags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-  .sdTags .aTag { margin: 0; display: inline-flex; gap: 6px; align-items: center; }
+  .sdTags { display: flex; flex-wrap: wrap; gap: var(--s-1); align-items: center; }
+  .sdTags .aTag { margin: 0; display: inline-flex; gap: var(--s-1); align-items: center; }
   .sdTags .aTag svg { width: 12px; height: 12px; }
-  .sdAdd { border: 1px dashed var(--warm-ink); color: var(--warm-ink); background: transparent; border-radius: var(--r-sm); padding: 5px 10px; font: 700 12px/1 var(--font-body); display: inline-flex; gap: 6px; align-items: center; }
+  .sdAdd { border: 1px dashed var(--warm-ink); color: var(--warm-ink); background: transparent; border-radius: var(--r-sm); padding: var(--s-1) var(--s-2); font: 700 12px/1 var(--font-body); display: inline-flex; gap: var(--s-1); align-items: center; }
   .sdAdd svg { width: 12px; height: 12px; }
-  .sdNote { width: 100%; min-height: 96px; border: 1px solid #C9D6E2; border-radius: var(--r-sm); padding: 12px 14px; font: inherit; font-size: var(--t-small); resize: vertical; background: #fff; color: var(--text-primary); }
+  .sdNote { width: 100%; min-height: 96px; border: 1px solid #C9D6E2; border-radius: var(--r-sm); padding: 12px var(--s-3); font: inherit; font-size: var(--t-small); resize: vertical; background: #fff; color: var(--text-primary); }
   .sdNoteLog { list-style: none; margin: var(--s-3) 0 0; padding: 0; font-size: var(--t-small); }
-  .sdNoteLog li { padding: 10px 0; border-top: 1px solid var(--border-subtle); }
+  .sdNoteLog li { padding: var(--s-2) 0; border-top: 1px solid var(--border-subtle); }
   .sdNoteLog small { display: block; color: var(--text-muted); font-size: var(--t-label); margin-top: 2px; }
-  .sdRate { display: flex; gap: var(--s-3); align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--border-subtle); font-size: var(--t-small); }
+  .sdRate { display: flex; gap: var(--s-3); align-items: flex-start; padding: var(--s-2) 0; border-top: 1px solid var(--border-subtle); font-size: var(--t-small); }
   .sdRate:first-of-type { border-top: 0; }
   .sdShoes { display: inline-flex; gap: 2px; color: var(--navy-700); flex: 0 0 auto; margin-top: 2px; }
   .sdShoes svg { width: 15px; height: 17px; }
@@ -51,11 +51,11 @@
   .sdActs .btn { justify-content: flex-start; width: 100%; }
   .sdActs .btn svg { width: 18px; height: 18px; }
   .sdVis { display: grid; gap: var(--s-2); font-size: var(--t-small); }
-  .sdVis label { display: flex; gap: var(--s-2); align-items: flex-start; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm); }
+  .sdVis label { display: flex; gap: var(--s-2); align-items: flex-start; padding: var(--s-2) 12px; border: 1px solid var(--border-subtle); border-radius: var(--r-sm); }
   .sdVis label:has(input:checked) { border-color: var(--blue-600); background: var(--depth-01); }
   .sdVis small { display: block; color: var(--text-muted); font-size: var(--t-label); }
   .sdVis input { accent-color: var(--blue-600); margin-top: 3px; }
-  .rrDrop { display: grid; justify-items: center; gap: 6px; text-align: center; padding: var(--s-6) var(--s-4); border: 2px dashed var(--baby-300); border-radius: var(--r-md); background: var(--depth-01); font-size: var(--t-small); cursor: pointer; }
+  .rrDrop { display: grid; justify-items: center; gap: var(--s-1); text-align: center; padding: var(--s-6) var(--s-4); border: 2px dashed var(--baby-300); border-radius: var(--r-md); background: var(--depth-01); font-size: var(--t-small); cursor: pointer; }
   .rrDrop svg { width: 30px; height: 30px; color: var(--blue-600); }
   .rrDrop span { color: var(--text-muted); }
   .rrDrop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
