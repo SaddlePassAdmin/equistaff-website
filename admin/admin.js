@@ -117,6 +117,9 @@
   ];
   var BY_PAGE = { seekers: 'seeker.html', employers: 'employer.html', jobs: 'job.html', searches: 'search.html', leads: 'lead.html', blog: 'blog-post.html' };
   var SAY = [
+    [/add to shortlist/i, 'Added to the shortlist. Write their summary before you present them.'],
+    [/take off the job board/i, 'Taken off the job board. The search carries on.'],
+    [/post to (the )?job board/i, 'Posted to the job board.'],
     [/approve all/i, 'All approved. They’re live on the site.'],
     [/approve/i, 'Approved. It’s live on the site.'],
     [/password reset/i, 'Password reset email sent.'],
