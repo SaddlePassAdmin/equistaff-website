@@ -12,8 +12,8 @@ whether.
 
 **Scope only.** No dates, no estimates, no commercial terms in this file.
 
-Source: admin portal check-in with Kaitlin, 9 November 2026.
-Last reviewed: 9 November 2026.
+Source: admin portal check-in with Kaitlin, 9 November 2026, plus her Figma notes of 11 November.
+Last reviewed: 11 November 2026.
 
 ---
 
@@ -118,6 +118,47 @@ Kaitlin entering their details by hand.
 **Why parked:** it depends on the candidate-facing account flow and on how
 candidates arrive, both of which are still settling. Named as a direction to aim
 at rather than something to build now.
+
+---
+
+## 8. Interview tracking
+
+A view of who is moving to interview and when — today, tomorrow, the day after —
+so the week ahead is visible at a glance rather than reconstructed from each search.
+
+**Her words:** future design feature. (Figma, 11 November, pinned to the dashboard
+header.)
+
+**Why parked:** she named it as future herself. It also leans on the candidate
+workflow stages in item 3 — there is no "moving to interview" state to count until
+those exist, so this lands with them rather than before.
+
+---
+
+## Not yet placed — open questions from 11 November
+
+Kaitlin left these on the Admin V1 frame. They are questions, not parked scope, and
+they need an answer before they can be sized. Recorded here so they do not get lost
+between the Figma thread and the next call.
+
+- **Direct Hire jobs managed through the admin portal** — posting and managing the
+  job description to the EquiStaff job board, viewing and rejecting applicants, job
+  stats. She says this was discussed on Monday's call and is reiterating it, and is
+  relaxed about whether it lives in the main portal or a separate recruiter login.
+  This is substantial and is **not** currently in the build.
+- **Skill tags** — is the list finite or will it grow to every tag? Are they
+  recruiter tags or seeker-provided? *(The current design already shows both, split
+  into "From her profile" and "Added by the recruiting team", so part of this is
+  answerable now; who governs the master list is not.)*
+- **Tagging a candidate against specific Direct Hire jobs or job titles**, and who
+  controls that tag list.
+- **Leads** — should the grid capture which product a lead is interested in (Direct
+  Hire / Advertising / Job Board) as well as what they have bought?
+- **Recruiting team notes on a lead** — where do they save to? A data question for
+  engineering rather than a design one.
+- **A 1:1 sample site covering both the front end and the admin portal**, to walk
+  before final approval. The AWS staging server is the answer to this; worth telling
+  her so explicitly.
 
 ---
 
