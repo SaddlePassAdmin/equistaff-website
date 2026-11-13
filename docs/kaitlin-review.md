@@ -6,8 +6,15 @@ what happened to it. Updated automatically twice a day from the Figma Dev Ready 
 **Round 1** — her V3 feedback document, answered 2 November.  
 **Round 2** — 60 comments on the Figma Dev Ready page, 3 November. That is what is below.
 
-Status words: **Shipped** · **Asked her** (we replied in Figma and need a detail) · 
-**Needs a decision** (Carrington's call) · **Open** (clear, not built yet) · **Approved** (her "Done").
+Status words: **Shipped** · **Needs a decision** (Carrington's call) · **Open** (clear, not built yet) ·
+**Approved** (her "Done").
+
+> **Corrected 14 Nov.** This file carried nine items as "Asked her — waiting". That was wrong:
+> Kaitlin answered every question we put to her, on 5 November, and her answers were sitting
+> unread in the Figma threads. The cause was a bug in the sweep — Figma replies carry no node
+> anchor of their own, so they fell outside the Dev Ready filter and the sweep never saw them.
+> Nothing is waiting on Kaitlin for the site review. Her answers are recorded against each item
+> below and the work is ours.
 
 ---
 
@@ -29,11 +36,12 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 - **Open** · _Brittany_ — @Saddle Pass Admin I am wondering if this gets simplified to just "Talk to a person" so that way job seekers/posters don't think this only applies to Ocala
 
 ### B1 · Job board — browse, filter, find by state
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — Can we have these be the same categories we use in the "request talent" form and on the home page that Brittney is building cute graphics for?
+- **Open** — she answered 5 Nov, not built yet · _Kaitlin_ — Can we have these be the same categories we use in the "request talent" form and on the home page that Brittney is building cute graphics for?
+  **Her answer:** keep the ability to define discipline, and add "Office/Business" plus sales, marketing, admin and veterinary filters so the full scope and the most popular categories are covered.
 - **Open** · _Brittany_ — @Saddle Pass Admin I was just thinking - IDK if it is needed but on these role snapshot views is it important or worth including when the application period closes? Maybe instead of the posted 5 days ago is it more important to say something like application closes in 3 days or somehting?
 
 ### B2 · Job detail — Barn Manager
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — Ideally these will be different for in-barn vs business roles, but if that's not part of current scope can we just have them not appear if left blank?
+- **Open** — we answered her; the "hide when blank" half is ours to build · _Kaitlin_ — Ideally these will be different for in-barn vs business roles, but if that's not part of current scope can we just have them not appear if left blank?
 - **Approved** · _Kaitlin_ — Snyder, despite what my google acct is determined to know me as for all meetings :zany_face:
 
 ### B3 · Job detail — Head Groom (direct listing)
@@ -41,7 +49,7 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 
 ### B4 · Job detail — Working Student
 - **Shipped** — 5 Nov · _Kaitlin_ — "Days off per week"
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — Is the purpose of the "stipend" version for employers who don't provide pay? I think we should still try to make them define the pay rate even so
+- **Open** — we answered her; nothing owed by her · _Kaitlin_ — Is the purpose of the "stipend" version for employers who don't provide pay? I think we should still try to make them define the pay rate even so
 
 ### C1 · Create an account
 - **Open** · _Kaitlin_ — Where is the resume upload feature between the two of these??
@@ -53,20 +61,24 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 - **Open** · _Kaitlin_ — If they've uploaded a resume and want to change out to a new one, should there be something here that shows them the upload resume feature and gives them the ability to view what's here and replace it if necessary??
 - **Open** · _Kaitlin_ — Or bigger & brighter!
 - **Open** · _Kaitlin_ — Also ask: "Willing to relocate?" can be simple yes/no
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — Rename "Relocation Details"
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — What will this section look like empty for new users?
+- **Open** — she answered 5 Nov, not built yet · _Kaitlin_ — Rename "Relocation Details"
+  **Her answer:** rename "Housing preference" to "Relocation details".
+- **Approved** — resolved in thread · _Kaitlin_ — What will this section look like empty for new users?
+  **Her answer:** she meant current applications, which need no prompt. No empty state to design.
 - **Open** · _Brittany_ — @Saddle Pass Admin I would remove the horse icon here!
 - **Open** · _Brittany_ — @Saddle Pass Admin Can this be smaller? more inline with the text line?
 - **Open** · _Brittany_ — @Saddle Pass Admin what is this"button" for?
 
 ### D2 · A job seeker as an employer sees them
 - **Open** · _Kaitlin_ — If they add social media links, where will those appear?
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — Let's put this one first, then Key skills, then Achievements & extras
+- **Open** — she answered 5 Nov, not built yet · _Kaitlin_ — Let's put this one first, then Key skills, then Achievements & extras
+  **Her answer:** the right-hand fields order as "Looking For", then "Key Skills", then "Achievements & Extras".
 
 ### D3 · Résumé builder
 - **Open** · _Kaitlin_ — This should be the first screen viewed after a new account creation
 - **Approved** · _Kaitlin_ — Done, looks great!
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — "companies that support the industry"
+- **Open** — she answered 5 Nov, not built yet · _Kaitlin_ — "companies that support the industry"
+  **Her answer:** replace "Sales, marketing, and the companies (around the horse)" with "Sales, marketing, and the companies that support the industry".
 
 ### D4 · Your applications
 - **Open** · _Kaitlin_ — Should we give them the ability to message the employer from this screen, rather than having to click onto the job description?
@@ -110,7 +122,7 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 - **Open** · _Kaitlin_ — Can we make this white theme like the job search?? Also for employers who are posting their own jobs
 
 ### F5 · A second candidate on the same shortlist
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — Where is this coming from??
+- **Open** — we answered her; nothing owed by her · _Kaitlin_ — Where is this coming from??
 
 ### G1 · Messages
 - **Open** · _Kaitlin_ — I'm okay with this part saying my name! Just didn't want the toggle bar to the left to be my name When the team grows and I add more users, will they be able to have individual profiles in the admin portal? Likely won't grow until ATS is built so this can be topic for later date
@@ -131,7 +143,7 @@ Status words: **Shipped** · **Asked her** (we replied in Figma and need a detai
 - **Open** · _Kaitlin_ — Love the way this looks, will likely have some edits to fields at a later date
 
 ### G6 · The employer’s inbox
-- **Asked her** — replied in Figma, waiting · _Kaitlin_ — What are these? automated system messages?>
+- **Open** — we answered her; nothing owed by her · _Kaitlin_ — What are these? automated system messages?>
 
 ### V5 · Employer — the brief, one field at a time
 - **Approved** · _Kaitlin_ — Clever! I like this
