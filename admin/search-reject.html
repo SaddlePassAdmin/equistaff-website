@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barn Manager · Live Oak Stables · EquiStaff Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Lato:wght@400;700;900&family=Azeret+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.btn > svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.btn { white-space: nowrap; }
+
+.swLbl { display: block; font: 700 12px/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.swBig { font: 700 1.25rem/1.2 var(--font-display); margin: 0 0 4px; }
+.swClient { margin-bottom: var(--s-5); }
+.swClient__grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: var(--s-6); }
+.swClient p { margin: 0 0 var(--s-2); font-size: var(--t-small); }
+.swFile { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; font-size: var(--t-small); text-decoration: none; }
+.swFile svg { width: 16px; height: 16px; }
+.swCount { margin-left: auto; font-size: var(--t-small); }
+.swFee { margin: var(--s-4) var(--s-5) var(--s-2); }
+.swCand { padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border-subtle); }
+.swCand--out { background: var(--surface-sunken); }
+.swCand--out .aWho img { filter: grayscale(1); opacity: .7; }
+.swCand__top { display: grid; grid-template-columns: minmax(0, 1fr) 150px 120px auto; gap: var(--s-4); align-items: center; }
+.swCand__stage { display: grid; gap: 4px; justify-items: start; }
+.swCand__stage small { font-size: var(--t-label); color: var(--text-muted); }
+.swCand__mid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s-5); margin: var(--s-3) 0 0 48px; }
+.swFb { margin: var(--s-1) 0 0; font-size: var(--t-small); font-style: italic; }
+.swFb--none { color: var(--text-muted); font-style: normal; }
+.swShoes { display: inline-flex; gap: 2px; }
+.swShoes i { width: 15px; height: 17px; color: #C9D6E2; display: inline-block; }
+.swShoes i.on { color: var(--warm-ink); }
+.swShoes svg { width: 15px; height: 17px; display: block; }
+.swCand__sw .aSwitch { padding: 8px 0; }
+.swCand__sw { border-left: 1px solid var(--border-subtle); padding-left: var(--s-4); }
+.swAvail { margin: 0 0 var(--s-2); font-size: var(--t-small); background: var(--depth-01); border-radius: var(--r-sm); padding: var(--s-3); }
+.swSmall { font-size: var(--t-label); margin: 0; }
+/* The client-facing write-up. It belongs to the search, not the candidate:
+   the same person is framed differently for a different role and client. */
+.swSum { margin: var(--s-3) 0 0 48px; padding: var(--s-3) var(--s-4); background: var(--depth-01); border-radius: var(--r-sm); }
+.swSum .swLbl { display: block; }
+.swSum__why { margin: var(--s-1) 0 var(--s-2); font-size: var(--t-label); color: var(--text-muted); }
+.swSum .field { margin: 0; }
+.swSum textarea { width: 100%; }
+.swSum__quote { margin: 0; font-size: var(--t-small); font-style: italic; }
+.swSum__acts { display: flex; gap: var(--s-2); align-items: center; flex-wrap: wrap; margin-top: var(--s-2); }
+.swSum__state { font-size: var(--t-label); color: var(--text-muted); margin-left: auto; }
+.swNew { margin-left: auto; }
+.swNotes li { align-items: flex-start; }
+.swNotes b { font-size: var(--t-small); }
+.swNotes p { margin: 4px 0; font-size: var(--t-small); }
+.swNotes small { color: var(--text-muted); font-size: var(--t-label); }
+.swTime { list-style: none; margin: 0; padding: var(--s-4) var(--s-5); }
+.swTime li { position: relative; padding: 0 0 var(--s-4) var(--s-5); border-left: 2px solid var(--border-subtle); margin-left: var(--s-1); }
+.swTime li:last-child { padding-bottom: 0; border-left-color: transparent; }
+.swTime li::before { content: ""; position: absolute; left: -7px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface-raised); border: 2px solid var(--blue-600); pointer-events: none; }
+.swTime li.late::before { border-color: var(--err-ink); background: var(--err-bg); }
+.swTime b { display: block; font-size: var(--t-small); }
+.swTime span { font-size: var(--t-label); color: var(--text-muted); }
+.swTime li.late span { color: var(--err-ink); font-weight: 700; }
+@media (max-width: 1180px) { .swCand__mid { grid-template-columns: 1fr; margin-left: 0; } .swCand__sw { border-left: 0; padding-left: 0; } }
+@media (max-width: 860px) {
+  .swClient__grid { grid-template-columns: 1fr; gap: var(--s-4); }
+  .swCand__top { grid-template-columns: 1fr auto; }
+  .swCand__stage, .swCand__wait { grid-column: auto; }
+}
+.swJob__stats { display: flex; flex-wrap: wrap; gap: var(--s-5); margin: 0 0 var(--s-4); }
+.swJob__stats b { display: block; font: 700 22px/1.1 var(--font-body); color: var(--text); }
+.swJob__stats span { font-size: var(--t-label); color: var(--text-muted); }
+.swJob__acts { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-4); }
+.aGrid--main > div { min-width: 0; }
+.swJob .aTable td:first-child { min-width: 220px; }
+body{position:relative}.aScrim{position:absolute;inset:0 0 auto 0;min-height:100%;place-items:start center;padding:140px 0 80px}
+.aModal .field{margin-bottom:var(--s-4)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+@media (max-width:860px){.aGrid.aGrid--main,.aGrid.aGrid--2,.aGrid.aGrid--3{grid-template-columns:minmax(0,1fr)}.aDl{grid-template-columns:1fr;gap:2px}.aDl dd{margin-bottom:8px}.aHead__acts{margin-left:0}.aFind--sm{flex:1 1 100%}.aBar__right{margin-left:0;width:100%;flex-wrap:wrap}.aScrim{padding:80px 12px 0}}
+.rChip{border:1px solid #C9D6E2;border-radius:var(--r-pill);padding:8px var(--s-3);font:700 var(--t-small)/1 var(--font-body);background:#fff}
+.rChip.on{background:var(--navy-900);border-color:var(--navy-900);color:#fff}.rPrev{display:flex;gap:var(--s-3);align-items:center;margin-bottom:var(--s-4)}.rPrev img{width:96px;height:72px;object-fit:cover;border-radius:var(--r-sm)}
+</style>
+</head>
+<body class="adm" data-page="searches">
+<main id="aPage">
+  <p class="aCrumb"><a href="searches.html">← Direct hire</a></p>
+  <div class="aHead">
+    <div>
+      <h1>Barn Manager · Live Oak Stables</h1>
+      <p>Opened 12 Oct · Ocala, FL · <span class="aPill aPill--err">Client hasn't replied in 5 days</span></p>
+    </div>
+    <div class="aHead__acts">
+      <a class="btn btn--secondary" href="search-add.html" data-i="plus">Add candidate</a>
+      <a class="btn btn--primary" href="#" data-i="check">Mark hired</a>
+    </div>
+  </div>
+
+  <div class="aGrid aGrid--main">
+    <div>
+      <section class="aCard swClient">
+        <div class="aCard__body swClient__grid">
+          <div>
+            <span class="swLbl">Client</span>
+            <p class="swBig">Live Oak Stables</p>
+            <p class="muted">Janet Moreau · janet@liveoakstables.example · (352) 555-0144</p>
+            <p><span class="aTag">Came in through Request talent</span><span class="aTag">Direct hire only · no job-board plan</span></p>
+          </div>
+          <div>
+            <span class="swLbl">The brief</span>
+            <p>Run a 24-horse hunter/jumper barn: feed, turnout, farrier and vet schedules, two grooms. On-site apartment. Starts January.</p>
+            <a class="swFile" href="#" data-i="brief">Live-Oak-Barn-Manager.pdf</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="aCard swJob">
+        <div class="aCard__head"><h2>Job posting</h2><span class="aPill aPill--ok">On the job board</span></div>
+        <div class="aCard__body">
+          <div class="swJob__stats">
+            <div><b>9 days</b><span>Live since 3 Nov</span></div>
+            <div><b>412</b><span>Views</span></div>
+            <div><b>3</b><span>Applicants · 2 new</span></div>
+          </div>
+          <div class="swJob__acts">
+            <a class="btn btn--secondary btn--sm" href="job.html" data-i="pen">Edit job description</a>
+            <a class="btn btn--quiet btn--sm" href="../job-detail.html">View on site</a>
+            <button class="btn btn--quiet btn--sm" type="button">Take off the job board</button>
+          </div>
+          <span class="swLbl">Applicants</span>
+          <div class="aTableWrap">
+          <table class="aTable">
+            <thead><tr><th>Applicant</th><th>Applied</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="aWho"><img src="../img/people/sarah.jpg" alt=""><div><a href="seeker.html"><b>Sarah Okafor</b></a><small>Barn Manager · Ocala</small></div></div></td>
+                <td class="muted">Today</td>
+                <td><span class="aPill aPill--warn">New</span></td>
+                <td><div class="aRowActs"><button class="btn btn--secondary btn--sm" type="button">Add to shortlist</button><a class="btn btn--quiet btn--sm" href="search-reject.html">Reject</a></div></td>
+              </tr>
+              <tr>
+                <td><div class="aWho"><img src="../img/people/tom.jpg" alt=""><div><a href="seeker.html"><b>Tom Reyes</b></a><small>Head Groom · Wellington</small></div></div></td>
+                <td class="muted">Yesterday</td>
+                <td><span class="aPill aPill--warn">New</span></td>
+                <td><div class="aRowActs"><button class="btn btn--secondary btn--sm" type="button">Add to shortlist</button><a class="btn btn--quiet btn--sm" href="search-reject.html">Reject</a></div></td>
+              </tr>
+              <tr>
+                <td><div class="aWho"><img src="../img/people/hallie.jpg" alt=""><div><a href="seeker.html"><b>Hallie Brooks</b></a><small>Assistant Barn Manager · Aiken</small></div></div></td>
+                <td class="muted">30 Oct</td>
+                <td><span class="aPill aPill--info aPill--plain">On the shortlist</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Shortlist</h2><span class="muted swCount">4 presented · 1 interviewing · 1 passed</span></div>
+        <div class="aNote swFee" data-i="lock"><span><b>These two switches protect the fee.</b> Release contact details only once the placement is settled. Turn messaging on when you've made the introduction. The client never sees these switches.</span></div>
+        <article class="swCand">
+          <div class="swCand__top">
+            <div class="aWho"><img src="../img/people/dana.jpg" alt=""><div><a href="search-candidate.html"><b>Dana Whitfield</b></a><small>Barn Manager · 24-horse hunter/jumper barn, Ocala</small></div></div>
+            <div class="swCand__stage"><span class="aPill aPill--info aPill--plain">Interviewing</span><small>Interview 28 Oct</small></div>
+            <div class="swCand__wait"><span class="aPill aPill--err">Waiting 5 days</span></div>
+            <a class="btn btn--secondary btn--sm" href="search-candidate.html">Open</a>
+          </div>
+          <div class="swCand__mid">
+            <div class="swCand__fb"><span class="swLbl">Client's feedback</span><span class="swShoes" aria-label="4 of 5 horseshoes"><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class=""><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i></span><p class="swFb">"Strong on feed and farrier schedules. We'd like a second interview with our head trainer."</p></div>
+            <div class="swCand__sw">
+              <div class="aSwitch"><div><b>Release contact details</b><small>Hidden until the placement is settled</small></div><i role="switch" aria-checked="false"></i></div>
+              <div class="aSwitch"><div><b>Messaging on</b><small>Client and candidate can message</small></div><i class="on" role="switch" aria-checked="true"></i></div>
+            </div>
+          </div>
+            <div class="swSum">
+              <span class="swLbl">Your summary for this search</span>
+              <p class="swSum__why">Written for Live Oak Stables and the Barn Manager role. The same candidate reads differently on a different search.</p>
+              <p class="swSum__quote">"Eight years running show barns on the Florida circuit, managing a team of four at a 30-horse barn. Calm, organised, and every reference mentioned her record-keeping."</p>
+              <div class="swSum__acts"><a class="btn btn--quiet btn--sm" href="#" data-i="pen">Edit summary</a><span class="swSum__state">Sent to the client 22 Oct</span></div>
+            </div>
+        </article>
+        <article class="swCand">
+          <div class="swCand__top">
+            <div class="aWho"><img src="../img/people/marcus.jpg" alt=""><div><a href="search-candidate.html"><b>Marcus Bell</b></a><small>Show Groom → Barn Manager · Wellington circuit</small></div></div>
+            <div class="swCand__stage"><span class="aPill aPill--info aPill--plain">Reviewed</span><small>Reviewed 30 Oct</small></div>
+            <div class="swCand__wait"><span class="aPill aPill--warn">3 days</span></div>
+            <a class="btn btn--secondary btn--sm" href="search-candidate.html">Open</a>
+          </div>
+          <div class="swCand__mid">
+            <div class="swCand__fb"><span class="swLbl">Client's feedback</span><span class="swShoes" aria-label="3 of 5 horseshoes"><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class=""><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class=""><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i></span><p class="swFb">"Good experience but hasn't managed staff yet. Holding for now."</p></div>
+            <div class="swCand__sw">
+              <div class="aSwitch"><div><b>Release contact details</b><small>Hidden until the placement is settled</small></div><i class="" role="switch" aria-checked="false"></i></div>
+              <div class="aSwitch"><div><b>Messaging on</b><small>Off until you make the introduction</small></div><i class="" role="switch" aria-checked="false"></i></div>
+            </div>
+          </div>
+            <div class="swSum">
+              <span class="swLbl">Your summary for this search</span>
+              <p class="swSum__why">Written for Live Oak Stables and the Barn Manager role. The same candidate reads differently on a different search.</p>
+              <div class="field"><label class="sr-only" for="sum-marcus">Your summary for the client</label><textarea id="sum-marcus" rows="5">Twelve years in hunter/jumper barns, the last six running a 30-horse show string on the Florida circuit. Calm with young horses and the most organised feed and farrier records I have seen this year. Two references spoke to how steady he is on a show day.</textarea></div>
+              <div class="swSum__acts"><button class="btn btn--primary btn--sm" type="button" data-i="mail">Submit to client</button><button class="btn btn--secondary btn--sm" type="button">Save draft</button><span class="swSum__state">Draft saved today, 2:14pm</span></div>
+            </div>
+        </article>
+        <article class="swCand">
+          <div class="swCand__top">
+            <div class="aWho"><img src="../img/people/hallie.jpg" alt=""><div><a href="search-candidate.html"><b>Hallie Brooks</b></a><small>Assistant Barn Manager · Aiken</small></div></div>
+            <div class="swCand__stage"><span class="aPill aPill--info aPill--plain">Presented</span><small>Presented 1 Nov</small></div>
+            <div class="swCand__wait"><span class="aPill aPill--ok">1 day</span></div>
+            <a class="btn btn--secondary btn--sm" href="search-candidate.html">Open</a>
+          </div>
+          <div class="swCand__mid">
+            <div class="swCand__fb"><span class="swLbl">Client's feedback</span><p class="swFb swFb--none">No feedback yet</p></div>
+            <div class="swCand__sw">
+              <div class="aSwitch"><div><b>Release contact details</b><small>Hidden until the placement is settled</small></div><i class="" role="switch" aria-checked="false"></i></div>
+              <div class="aSwitch"><div><b>Messaging on</b><small>Off until you make the introduction</small></div><i class="" role="switch" aria-checked="false"></i></div>
+            </div>
+          </div>
+            <div class="swSum">
+              <span class="swLbl">Your summary for this search</span>
+              <p class="swSum__why">Written for Live Oak Stables and the Barn Manager role. The same candidate reads differently on a different search.</p>
+              <p class="swSum__quote">"Came up through eventing yards in Aiken and has run a barn single-handed through a season. Quieter than Dana on paper; much stronger on young horses."</p>
+              <div class="swSum__acts"><a class="btn btn--quiet btn--sm" href="#" data-i="pen">Edit summary</a><span class="swSum__state">Sent to the client 28 Oct</span></div>
+            </div>
+        </article>
+        <article class="swCand swCand--out">
+          <div class="swCand__top">
+            <div class="aWho"><img src="../img/people/chris.jpg" alt=""><div><a href="search-candidate.html"><b>Chris Navarro</b></a><small>Barn Manager · Lexington</small></div></div>
+            <div class="swCand__stage"><span class="aPill aPill--mute aPill--plain">Passed</span><small>Passed 25 Oct</small></div>
+            <div class="swCand__wait"><span class="muted">—</span></div>
+            <a class="btn btn--secondary btn--sm" href="search-candidate.html">Open</a>
+          </div>
+          <div class="swCand__mid">
+            <div class="swCand__fb"><span class="swLbl">Client's feedback</span><span class="swShoes" aria-label="3 of 5 horseshoes"><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class="on"><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class=""><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i><i class=""><svg aria-hidden="true" focusable="false"><use href="#i-horseshoe"/></svg></i></span><p class="swFb">"Lovely candidate, but needs housing for two horses we can't offer."</p></div>
+            <div class="swCand__sw">
+              <div class="aSwitch"><div><b>Release contact details</b><small>Hidden until the placement is settled</small></div><i class="" role="switch" aria-checked="false"></i></div>
+              <div class="aSwitch"><div><b>Messaging on</b><small>Off until you make the introduction</small></div><i class="" role="switch" aria-checked="false"></i></div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <aside class="aGrid">
+      <section class="aCard">
+        <div class="aCard__head"><h2>Client's interview availability</h2></div>
+        <div class="aCard__body">
+          <p class="swAvail">"Weekday mornings before 11 work best. Tuesdays and Thursdays all day. Away 14–16 Nov at HITS."</p>
+          <p class="muted swSmall">Typed by Janet · 29 Oct</p>
+        </div>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Client's notes</h2><span class="aCount swNew">2 new</span></div>
+        <ul class="aList swNotes">
+          <li><div><b>On Dana Whitfield</b><p>"Can she start before the Winter Equestrian Festival?"</p><small>Yesterday · unread</small></div></li>
+          <li><div><b>On Marcus Bell</b><p>"Would he consider an assistant role first?"</p><small>30 Oct · unread</small></div></li>
+          <li><div><b>On Chris Navarro</b><p>"Sorry to pass. Housing is the only blocker."</p><small>25 Oct</small></div></li>
+        </ul>
+      </section>
+
+      <section class="aCard">
+        <div class="aCard__head"><h2>Activity</h2></div>
+        <ol class="swTime">
+          <li class="late"><b>Interview · Dana Whitfield</b><span>28 Oct · no update in 5 days</span></li>
+          <li><b>Reviewed · Marcus Bell</b><span>30 Oct</span></li>
+          <li><b>Presented · Hallie Brooks</b><span>1 Nov</span></li>
+          <li><b>Passed · Chris Navarro</b><span>25 Oct</span></li>
+          <li><b>Presented · Dana Whitfield, Marcus Bell, Chris Navarro</b><span>20 Oct</span></li>
+          <li><b>Search opened</b><span>12 Oct · from Request talent</span></li>
+        </ol>
+      </section>
+    </aside>
+  </div>
+  <script src="../src/icons.js"></script>
+<div class="aScrim"><div class="aModal" role="dialog" aria-modal="true" aria-labelledby="mt">
+<div class="aModal__head"><h2 id="mt">Reject Tom Reyes for this job?</h2><p>Tom gets an email letting him know. Your reason stays with the recruiting team unless you add a note.</p></div>
+<div class="aModal__body">
+<div class="field"><label>Reason</label><div class="chips"><span class="rChip on">Not enough experience for this role</span><span class="rChip">Location or housing doesn't fit</span><span class="rChip">Role has been filled</span><span class="rChip">Other</span></div></div>
+<div class="field"><label for="note">Note to Tom (optional)</label><textarea id="note" rows="3">Thank you for applying. This role needs someone who has managed staff, but we'd love to keep you in mind for head groom roles.</textarea><small>Sent from the EquiStaff Recruiting Team</small></div>
+</div>
+<div class="aModal__foot"><a class="btn btn--secondary btn--sm" href="search.html">Cancel</a><a class="btn btn--primary btn--sm" href="search.html">Reject and email</a></div>
+</div></div>
+</main>
+<script src="admin.js"></script>
+</body>
+</html>

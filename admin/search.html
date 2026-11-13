@@ -70,6 +70,12 @@
   .swCand__top { grid-template-columns: 1fr auto; }
   .swCand__stage, .swCand__wait { grid-column: auto; }
 }
+.swJob__stats { display: flex; flex-wrap: wrap; gap: var(--s-5); margin: 0 0 var(--s-4); }
+.swJob__stats b { display: block; font: 700 22px/1.1 var(--font-body); color: var(--text); }
+.swJob__stats span { font-size: var(--t-label); color: var(--text-muted); }
+.swJob__acts { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-4); }
+.aGrid--main > div { min-width: 0; }
+.swJob .aTable td:first-child { min-width: 220px; }
 </style>
 </head>
 <body class="adm" data-page="searches">
@@ -100,6 +106,48 @@
             <span class="swLbl">The brief</span>
             <p>Run a 24-horse hunter/jumper barn: feed, turnout, farrier and vet schedules, two grooms. On-site apartment. Starts January.</p>
             <a class="swFile" href="#" data-i="brief">Live-Oak-Barn-Manager.pdf</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="aCard swJob">
+        <div class="aCard__head"><h2>Job posting</h2><span class="aPill aPill--ok">On the job board</span></div>
+        <div class="aCard__body">
+          <div class="swJob__stats">
+            <div><b>9 days</b><span>Live since 3 Nov</span></div>
+            <div><b>412</b><span>Views</span></div>
+            <div><b>3</b><span>Applicants · 2 new</span></div>
+          </div>
+          <div class="swJob__acts">
+            <a class="btn btn--secondary btn--sm" href="job.html" data-i="pen">Edit job description</a>
+            <a class="btn btn--quiet btn--sm" href="../job-detail.html">View on site</a>
+            <button class="btn btn--quiet btn--sm" type="button">Take off the job board</button>
+          </div>
+          <span class="swLbl">Applicants</span>
+          <div class="aTableWrap">
+          <table class="aTable">
+            <thead><tr><th>Applicant</th><th>Applied</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="aWho"><img src="../img/people/sarah.jpg" alt=""><div><a href="seeker.html"><b>Sarah Okafor</b></a><small>Barn Manager · Ocala</small></div></div></td>
+                <td class="muted">Today</td>
+                <td><span class="aPill aPill--warn">New</span></td>
+                <td><div class="aRowActs"><button class="btn btn--secondary btn--sm" type="button">Add to shortlist</button><a class="btn btn--quiet btn--sm" href="search-reject.html">Reject</a></div></td>
+              </tr>
+              <tr>
+                <td><div class="aWho"><img src="../img/people/tom.jpg" alt=""><div><a href="seeker.html"><b>Tom Reyes</b></a><small>Head Groom · Wellington</small></div></div></td>
+                <td class="muted">Yesterday</td>
+                <td><span class="aPill aPill--warn">New</span></td>
+                <td><div class="aRowActs"><button class="btn btn--secondary btn--sm" type="button">Add to shortlist</button><a class="btn btn--quiet btn--sm" href="search-reject.html">Reject</a></div></td>
+              </tr>
+              <tr>
+                <td><div class="aWho"><img src="../img/people/hallie.jpg" alt=""><div><a href="seeker.html"><b>Hallie Brooks</b></a><small>Assistant Barn Manager · Aiken</small></div></div></td>
+                <td class="muted">30 Oct</td>
+                <td><span class="aPill aPill--info aPill--plain">On the shortlist</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
           </div>
         </div>
       </section>

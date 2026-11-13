@@ -13,7 +13,7 @@ whether.
 **Scope only.** No dates, no estimates, no commercial terms in this file.
 
 Source: admin portal check-in with Kaitlin, 9 November 2026, plus her Figma notes of 11 November.
-Last reviewed: 11 November 2026.
+Last reviewed: 12 November 2026.
 
 ---
 
@@ -135,6 +135,37 @@ those exist, so this lands with them rather than before.
 
 ---
 
+## 9. Direct-hire jobs, full version
+
+The current build has a rough version on each direct-hire search: post to the job
+board, edit the description, days live / views / applicants, and an applicant list
+where each person can be added to the shortlist or rejected with a reason. What is
+**not** built is the fuller version: a separate recruiter login, applicant stages and
+history, and reporting across all direct-hire jobs.
+
+**Her words:** manage Direct Hire jobs through the admin portal; whether through the
+main portal or a recruiter login "is open to ease of engineering".
+
+**Why parked:** the rough version covers the day-one need, and the fuller version
+leans on candidate stages (item 3) and roles (item 4).
+
+---
+
+## 10. Smaller asks from the 9–11 November Figma notes
+
+Each is real and wanted; none blocks launch.
+
+- **Lead package upgrade through Stripe**: show a lead's current package and let the
+  admin trigger an upgrade that runs through Stripe (never a hand-set tag; see item 5).
+- **Post a job description for a lead on the $500 package**: most of these leads will
+  upgrade to it, so the admin writes and posts the job for them.
+- **Jobs filters**: by date posted, type and role.
+- **"Please review our changes" email**: when a job goes back and forth with the
+  client, an email template asking them to review.
+- **Replace-résumé hint** on the candidate page, so it is obvious where to do it.
+
+---
+
 ## Not yet placed — open questions from 11 November
 
 Kaitlin left these on the Admin V1 frame. They are questions, not parked scope, and
@@ -145,7 +176,8 @@ between the Figma thread and the next call.
   job description to the EquiStaff job board, viewing and rejecting applicants, job
   stats. She says this was discussed on Monday's call and is reiterating it, and is
   relaxed about whether it lives in the main portal or a separate recruiter login.
-  This is substantial and is **not** currently in the build.
+  **Update 12 Nov:** a rough version is now in the build (see item 9); the full
+  version is parked.
 - **Skill tags** — is the list finite or will it grow to every tag? Are they
   recruiter tags or seeker-provided? *(The current design already shows both, split
   into "From her profile" and "Added by the recruiting team", so part of this is
@@ -184,4 +216,7 @@ In scope for the current build, in progress:
 
 - Package status shown inline on Leads across all four states
 - Per-search candidate submittal summary, client-facing, with save-draft
+- A candidate summary on the job seeker page that only Kaitlin writes (never automatic). Each search starts from it and she tailors it per client; the dashboard shows who is waiting on one
+- Direct-hire job posting on each search (rough version, item 9)
+- Job seekers has one view (cards); the table version was dropped on 12 Nov
 - The employer is notified when we edit their job description
