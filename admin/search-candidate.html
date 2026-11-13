@@ -17,18 +17,18 @@
 
 .scHead img { width: 64px; height: 64px; }
 .scHead h1 { font: 700 2rem/1.15 var(--font-display); margin: 0; }
-.scHead p { margin: 6px 0 0; color: var(--text-muted); }
+.scHead p { margin: var(--s-1) 0 0; color: var(--text-muted); }
 .scHint { margin-left: auto; font-size: var(--t-label); }
 .scEditor { border: 1px solid #C9D6E2; border-radius: var(--r-sm); overflow: hidden; }
-.scTools { display: flex; gap: 4px; padding: 6px; background: var(--surface-sunken); border-bottom: 1px solid var(--border-subtle); }
-.scTools button { min-width: 36px; height: 32px; border: 0; background: transparent; border-radius: var(--r-sm); font: 700 var(--t-small)/1 var(--font-body); color: var(--text-primary); cursor: pointer; padding: 0 10px; }
+.scTools { display: flex; gap: 4px; padding: var(--s-1); background: var(--surface-sunken); border-bottom: 1px solid var(--border-subtle); }
+.scTools button { min-width: 36px; height: 32px; border: 0; background: transparent; border-radius: var(--r-sm); font: 700 var(--t-small)/1 var(--font-body); color: var(--text-primary); cursor: pointer; padding: 0 var(--s-2); }
 .scTools button:hover { background: var(--surface-tint); }
 .scText { padding: var(--s-4); min-height: 200px; font-size: 1rem; line-height: 1.65; }
 .scText p { margin: 0 0 var(--s-3); }
 .scText p:last-child { margin: 0; }
 .scSaved { font-size: var(--t-label); margin: var(--s-3) 0 0; }
 .scTrack { list-style: none; margin: 0 0 var(--s-5); padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
-.scTrack li { position: relative; padding-top: 22px; font-size: var(--t-small); }
+.scTrack li { position: relative; padding-top: var(--s-5); font-size: var(--t-small); }
 .scTrack li::before { content: ""; position: absolute; top: 5px; left: 0; right: 0; height: 3px; background: var(--border-subtle); pointer-events: none; }
 .scTrack li::after { content: ""; position: absolute; top: 0; left: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--surface-raised); border: 2px solid #C9D6E2; pointer-events: none; }
 .scTrack li.done::before { background: var(--blue-600); }
@@ -47,7 +47,7 @@
 .scQuote--note { border-left-color: var(--warm-ink); background: var(--warm); }
 .scNoteHd { margin: var(--s-4) 0 0; font-weight: 700; font-size: var(--t-small); }
 .scSw .aSwitch:first-child { padding-top: 0; }
-.scSmall { font-size: var(--t-label); font-weight: 700; margin: 0 0 6px; }
+.scSmall { font-size: var(--t-label); font-weight: 700; margin: 0 0 var(--s-1); }
 .scDl { grid-template-columns: 96px minmax(0, 1fr); }
 .scSmall.muted { font-weight: 400; margin-top: var(--s-3); }
 .aSwitch small { display: block; line-height: 1.45; }

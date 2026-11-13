@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="admin.css">
 <style>
   .tdGrid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s-5); align-items: start; }
-  .tdRow { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto auto; gap: var(--s-4); align-items: center; padding: 14px var(--s-5); border-bottom: 1px solid var(--border-subtle); }
+  .tdRow { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto auto; gap: var(--s-4); align-items: center; padding: var(--s-3) var(--s-5); border-bottom: 1px solid var(--border-subtle); }
   .tdRow:last-child { border-bottom: 0; }
   .tdType { display: inline-flex; align-items: center; gap: 8px; font: 700 var(--t-label)/1.2 var(--font-body); color: var(--navy-700); }
   .tdType svg { width: 16px; height: 16px; color: var(--navy-500); flex: 0 0 auto; }
@@ -21,12 +21,18 @@
   .tdRow small { display: block; color: var(--text-muted); font-size: var(--t-label); }
   .tdRow .btn { justify-self: end; }
   .tdDone { display: flex; gap: var(--s-3); align-items: center; padding: var(--s-4) var(--s-5); color: var(--text-muted); font-size: var(--t-small); background: var(--surface-sunken); border-top: 1px solid var(--border-subtle); }
-  .tdNum { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding: 14px var(--s-5); border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: var(--text-primary); }
+  .tdNum { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding: var(--s-3) var(--s-5); border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: var(--text-primary); }
   .tdNum:last-child { border-bottom: 0; }
   .tdNum span { font-weight: 700; font-size: var(--t-small); }
   .tdNum small { display: block; color: var(--text-muted); font-size: var(--t-label); font-weight: 400; }
-  .tdNum b { font: 700 1.625rem/1 var(--font-mono); }
+  .tdNum b { font: 700 1.625rem/1.2 var(--font-mono); }
   .tdNum:hover { background: var(--depth-01); }
+  /* Narrow laptop: the sidebar column and the dense rows collapse before
+     the main column gets squeezed narrower than the buttons inside it. */
+  @media (max-width: 1100px) {
+    .tdGrid { grid-template-columns: 1fr; }
+    .tdRow { grid-template-columns: 1fr auto; row-gap: var(--s-2); }
+  }
   @media (max-width: 860px) {
     .tdGrid { grid-template-columns: 1fr; }
     .tdRow { grid-template-columns: minmax(0, 1fr) auto; }
