@@ -14,7 +14,7 @@ before building it.
 | Design | Carrington Smurl, Brittany Capps (Saddle Pass) |
 | Client | Kaitlin Snyder, EquiStaff (reviews with Kelly) |
 | Timeline | Client design notes closed 2 Nov · admin portal design in progress (target 1 Dec) · site testing ~23 Nov → 1 Dec |
-| Last updated | 2 November 2026 (build notes added after Kaitlin's review) |
+| Last updated | 9 November 2026 (admin design branch added to §0) |
 
 **V1 build notes — read these first.** The prototype still shows some things Kaitlin has deferred. Build V1 like this:
 
@@ -54,6 +54,11 @@ Build from `main` and it will not move under you.
 Further site design lands on **`design-2026-11-06`**, not on main. When a batch there is
 settled, Carrington decides when it comes across. Until then, anything on that branch is
 still being argued about and is not yours to build.
+
+**Admin portal design** has its own branch, **`admin-2026-11-09`** (set up 9 November). New
+admin screens land there, not on main, and come across only when Carrington says so. The
+27-screen admin prototype already on `main` under `admin/` is the version Kaitlin is
+reviewing. It is still a design in progress, so don't build ahead of sign-off (see §6).
 
 The live preview at saddlepassadmin.github.io serves `main`, so what you see there and what
 you build from are the same thing.
@@ -150,7 +155,7 @@ Change a row's status only through a PR that design signs off.
 
 | Area | Status |
 |---|---|
-| **Admin portal V1** | **Design in progress.** Static, light-theme design prototype (27 screens, fake data) at [`admin/`](https://saddlepassadmin.github.io/equistaff-website/admin/dashboard.html) — not linked from `start.html`. Kaitlin reviews it Friday, then Kelly and Nick; Figma screens follow on the **💻 Admin Portal** page. **Don't build ahead of sign-off.** See §6 |
+| **Admin portal V1** | **Design in progress.** Static, light-theme design prototype (27 screens, fake data) at [`admin/`](https://saddlepassadmin.github.io/equistaff-website/admin/dashboard.html) — not linked from `start.html`. Kaitlin reviews it Friday, then Kelly and Nick; Figma screens are on the **💻 Admin Portal** page ([open](https://www.figma.com/design/cC1Nx8Ox10XfkcWlgviV9C/Equistaff-Website?node-id=588-2)). New admin design lands on the `admin-2026-11-09` branch (§0). **Don't build ahead of sign-off.** See §6 |
 | Role-family SEO landing pages | After launch |
 
 ---
@@ -248,7 +253,7 @@ a recapture email asks people to complete their profiles. Field map is an open i
 **Stripe.** Stripe currently gets its data from the old site (Kaitlin flagged this). Scope how subscriptions,
 customers and webhooks move to the new platform before billing is built; no new prices are needed beyond §4.
 
-**Admin portal V1** (design in progress at `admin/` — don't build ahead of sign-off). Kaitlin's direction from the admin SOW:
+**Admin portal V1** (design in progress at `admin/`, with new work on the `admin-2026-11-09` branch — don't build ahead of sign-off). Kaitlin's direction from the admin SOW:
 - **Highest priority:** direct-hire candidate presentation and search management (add clients and candidates by
   hand, present candidates, move stages) — `direct-hire-flow.html` shows the client side of each step.
 - Employers who signed up but haven't subscribed.

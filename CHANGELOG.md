@@ -8,6 +8,7 @@ Preview: https://saddlepassadmin.github.io/equistaff-website/
 
 ## Unreleased
 
+- Branch rule from 9 Nov: admin portal design gets its own branch, `admin-2026-11-09`; new admin screens land there and come across to main only when Carrington says so. Noted in HANDOFF.md §0, §1 and §6 so Uraiz sees it.
 - Branch rule from 6 Nov: `main` is the engineer's baseline and is frozen for site design; further design work goes on `design-2026-11-06` and comes across only when Carrington says so. Recorded at the top of HANDOFF.md so Uraiz sees it before anything else. The site pauses here while the admin screens are designed.
 - Kaitlin's review now has a living record at `docs/kaitlin-review.md`: every note she left, grouped by screen, with a status against each (approved / shipped / waiting on her / open). The changelog stays the log of what shipped; that file is the backlog. It is refreshed twice a day from the Figma comments so the two never drift.
 - Kaitlin's V2 notes, first batch (no decision needed): the featured job-board month rounds from $69.99 to $70 everywhere it appears; "Days off" is "Days off per week" on job posts and job detail; and Request a call now offers her three call levels rather than one length for everyone — an hour if you're hiring, 45 minutes if you're looking, 15 for a general question, each labelled on the card before you pick.
