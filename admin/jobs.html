@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../src/tokens.css">
 <link rel="stylesheet" href="../src/styles.css">
 <link rel="stylesheet" href="admin.css">
-<style>[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.aCard__head a[data-i]{display:inline-flex;gap:6px;align-items:center}
+<style>[data-i]>svg{width:18px;height:18px;flex:0 0 auto}.aCard__head a[data-i]{display:inline-flex;gap:var(--s-1);align-items:center}
 .nw{white-space:nowrap}.muted{color:var(--text-muted)}.small{font-size:var(--t-label)}
 .aTableWrap{overflow-x:auto;position:relative}.aGrid{grid-template-columns:minmax(0,1fr)}.aGrid.aGrid--main{grid-template-columns:minmax(0,1fr) 360px}
 .aGrid.aGrid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.aGrid.aGrid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -19,11 +19,11 @@
 body{position:relative}.aScrim{position:absolute;inset:0 0 auto 0;min-height:100%;place-items:start center;padding:140px 0 80px}
 .field input[type=checkbox],.field input[type=radio],.radio input{width:auto;min-height:0;padding:0}.field label.radio,.field label.chk{display:flex;font-weight:400}.field label.radio b{font-weight:700}
 .aModal .field{margin-bottom:var(--s-4)}
-.radio{display:flex;gap:var(--s-3);align-items:flex-start;padding:12px 14px;border:1px solid #C9D6E2;border-radius:var(--r-sm);margin-bottom:var(--s-2)}
+.radio{display:flex;gap:var(--s-3);align-items:flex-start;padding:12px var(--s-3);border:1px solid #C9D6E2;border-radius:var(--r-sm);margin-bottom:var(--s-2)}
 .radio input{margin-top:4px;accent-color:var(--blue-600)}.radio b{display:block}.radio small{color:var(--text-muted);font-size:var(--t-label)}
 .radio.on{border-color:var(--blue-600);background:var(--depth-01)}.radio .num{margin-left:auto;font-family:var(--font-mono);font-weight:700;white-space:nowrap}
 .chips{display:flex;flex-wrap:wrap;gap:var(--s-2)}
-.aFind--sm{flex:0 0 260px}.aFind--sm input{min-height:38px;padding-left:14px}
+.aFind--sm{flex:0 0 260px}.aFind--sm input{min-height:38px;padding-left:var(--s-3)}
 @media (max-width:860px){.aGrid.aGrid--main,.aGrid.aGrid--2,.aGrid.aGrid--3{grid-template-columns:minmax(0,1fr)}.aDl{grid-template-columns:1fr;gap:2px}.aDl dd{margin-bottom:8px}.aHead__acts{margin-left:0}.aFind--sm{flex:1 1 100%}.aBar__right{margin-left:0;width:100%;flex-wrap:wrap}.aScrim{padding:80px 12px 0}}
 .liveCard{margin-top:var(--s-5)}</style>
 </head>

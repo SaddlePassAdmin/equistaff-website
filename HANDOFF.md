@@ -13,8 +13,8 @@ before building it.
 | Engineering | Uraiz Ali |
 | Design | Carrington Smurl, Brittany Capps (Saddle Pass) |
 | Client | Kaitlin Snyder, EquiStaff (reviews with Kelly) |
-| Timeline | Client design notes closed 2 Nov · admin portal design in progress (target 1 Dec) · site testing ~23 Nov → 1 Dec |
-| Last updated | 9 November 2026 (admin design branch added to §0) |
+| Timeline | Client design notes closed 2 Nov · admin portal design ready to build 13 Nov · site testing ~23 Nov → 1 Dec |
+| Last updated | 13 November 2026 (admin portal ready to build) |
 
 **V1 build notes — read these first.** The prototype still shows some things Kaitlin has deferred. Build V1 like this:
 
@@ -56,9 +56,10 @@ settled, Carrington decides when it comes across. Until then, anything on that b
 still being argued about and is not yours to build.
 
 **Admin portal design** has its own branch, **`admin-2026-11-09`** (set up 9 November). New
-admin screens land there, not on main, and come across only when Carrington says so. The
-27-screen admin prototype already on `main` under `admin/` is the version Kaitlin is
-reviewing. It is still a design in progress, so don't build ahead of sign-off (see §6).
+admin screens land there, not on main, and come across only when Carrington says so.
+**As of 13 November the admin design on `main` under `admin/` is ready to build.** It
+includes Kaitlin's Monday review and the 12 November changes. Anything listed in
+[`docs/admin-phase-2.md`](docs/admin-phase-2.md) is parked: don't build it now (see §6).
 
 The live preview at saddlepassadmin.github.io serves `main`, so what you see there and what
 you build from are the same thing.
@@ -155,7 +156,7 @@ Change a row's status only through a PR that design signs off.
 
 | Area | Status |
 |---|---|
-| **Admin portal V1** | **Design in progress.** Static, light-theme design prototype (27 screens, fake data) at [`admin/`](https://saddlepassadmin.github.io/equistaff-website/admin/dashboard.html) — not linked from `start.html`. Kaitlin reviews it Friday, then Kelly and Nick; Figma screens are on the **💻 Admin Portal** page ([open](https://www.figma.com/design/cC1Nx8Ox10XfkcWlgviV9C/Equistaff-Website?node-id=588-2)). New admin design lands on the `admin-2026-11-09` branch (§0). **Don't build ahead of sign-off.** See §6 |
+| **Admin portal V1** | **Ready to build (13 Nov).** Light-theme design prototype, 27 screens with fake data, at [`admin/`](https://saddlepassadmin.github.io/equistaff-website/admin/dashboard.html). It is not linked from `start.html`. Kaitlin and Kelly reviewed it on 9 Nov, and the 12 Nov changes are in. Parked items are in [`docs/admin-phase-2.md`](docs/admin-phase-2.md). Unblocks Direct Hire on staging. See §6 |
 | Role-family SEO landing pages | After launch |
 
 ---
@@ -253,7 +254,19 @@ a recapture email asks people to complete their profiles. Field map is an open i
 **Stripe.** Stripe currently gets its data from the old site (Kaitlin flagged this). Scope how subscriptions,
 customers and webhooks move to the new platform before billing is built; no new prices are needed beyond §4.
 
-**Admin portal V1** (design in progress at `admin/`, with new work on the `admin-2026-11-09` branch — don't build ahead of sign-off). Kaitlin's direction from the admin SOW:
+**Admin portal V1**: ready to build from `admin/` (13 Nov). Parked scope is in `docs/admin-phase-2.md`, so don't build those items. What's new since the first pass:
+- **Candidate summary:** written by Kaitlin only, never generated. It is stored on the candidate, and each direct-hire search keeps its own client-facing copy, which starts from it. Nothing goes to the client without one, and the dashboard counts candidates waiting on one.
+- **Direct-hire job posting** on each search:
+  - on or off the job board
+  - edit the job description (same approval flow as `job.html`)
+  - days live, views and applicant counts
+  - applicants: add to the shortlist, or reject with a reason, which emails the applicant (`search-reject.html`)
+  - keep these applicant states the same as the employer-side Applicants on staging
+- **Support:** admins can't send someone's password reset or resend their confirmation email. Only the account holder can.
+- **Leads** show the package each lead is on or wants. The package tag is driven by Stripe and is never set by hand.
+- **Job seekers** has one view (cards). The table version was dropped.
+
+Kaitlin's direction from the admin SOW:
 - **Highest priority:** direct-hire candidate presentation and search management (add clients and candidates by
   hand, present candidates, move stages) — `direct-hire-flow.html` shows the client side of each step.
 - Employers who signed up but haven't subscribed.
