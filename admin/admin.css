@@ -104,6 +104,10 @@ body.adm { background: var(--surface-sunken); color: var(--text-primary); min-he
 .aTile--act b { color: var(--warn-ink); }
 
 /* ---------- Tables ---------- */
+/* A wide table scrolls inside its own card at every width. Without this the
+   table pushes out past the card's right edge instead, which reads as text
+   falling off the background. */
+.aTableWrap { overflow-x: auto; }
 .aTable { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
 .aTable th {
   text-align: left; font: 700 12px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase;
@@ -214,7 +218,6 @@ body.adm { background: var(--surface-sunken); color: var(--text-primary); min-he
   .aTop { padding: var(--s-3) var(--s-4); position: static; }
   .aPage { padding: var(--s-5) var(--s-4) var(--s-7); }
   .aGrid--2, .aGrid--3, .aGrid--main { grid-template-columns: 1fr; }
-  .aTableWrap { overflow-x: auto; }
 }
 
 /* Icons inside buttons and links (data-i) default to text size. */
