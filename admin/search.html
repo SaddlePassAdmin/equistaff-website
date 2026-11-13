@@ -41,6 +41,16 @@
 .swCand__sw { border-left: 1px solid var(--border-subtle); padding-left: var(--s-4); }
 .swAvail { margin: 0 0 var(--s-2); font-size: var(--t-small); background: var(--depth-01); border-radius: var(--r-sm); padding: var(--s-3); }
 .swSmall { font-size: var(--t-label); margin: 0; }
+/* The client-facing write-up. It belongs to the search, not the candidate:
+   the same person is framed differently for a different role and client. */
+.swSum { margin: var(--s-3) 0 0 48px; padding: var(--s-3) var(--s-4); background: var(--depth-01); border-radius: var(--r-sm); }
+.swSum .swLbl { display: block; }
+.swSum__why { margin: var(--s-1) 0 var(--s-2); font-size: var(--t-label); color: var(--text-muted); }
+.swSum .field { margin: 0; }
+.swSum textarea { width: 100%; }
+.swSum__quote { margin: 0; font-size: var(--t-small); font-style: italic; }
+.swSum__acts { display: flex; gap: var(--s-2); align-items: center; flex-wrap: wrap; margin-top: var(--s-2); }
+.swSum__state { font-size: var(--t-label); color: var(--text-muted); margin-left: auto; }
 .swNew { margin-left: auto; }
 .swNotes li { align-items: flex-start; }
 .swNotes b { font-size: var(--t-small); }
@@ -111,6 +121,12 @@
               <div class="aSwitch"><div><b>Messaging on</b><small>Client and candidate can message</small></div><i class="on" role="switch" aria-checked="true"></i></div>
             </div>
           </div>
+            <div class="swSum">
+              <span class="swLbl">Your summary for this search</span>
+              <p class="swSum__why">Written for Live Oak Stables and the Barn Manager role. The same candidate reads differently on a different search.</p>
+              <p class="swSum__quote">"Eight years running show barns on the Florida circuit, managing a team of four at a 30-horse barn. Calm, organised, and every reference mentioned her record-keeping."</p>
+              <div class="swSum__acts"><a class="btn btn--quiet btn--sm" href="#" data-i="pen">Edit summary</a><span class="swSum__state">Sent to the client 22 Oct</span></div>
+            </div>
         </article>
         <article class="swCand">
           <div class="swCand__top">
@@ -126,6 +142,12 @@
               <div class="aSwitch"><div><b>Messaging on</b><small>Off until you make the introduction</small></div><i class="" role="switch" aria-checked="false"></i></div>
             </div>
           </div>
+            <div class="swSum">
+              <span class="swLbl">Your summary for this search</span>
+              <p class="swSum__why">Written for Live Oak Stables and the Barn Manager role. The same candidate reads differently on a different search.</p>
+              <div class="field"><label class="sr-only" for="sum-marcus">Your summary for the client</label><textarea id="sum-marcus" rows="5">Twelve years in hunter/jumper barns, the last six running a 30-horse show string on the Florida circuit. Calm with young horses and the most organised feed and farrier records I have seen this year. Two references spoke to how steady he is on a show day.</textarea></div>
+              <div class="swSum__acts"><button class="btn btn--primary btn--sm" type="button" data-i="mail">Submit to client</button><button class="btn btn--secondary btn--sm" type="button">Save draft</button><span class="swSum__state">Draft saved today, 2:14pm</span></div>
+            </div>
         </article>
         <article class="swCand">
           <div class="swCand__top">
@@ -141,6 +163,12 @@
               <div class="aSwitch"><div><b>Messaging on</b><small>Off until you make the introduction</small></div><i class="" role="switch" aria-checked="false"></i></div>
             </div>
           </div>
+            <div class="swSum">
+              <span class="swLbl">Your summary for this search</span>
+              <p class="swSum__why">Written for Live Oak Stables and the Barn Manager role. The same candidate reads differently on a different search.</p>
+              <p class="swSum__quote">"Came up through eventing yards in Aiken and has run a barn single-handed through a season. Quieter than Dana on paper; much stronger on young horses."</p>
+              <div class="swSum__acts"><a class="btn btn--quiet btn--sm" href="#" data-i="pen">Edit summary</a><span class="swSum__state">Sent to the client 28 Oct</span></div>
+            </div>
         </article>
         <article class="swCand swCand--out">
           <div class="swCand__top">
